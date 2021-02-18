@@ -64,6 +64,13 @@
 <libraries>
 <library name="my_devices">
 <packages>
+<package name="FAN">
+<pad name="P$1" x="-6.35" y="2.54" drill="0.6" shape="square"/>
+<pad name="P$2" x="-6.35" y="-2.54" drill="0.6" shape="square"/>
+<circle x="0" y="0" radius="5.08" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="2.54" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="-2.54" x2="-3.81" y2="-2.54" width="0.127" layer="21"/>
+</package>
 <package name="ANEMOMETER">
 <pad name="+5V" x="0" y="2.54" drill="0.6" shape="square"/>
 <pad name="GND" x="0" y="0" drill="0.6" shape="square"/>
@@ -74,15 +81,14 @@
 <wire x1="2.54" y1="-6.35" x2="-2.54" y2="-6.35" width="0.127" layer="1"/>
 <wire x1="-2.54" y1="-6.35" x2="-2.54" y2="3.81" width="0.127" layer="1"/>
 </package>
-<package name="FAN">
-<pad name="P$1" x="-6.35" y="2.54" drill="0.6" shape="square"/>
-<pad name="P$2" x="-6.35" y="-2.54" drill="0.6" shape="square"/>
-<circle x="0" y="0" radius="5.08" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="2.54" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-2.54" x2="-3.81" y2="-2.54" width="0.127" layer="21"/>
-</package>
 </packages>
 <symbols>
+<symbol name="FAN">
+<pin name="220V_L" x="-17.78" y="0" length="middle" direction="pwr"/>
+<pin name="220V_N" x="17.78" y="0" length="middle" direction="pwr" rot="R180"/>
+<circle x="0" y="0" radius="12.7" width="0.254" layer="94"/>
+<text x="-2.54" y="5.08" size="1.778" layer="94">FAN</text>
+</symbol>
 <symbol name="ANEMOMETER">
 <pin name="VIN" x="-20.32" y="5.08" length="middle" direction="pwr"/>
 <pin name="OUT_A" x="-20.32" y="2.54" length="middle" direction="out"/>
@@ -120,14 +126,24 @@
 <text x="17.78" y="0" size="1.778" layer="94">B</text>
 <wire x1="5.08" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
 </symbol>
-<symbol name="FAN">
-<pin name="220V_L" x="-17.78" y="0" length="middle" direction="pwr"/>
-<pin name="220V_N" x="17.78" y="0" length="middle" direction="pwr" rot="R180"/>
-<circle x="0" y="0" radius="12.7" width="0.254" layer="94"/>
-<text x="-2.54" y="5.08" size="1.778" layer="94">FAN</text>
-</symbol>
 </symbols>
 <devicesets>
+<deviceset name="FAN">
+<gates>
+<gate name="G$1" symbol="FAN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="FAN">
+<connects>
+<connect gate="G$1" pin="220V_L" pad="P$1"/>
+<connect gate="G$1" pin="220V_N" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="ANEMOMETER">
 <gates>
 <gate name="G$1" symbol="ANEMOMETER" x="7.62" y="0"/>
@@ -139,22 +155,6 @@
 <connect gate="G$1" pin="OUT_A" pad="OUT_A"/>
 <connect gate="G$1" pin="OUT_B" pad="OUT_B"/>
 <connect gate="G$1" pin="VIN" pad="+5V"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="FAN">
-<gates>
-<gate name="G$1" symbol="FAN" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="FAN">
-<connects>
-<connect gate="G$1" pin="220V_L" pad="P$1"/>
-<connect gate="G$1" pin="220V_N" pad="P$2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -280,79 +280,43 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </class>
 </classes>
 <groups>
-<schematic_group name="ANEMOMETER1"/>
 <schematic_group name="FAN1"/>
+<schematic_group name="ANEMOMETER1"/>
 </groups>
 <parts>
+<part name="U$10" library="my_devices" deviceset="FAN" device=""/>
+<part name="J9" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="U$8" library="my_devices" deviceset="ANEMOMETER" device=""/>
 <part name="J4_AN_HWFN_POWER_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J4_AN_HWFN_OUT_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
-<part name="U$10" library="my_devices" deviceset="FAN" device=""/>
-<part name="J9" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="-86.36" y="73.66" size="1.778" layer="91" grouprefs="ANEMOMETER1">Cabel to FAN block and Fan block</text>
 <text x="35.56" y="83.82" size="1.778" layer="91" grouprefs="FAN1">Cabel to FAN block and FAN block</text>
+<text x="-58.42" y="58.42" size="1.778" layer="91" grouprefs="ANEMOMETER1">Cabel to FAN block and Fan block</text>
 </plain>
 <instances>
-<instance part="U$8" gate="G$1" x="-53.34" y="88.9" smashed="yes" grouprefs="ANEMOMETER1">
-<attribute name="NAME" x="-68.58" y="96.52" size="1.778" layer="94"/>
-</instance>
-<instance part="J4_AN_HWFN_POWER_2" gate="G$1" x="-91.44" y="93.98" smashed="yes" rot="R90" grouprefs="ANEMOMETER1">
-<attribute name="NAME" x="-66.04" y="101.6" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-87.63" y="99.06" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="J4_AN_HWFN_OUT_2" gate="G$1" x="-91.44" y="86.36" smashed="yes" rot="R90" grouprefs="ANEMOMETER1">
-<attribute name="NAME" x="-68.58" y="83.82" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-87.63" y="91.44" size="1.778" layer="96" rot="R90"/>
-</instance>
 <instance part="U$10" gate="G$1" x="66.04" y="53.34" smashed="yes" rot="R90" grouprefs="FAN1"/>
 <instance part="J9" gate="G$1" x="30.48" y="48.26" smashed="yes" rot="R90" grouprefs="FAN1">
 <attribute name="NAME" x="30.48" y="53.34" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="34.29" y="53.34" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="U$8" gate="G$1" x="-25.4" y="73.66" smashed="yes" grouprefs="ANEMOMETER1">
+<attribute name="NAME" x="-40.64" y="81.28" size="1.778" layer="94"/>
+</instance>
+<instance part="J4_AN_HWFN_POWER_2" gate="G$1" x="-63.5" y="78.74" smashed="yes" rot="R90" grouprefs="ANEMOMETER1">
+<attribute name="NAME" x="-38.1" y="86.36" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-59.69" y="83.82" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="J4_AN_HWFN_OUT_2" gate="G$1" x="-63.5" y="71.12" smashed="yes" rot="R90" grouprefs="ANEMOMETER1">
+<attribute name="NAME" x="-40.64" y="68.58" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-59.69" y="76.2" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
 <nets>
-<net name="GND" class="0">
-<segment>
-<pinref part="U$8" gate="G$1" pin="GND"/>
-<wire x1="-73.66" y1="86.36" x2="-81.28" y2="86.36" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<wire x1="-81.28" y1="86.36" x2="-81.28" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="1"/>
-<wire x1="-81.28" y1="93.98" x2="-88.9" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-</segment>
-</net>
-<net name="N$12" class="0">
-<segment>
-<pinref part="U$8" gate="G$1" pin="VIN"/>
-<wire x1="-73.66" y1="93.98" x2="-78.74" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<wire x1="-78.74" y1="93.98" x2="-78.74" y2="96.52" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="2"/>
-<wire x1="-78.74" y1="96.52" x2="-88.9" y2="96.52" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-</segment>
-</net>
-<net name="N$13" class="0">
-<segment>
-<pinref part="U$8" gate="G$1" pin="OUT_A"/>
-<wire x1="-73.66" y1="91.44" x2="-86.36" y2="91.44" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<wire x1="-86.36" y1="91.44" x2="-86.36" y2="88.9" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="2"/>
-<wire x1="-86.36" y1="88.9" x2="-88.9" y2="88.9" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-</segment>
-</net>
-<net name="N$14" class="0">
-<segment>
-<pinref part="U$8" gate="G$1" pin="OUT_B"/>
-<wire x1="-73.66" y1="88.9" x2="-83.82" y2="88.9" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<wire x1="-83.82" y1="88.9" x2="-83.82" y2="86.36" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="1"/>
-<wire x1="-83.82" y1="86.36" x2="-88.9" y2="86.36" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-</segment>
-</net>
 <net name="N$15" class="0">
 <segment>
 <pinref part="U$10" gate="G$1" pin="220V_N"/>
@@ -369,6 +333,40 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="45.72" y1="35.56" x2="45.72" y2="48.26" width="0.1524" layer="91" grouprefs="FAN1"/>
 <pinref part="J9" gate="G$1" pin="1"/>
 <wire x1="45.72" y1="48.26" x2="33.02" y2="48.26" width="0.1524" layer="91" grouprefs="FAN1"/>
+</segment>
+</net>
+<net name="GND" class="0">
+<segment>
+<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="2"/>
+<wire x1="-60.96" y1="81.28" x2="-53.34" y2="81.28" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<wire x1="-53.34" y1="81.28" x2="-53.34" y2="71.12" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<pinref part="U$8" gate="G$1" pin="GND"/>
+<wire x1="-53.34" y1="71.12" x2="-45.72" y2="71.12" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+</segment>
+</net>
+<net name="N$13" class="0">
+<segment>
+<pinref part="U$8" gate="G$1" pin="OUT_A"/>
+<wire x1="-45.72" y1="76.2" x2="-58.42" y2="76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<wire x1="-58.42" y1="76.2" x2="-58.42" y2="73.66" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="2"/>
+<wire x1="-58.42" y1="73.66" x2="-60.96" y2="73.66" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+</segment>
+</net>
+<net name="N$14" class="0">
+<segment>
+<pinref part="U$8" gate="G$1" pin="OUT_B"/>
+<wire x1="-45.72" y1="73.66" x2="-55.88" y2="73.66" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<wire x1="-55.88" y1="73.66" x2="-55.88" y2="71.12" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="1"/>
+<wire x1="-55.88" y1="71.12" x2="-60.96" y2="71.12" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="1"/>
+<pinref part="U$8" gate="G$1" pin="VIN"/>
+<wire x1="-60.96" y1="78.74" x2="-45.72" y2="78.74" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 </segment>
 </net>
 </nets>

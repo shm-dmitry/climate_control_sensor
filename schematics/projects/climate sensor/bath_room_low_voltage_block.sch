@@ -885,7 +885,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <schematic_group name="TTP1"/>
 <schematic_group name="RGBLED1"/>
 <schematic_group name="BH1"/>
-<schematic_group name="GY-SGP1"/>
+<schematic_group name="GY_SGP30"/>
 <schematic_group name="5V_SUPPLY_JET1"/>
 <schematic_group name="ANEMOMETER1"/>
 </groups>
@@ -906,18 +906,18 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="U$4" library="diy-modules" deviceset="LIGHT-SENSOR-BH1750" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GY_SGP1" library="my_devices" deviceset="GY-SGP30" device=""/>
+<part name="GY_SGP30_1" library="my_devices" deviceset="GY-SGP30" device=""/>
 <part name="J2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="C1" library="my_devices" deviceset="C" device="" value="1000 mF"/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J4" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J5" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
-<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="Q4" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="KT3102BM"/>
 <part name="Q5" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="KT3102BM"/>
 <part name="R2" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="600"/>
+<part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -975,10 +975,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="GND5" gate="1" x="83.82" y="5.08" smashed="yes" grouprefs="BH1">
 <attribute name="VALUE" x="81.28" y="2.54" size="1.778" layer="96"/>
 </instance>
-<instance part="GND6" gate="1" x="78.74" y="-35.56" smashed="yes" grouprefs="GY-SGP1">
+<instance part="GND6" gate="1" x="78.74" y="-35.56" smashed="yes" grouprefs="GY_SGP30">
 <attribute name="VALUE" x="76.2" y="-38.1" size="1.778" layer="96"/>
 </instance>
-<instance part="GY_SGP1" gate="G$1" x="106.68" y="-30.48" smashed="yes" grouprefs="GY-SGP1">
+<instance part="GY_SGP30_1" gate="G$1" x="106.68" y="-30.48" smashed="yes" grouprefs="GY_SGP30">
 <attribute name="NAME" x="104.14" y="-20.32" size="1.778" layer="94"/>
 </instance>
 <instance part="J2" gate="G$1" x="10.16" y="20.32" smashed="yes" rot="R90" grouprefs="5V_SUPPLY_JET1">
@@ -1003,9 +1003,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <attribute name="NAME" x="-48.26" y="-22.86" size="1.778" layer="95" rot="R270"/>
 <attribute name="VALUE" x="-52.07" y="-22.86" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="GND10" gate="1" x="-66.04" y="-15.24" smashed="yes" grouprefs="ANEMOMETER1">
-<attribute name="VALUE" x="-68.58" y="-17.78" size="1.778" layer="96"/>
-</instance>
 <instance part="Q4" gate="G$1" x="-48.26" y="-68.58" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-40.64" y="-66.04" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-40.64" y="-71.12" size="1.778" layer="94"/>
@@ -1021,6 +1018,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="R3" gate="G$1" x="-38.1" y="-45.72" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-44.45" y="-43.18" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-44.45" y="-49.53" size="1.778" layer="94"/>
+</instance>
+<instance part="GND1" gate="1" x="-73.66" y="-15.24" smashed="yes">
+<attribute name="VALUE" x="-76.2" y="-17.78" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1061,10 +1061,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="GND5" gate="1" pin="GND"/>
 </segment>
 <segment>
-<wire x1="99.06" y1="-30.48" x2="78.74" y2="-30.48" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
+<wire x1="99.06" y1="-30.48" x2="78.74" y2="-30.48" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
 <pinref part="GND6" gate="1" pin="GND"/>
-<wire x1="78.74" y1="-30.48" x2="78.74" y2="-33.02" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP1" gate="G$1" pin="GND"/>
+<wire x1="78.74" y1="-30.48" x2="78.74" y2="-33.02" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="2"/>
@@ -1087,9 +1087,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="-48.26" y1="-81.28" x2="-48.26" y2="-76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 </segment>
 <segment>
-<pinref part="GND10" gate="1" pin="GND"/>
-<pinref part="J4" gate="G$1" pin="2"/>
-<wire x1="-66.04" y1="-12.7" x2="-50.8" y2="-12.7" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<pinref part="J4" gate="G$1" pin="1"/>
+<wire x1="-50.8" y1="-10.16" x2="-73.66" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="-73.66" y1="-10.16" x2="-73.66" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1112,11 +1113,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="73.66" y="12.7" size="1.778" layer="95" grouprefs="BH1"/>
 </segment>
 <segment>
-<wire x1="99.06" y1="-33.02" x2="83.82" y2="-33.02" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<wire x1="83.82" y1="-33.02" x2="83.82" y2="-40.64" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<wire x1="83.82" y1="-40.64" x2="73.66" y2="-40.64" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<label x="73.66" y="-43.18" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP1" gate="G$1" pin="SCL"/>
+<wire x1="99.06" y1="-33.02" x2="83.82" y2="-33.02" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<wire x1="83.82" y1="-33.02" x2="83.82" y2="-40.64" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<wire x1="83.82" y1="-40.64" x2="73.66" y2="-40.64" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<label x="73.66" y="-43.18" size="1.778" layer="95" grouprefs="GY_SGP30"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="SCL"/>
 </segment>
 </net>
 <net name="I2C_SDA" class="0">
@@ -1139,11 +1140,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="73.66" y="17.78" size="1.778" layer="95" grouprefs="BH1"/>
 </segment>
 <segment>
-<wire x1="99.06" y1="-35.56" x2="88.9" y2="-35.56" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<wire x1="88.9" y1="-35.56" x2="88.9" y2="-48.26" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<wire x1="88.9" y1="-48.26" x2="73.66" y2="-48.26" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<label x="73.66" y="-48.26" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP1" gate="G$1" pin="SDA"/>
+<wire x1="99.06" y1="-35.56" x2="88.9" y2="-35.56" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<wire x1="88.9" y1="-35.56" x2="88.9" y2="-48.26" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<wire x1="88.9" y1="-48.26" x2="73.66" y2="-48.26" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<label x="73.66" y="-48.26" size="1.778" layer="95" grouprefs="GY_SGP30"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="SDA"/>
 </segment>
 </net>
 <net name="+5V" class="0">
@@ -1151,11 +1152,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="U$2" gate="G$1" pin="5V"/>
 <wire x1="7.62" y1="48.26" x2="40.64" y2="48.26" width="0.1524" layer="91" grouprefs="ESP2"/>
 <label x="7.62" y="48.26" size="1.778" layer="95" grouprefs="ESP2"/>
-</segment>
-<segment>
-<wire x1="99.06" y1="-27.94" x2="78.74" y2="-27.94" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<label x="78.74" y="-27.94" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP1" gate="G$1" pin="VIN"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="1"/>
@@ -1168,9 +1164,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <junction x="25.4" y="15.24"/>
 </segment>
 <segment>
-<pinref part="J4" gate="G$1" pin="1"/>
-<wire x1="-50.8" y1="-10.16" x2="-66.04" y2="-10.16" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<label x="-66.04" y="-10.16" size="1.778" layer="95" grouprefs="ANEMOMETER1"/>
+<pinref part="J4" gate="G$1" pin="2"/>
+<wire x1="-50.8" y1="-12.7" x2="-68.58" y2="-12.7" width="0.1524" layer="91"/>
+<label x="-68.58" y="-15.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="3V3" class="0">
@@ -1211,6 +1207,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="88.9" y1="10.16" x2="88.9" y2="-2.54" width="0.1524" layer="91" grouprefs="BH1"/>
 <wire x1="88.9" y1="-2.54" x2="71.12" y2="-2.54" width="0.1524" layer="91" grouprefs="BH1"/>
 <label x="71.12" y="-2.54" size="1.778" layer="95" grouprefs="BH1"/>
+</segment>
+<segment>
+<wire x1="99.06" y1="-27.94" x2="78.74" y2="-27.94" width="0.1524" layer="91" grouprefs="GY_SGP30"/>
+<label x="78.74" y="-27.94" size="1.778" layer="95" grouprefs="GY_SGP30"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="VIN"/>
 </segment>
 </net>
 <net name="GPIO_TTP223" class="0">
@@ -1367,7 +1368,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <approved hash="104,1,193.04,88.9,U$3,VIN,3V3,,,"/>
 <approved hash="104,1,182.88,33.02,U$5,VIN,3V3,,,"/>
 <approved hash="104,1,93.98,10.16,U$4,VCC,3V3,,,"/>
-<approved hash="104,1,99.06,-27.94,GY_SGP1,VIN,+5V,,,"/>
+<approved hash="104,1,99.06,-27.94,GY_SGP30_1,VIN,3V3,,,"/>
 <approved hash="113,1,-2.93116,82.6045,J4_FS_1,,,,,"/>
 <approved hash="113,1,12.3088,22.9757,J2,,,,,"/>
 <approved hash="113,1,-50.4088,-12.8157,J4,,,,,"/>

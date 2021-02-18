@@ -1248,7 +1248,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="VCC" device=""/>
 <part name="U$10" library="my_devices" deviceset="FAN" device=""/>
 <part name="U$3" library="my_devices" deviceset="PMS7003" device=""/>
-<part name="GY_SGP1" library="my_devices" deviceset="GY-SGP30" device=""/>
+<part name="GY_SGP30_1" library="my_devices" deviceset="GY-SGP30" device=""/>
 <part name="U$5" library="my_devices" deviceset="TTP223" device=""/>
 <part name="U$6" library="my_devices" deviceset="RGBLED" device=""/>
 <part name="U$8" library="my_devices" deviceset="ANEMOMETER" device=""/>
@@ -1263,7 +1263,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="J4_AN_LWHW_OUT_1" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J4_AN_HWFN_POWER_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J4_AN_HWFN_OUT_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
-<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J8" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J9" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="Q4" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="KT3102BM"/>
@@ -1282,16 +1281,17 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="J4_AN_LWHW_OUT_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J4_AN_HWFN_OUT_1" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J4_AN_HWFN_POWER_1" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
+<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="-302.26" y="68.58" size="1.778" layer="91">Low voltage block</text>
-<text x="-259.08" y="96.52" size="1.778" layer="91">High voltage block</text>
-<text x="-208.28" y="78.74" size="1.778" layer="91">Cabel to FAN block and Fan block</text>
+<text x="-302.26" y="68.58" size="1.778" layer="91" grouprefs="ANEMOMETER">Low voltage block</text>
+<text x="-259.08" y="96.52" size="1.778" layer="91" grouprefs="ANEMOMETER">High voltage block</text>
+<text x="-208.28" y="78.74" size="1.778" layer="91" grouprefs="ANEMOMETER">Cabel to FAN block and Fan block</text>
 <text x="-213.36" y="-60.96" size="1.778" layer="91">High voltage block</text>
 <text x="-121.92" y="-50.8" size="1.778" layer="91">Low voltage block</text>
-<text x="-124.46" y="-76.2" size="1.778" layer="91">Cabel to FAN block and FAN block</text>
+<text x="-124.46" y="-76.2" size="1.778" layer="91" grouprefs="FAN">Cabel to FAN block and FAN block</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
@@ -1337,7 +1337,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </instance>
 <instance part="U$10" gate="G$1" x="-93.98" y="-106.68" smashed="yes" rot="R90" grouprefs="FAN"/>
 <instance part="U$3" gate="G$1" x="-38.1" y="10.16" smashed="yes" grouprefs="PMS7003"/>
-<instance part="GY_SGP1" gate="G$1" x="-48.26" y="-43.18" smashed="yes" grouprefs="GY-SGP30">
+<instance part="GY_SGP30_1" gate="G$1" x="-48.26" y="-43.18" smashed="yes" grouprefs="GY-SGP30">
 <attribute name="NAME" x="-50.8" y="-33.02" size="1.778" layer="94"/>
 </instance>
 <instance part="U$5" gate="G$1" x="185.42" y="86.36" smashed="yes" grouprefs="TTP223">
@@ -1387,9 +1387,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="J4_AN_HWFN_OUT_2" gate="G$1" x="-213.36" y="91.44" smashed="yes" rot="R90" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-190.5" y="88.9" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-209.55" y="96.52" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND10" gate="1" x="-302.26" y="96.52" smashed="yes" grouprefs="ANEMOMETER">
-<attribute name="VALUE" x="-304.8" y="93.98" size="1.778" layer="96"/>
 </instance>
 <instance part="J8" gate="G$1" x="-149.86" y="-109.22" smashed="yes" rot="R270" grouprefs="FAN_SWITCH">
 <attribute name="NAME" x="-149.86" y="-114.3" size="1.778" layer="95" rot="R270"/>
@@ -1444,21 +1441,24 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="GND13" gate="1" x="45.72" y="27.94" smashed="yes" grouprefs="MH_Z19B_CO2">
 <attribute name="VALUE" x="43.18" y="25.4" size="1.778" layer="96"/>
 </instance>
-<instance part="J4_AN_LWHW_POWER_2" gate="G$1" x="-276.86" y="99.06" smashed="yes" rot="R90">
+<instance part="J4_AN_LWHW_POWER_2" gate="G$1" x="-276.86" y="99.06" smashed="yes" rot="R90" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-251.46" y="106.68" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-273.05" y="104.14" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="J4_AN_LWHW_OUT_2" gate="G$1" x="-276.86" y="91.44" smashed="yes" rot="R90">
+<instance part="J4_AN_LWHW_OUT_2" gate="G$1" x="-276.86" y="91.44" smashed="yes" rot="R90" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-254" y="88.9" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-273.05" y="96.52" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="J4_AN_HWFN_OUT_1" gate="G$1" x="-220.98" y="93.98" smashed="yes" rot="R270">
+<instance part="J4_AN_HWFN_OUT_1" gate="G$1" x="-220.98" y="93.98" smashed="yes" rot="R270" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-246.38" y="86.36" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-224.79" y="88.9" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="J4_AN_HWFN_POWER_1" gate="G$1" x="-220.98" y="101.6" smashed="yes" rot="R270">
+<instance part="J4_AN_HWFN_POWER_1" gate="G$1" x="-220.98" y="101.6" smashed="yes" rot="R270" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-248.92" y="104.14" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-224.79" y="96.52" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="GND3" gate="1" x="-314.96" y="96.52" smashed="yes">
+<attribute name="VALUE" x="-317.5" y="93.98" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1493,7 +1493,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-55.88" y1="-43.18" x2="-76.2" y2="-43.18" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
 <pinref part="GND6" gate="1" pin="GND"/>
 <wire x1="-76.2" y1="-43.18" x2="-76.2" y2="-45.72" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
-<pinref part="GY_SGP1" gate="G$1" pin="GND"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <wire x1="177.8" y1="88.9" x2="157.48" y2="88.9" width="0.1524" layer="91" grouprefs="TTP223"/>
@@ -1528,11 +1528,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="GND9" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="GND10" gate="1" pin="GND"/>
-<pinref part="J4_AN_LWHW_POWER_1" gate="G$1" pin="2"/>
-<wire x1="-302.26" y1="99.06" x2="-287.02" y2="99.06" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
-</segment>
-<segment>
 <pinref part="J2" gate="G$1" pin="2"/>
 <wire x1="-132.08" y1="-33.02" x2="-127" y2="-33.02" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <wire x1="-127" y1="-33.02" x2="-127" y2="-27.94" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
@@ -1548,11 +1543,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="U$8" gate="G$1" pin="GND"/>
-<wire x1="-195.58" y1="91.44" x2="-203.2" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="-203.2" y1="91.44" x2="-203.2" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="1"/>
-<wire x1="-203.2" y1="99.06" x2="-210.82" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="J4_AN_LWHW_POWER_1" gate="G$1" pin="1"/>
+<wire x1="-287.02" y1="101.6" x2="-314.96" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="-314.96" y1="101.6" x2="-314.96" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1579,7 +1573,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-71.12" y1="-45.72" x2="-71.12" y2="-53.34" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
 <wire x1="-71.12" y1="-53.34" x2="-81.28" y2="-53.34" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
 <label x="-81.28" y="-55.88" size="1.778" layer="95" grouprefs="GY-SGP30"/>
-<pinref part="GY_SGP1" gate="G$1" pin="SCL"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="SCL"/>
 </segment>
 </net>
 <net name="I2C_SDA" class="0">
@@ -1606,7 +1600,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-66.04" y1="-48.26" x2="-66.04" y2="-60.96" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
 <wire x1="-66.04" y1="-60.96" x2="-81.28" y2="-60.96" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
 <label x="-81.28" y="-60.96" size="1.778" layer="95" grouprefs="GY-SGP30"/>
-<pinref part="GY_SGP1" gate="G$1" pin="SDA"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="SDA"/>
 </segment>
 </net>
 <net name="+5V" class="0">
@@ -1625,16 +1619,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="-88.9" y="58.42" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<wire x1="-55.88" y1="-40.64" x2="-76.2" y2="-40.64" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
-<label x="-76.2" y="-40.64" size="1.778" layer="95" grouprefs="GY-SGP30"/>
-<pinref part="GY_SGP1" gate="G$1" pin="VIN"/>
-</segment>
-<segment>
-<pinref part="J4_AN_LWHW_POWER_1" gate="G$1" pin="1"/>
-<wire x1="-287.02" y1="101.6" x2="-302.26" y2="101.6" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
-<label x="-302.26" y="101.6" size="1.778" layer="95" grouprefs="ANEMOMETER"/>
-</segment>
-<segment>
 <pinref part="J2" gate="G$1" pin="1"/>
 <wire x1="-132.08" y1="-35.56" x2="-127" y2="-35.56" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <wire x1="-127" y1="-35.56" x2="-127" y2="-40.64" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
@@ -1648,6 +1632,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="U$11" gate="G$1" pin="VCC"/>
 <wire x1="76.2" y1="33.02" x2="55.88" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <label x="53.34" y="33.02" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+</segment>
+<segment>
+<pinref part="J4_AN_LWHW_POWER_1" gate="G$1" pin="2"/>
+<wire x1="-287.02" y1="99.06" x2="-309.88" y2="99.06" width="0.1524" layer="91"/>
+<label x="-309.88" y="96.52" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="3V3" class="0">
@@ -1693,6 +1682,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="R1" gate="G$1" pin="P$1"/>
 <wire x1="-81.28" y1="-10.16" x2="-86.36" y2="-10.16" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <label x="-86.36" y="-12.7" size="1.778" layer="95" grouprefs="PMS7003"/>
+</segment>
+<segment>
+<wire x1="-55.88" y1="-40.64" x2="-76.2" y2="-40.64" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
+<label x="-76.2" y="-40.64" size="1.778" layer="95" grouprefs="GY-SGP30"/>
+<pinref part="GY_SGP30_1" gate="G$1" pin="VIN"/>
 </segment>
 </net>
 <net name="UART_0_TXD" class="0">
@@ -1992,59 +1986,50 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-114.3" y1="-111.76" x2="-127" y2="-111.76" width="0.1524" layer="91" grouprefs="FAN"/>
 </segment>
 </net>
-<net name="N$12" class="0">
-<segment>
-<pinref part="U$8" gate="G$1" pin="VIN"/>
-<wire x1="-195.58" y1="99.06" x2="-200.66" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="-200.66" y1="99.06" x2="-200.66" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="J4_AN_HWFN_POWER_2" gate="G$1" pin="2"/>
-<wire x1="-200.66" y1="101.6" x2="-210.82" y2="101.6" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$13" class="0">
 <segment>
 <pinref part="U$8" gate="G$1" pin="OUT_A"/>
-<wire x1="-195.58" y1="96.52" x2="-208.28" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="-208.28" y1="96.52" x2="-208.28" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="-195.58" y1="96.52" x2="-208.28" y2="96.52" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
+<wire x1="-208.28" y1="96.52" x2="-208.28" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="2"/>
-<wire x1="-208.28" y1="93.98" x2="-210.82" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="-208.28" y1="93.98" x2="-210.82" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
 <pinref part="U$8" gate="G$1" pin="OUT_B"/>
-<wire x1="-195.58" y1="93.98" x2="-205.74" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="-205.74" y1="93.98" x2="-205.74" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-195.58" y1="93.98" x2="-205.74" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
+<wire x1="-205.74" y1="93.98" x2="-205.74" y2="91.44" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <pinref part="J4_AN_HWFN_OUT_2" gate="G$1" pin="1"/>
-<wire x1="-205.74" y1="91.44" x2="-210.82" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-205.74" y1="91.44" x2="-210.82" y2="91.44" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 <net name="N$17" class="0">
 <segment>
 <pinref part="J4_AN_LWHW_POWER_2" gate="G$1" pin="2"/>
 <pinref part="J4_AN_HWFN_POWER_1" gate="G$1" pin="1"/>
-<wire x1="-274.32" y1="101.6" x2="-223.52" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="-274.32" y1="101.6" x2="-223.52" y2="101.6" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 <net name="N$18" class="0">
 <segment>
 <pinref part="J4_AN_LWHW_POWER_2" gate="G$1" pin="1"/>
 <pinref part="J4_AN_HWFN_POWER_1" gate="G$1" pin="2"/>
-<wire x1="-274.32" y1="99.06" x2="-223.52" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-274.32" y1="99.06" x2="-223.52" y2="99.06" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 <net name="N$19" class="0">
 <segment>
 <pinref part="J4_AN_LWHW_OUT_2" gate="G$1" pin="2"/>
 <pinref part="J4_AN_HWFN_OUT_1" gate="G$1" pin="1"/>
-<wire x1="-274.32" y1="93.98" x2="-223.52" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="-274.32" y1="93.98" x2="-223.52" y2="93.98" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 <net name="N$20" class="0">
 <segment>
 <pinref part="J4_AN_LWHW_OUT_2" gate="G$1" pin="1"/>
 <pinref part="J4_AN_HWFN_OUT_1" gate="G$1" pin="2"/>
-<wire x1="-274.32" y1="91.44" x2="-223.52" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-274.32" y1="91.44" x2="-223.52" y2="91.44" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 </segment>
 </net>
 </nets>
@@ -2062,23 +2047,27 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <approved hash="104,1,-53.34,15.24,U$3,GND_1,GND,,,"/>
 <approved hash="104,1,-55.88,-40.64,GY_SGP1,VIN,+5V,,,"/>
 <approved hash="104,1,177.8,83.82,U$5,VIN,3V3,,,"/>
-<approved hash="104,1,-200.66,96.52,U$8,VIN,N$12,,,"/>
+<approved hash="104,1,-195.58,99.06,U$8,VIN,N$12,,,"/>
 <approved hash="104,1,-228.6,-30.48,U$9,220V_L,VCC,,,"/>
 <approved hash="104,1,-228.6,-40.64,U$9,220V_N,N$9,,,"/>
 <approved hash="104,1,-177.8,-40.64,U$9,OUT_5V,ACDC_OUT_5V,,,"/>
 <approved hash="104,1,-175.26,-93.98,U$7,220V_IN_L,VCC,,,"/>
 <approved hash="104,1,-175.26,-96.52,U$7,220V_IN_N,N$9,,,"/>
-<approved hash="104,1,99.06,17.78,U$11,VCC,+5V,,,"/>
+<approved hash="104,1,76.2,33.02,U$11,VCC,+5V,,,"/>
 <approved hash="113,1,-132.471,-32.9043,J2,,,,,"/>
 <approved hash="113,1,-154.549,-35.6757,J3,,,,,"/>
 <approved hash="113,1,-244.231,-97.7355,J4_FS_1,,,,,"/>
 <approved hash="113,1,-99.4512,92.7645,J4_FS_2,,,,,"/>
-<approved hash="113,1,-238.369,96.4043,J4,,,,,"/>
-<approved hash="113,1,-238.369,88.7843,J5,,,,,"/>
-<approved hash="113,1,-226.451,99.1757,J6,,,,,"/>
-<approved hash="113,1,-226.451,91.5557,J7,,,,,"/>
+<approved hash="113,1,-297.036,101.94,J4_AN_LWHW_POWER_1,,,,,"/>
+<approved hash="113,1,-296.308,91.3977,J4_AN_LWHW_OUT_1,,,,,"/>
+<approved hash="113,1,-203.228,101.642,J4_AN_HWFN_POWER_2,,,,,"/>
+<approved hash="113,1,-203.648,91.0996,J4_AN_HWFN_OUT_2,,,,,"/>
 <approved hash="113,1,-152.009,-111.876,J8,,,,,"/>
 <approved hash="113,1,-127.391,-109.104,J9,,,,,"/>
+<approved hash="113,1,-266.844,101.642,J4_AN_LWHW_POWER_2,,,,,"/>
+<approved hash="113,1,-267.264,91.0996,J4_AN_LWHW_OUT_2,,,,,"/>
+<approved hash="113,1,-232.808,91.3977,J4_AN_HWFN_OUT_1,,,,,"/>
+<approved hash="113,1,-233.652,101.94,J4_AN_HWFN_POWER_1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
