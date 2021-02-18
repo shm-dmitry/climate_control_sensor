@@ -16,7 +16,7 @@ esp_err_t rgbled_change_color();
 
 esp_err_t rgbled_init(const rgbled_config_t * config) {
     ledc_timer_config_t ledc_timer = {
-        .duty_resolution = LEDC_TIMER_8_BIT,  // resolution of PWM duty
+        .duty_resolution = LEDC_TIMER_16_BIT, // resolution of PWM duty
         .freq_hz = 5000,                      // frequency of PWM signal
         .speed_mode = LEDC_LOW_SPEED_MODE,    // timer mode
         .timer_num = LEDC_TIMER_1,            // timer index
