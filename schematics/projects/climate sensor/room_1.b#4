@@ -619,7 +619,6 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="19"/>
 <contactref element="U$3" pad="VIN"/>
 <contactref element="U$3" pad="VIN_1"/>
-<contactref element="GY_SGP1" pad="VIN"/>
 <contactref element="U$11" pad="VCC"/>
 <wire x1="32.7152" y1="33.4264" x2="30.5816" y2="33.4264" width="1.016" layer="16"/>
 <wire x1="30.5816" y1="33.4264" x2="30.48" y2="33.02" width="1.016" layer="16"/>
@@ -630,7 +629,6 @@ design rules under a new name.</description>
 <wire x1="9.2456" y1="7.8232" x2="14.0208" y2="7.8232" width="1.016" layer="16"/>
 <wire x1="21.9456" y1="7.8232" x2="21.59" y2="7.62" width="1.016" layer="16"/>
 <wire x1="14.0208" y1="7.8232" x2="21.9456" y2="7.8232" width="1.016" layer="16"/>
-<wire x1="42.672" y1="4.9784" x2="43.18" y2="5.08" width="1.016" layer="16"/>
 <wire x1="14.0208" y1="7.8232" x2="13.97" y2="7.62" width="1.016" layer="16"/>
 <wire x1="30.5816" y1="32.7152" x2="30.48" y2="33.02" width="1.016" layer="16"/>
 <wire x1="80.3656" y1="51.2064" x2="93.8784" y2="51.2064" width="1.016" layer="16"/>
@@ -642,7 +640,6 @@ design rules under a new name.</description>
 <wire x1="24.892" y1="2.8448" x2="7.8232" y2="2.8448" width="1.016" layer="16"/>
 <wire x1="93.8784" y1="51.2064" x2="93.97" y2="50.79" width="1.016" layer="16"/>
 <wire x1="27.0256" y1="4.9784" x2="24.892" y2="2.8448" width="1.016" layer="16"/>
-<wire x1="42.672" y1="4.9784" x2="27.0256" y2="4.9784" width="1.016" layer="16"/>
 <wire x1="9.2456" y1="13.97" x2="26.67" y2="13.97" width="1.016" layer="16"/>
 <wire x1="26.67" y1="13.97" x2="27.0256" y2="13.6144" width="1.016" layer="16"/>
 <wire x1="27.0256" y1="13.6144" x2="27.0256" y2="4.9784" width="1.016" layer="16"/>
@@ -686,6 +683,9 @@ design rules under a new name.</description>
 <wire x1="88.1888" y1="2.8448" x2="63.2968" y2="2.8448" width="1.016" layer="16"/>
 <wire x1="92.1004" y1="6.7564" x2="88.1888" y2="2.8448" width="1.016" layer="16"/>
 <wire x1="61.1632" y1="4.9784" x2="60.96" y2="5.08" width="1.016" layer="16"/>
+<contactref element="GY_SGP1" pad="VIN"/>
+<wire x1="43.18" y1="5.08" x2="61.0616" y2="5.08" width="1.016" layer="16"/>
+<wire x1="61.0616" y1="5.08" x2="61.1632" y2="4.9784" width="1.016" layer="16"/>
 </signal>
 <signal name="UART_0_TXD">
 <contactref element="U$1" pad="35"/>
