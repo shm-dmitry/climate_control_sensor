@@ -1179,41 +1179,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="93.98" y="139.7" size="1.778" layer="95" grouprefs="ESP1"/>
 </segment>
 </net>
-<net name="GPIO_RGB_R" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO25"/>
-<wire x1="43.18" y1="157.48" x2="15.24" y2="157.48" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="15.24" y="157.48" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
-<net name="GPIO_RGB_G" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO26"/>
-<wire x1="43.18" y1="154.94" x2="15.24" y2="154.94" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="15.24" y="154.94" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
-<net name="GPIO_RGB_B" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO27"/>
-<wire x1="43.18" y1="152.4" x2="15.24" y2="152.4" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="15.24" y="152.4" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
-<net name="GPIO_AN_A" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="SVN"/>
-<wire x1="43.18" y1="170.18" x2="15.24" y2="170.18" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="15.24" y="170.18" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
-<net name="GPIO_AN_B" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO34"/>
-<wire x1="43.18" y1="167.64" x2="15.24" y2="167.64" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="15.24" y="167.64" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO32"/>
@@ -1224,6 +1189,17 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,86.36,91.44,GY_SGP1,VIN,+5V,,,"/>
+<approved hash="104,1,30.48,45.72,U$3,VIN,+5V,,,"/>
+<approved hash="104,1,30.48,43.18,U$3,VIN_1,+5V,,,"/>
+<approved hash="104,1,30.48,38.1,U$3,GND_1,GND,,,"/>
+<approved hash="104,1,99.06,38.1,J1,VIN,+5V,,,"/>
+<approved hash="204,1,139.7,38.1,J1,VO,,,,"/>
+<approved hash="202,1,139.7,48.26,J1,HD,,,,"/>
+<approved hash="104,1,185.42,99.06,U$2,VIN,3V3,,,"/>
+<approved hash="106,1,43.18,170.18,GPIO_AN_A,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>

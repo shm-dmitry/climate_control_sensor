@@ -1153,11 +1153,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="7.62" y="48.26" size="1.778" layer="95" grouprefs="ESP2"/>
 </segment>
 <segment>
-<wire x1="99.06" y1="-27.94" x2="78.74" y2="-27.94" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<label x="78.74" y="-27.94" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP1" gate="G$1" pin="VIN"/>
-</segment>
-<segment>
 <pinref part="J2" gate="G$1" pin="1"/>
 <wire x1="12.7" y1="20.32" x2="17.78" y2="20.32" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET1"/>
 <wire x1="17.78" y1="20.32" x2="17.78" y2="15.24" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET1"/>
@@ -1211,6 +1206,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="88.9" y1="10.16" x2="88.9" y2="-2.54" width="0.1524" layer="91" grouprefs="BH1"/>
 <wire x1="88.9" y1="-2.54" x2="71.12" y2="-2.54" width="0.1524" layer="91" grouprefs="BH1"/>
 <label x="71.12" y="-2.54" size="1.778" layer="95" grouprefs="BH1"/>
+</segment>
+<segment>
+<wire x1="99.06" y1="-27.94" x2="78.74" y2="-27.94" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
+<label x="78.74" y="-27.94" size="1.778" layer="95" grouprefs="GY-SGP1"/>
+<pinref part="GY_SGP1" gate="G$1" pin="VIN"/>
 </segment>
 </net>
 <net name="GPIO_TTP223" class="0">

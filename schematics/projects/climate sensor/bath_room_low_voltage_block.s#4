@@ -1213,34 +1213,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="71.12" y="-2.54" size="1.778" layer="95" grouprefs="BH1"/>
 </segment>
 </net>
-<net name="UART_0_TXD" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="TXD0"/>
-<wire x1="76.2" y1="86.36" x2="104.14" y2="86.36" width="0.1524" layer="91" grouprefs="ESP2"/>
-<label x="88.9" y="86.36" size="1.778" layer="95" grouprefs="ESP2"/>
-</segment>
-</net>
-<net name="UART_0_RXD" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="RXD0"/>
-<wire x1="76.2" y1="83.82" x2="104.14" y2="83.82" width="0.1524" layer="91" grouprefs="ESP2"/>
-<label x="88.9" y="81.28" size="1.778" layer="95" grouprefs="ESP2"/>
-</segment>
-</net>
-<net name="UART_1_RXD" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="SD2"/>
-<wire x1="40.64" y1="55.88" x2="17.78" y2="55.88" width="0.1524" layer="91" grouprefs="ESP2"/>
-<label x="17.78" y="55.88" size="1.778" layer="95" grouprefs="ESP2"/>
-</segment>
-</net>
-<net name="UART_1_TXD" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="SD3"/>
-<wire x1="40.64" y1="53.34" x2="17.78" y2="53.34" width="0.1524" layer="91" grouprefs="ESP2"/>
-<label x="17.78" y="50.8" size="1.778" layer="95" grouprefs="ESP2"/>
-</segment>
-</net>
 <net name="GPIO_TTP223" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="IO18"/>
@@ -1391,6 +1363,16 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,193.04,88.9,U$3,VIN,3V3,,,"/>
+<approved hash="104,1,182.88,33.02,U$5,VIN,3V3,,,"/>
+<approved hash="104,1,93.98,10.16,U$4,VCC,3V3,,,"/>
+<approved hash="104,1,99.06,-27.94,GY_SGP1,VIN,+5V,,,"/>
+<approved hash="113,1,-2.93116,82.6045,J4_FS_1,,,,,"/>
+<approved hash="113,1,12.3088,22.9757,J2,,,,,"/>
+<approved hash="113,1,-50.4088,-12.8157,J4,,,,,"/>
+<approved hash="113,1,-50.4088,-20.4357,J5,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>

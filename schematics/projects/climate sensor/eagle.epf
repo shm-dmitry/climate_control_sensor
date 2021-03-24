@@ -272,9 +272,6 @@ UsedLibraryUrn="urn:adsk.eagle:library:197"
 UsedLibraryUrn="urn:adsk.eagle:library:198"
 UsedLibraryUrn="urn:adsk.eagle:library:199"
 UsedLibrary="/home/shmyglev/EAGLE/libraries/my_devices.lbr"
-UsedLibrary="/home/shmyglev/diy-modules.lbr"
-UsedLibrary="/home/shmyglev/mhz19b.lbr"
-UsedLibrary="/home/shmyglev/ESP32-DEVKITC.lbr"
 
 [Win_1]
 Type="Control Panel"

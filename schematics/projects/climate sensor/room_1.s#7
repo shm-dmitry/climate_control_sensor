@@ -1170,15 +1170,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="91.44" y="165.1" size="1.778" layer="95" grouprefs="ESP1"/>
 </segment>
 </net>
-<net name="GPIO_TTP223" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO18"/>
-<wire x1="78.74" y1="157.48" x2="83.82" y2="157.48" width="0.1524" layer="91" grouprefs="ESP1"/>
-<wire x1="83.82" y1="157.48" x2="83.82" y2="139.7" width="0.1524" layer="91" grouprefs="ESP1"/>
-<wire x1="83.82" y1="139.7" x2="109.22" y2="139.7" width="0.1524" layer="91" grouprefs="ESP1"/>
-<label x="93.98" y="139.7" size="1.778" layer="95" grouprefs="ESP1"/>
-</segment>
-</net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO32"/>

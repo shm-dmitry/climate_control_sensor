@@ -98,9 +98,9 @@
 <library name="my_devices">
 <packages>
 <package name="C">
-<pad name="P$1" x="-1.27" y="0" drill="0.6" shape="square"/>
-<pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
-<circle x="0" y="0" radius="2.83980625" width="0.127" layer="21"/>
+<pad name="P$1" x="-3.81" y="0" drill="0.6" shape="square"/>
+<pad name="P$2" x="3.81" y="0" drill="0.6" shape="square"/>
+<circle x="0" y="0" radius="6.35" width="0.127" layer="21"/>
 </package>
 <package name="PMS7003">
 <pad name="GND" x="-1.27" y="0" drill="0.6" shape="square"/>
@@ -119,16 +119,16 @@
 <wire x1="6.35" y1="7.62" x2="-3.81" y2="7.62" width="0.127" layer="21"/>
 </package>
 <package name="R">
-<wire x1="5.08" y1="1.27" x2="-5.08" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="1.27" x2="-5.08" y2="0" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="0" x2="-5.08" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-1.27" x2="5.08" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-1.27" x2="5.08" y2="0" width="0.127" layer="21"/>
-<pad name="P$1" x="-7.62" y="0" drill="0.6" shape="square"/>
-<pad name="P$2" x="7.62" y="0" drill="0.6" shape="square"/>
-<wire x1="5.08" y1="0" x2="5.08" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="0" x2="-5.08" y2="0" width="0.127" layer="21"/>
-<wire x1="5.08" y1="0" x2="7.62" y2="0" width="0.127" layer="21"/>
+<pad name="P$1" x="-7.62" y="-3.81" drill="0.6" shape="square"/>
+<pad name="P$2" x="3.81" y="-3.81" drill="0.6" shape="square"/>
+<wire x1="-5.08" y1="-2.54" x2="-5.08" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="-3.81" x2="-5.08" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="-5.08" y1="-5.08" x2="1.27" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-5.08" x2="1.27" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-3.81" x2="1.27" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-2.54" x2="-5.08" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="-7.62" y1="-3.81" x2="-5.08" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-3.81" x2="3.81" y2="-3.81" width="0.127" layer="21"/>
 </package>
 <package name="GY-SGP30">
 <pad name="VIN" x="0" y="3.81" drill="0.6" shape="square"/>
@@ -1018,7 +1018,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <approved hash="104,1,17.78,2.54,U$3,VIN,+5V,,,"/>
 <approved hash="104,1,17.78,0,U$3,VIN_1,+5V,,,"/>
 <approved hash="104,1,17.78,-5.08,U$3,GND_1,GND,,,"/>
-<approved hash="104,1,96.52,2.54,GY_SGP1,VIN,+5V,,,"/>
+<approved hash="104,1,96.52,2.54,GY_SGP30_1,VIN,3V3,,,"/>
 <approved hash="104,1,187.96,5.08,U$11,VCC,+5V,,,"/>
 <approved hash="104,1,226.06,66.04,U$2,VIN,3V3,,,"/>
 <approved hash="106,1,17.78,-17.78,UART_1_RXD,,,,,"/>

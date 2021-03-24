@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -185,6 +185,16 @@
 <pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
 <circle x="0" y="0" radius="2.83980625" width="0.127" layer="21"/>
 </package>
+<package name="MH_Z19B">
+<pad name="GND" x="0" y="0" drill="0.6" shape="square"/>
+<pad name="RX" x="0" y="2.54" drill="0.6" shape="square"/>
+<pad name="TX" x="0" y="5.08" drill="0.6" shape="square"/>
+<pad name="VCC" x="0" y="-2.54" drill="0.6" shape="square"/>
+<wire x1="-2.54" y1="6.35" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-3.81" x2="2.54" y2="6.35" width="0.127" layer="21"/>
+<wire x1="2.54" y1="6.35" x2="-2.54" y2="6.35" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="PMS7003">
@@ -337,14 +347,16 @@
 <text x="-5.08" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 <symbol name="MH_Z19B">
-<pin name="P$1" x="-5.08" y="5.08" length="middle"/>
-<pin name="P$2" x="-5.08" y="2.54" length="middle"/>
-<pin name="P$3" x="-5.08" y="0" length="middle"/>
-<pin name="P$4" x="-5.08" y="-2.54" length="middle"/>
+<pin name="VCC" x="-5.08" y="5.08" length="middle" direction="pwr"/>
+<pin name="GND" x="-5.08" y="2.54" length="middle" direction="pwr"/>
+<pin name="RX" x="-5.08" y="0" length="middle"/>
+<pin name="TX" x="-5.08" y="-2.54" length="middle"/>
 <wire x1="0" y1="7.62" x2="0" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="0" y1="-5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="7.62" y1="-5.08" x2="7.62" y2="7.62" width="0.254" layer="94"/>
 <wire x1="7.62" y1="7.62" x2="0" y2="7.62" width="0.254" layer="94"/>
+<text x="10.16" y="5.08" size="1.778" layer="94">&gt;NAME</text>
+<text x="10.16" y="-2.54" size="1.778" layer="94">MH-Z19B</text>
 </symbol>
 </symbols>
 <devicesets>

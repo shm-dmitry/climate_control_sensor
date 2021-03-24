@@ -895,8 +895,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U$1" library="ESP32-DEVKITC" deviceset="ESP32DEVKITC" device=""/>
-<part name="J4_FS_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
-<part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -948,13 +946,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="U$1" gate="G$1" x="60.96" y="154.94" smashed="yes" rot="R270" grouprefs="ESP1">
 <attribute name="NAME" x="66.04" y="181.61" size="1.27" layer="95"/>
 </instance>
-<instance part="J4_FS_2" gate="G$1" x="-2.54" y="160.02" smashed="yes" rot="R90" grouprefs="ESP1">
-<attribute name="NAME" x="-2.54" y="165.1" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="1.27" y="165.1" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND9" gate="1" x="5.08" y="154.94" smashed="yes" grouprefs="ESP1">
-<attribute name="VALUE" x="2.54" y="152.4" size="1.778" layer="96"/>
-</instance>
 </instances>
 <busses>
 </busses>
@@ -999,12 +990,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="U$1" gate="G$1" pin="GND@38"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="78.74" y1="177.8" x2="109.22" y2="177.8" width="0.1524" layer="91" grouprefs="ESP1"/>
-</segment>
-<segment>
-<pinref part="J4_FS_2" gate="G$1" pin="1"/>
-<wire x1="0" y1="160.02" x2="5.08" y2="160.02" width="0.1524" layer="91" grouprefs="ESP1"/>
-<wire x1="5.08" y1="160.02" x2="5.08" y2="157.48" width="0.1524" layer="91" grouprefs="ESP1"/>
-<pinref part="GND9" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="+5V" class="0">
@@ -1170,13 +1155,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="91.44" y="165.1" size="1.778" layer="95" grouprefs="ESP1"/>
 </segment>
 </net>
-<net name="N$11" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO32"/>
-<pinref part="J4_FS_2" gate="G$1" pin="2"/>
-<wire x1="43.18" y1="162.56" x2="0" y2="162.56" width="0.1524" layer="91" grouprefs="ESP1"/>
-</segment>
-</net>
 </nets>
 </sheet>
 </sheets>
@@ -1189,7 +1167,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <approved hash="204,1,139.7,38.1,J1,VO,,,,"/>
 <approved hash="202,1,139.7,48.26,J1,HD,,,,"/>
 <approved hash="104,1,185.42,99.06,U$2,VIN,3V3,,,"/>
-<approved hash="106,1,43.18,170.18,GPIO_AN_A,,,,,"/>
+<approved hash="113,1,4.68884,83.9357,J2,,,,,"/>
+<approved hash="113,1,-0.391159,166.425,J4_FS_2,,,,,"/>
 </errors>
 </schematic>
 </drawing>

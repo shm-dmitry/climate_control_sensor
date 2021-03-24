@@ -913,11 +913,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J4" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
 <part name="J5" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
-<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="Q4" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="KT3102BM"/>
 <part name="Q5" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="KT3102BM"/>
 <part name="R2" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="600"/>
+<part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1003,9 +1003,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <attribute name="NAME" x="-48.26" y="-22.86" size="1.778" layer="95" rot="R270"/>
 <attribute name="VALUE" x="-52.07" y="-22.86" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="GND10" gate="1" x="-66.04" y="-15.24" smashed="yes" grouprefs="ANEMOMETER1">
-<attribute name="VALUE" x="-68.58" y="-17.78" size="1.778" layer="96"/>
-</instance>
 <instance part="Q4" gate="G$1" x="-48.26" y="-68.58" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-40.64" y="-66.04" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-40.64" y="-71.12" size="1.778" layer="94"/>
@@ -1021,6 +1018,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="R3" gate="G$1" x="-38.1" y="-45.72" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-44.45" y="-43.18" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-44.45" y="-49.53" size="1.778" layer="94"/>
+</instance>
+<instance part="GND1" gate="1" x="-73.66" y="-15.24" smashed="yes">
+<attribute name="VALUE" x="-76.2" y="-17.78" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1087,9 +1087,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="-48.26" y1="-81.28" x2="-48.26" y2="-76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 </segment>
 <segment>
-<pinref part="GND10" gate="1" pin="GND"/>
-<pinref part="J4" gate="G$1" pin="2"/>
-<wire x1="-66.04" y1="-12.7" x2="-50.8" y2="-12.7" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
+<pinref part="J4" gate="G$1" pin="1"/>
+<wire x1="-50.8" y1="-10.16" x2="-73.66" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="-73.66" y1="-10.16" x2="-73.66" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1163,9 +1164,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <junction x="25.4" y="15.24"/>
 </segment>
 <segment>
-<pinref part="J4" gate="G$1" pin="1"/>
-<wire x1="-50.8" y1="-10.16" x2="-66.04" y2="-10.16" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<label x="-66.04" y="-10.16" size="1.778" layer="95" grouprefs="ANEMOMETER1"/>
+<pinref part="J4" gate="G$1" pin="2"/>
+<wire x1="-50.8" y1="-12.7" x2="-68.58" y2="-12.7" width="0.1524" layer="91"/>
+<label x="-68.58" y="-15.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="3V3" class="0">
