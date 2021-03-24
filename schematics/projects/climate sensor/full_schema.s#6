@@ -664,6 +664,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
 <circle x="0" y="0" radius="2.54" width="0.127" layer="21"/>
 </package>
+<package name="TOUCH_SENSOR">
+<pad name="P$1" x="0" y="0" drill="0.6" shape="square"/>
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="FAN">
@@ -671,6 +675,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pin name="220V_N" x="17.78" y="0" length="middle" direction="pwr" rot="R180"/>
 <circle x="0" y="0" radius="12.7" width="0.254" layer="94"/>
 <text x="-2.54" y="5.08" size="1.778" layer="94">FAN</text>
+<text x="-5.08" y="-7.62" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
 <symbol name="PMS7003">
 <pin name="VIN" x="-15.24" y="12.7" length="middle" direction="pwr"/>
@@ -687,6 +692,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="-10.16" y1="-12.7" x2="7.62" y2="-12.7" width="0.254" layer="94"/>
 <wire x1="7.62" y1="-12.7" x2="7.62" y2="15.24" width="0.254" layer="94"/>
 <wire x1="7.62" y1="15.24" x2="-10.16" y2="15.24" width="0.254" layer="94"/>
+<text x="-5.08" y="17.78" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
 <symbol name="GY-SGP30">
 <pin name="VIN" x="-7.62" y="2.54" length="middle" direction="pwr"/>
@@ -766,6 +772,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="-20.32" y1="-7.62" x2="20.32" y2="-7.62" width="0.254" layer="94"/>
 <wire x1="20.32" y1="-7.62" x2="20.32" y2="7.62" width="0.254" layer="94"/>
 <wire x1="20.32" y1="7.62" x2="-20.32" y2="7.62" width="0.254" layer="94"/>
+<text x="-5.08" y="2.54" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
 <symbol name="THYRISTOR_SWITCH">
 <pin name="VIN" x="-27.94" y="2.54" length="middle" direction="in"/>
@@ -865,6 +872,14 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </polygon>
 <text x="-7.62" y="-5.08" size="1.778" layer="94">&gt;NAME</text>
 <text x="-7.62" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="TOUCH_SENSOR">
+<pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="-2.54" y2="2.54" width="0.254" layer="94"/>
+<text x="-5.08" y="5.08" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1119,6 +1134,21 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </device>
 </devices>
 </deviceset>
+<deviceset name="TOUCH_SENSOR" prefix="TC">
+<gates>
+<gate name="G$1" symbol="TOUCH_SENSOR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TOUCH_SENSOR">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="supply2" urn="urn:adsk.eagle:library:372">
@@ -1306,6 +1336,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <schematic_group name="220V"/>
 <schematic_group name="5V_SUPPLY_JET"/>
 <schematic_group name="FAN"/>
+<schematic_group name="IR"/>
 </groups>
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -1368,6 +1399,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="D1" library="my_devices" deviceset="LD" device="" value="IR"/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
+<part name="R12" library="my_devices" deviceset="R" device="" value="100"/>
+<part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
+<part name="TC1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
+<part name="C2" library="my_devices" deviceset="C" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1378,6 +1413,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="-213.36" y="-60.96" size="1.778" layer="91">High voltage block</text>
 <text x="-121.92" y="-50.8" size="1.778" layer="91">Low voltage block</text>
 <text x="-124.46" y="-76.2" size="1.778" layer="91" grouprefs="FAN">Cabel to FAN block and FAN block</text>
+<text x="-45.72" y="-58.42" size="1.778" layer="91">CHECKED</text>
+<text x="73.66" y="-58.42" size="1.778" layer="91">CHECKED</text>
+<text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
@@ -1406,8 +1444,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="GND6" gate="1" x="-76.2" y="-48.26" smashed="yes" grouprefs="GY-SGP30">
 <attribute name="VALUE" x="-78.74" y="-50.8" size="1.778" layer="96"/>
 </instance>
-<instance part="GND7" gate="1" x="157.48" y="83.82" smashed="yes" grouprefs="TTP223">
-<attribute name="VALUE" x="154.94" y="81.28" size="1.778" layer="96"/>
+<instance part="GND7" gate="1" x="157.48" y="99.06" smashed="yes" grouprefs="TTP223">
+<attribute name="VALUE" x="154.94" y="96.52" size="1.778" layer="96"/>
 </instance>
 <instance part="GND8" gate="1" x="218.44" y="-2.54" smashed="yes" grouprefs="RGBLED">
 <attribute name="VALUE" x="215.9" y="-5.08" size="1.778" layer="96"/>
@@ -1426,8 +1464,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="GY_SGP30_1" gate="G$1" x="-48.26" y="-43.18" smashed="yes" grouprefs="GY-SGP30">
 <attribute name="NAME" x="-50.8" y="-33.02" size="1.778" layer="94"/>
 </instance>
-<instance part="U$5" gate="G$1" x="185.42" y="86.36" smashed="yes" grouprefs="TTP223">
-<attribute name="NAME" x="182.88" y="96.52" size="1.778" layer="94"/>
+<instance part="U$5" gate="G$1" x="185.42" y="101.6" smashed="yes" grouprefs="TTP223">
+<attribute name="NAME" x="182.88" y="111.76" size="1.778" layer="94"/>
 </instance>
 <instance part="U$6" gate="G$1" x="228.6" y="5.08" smashed="yes" grouprefs="RGBLED">
 <attribute name="NAME" x="228.6" y="15.24" size="1.778" layer="94"/>
@@ -1578,16 +1616,31 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-77.47" y="106.68" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-77.47" y="100.33" size="1.778" layer="94"/>
 </instance>
-<instance part="D1" gate="G$1" x="149.86" y="-45.72" smashed="yes" rot="R270">
-<attribute name="NAME" x="144.78" y="-38.1" size="1.778" layer="94" rot="R270"/>
-<attribute name="VALUE" x="142.24" y="-38.1" size="1.778" layer="94" rot="R270"/>
+<instance part="D1" gate="G$1" x="172.72" y="-55.88" smashed="yes" rot="R270" grouprefs="IR">
+<attribute name="NAME" x="167.64" y="-48.26" size="1.778" layer="94" rot="R270"/>
+<attribute name="VALUE" x="165.1" y="-48.26" size="1.778" layer="94" rot="R270"/>
 </instance>
-<instance part="GND10" gate="1" x="149.86" y="-73.66" smashed="yes">
-<attribute name="VALUE" x="147.32" y="-76.2" size="1.778" layer="96"/>
+<instance part="GND10" gate="1" x="172.72" y="-83.82" smashed="yes" grouprefs="IR">
+<attribute name="VALUE" x="170.18" y="-86.36" size="1.778" layer="96"/>
 </instance>
-<instance part="Q6" gate="G$1" x="149.86" y="-60.96" smashed="yes">
-<attribute name="NAME" x="153.67" y="-59.69" size="1.778" layer="94"/>
-<attribute name="VALUE" x="153.67" y="-63.5" size="1.778" layer="94"/>
+<instance part="Q6" gate="G$1" x="172.72" y="-71.12" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="176.53" y="-69.85" size="1.778" layer="94"/>
+<attribute name="VALUE" x="176.53" y="-73.66" size="1.778" layer="94"/>
+</instance>
+<instance part="R12" gate="G$1" x="162.56" y="-43.18" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="156.21" y="-40.64" size="1.778" layer="94"/>
+<attribute name="VALUE" x="156.21" y="-46.99" size="1.778" layer="94"/>
+</instance>
+<instance part="R13" gate="G$1" x="152.4" y="-71.12" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="146.05" y="-68.58" size="1.778" layer="94"/>
+<attribute name="VALUE" x="146.05" y="-74.93" size="1.778" layer="94"/>
+</instance>
+<instance part="TC1" gate="G$1" x="190.5" y="68.58" smashed="yes">
+<attribute name="NAME" x="185.42" y="73.66" size="1.778" layer="94"/>
+</instance>
+<instance part="C2" gate="G$1" x="175.26" y="63.5" smashed="yes" rot="R90">
+<attribute name="NAME" x="170.18" y="58.42" size="1.778" layer="94" rot="R90"/>
+<attribute name="VALUE" x="182.88" y="58.42" size="1.778" layer="94" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -1625,8 +1678,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="GY_SGP30_1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
-<wire x1="177.8" y1="88.9" x2="157.48" y2="88.9" width="0.1524" layer="91" grouprefs="TTP223"/>
-<wire x1="157.48" y1="88.9" x2="157.48" y2="86.36" width="0.1524" layer="91" grouprefs="TTP223"/>
+<wire x1="177.8" y1="104.14" x2="157.48" y2="104.14" width="0.1524" layer="91" grouprefs="TTP223"/>
+<wire x1="157.48" y1="104.14" x2="157.48" y2="101.6" width="0.1524" layer="91" grouprefs="TTP223"/>
 <pinref part="GND7" gate="1" pin="GND"/>
 <pinref part="U$5" gate="G$1" pin="GND"/>
 </segment>
@@ -1685,7 +1738,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <segment>
 <pinref part="Q6" gate="G$1" pin="E"/>
 <pinref part="GND10" gate="1" pin="GND"/>
-<wire x1="149.86" y1="-68.58" x2="149.86" y2="-71.12" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="-78.74" x2="172.72" y2="-81.28" width="0.1524" layer="91" grouprefs="IR"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1801,6 +1854,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-217.17" y1="121.92" x2="-205.74" y2="121.92" width="0.1524" layer="91"/>
 <label x="-210.82" y="121.92" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R12" gate="G$1" pin="P$1"/>
+<wire x1="154.94" y1="-43.18" x2="147.32" y2="-43.18" width="0.1524" layer="91" grouprefs="IR"/>
+<label x="147.32" y="-43.18" size="1.778" layer="95" grouprefs="IR"/>
+</segment>
 </net>
 <net name="3V3" class="0">
 <segment>
@@ -1817,9 +1875,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="35.56" y="-58.42" size="1.778" layer="95" grouprefs="BH1750"/>
 </segment>
 <segment>
-<wire x1="177.8" y1="83.82" x2="177.8" y2="76.2" width="0.1524" layer="91" grouprefs="TTP223"/>
-<wire x1="177.8" y1="76.2" x2="157.48" y2="76.2" width="0.1524" layer="91" grouprefs="TTP223"/>
-<label x="157.48" y="76.2" size="1.778" layer="95" grouprefs="TTP223"/>
+<wire x1="177.8" y1="99.06" x2="177.8" y2="91.44" width="0.1524" layer="91" grouprefs="TTP223"/>
+<wire x1="177.8" y1="91.44" x2="157.48" y2="91.44" width="0.1524" layer="91" grouprefs="TTP223"/>
+<label x="157.48" y="91.44" size="1.778" layer="95" grouprefs="TTP223"/>
 <pinref part="U$5" gate="G$1" pin="VIN"/>
 </segment>
 <segment>
@@ -1899,10 +1957,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="GPIO_TTP223" class="0">
 <segment>
-<wire x1="177.8" y1="86.36" x2="172.72" y2="86.36" width="0.1524" layer="91" grouprefs="TTP223"/>
-<wire x1="172.72" y1="86.36" x2="172.72" y2="81.28" width="0.1524" layer="91" grouprefs="TTP223"/>
-<wire x1="172.72" y1="81.28" x2="162.56" y2="81.28" width="0.1524" layer="91" grouprefs="TTP223"/>
-<label x="162.56" y="81.28" size="1.778" layer="95" grouprefs="TTP223"/>
+<wire x1="177.8" y1="101.6" x2="172.72" y2="101.6" width="0.1524" layer="91" grouprefs="TTP223"/>
+<wire x1="172.72" y1="101.6" x2="172.72" y2="96.52" width="0.1524" layer="91" grouprefs="TTP223"/>
+<wire x1="172.72" y1="96.52" x2="162.56" y2="96.52" width="0.1524" layer="91" grouprefs="TTP223"/>
+<label x="162.56" y="96.52" size="1.778" layer="95" grouprefs="TTP223"/>
 <pinref part="U$5" gate="G$1" pin="IO"/>
 </segment>
 <segment>
@@ -2239,6 +2297,52 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="U$1" gate="G$1" pin="3V3"/>
 <pinref part="R11" gate="G$1" pin="P$2"/>
 <wire x1="-55.88" y1="104.14" x2="-62.23" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$25" class="0">
+<segment>
+<pinref part="D1" gate="G$1" pin="P$2"/>
+<pinref part="Q6" gate="G$1" pin="C"/>
+<wire x1="172.72" y1="-60.96" x2="172.72" y2="-63.5" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="N$26" class="0">
+<segment>
+<pinref part="R12" gate="G$1" pin="P$2"/>
+<wire x1="171.45" y1="-43.18" x2="172.72" y2="-43.18" width="0.1524" layer="91" grouprefs="IR"/>
+<pinref part="D1" gate="G$1" pin="P$1"/>
+<wire x1="172.72" y1="-43.18" x2="172.72" y2="-48.26" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="Q6" gate="G$1" pin="B"/>
+<pinref part="R13" gate="G$1" pin="P$2"/>
+<wire x1="165.1" y1="-71.12" x2="161.29" y2="-71.12" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="GPIO_IR" class="0">
+<segment>
+<pinref part="R13" gate="G$1" pin="P$1"/>
+<wire x1="144.78" y1="-71.12" x2="137.16" y2="-71.12" width="0.1524" layer="91" grouprefs="IR"/>
+<label x="134.62" y="-71.12" size="1.778" layer="95" grouprefs="IR"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO2"/>
+<wire x1="-20.32" y1="68.58" x2="-17.78" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="68.58" x2="-17.78" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="58.42" x2="10.16" y2="58.42" width="0.1524" layer="91"/>
+<label x="2.54" y="58.42" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="GPIO_TS" class="0">
+<segment>
+<pinref part="TC1" gate="G$1" pin="P$1"/>
+<pinref part="C2" gate="G$1" pin="P$2"/>
+<wire x1="182.88" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="68.58" x2="157.48" y2="68.58" width="0.1524" layer="91"/>
+<junction x="175.26" y="68.58"/>
+<label x="154.94" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
