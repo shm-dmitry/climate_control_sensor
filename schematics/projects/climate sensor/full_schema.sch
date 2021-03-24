@@ -659,6 +659,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="2.54" y1="-3.81" x2="2.54" y2="6.35" width="0.127" layer="21"/>
 <wire x1="2.54" y1="6.35" x2="-2.54" y2="6.35" width="0.127" layer="21"/>
 </package>
+<package name="LD">
+<pad name="P$1" x="-1.27" y="0" drill="0.6" shape="square"/>
+<pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
+<circle x="0" y="0" radius="2.54" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="FAN">
@@ -838,6 +843,28 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <vertex x="-1.016" y="-0.508"/>
 <vertex x="-2.032" y="-1.524"/>
 </polygon>
+</symbol>
+<symbol name="LD">
+<pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="0" y2="0" width="0.254" layer="94"/>
+<pin name="P$2" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
+<wire x1="0" y1="2.54" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0.508" y1="3.048" x2="1.524" y2="4.064" width="0.254" layer="94"/>
+<polygon width="0.254" layer="94">
+<vertex x="1.016" y="4.064"/>
+<vertex x="1.524" y="3.556"/>
+<vertex x="1.524" y="4.064"/>
+</polygon>
+<wire x1="-1.016" y1="3.556" x2="0" y2="4.572" width="0.254" layer="94"/>
+<polygon width="0.254" layer="94">
+<vertex x="-0.508" y="4.572"/>
+<vertex x="0" y="4.064"/>
+<vertex x="0" y="4.572"/>
+</polygon>
+<text x="-7.62" y="-5.08" size="1.778" layer="94">&gt;NAME</text>
+<text x="-7.62" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1076,6 +1103,22 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </device>
 </devices>
 </deviceset>
+<deviceset name="LD" prefix="D">
+<gates>
+<gate name="G$1" symbol="LD" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="LD">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="supply2" urn="urn:adsk.eagle:library:372">
@@ -1263,6 +1306,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <schematic_group name="220V"/>
 <schematic_group name="5V_SUPPLY_JET"/>
 <schematic_group name="FAN"/>
+<schematic_group name="IR"/>
 </groups>
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -1321,6 +1365,12 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="R8" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R9" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R10" library="my_devices" deviceset="R" device="" value="600"/>
+<part name="R11" library="my_devices" deviceset="R" device="" value="30"/>
+<part name="D1" library="my_devices" deviceset="LD" device="" value="IR"/>
+<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
+<part name="R12" library="my_devices" deviceset="R" device="" value="100"/>
+<part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 </parts>
 <sheets>
 <sheet>
@@ -1527,6 +1577,29 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-232.41" y="124.46" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-232.41" y="118.11" size="1.778" layer="94"/>
 </instance>
+<instance part="R11" gate="G$1" x="-71.12" y="104.14" smashed="yes">
+<attribute name="NAME" x="-77.47" y="106.68" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-77.47" y="100.33" size="1.778" layer="94"/>
+</instance>
+<instance part="D1" gate="G$1" x="172.72" y="-55.88" smashed="yes" rot="R270" grouprefs="IR">
+<attribute name="NAME" x="167.64" y="-48.26" size="1.778" layer="94" rot="R270"/>
+<attribute name="VALUE" x="165.1" y="-48.26" size="1.778" layer="94" rot="R270"/>
+</instance>
+<instance part="GND10" gate="1" x="172.72" y="-83.82" smashed="yes" grouprefs="IR">
+<attribute name="VALUE" x="170.18" y="-86.36" size="1.778" layer="96"/>
+</instance>
+<instance part="Q6" gate="G$1" x="172.72" y="-71.12" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="176.53" y="-69.85" size="1.778" layer="94"/>
+<attribute name="VALUE" x="176.53" y="-73.66" size="1.778" layer="94"/>
+</instance>
+<instance part="R12" gate="G$1" x="162.56" y="-43.18" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="156.21" y="-40.64" size="1.778" layer="94"/>
+<attribute name="VALUE" x="156.21" y="-46.99" size="1.778" layer="94"/>
+</instance>
+<instance part="R13" gate="G$1" x="152.4" y="-71.12" smashed="yes" grouprefs="IR">
+<attribute name="NAME" x="146.05" y="-68.58" size="1.778" layer="94"/>
+<attribute name="VALUE" x="146.05" y="-74.93" size="1.778" layer="94"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -1619,6 +1692,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="J4_AN_LWHW_POWER_1" gate="G$1" pin="2"/>
 <pinref part="GND3" gate="1" pin="GND"/>
 <wire x1="-299.72" y1="149.86" x2="-243.84" y2="149.86" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="Q6" gate="G$1" pin="E"/>
+<pinref part="GND10" gate="1" pin="GND"/>
+<wire x1="172.72" y1="-78.74" x2="172.72" y2="-81.28" width="0.1524" layer="91" grouprefs="IR"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1734,13 +1812,13 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-217.17" y1="121.92" x2="-205.74" y2="121.92" width="0.1524" layer="91"/>
 <label x="-210.82" y="121.92" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R12" gate="G$1" pin="P$1"/>
+<wire x1="154.94" y1="-43.18" x2="147.32" y2="-43.18" width="0.1524" layer="91" grouprefs="IR"/>
+<label x="147.32" y="-43.18" size="1.778" layer="95" grouprefs="IR"/>
+</segment>
 </net>
 <net name="3V3" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="3V3"/>
-<wire x1="-55.88" y1="104.14" x2="-81.28" y2="104.14" width="0.1524" layer="91" grouprefs="ESP"/>
-<label x="-81.28" y="104.14" size="1.778" layer="95" grouprefs="ESP"/>
-</segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="VIN"/>
 <wire x1="78.74" y1="93.98" x2="66.04" y2="93.98" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
@@ -1779,6 +1857,12 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-218.44" y1="104.14" x2="-198.12" y2="104.14" width="0.1524" layer="91"/>
 <junction x="-218.44" y="104.14"/>
 <label x="-203.2" y="104.14" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R11" gate="G$1" pin="P$1"/>
+<wire x1="-78.74" y1="104.14" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="-91.44" y1="104.14" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
+<label x="-91.44" y="104.14" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="UART_0_TXD" class="0">
@@ -2164,6 +2248,49 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="J4_AN_HWFN_OUT_1" gate="G$1" pin="1"/>
 <pinref part="J4_AN_LWHW_OUT_2" gate="G$1" pin="2"/>
 <wire x1="-353.06" y1="132.08" x2="-312.42" y2="132.08" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$24" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="3V3"/>
+<pinref part="R11" gate="G$1" pin="P$2"/>
+<wire x1="-55.88" y1="104.14" x2="-62.23" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$25" class="0">
+<segment>
+<pinref part="D1" gate="G$1" pin="P$2"/>
+<pinref part="Q6" gate="G$1" pin="C"/>
+<wire x1="172.72" y1="-60.96" x2="172.72" y2="-63.5" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="N$26" class="0">
+<segment>
+<pinref part="R12" gate="G$1" pin="P$2"/>
+<wire x1="171.45" y1="-43.18" x2="172.72" y2="-43.18" width="0.1524" layer="91" grouprefs="IR"/>
+<pinref part="D1" gate="G$1" pin="P$1"/>
+<wire x1="172.72" y1="-43.18" x2="172.72" y2="-48.26" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="Q6" gate="G$1" pin="B"/>
+<pinref part="R13" gate="G$1" pin="P$2"/>
+<wire x1="165.1" y1="-71.12" x2="161.29" y2="-71.12" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+</net>
+<net name="GPIO_IR" class="0">
+<segment>
+<pinref part="R13" gate="G$1" pin="P$1"/>
+<wire x1="144.78" y1="-71.12" x2="137.16" y2="-71.12" width="0.1524" layer="91" grouprefs="IR"/>
+<label x="134.62" y="-71.12" size="1.778" layer="95" grouprefs="IR"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO2"/>
+<wire x1="-20.32" y1="68.58" x2="-17.78" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="68.58" x2="-17.78" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="58.42" x2="10.16" y2="58.42" width="0.1524" layer="91"/>
+<label x="2.54" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
