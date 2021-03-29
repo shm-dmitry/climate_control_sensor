@@ -1,4 +1,14 @@
 menu "Climate Control Configuration"
+   menu "WIFI Configuration"
+   	  config WIFI_SSID
+   	  	string "Wifi AP SSID"
+   	  	default ""
+
+   	  config WIFI_PASSWORD
+   	  	string "Wifi AP Password"
+   	  	default ""
+   endmenu
+
    menu "MQTT Configuration"
       config MQTT_BROKER_URI
          string "Broker URL"

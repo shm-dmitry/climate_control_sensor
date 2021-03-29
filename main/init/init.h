@@ -3,7 +3,7 @@
 
 void init_flash();
 
-void init_wifi();
+void init_wifi(const char* ssid, const char* password);
 
 void init_snmp();
 

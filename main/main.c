@@ -1,4 +1,7 @@
 #include "log.h"
+
+#include "unistd.h"
+
 #include "tion/tion.h"
 #include "init/init.h"
 #include "init/mqtt.h"
@@ -16,7 +19,7 @@
 void app_main(void)
 {
 	init_flash();
-	init_wifi();
+	init_wifi(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD);
 	init_snmp();
 
 #if CONFIG_I2C_PORT_0_ENABLED
@@ -92,5 +95,9 @@ void app_main(void)
 #endif
 
 	mqtt_start();
+
+	while(true) {
+		sleep(1);
+	}
 }
 
