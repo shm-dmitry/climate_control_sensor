@@ -8,7 +8,7 @@
 
 static char* pms7003_status_topic = NULL;
 
-#define PMS7003_EXEC_PERIOD 60000000
+#define PMS7003_EXEC_PERIOD 30000000
 
 void pms7003_timer_exec_function(void* arg) {
 	pms7003_data_t data = { 0 };

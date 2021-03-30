@@ -9,5 +9,6 @@
 #define MQTT_LOG "mqtt_log"
 #define MH_Z19B_LOG "mh_z19b_log"
 #define SNMP_LOG "snmp_log"
+#define PMS7003_LOG "pms7003_log"
 
 #endif /* MAIN_LOG_H_ */

@@ -149,7 +149,7 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 	if (res <= 0) {
 		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Cant send data to device");
 
-		return res;
+		return ESP_FAIL;
 	}
 
 	if (reply == NULL) {

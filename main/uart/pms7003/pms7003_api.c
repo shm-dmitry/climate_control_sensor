@@ -1,6 +1,13 @@
 #include "pms7003_api.h"
 
+#include "string.h"
+
+#include "../../log.h"
+
 #define PMS7003_BUF_SIZE 32
+#define PMS7003_DRIVER_BUF_SIZE 1024
+#define PMS7003_AWAIT_RESPONSE 1000
+#define PMS7003_QUEUE_SIZE 10
 
 #define PMS7003_COMMAND_SIZE        7
 #define PMS7003_COMMAND_WAKEUP      { 0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74 }
@@ -35,20 +42,29 @@ esp_err_t pms7003_init_driver(const uart_config_def_t * config) {
     intr_alloc_flags = ESP_INTR_FLAG_IRAM;
 #endif
 
-    esp_err_t res = uart_driver_install(pms7003_uart_port, PMS7003_BUF_SIZE * 2, 0, 0, NULL, intr_alloc_flags);
+    esp_err_t res = uart_driver_install(pms7003_uart_port, PMS7003_DRIVER_BUF_SIZE, PMS7003_DRIVER_BUF_SIZE, PMS7003_QUEUE_SIZE, NULL, intr_alloc_flags);
     if (res) {
+    	ESP_LOGE(PMS7003_LOG, "uart_driver_install error: %d", res);
     	return res;
     }
+
+	ESP_LOGI(PMS7003_LOG, "uart_set_pin OK");
 
     res = uart_param_config(pms7003_uart_port, &uart_config);
     if (res) {
+    	ESP_LOGE(PMS7003_LOG, "uart_param_config error: %d", res);
     	return res;
     }
 
+	ESP_LOGI(PMS7003_LOG, "uart_param_config OK");
+
     res = uart_set_pin(pms7003_uart_port, config->pin_txd, config->pin_rxd, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     if (res) {
+    	ESP_LOGE(PMS7003_LOG, "uart_set_pin error: %d", res);
     	return res;
     }
+
+	ESP_LOGI(PMS7003_LOG, "uart_set_pin OK");
 
     return ESP_OK;
 }
@@ -82,23 +98,23 @@ esp_err_t pms7003_read(pms7003_data_t * data) {
 		return res;
 	}
 
-	data->factory_pm_1_0 =  (reply[5] << 8) + reply[6];
-	data->factory_pm_2_5 =  (reply[7] << 8) + reply[8];
-	data->factory_pm_10_0 = (reply[9] << 8) + reply[10];
+	data->factory_pm_1_0 =  (reply[4] << 8) + reply[5];
+	data->factory_pm_2_5 =  (reply[6] << 8) + reply[7];
+	data->factory_pm_10_0 = (reply[8] << 8) + reply[9];
 
-	data->atmospheric_pm_1_0 =  (reply[11] << 8) + reply[12];
-	data->atmospheric_pm_2_5 =  (reply[13] << 8) + reply[14];
-	data->atmospheric_pm_10_0 = (reply[15] << 8) + reply[16];
+	data->atmospheric_pm_1_0 =  (reply[10] << 8) + reply[11];
+	data->atmospheric_pm_2_5 =  (reply[12] << 8) + reply[13];
+	data->atmospheric_pm_10_0 = (reply[14] << 8) + reply[15];
 
-	data->raw_0_3_um =  (reply[17] << 8) + reply[18];
-	data->raw_0_5_um =  (reply[19] << 8) + reply[20];
-	data->raw_1_0_um =  (reply[21] << 8) + reply[22];
-	data->raw_2_5_um =  (reply[23] << 8) + reply[24];
-	data->raw_5_0_um =  (reply[25] << 8) + reply[26];
-	data->raw_10_0_um = (reply[27] << 8) + reply[28];
+	data->raw_0_3_um =  (reply[16] << 8) + reply[17];
+	data->raw_0_5_um =  (reply[18] << 8) + reply[29];
+	data->raw_1_0_um =  (reply[20] << 8) + reply[21];
+	data->raw_2_5_um =  (reply[22] << 8) + reply[23];
+	data->raw_5_0_um =  (reply[24] << 8) + reply[25];
+	data->raw_10_0_um = (reply[26] << 8) + reply[27];
 
-	data->version_number = reply[29];
-	data->error_code = reply[30];
+	data->version_number = reply[28];
+	data->error_code = reply[29];
 
 	return ESP_OK;
 }
@@ -118,39 +134,59 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 		uint8_t buf;
 
 		// cleanup buffer
-		if (uart_read_bytes(pms7003_uart_port, &buf, 1, 10 / portTICK_RATE_MS)) {
+		if (uart_read_bytes(pms7003_uart_port, &buf, 1, 10 / portTICK_RATE_MS) <= 0) {
 			break;
 		}
 	}
 
+	ESP_LOGI(PMS7003_LOG, "pms7003_send_buffer  ready-to-send: input queue empty");
+	ESP_LOG_BUFFER_HEXDUMP(PMS7003_LOG, command, PMS7003_COMMAND_SIZE, ESP_LOG_INFO);
+
 	esp_err_t res = uart_write_bytes(pms7003_uart_port, command, PMS7003_COMMAND_SIZE);
-	if (res) {
-		return res;
+	if (res <= 0) {
+		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Cant send data to device");
+
+		return ESP_FAIL;
 	}
 
 	if (reply == NULL) {
 		return ESP_OK;
 	}
 
-	for (uint8_t i = 0; i<=5; i++) {
-		if (i == 5) {
+	memset(reply, 0xbb, PMS7003_BUF_SIZE);
+
+	uint8_t await = PMS7003_AWAIT_RESPONSE / 20;
+	uint8_t reply_index = 0;
+	for (uint8_t i = 0; i<=await; i++) {
+		if (i == await) {
+			ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Timeout awaiting for a data from device.");
 			return ESP_ERR_TIMEOUT;
 		}
 
-		if (!uart_read_bytes(pms7003_uart_port, reply, PMS7003_BUF_SIZE, 20 / portTICK_RATE_MS)) {
-			break;
+		int readed = uart_read_bytes(pms7003_uart_port, reply + reply_index, PMS7003_BUF_SIZE - reply_index, 20 / portTICK_RATE_MS);
+		if (readed > 0) {
+			reply_index += readed;
+			if (reply_index >= PMS7003_BUF_SIZE) {
+				break;
+			}
 		}
 	}
+
+	ESP_LOGI(PMS7003_LOG, "Received reply from device");
+	ESP_LOG_BUFFER_HEXDUMP(PMS7003_LOG, reply, PMS7003_BUF_SIZE, ESP_LOG_INFO);
 
 	uint16_t crc = pms7003_crc(reply);
 
 	if (reply[0] != 0x42) {
+		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#0");
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if (reply[1] != 0x4d) {
+		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#1");
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if ((reply[PMS7003_BUF_SIZE - 2] << 8 | reply[PMS7003_BUF_SIZE - 1]) != crc) {
+		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad CRC");
 		return ESP_ERR_INVALID_CRC;
 	}
 
