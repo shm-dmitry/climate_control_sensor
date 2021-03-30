@@ -1337,6 +1337,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <schematic_group name="5V_SUPPLY_JET"/>
 <schematic_group name="FAN"/>
 <schematic_group name="IR"/>
+<schematic_group name="TOUCH_SENSOR"/>
 </groups>
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -1403,6 +1404,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="C2" library="my_devices" deviceset="C" device=""/>
+<part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1635,12 +1637,15 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="146.05" y="-68.58" size="1.778" layer="94"/>
 <attribute name="VALUE" x="146.05" y="-74.93" size="1.778" layer="94"/>
 </instance>
-<instance part="TS1" gate="G$1" x="190.5" y="68.58" smashed="yes">
+<instance part="TS1" gate="G$1" x="190.5" y="68.58" smashed="yes" grouprefs="TOUCH_SENSOR">
 <attribute name="NAME" x="185.42" y="73.66" size="1.778" layer="94"/>
 </instance>
-<instance part="C2" gate="G$1" x="175.26" y="63.5" smashed="yes" rot="R90">
+<instance part="C2" gate="G$1" x="175.26" y="63.5" smashed="yes" rot="R90" grouprefs="TOUCH_SENSOR">
 <attribute name="NAME" x="170.18" y="58.42" size="1.778" layer="94" rot="R90"/>
 <attribute name="VALUE" x="182.88" y="58.42" size="1.778" layer="94" rot="R90"/>
+</instance>
+<instance part="GND14" gate="1" x="175.26" y="50.8" smashed="yes" grouprefs="TOUCH_SENSOR">
+<attribute name="VALUE" x="172.72" y="48.26" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1740,6 +1745,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="GND10" gate="1" pin="GND"/>
 <wire x1="172.72" y1="-78.74" x2="172.72" y2="-81.28" width="0.1524" layer="91" grouprefs="IR"/>
 </segment>
+<segment>
+<pinref part="C2" gate="G$1" pin="P$1"/>
+<pinref part="GND14" gate="1" pin="GND"/>
+<wire x1="175.26" y1="55.88" x2="175.26" y2="53.34" width="0.1524" layer="91" grouprefs="TOUCH_SENSOR"/>
+</segment>
 </net>
 <net name="I2C_SCL" class="0">
 <segment>
@@ -1750,9 +1760,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO22"/>
-<wire x1="-20.32" y1="99.06" x2="-10.16" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="-10.16" y1="99.06" x2="-10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-10.16" y1="81.28" x2="10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="99.06" x2="-7.62" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="99.06" x2="-7.62" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-7.62" y1="81.28" x2="10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="0" y="81.28" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
@@ -1777,9 +1787,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO21"/>
-<wire x1="-20.32" y1="91.44" x2="-12.7" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="-12.7" y1="91.44" x2="-12.7" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-12.7" y1="73.66" x2="10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="91.44" x2="-10.16" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-10.16" y1="91.44" x2="-10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-10.16" y1="73.66" x2="10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="0" y="73.66" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
@@ -1965,9 +1975,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO18"/>
-<wire x1="-20.32" y1="83.82" x2="-15.24" y2="83.82" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-15.24" y1="83.82" x2="-15.24" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-15.24" y1="66.04" x2="10.16" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="83.82" x2="-12.7" y2="83.82" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-12.7" y1="83.82" x2="-12.7" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-12.7" y1="66.04" x2="10.16" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="-5.08" y="66.04" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 </net>
@@ -2339,10 +2349,17 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <segment>
 <pinref part="TS1" gate="G$1" pin="P$1"/>
 <pinref part="C2" gate="G$1" pin="P$2"/>
-<wire x1="182.88" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="68.58" x2="157.48" y2="68.58" width="0.1524" layer="91"/>
-<junction x="175.26" y="68.58"/>
-<label x="154.94" y="68.58" size="1.778" layer="95"/>
+<wire x1="182.88" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91" grouprefs="TOUCH_SENSOR"/>
+<wire x1="175.26" y1="68.58" x2="157.48" y2="68.58" width="0.1524" layer="91" grouprefs="TOUCH_SENSOR"/>
+<junction x="175.26" y="68.58" grouprefs="TOUCH_SENSOR"/>
+<label x="154.94" y="68.58" size="1.778" layer="95" grouprefs="TOUCH_SENSOR"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO4"/>
+<wire x1="-20.32" y1="73.66" x2="-15.24" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="73.66" x2="-15.24" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="60.96" x2="10.16" y2="60.96" width="0.1524" layer="91"/>
+<label x="-2.54" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
