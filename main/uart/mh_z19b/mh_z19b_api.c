@@ -3,10 +3,14 @@
 #include "stdint.h"
 #include "string.h"
 #include "esp_err.h"
+#include "esp_log.h"
+#include "../../log.h"
 
 // https://github.com/strange-v/MHZ19/
 
-#define MH_Z19B_BUF_SIZE 8
+#define MH_Z19B_BUF_SIZE 1024
+#define MH_Z19B_QUEUE_SIZE 10
+#define MH_Z19B_AWAIT_RESPONSE 1000
 
 static uint8_t COMMAND_MHZ19_RANGE_1000[]  = { 0x99, 0x00, 0x00, 0x00, 0x03, 0xE8 };
 static uint8_t COMMAND_MHZ19_RANGE_2000[]  = { 0x99, 0x00, 0x00, 0x00, 0x07, 0xD0 };
@@ -42,18 +46,21 @@ esp_err_t mh_z19b_init_driver(const uart_config_def_t * config, mh_z19b_range ra
     intr_alloc_flags = ESP_INTR_FLAG_IRAM;
 #endif
 
-    esp_err_t res = uart_driver_install(mh_z19b_uart_port, MH_Z19B_BUF_SIZE * 2, 0, 0, NULL, intr_alloc_flags);
+    esp_err_t res = uart_driver_install(mh_z19b_uart_port, MH_Z19B_BUF_SIZE, MH_Z19B_BUF_SIZE, MH_Z19B_QUEUE_SIZE, NULL, intr_alloc_flags);
     if (res) {
+    	ESP_LOGE(MH_Z19B_LOG, "uart_driver_install error: %d", res);
     	return res;
     }
 
     res = uart_param_config(mh_z19b_uart_port, &uart_config);
     if (res) {
+    	ESP_LOGE(MH_Z19B_LOG, "uart_param_config error: %d", res);
     	return res;
     }
 
     res = uart_set_pin(mh_z19b_uart_port, config->pin_txd, config->pin_rxd, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     if (res) {
+    	ESP_LOGE(MH_Z19B_LOG, "uart_set_pin error: %d", res);
     	return res;
     }
 
@@ -77,6 +84,12 @@ esp_err_t mh_z19b_init_driver(const uart_config_def_t * config, mh_z19b_range ra
 			res = ESP_FAIL;
 			break;
 	}
+
+    if (res) {
+    	ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer(range) error: %d", res);
+    } else {
+    	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer(range) OK");
+    }
 
     return res;
 }
@@ -102,6 +115,7 @@ esp_err_t mh_z19b_read(mh_z19b_data_t * data) {
 
 	esp_err_t res = mh_z19b_send_buffer(COMMAND_MHZ19_READ_VALUE, buffer);
 	if (res) {
+		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_read error: %d", res);
 		return res;
 	}
 
@@ -115,19 +129,26 @@ esp_err_t mh_z19b_read(mh_z19b_data_t * data) {
 
 esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 	uint8_t command[] = { 0xFF, 0x01, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], 0x00 };
-	command[8] = mh_z19b_crc(buffer);
+	command[8] = mh_z19b_crc(command);
+
+	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  send buffer ready");
 
 	while (true) {
 		uint8_t buf;
 
 		// cleanup buffer
-		if (uart_read_bytes(mh_z19b_uart_port, &buf, 1, 10 / portTICK_RATE_MS)) {
+		if (uart_read_bytes(mh_z19b_uart_port, &buf, 1, 10 / portTICK_RATE_MS) <= 0) {
 			break;
 		}
 	}
 
-	esp_err_t res = uart_write_bytes(mh_z19b_uart_port, command, 9);
-	if (res) {
+	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  ready-to-send: input queue empty");
+	ESP_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, command, 9, ESP_LOG_INFO);
+
+	int res = uart_write_bytes(mh_z19b_uart_port, command, 9);
+	if (res <= 0) {
+		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Cant send data to device");
+
 		return res;
 	}
 
@@ -135,27 +156,37 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 		return ESP_OK;
 	}
 
-	for (uint8_t i = 0; i<=5; i++) {
-		if (i == 5) {
+	uint8_t await = MH_Z19B_AWAIT_RESPONSE / 20;
+	for (uint8_t i = 0; i<=await; i++) {
+		if (i == await) {
+			ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Timeout awaiting for a data from device.");
 			return ESP_ERR_TIMEOUT;
 		}
 
-		if (!uart_read_bytes(mh_z19b_uart_port, reply, 9, 20 / portTICK_RATE_MS)) {
+		if (uart_read_bytes(mh_z19b_uart_port, reply, 9, 20 / portTICK_RATE_MS) > 0) {
 			break;
 		}
 	}
 
+	ESP_LOGI(MH_Z19B_LOG, "Received reply from device");
+	ESP_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, reply, 9, ESP_LOG_INFO);
+
 	uint8_t crc = mh_z19b_crc(reply);
 
 	if (reply[0] != 0xFF) {
+		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad magic byte)");
 		return ESP_ERR_INVALID_RESPONSE;
 	}
-	if (reply[1] != buffer[1]) {
+	if (reply[1] != buffer[0]) {
+		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad command)");
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if (reply[8] != crc) {
+		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad crc)");
 		return ESP_ERR_INVALID_CRC;
 	}
+
+	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  Readed response from device.");
 
 	return ESP_OK;
 }

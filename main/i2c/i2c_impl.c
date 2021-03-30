@@ -76,6 +76,8 @@ bool i2c_init_driver(i2c_port_t port, int gpio_sda, int gpio_scl){
     	mutex_1 = xSemaphoreCreateBinary();
     }
 
+    ESP_LOGI(I2C_LOG_TAG, "I2C port %d with pins %d/%d initialized", port, gpio_sda, gpio_scl);
+
     return true;
 }
 

@@ -1418,6 +1418,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="-45.72" y="-58.42" size="1.778" layer="91">CHECKED</text>
 <text x="73.66" y="-58.42" size="1.778" layer="91">CHECKED</text>
 <text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
+<text x="66.04" y="20.32" size="1.778" layer="91" grouprefs="MH_Z19B_CO2">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
@@ -1549,11 +1550,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-80.01" y="-7.62" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-80.01" y="-13.97" size="1.778" layer="94"/>
 </instance>
-<instance part="U$11" gate="G$1" x="81.28" y="27.94" smashed="yes" grouprefs="MH_Z19B_CO2">
-<attribute name="NAME" x="91.44" y="33.02" size="1.778" layer="94"/>
+<instance part="U$11" gate="G$1" x="78.74" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
+<attribute name="NAME" x="88.9" y="35.56" size="1.778" layer="94"/>
 </instance>
-<instance part="GND13" gate="1" x="45.72" y="27.94" smashed="yes" grouprefs="MH_Z19B_CO2">
-<attribute name="VALUE" x="43.18" y="25.4" size="1.778" layer="96"/>
+<instance part="GND13" gate="1" x="43.18" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
+<attribute name="VALUE" x="40.64" y="27.94" size="1.778" layer="96"/>
 </instance>
 <instance part="J4_AN_LWHW_POWER_2" gate="G$1" x="-309.88" y="149.86" smashed="yes" rot="R270" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-335.28" y="142.24" size="1.778" layer="95"/>
@@ -1726,7 +1727,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="GND"/>
-<wire x1="76.2" y1="30.48" x2="45.72" y2="30.48" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="33.02" x2="43.18" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
 <segment>
@@ -1832,8 +1833,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="VCC"/>
-<wire x1="76.2" y1="33.02" x2="55.88" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="33.02" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="35.56" x2="53.34" y2="35.56" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="35.56" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 <segment>
 <pinref part="Q2" gate="G$1" pin="E"/>
@@ -1925,8 +1926,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="RX"/>
-<wire x1="76.2" y1="27.94" x2="55.88" y2="27.94" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="27.94" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="30.48" x2="53.34" y2="30.48" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="30.48" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 </net>
 <net name="UART_0_RXD" class="0">
@@ -1937,8 +1938,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="TX"/>
-<wire x1="76.2" y1="25.4" x2="55.88" y2="25.4" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="25.4" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="27.94" x2="53.34" y2="27.94" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="27.94" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 </net>
 <net name="UART_1_RXD" class="0">

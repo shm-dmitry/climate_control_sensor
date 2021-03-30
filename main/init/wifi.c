@@ -92,12 +92,18 @@ void wifi_init(const char* ssid, const char* password) {
     if (bits & WIFI_CONNECTED_BIT) {
         ESP_LOGI(WIFI_LOG_TAG, "connected to ap SSID:%s", ssid);
     } else if (bits & WIFI_FAIL_BIT) {
-        ESP_LOGI(WIFI_LOG_TAG, "Failed to connect to SSID:%s", ssid);
+        ESP_LOGE(WIFI_LOG_TAG, "Failed to connect to SSID:%s", ssid);
     } else {
         ESP_LOGE(WIFI_LOG_TAG, "UNEXPECTED EVENT");
     }
 
-    ESP_ERROR_CHECK(esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, instance_got_ip));
-    ESP_ERROR_CHECK(esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, instance_any_id));
+    esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, instance_got_ip);
+    esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, instance_any_id);
     vEventGroupDelete(s_wifi_event_group);
+
+    if (bits & WIFI_CONNECTED_BIT) {
+    	ESP_LOGI(WIFI_LOG_TAG, "WIFI configured");
+    } else {
+    	ESP_LOGE(WIFI_LOG_TAG, "Failed to configure WIFI");
+    }
 }

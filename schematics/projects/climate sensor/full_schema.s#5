@@ -1403,6 +1403,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="C2" library="my_devices" deviceset="C" device=""/>
+<part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1642,6 +1643,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="170.18" y="58.42" size="1.778" layer="94" rot="R90"/>
 <attribute name="VALUE" x="182.88" y="58.42" size="1.778" layer="94" rot="R90"/>
 </instance>
+<instance part="GND14" gate="1" x="175.26" y="50.8" smashed="yes">
+<attribute name="VALUE" x="172.72" y="48.26" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -1739,6 +1743,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="Q6" gate="G$1" pin="E"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 <wire x1="172.72" y1="-78.74" x2="172.72" y2="-81.28" width="0.1524" layer="91" grouprefs="IR"/>
+</segment>
+<segment>
+<pinref part="C2" gate="G$1" pin="P$1"/>
+<pinref part="GND14" gate="1" pin="GND"/>
+<wire x1="175.26" y1="55.88" x2="175.26" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">

@@ -1381,6 +1381,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="-213.36" y="-60.96" size="1.778" layer="91">High voltage block</text>
 <text x="-121.92" y="-50.8" size="1.778" layer="91">Low voltage block</text>
 <text x="-124.46" y="-76.2" size="1.778" layer="91" grouprefs="FAN">Cabel to FAN block and FAN block</text>
+<text x="-45.72" y="-58.42" size="1.778" layer="91">CHECKED</text>
+<text x="73.66" y="-58.42" size="1.778" layer="91">CHECKED</text>
+<text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">

@@ -1,8 +1,10 @@
 #include "mqtt.h"
 
 #include "mqtt_client.h"
-
 #include "nvs_rw.h"
+
+#include "../log.h"
+#include "esp_log.h"
 
 #define MAX_MQTT_URI_LEN 100
 #define MAX_MQTT_USER_PASS 20
@@ -47,7 +49,11 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 
 void mqtt_publish(const char * topic, const char * message) {
 	if (client) {
-		esp_mqtt_client_enqueue(client, topic, message, 0, 0, 1, 1);
+		if (esp_mqtt_client_enqueue(client, topic, message, 0, 0, 1, 1) >= 0) {
+	    	ESP_LOGI(MQTT_LOG, "MQTT publish OK topic = %s, message = %s", topic, message);
+		} else {
+	    	ESP_LOGE(MQTT_LOG, "MQTT publish error: topic = %s, message = %s", topic, message);
+		}
 	}
 }
 
@@ -70,6 +76,8 @@ void mqtt_subscribe(const char * topic, mqtt_topic_callback_t callback) {
 	callbacks[callbacks_count].function = callback;
 
 	callbacks_count++;
+
+	ESP_LOGI(MQTT_LOG, "Client subscribed on topic %s", topic);
 }
 
 void mqtt_start() {
@@ -81,5 +89,10 @@ void mqtt_start() {
 
 	client = esp_mqtt_client_init(&mqtt_cfg);
     esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client);
-    esp_mqtt_client_start(client);
+    if (esp_mqtt_client_start(client)) {
+    	client = NULL;
+    	ESP_LOGE(MQTT_LOG, "Cant start MQTT client!");
+    } else {
+    	ESP_LOGI(MQTT_LOG, "MQTT started");
+    }
 }

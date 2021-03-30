@@ -1134,7 +1134,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </device>
 </devices>
 </deviceset>
-<deviceset name="TOUCH_SENSOR" prefix="TC">
+<deviceset name="TOUCH_SENSOR" prefix="TS">
 <gates>
 <gate name="G$1" symbol="TOUCH_SENSOR" x="0" y="0"/>
 </gates>
@@ -1401,7 +1401,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
 <part name="R12" library="my_devices" deviceset="R" device="" value="100"/>
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
-<part name="TC1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
+<part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="C2" library="my_devices" deviceset="C" device=""/>
 </parts>
 <sheets>
@@ -1635,7 +1635,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="146.05" y="-68.58" size="1.778" layer="94"/>
 <attribute name="VALUE" x="146.05" y="-74.93" size="1.778" layer="94"/>
 </instance>
-<instance part="TC1" gate="G$1" x="190.5" y="68.58" smashed="yes">
+<instance part="TS1" gate="G$1" x="190.5" y="68.58" smashed="yes">
 <attribute name="NAME" x="185.42" y="73.66" size="1.778" layer="94"/>
 </instance>
 <instance part="C2" gate="G$1" x="175.26" y="63.5" smashed="yes" rot="R90">
@@ -2337,7 +2337,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="GPIO_TS" class="0">
 <segment>
-<pinref part="TC1" gate="G$1" pin="P$1"/>
+<pinref part="TS1" gate="G$1" pin="P$1"/>
 <pinref part="C2" gate="G$1" pin="P$2"/>
 <wire x1="182.88" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="175.26" y1="68.58" x2="157.48" y2="68.58" width="0.1524" layer="91"/>
