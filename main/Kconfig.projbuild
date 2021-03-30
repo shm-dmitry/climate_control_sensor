@@ -207,6 +207,20 @@ menu "Climate Control Configuration"
          default ""
    endmenu
 
+   menu "Internal touch pad configuration (sensor buffon)"
+      config TOUCH_ENABLED
+         bool "Enable touch pad integration"
+         default false
+
+      config TOUCH_PIN
+         int "Touch pin"
+         default 0
+
+      config TOUCH_MQTT_TOPIC_STATUS
+         string "MQTT topic for touch pad device status information"
+         default ""
+   endmenu
+
    menu "Anemometer configuration (air direction, air speed, air consumption)"
       config ANEMOMETER_ENABLED
          bool "Enable Anemometer integration"

@@ -10,5 +10,6 @@
 #define MH_Z19B_LOG "mh_z19b_log"
 #define SNMP_LOG "snmp_log"
 #define PMS7003_LOG "pms7003_log"
+#define TOUCH_LOG "touch_log"
 
 #endif /* MAIN_LOG_H_ */

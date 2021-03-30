@@ -1421,6 +1421,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="73.66" y="-58.42" size="1.778" layer="91">CHECKED</text>
 <text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
 <text x="66.04" y="20.32" size="1.778" layer="91" grouprefs="MH_Z19B_CO2">CHECKED</text>
+<text x="-43.18" y="-7.62" size="1.778" layer="91" grouprefs="PMS7003">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
@@ -1651,11 +1652,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-80.01" y="-10.16" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-80.01" y="-16.51" size="1.778" layer="94"/>
 </instance>
-<instance part="C3" gate="G$1" x="-73.66" y="30.48" smashed="yes" rot="R90">
+<instance part="C3" gate="G$1" x="-73.66" y="30.48" smashed="yes" rot="R90" grouprefs="PMS7003">
 <attribute name="NAME" x="-78.74" y="25.4" size="1.778" layer="94" rot="R90"/>
 <attribute name="VALUE" x="-66.04" y="25.4" size="1.778" layer="94" rot="R90"/>
 </instance>
-<instance part="GND4" gate="1" x="-93.98" y="17.78" smashed="yes">
+<instance part="GND4" gate="1" x="-93.98" y="17.78" smashed="yes" grouprefs="PMS7003">
 <attribute name="VALUE" x="-96.52" y="15.24" size="1.778" layer="96"/>
 </instance>
 </instances>
@@ -1760,10 +1761,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="U$3" gate="G$1" pin="GND_1"/>
 <junction x="-53.34" y="22.86" grouprefs="PMS7003"/>
 <pinref part="C3" gate="G$1" pin="P$1"/>
-<wire x1="-73.66" y1="22.86" x2="-93.98" y2="22.86" width="0.1524" layer="91"/>
-<junction x="-73.66" y="22.86"/>
+<wire x1="-73.66" y1="22.86" x2="-93.98" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<junction x="-73.66" y="22.86" grouprefs="PMS7003"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="-93.98" y1="22.86" x2="-93.98" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="-93.98" y1="22.86" x2="-93.98" y2="20.32" width="0.1524" layer="91" grouprefs="PMS7003"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1828,10 +1829,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-53.34" y1="27.94" x2="-53.34" y2="30.48" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <junction x="-53.34" y="30.48" grouprefs="PMS7003"/>
 <pinref part="C3" gate="G$1" pin="P$2"/>
-<wire x1="-53.34" y1="35.56" x2="-73.66" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="-73.66" y1="35.56" x2="-93.98" y2="35.56" width="0.1524" layer="91"/>
-<junction x="-73.66" y="35.56"/>
-<label x="-93.98" y="35.56" size="1.778" layer="95"/>
+<wire x1="-53.34" y1="35.56" x2="-73.66" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-73.66" y1="35.56" x2="-93.98" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<junction x="-73.66" y="35.56" grouprefs="PMS7003"/>
+<label x="-93.98" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="5V"/>

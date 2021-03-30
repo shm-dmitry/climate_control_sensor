@@ -15,6 +15,7 @@
 #include "gpio/fan/fan.h"
 #include "gpio/ttp223/ttp223.h"
 #include "gpio/anemometer/anemometer.h"
+#include "gpio/touchpad/touchpad.h"
 
 void app_main(void)
 {
@@ -92,6 +93,10 @@ void app_main(void)
 
 #if CONFIG_ANEMOMETER_ENABLED
 	anemometer_startup(CONFIG_ANEMOMETER_GPIO_A, CONFIG_ANEMOMETER_GPIO_A, CONFIG_ANEMOMETER_MQTT_TOPIC_STATUS, CONFIG_ANEMOMETER_MQTT_TOPIC_COMMAND);
+#endif
+
+#if CONFIG_TOUCH_ENABLED
+	touchpad_init(CONFIG_TOUCH_PIN, CONFIG_TOUCH_MQTT_TOPIC_STATUS);
 #endif
 
 	mqtt_start();
