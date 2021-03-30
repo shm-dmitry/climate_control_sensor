@@ -15,17 +15,17 @@ void ttp223_on_state_changed(uint8_t state) {
 		rgbled_set_override_color(TTP223_ON_KEY_DOWN_COLOR);
 	} else {
 		rgbled_reset_override_color();
-
-		cJSON *root = cJSON_CreateObject();
-
-		cJSON_AddBoolToObject(root, "on_key_up", 1);
-
-		char * json = cJSON_Print(root);
-		mqtt_publish(ttp223_status_topic, json);
-		cJSON_free(json);
-
-		cJSON_Delete(root);
 	}
+
+	cJSON *root = cJSON_CreateObject();
+
+	cJSON_AddStringToObject(root, "value", state == TTP223_ON_KEY_DOWN ? "on_key_down" : "on_key_up");
+
+	char * json = cJSON_Print(root);
+	mqtt_publish(ttp223_status_topic, json);
+	cJSON_free(json);
+
+	cJSON_Delete(root);
 }
 
 void ttp223_startup(int gpio, const char * status_topic) {

@@ -15,27 +15,39 @@
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
 
 static touch_pad_t touchpad_index;
-static xQueueHandle touchpad_data_queue = NULL;
 static touchpad_callback_t touchpad_callback = NULL;
+static volatile uint8_t touchpad_pressed = TOUCHPAD_IDLE;
 
 static void touchpad_isr(void *arg) {
 	uint32_t pad_intr = touch_pad_get_status();
 	touch_pad_clear_status();
 
-	uint32_t result = (pad_intr >> touchpad_index) & 0x01;
-    xQueueSendFromISR(touchpad_data_queue, (void*) result, NULL);
+	if ((pad_intr >> touchpad_index) & 0x01) {
+		touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
+	}
 }
 
 static void touchpad_listener(void* arg) {
+	uint8_t last_touchpad_pressed = TOUCHPAD_IDLE;
 	for (;;) {
-		uint32_t value;
-        if(xQueueReceive(touchpad_data_queue, &value, portMAX_DELAY)) {
-        	ESP_LOGI(TOUCH_LOG, "OnEvent value %d", value);
+		vTaskDelay(100 / portTICK_PERIOD_MS);
+		uint8_t value = touchpad_pressed;
+		if (value != last_touchpad_pressed) {
+			ESP_LOGI(TOUCH_LOG, "OnEvent: %d", value);
+			last_touchpad_pressed = value;
+    		touchpad_callback(value);
+		}
 
-        	if (touchpad_callback) {
-        		touchpad_callback(value ? TOUCHPAD_ON_KEY_DOWN : TOUCHPAD_ON_KEY_UP);
-        	}
-        }
+		if (value == TOUCHPAD_ON_KEY_DOWN) {
+			touchpad_pressed = TOUCHPAD_ON_KEY_UP;
+		} else if (value == TOUCHPAD_ON_KEY_UP) {
+			touchpad_pressed = TOUCHPAD_IDLE;
+		}
+//
+//		uint16_t temp = 0;
+//		if (!touch_pad_read_filtered(touchpad_index, &temp)) {
+//			ESP_LOGI(TOUCH_LOG, "touch_pad_read_filtered == %d", temp);
+//		}
 	}
 }
 
@@ -94,8 +106,13 @@ esp_err_t touchpad_setup(touch_pad_t pad, touchpad_callback_t callback) {
 		return res;
 	}
 
-	touchpad_data_queue = xQueueCreate(30, sizeof(uint32_t));
 	xTaskCreate(touchpad_listener, "on touch pad listener", 2048, NULL, 10, NULL);
+
+	res = touch_pad_intr_enable();
+	if (res) {
+		ESP_LOGE(TOUCH_LOG, "touch_pad_intr_enable error %d", res);
+		return res;
+	}
 
 	return ESP_OK;
 }

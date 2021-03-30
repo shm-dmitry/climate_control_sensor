@@ -5,6 +5,7 @@
 
 #define TOUCHPAD_ON_KEY_DOWN 0x00
 #define TOUCHPAD_ON_KEY_UP   0x01
+#define TOUCHPAD_IDLE        0x02
 
 typedef void (* touchpad_callback_t)(uint8_t state);
 
