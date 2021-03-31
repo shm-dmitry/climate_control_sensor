@@ -1378,7 +1378,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R2" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="600"/>
-<part name="R1" library="my_devices" deviceset="R" device="" value="600"/>
+<part name="R1" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="U$11" library="my_devices" deviceset="MH_Z19B" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J4_AN_LWHW_POWER_2" library="con-amp" library_urn="urn:adsk.eagle:library:127" deviceset="MTA02-100" device="" package3d_urn="urn:adsk.eagle:package:8081649/1"/>
@@ -1405,6 +1405,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="C2" library="my_devices" deviceset="C" device=""/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="R14" library="my_devices" deviceset="R" device="" value="10K"/>
 </parts>
 <sheets>
 <sheet>
@@ -1418,6 +1419,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="-45.72" y="-58.42" size="1.778" layer="91">CHECKED</text>
 <text x="73.66" y="-58.42" size="1.778" layer="91">CHECKED</text>
 <text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
+<text x="66.04" y="20.32" size="1.778" layer="91" grouprefs="MH_Z19B_CO2">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
@@ -1433,8 +1435,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="GND2" gate="1" x="40.64" y="88.9" smashed="yes" grouprefs="BME_280_TEMP_HUM">
 <attribute name="VALUE" x="38.1" y="86.36" size="1.778" layer="96"/>
 </instance>
-<instance part="GND4" gate="1" x="-66.04" y="12.7" smashed="yes" grouprefs="PMS7003">
-<attribute name="VALUE" x="-68.58" y="10.16" size="1.778" layer="96"/>
+<instance part="GND4" gate="1" x="-66.04" y="20.32" smashed="yes" grouprefs="PMS7003">
+<attribute name="VALUE" x="-68.58" y="17.78" size="1.778" layer="96"/>
 </instance>
 <instance part="U$4" gate="G$1" x="76.2" y="-40.64" smashed="yes" grouprefs="BH1750">
 <attribute name="NAME" x="63.5" y="-25.4" size="1.778" layer="95"/>
@@ -1462,7 +1464,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="VALUE" x="-258.445" y="-6.985" size="1.778" layer="96"/>
 </instance>
 <instance part="U$10" gate="G$1" x="-93.98" y="-106.68" smashed="yes" rot="R90" grouprefs="FAN"/>
-<instance part="U$3" gate="G$1" x="-38.1" y="10.16" smashed="yes" grouprefs="PMS7003"/>
+<instance part="U$3" gate="G$1" x="-38.1" y="17.78" smashed="yes" grouprefs="PMS7003"/>
 <instance part="GY_SGP30_1" gate="G$1" x="-48.26" y="-43.18" smashed="yes" grouprefs="GY-SGP30">
 <attribute name="NAME" x="-50.8" y="-33.02" size="1.778" layer="94"/>
 </instance>
@@ -1545,15 +1547,15 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-214.63" y="78.74" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-214.63" y="72.39" size="1.778" layer="94"/>
 </instance>
-<instance part="R1" gate="G$1" x="-73.66" y="-10.16" smashed="yes" grouprefs="PMS7003">
-<attribute name="NAME" x="-80.01" y="-7.62" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-80.01" y="-13.97" size="1.778" layer="94"/>
+<instance part="R1" gate="G$1" x="-73.66" y="-2.54" smashed="yes" grouprefs="PMS7003">
+<attribute name="NAME" x="-80.01" y="0" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-80.01" y="-6.35" size="1.778" layer="94"/>
 </instance>
-<instance part="U$11" gate="G$1" x="81.28" y="27.94" smashed="yes" grouprefs="MH_Z19B_CO2">
-<attribute name="NAME" x="91.44" y="33.02" size="1.778" layer="94"/>
+<instance part="U$11" gate="G$1" x="78.74" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
+<attribute name="NAME" x="88.9" y="35.56" size="1.778" layer="94"/>
 </instance>
-<instance part="GND13" gate="1" x="45.72" y="27.94" smashed="yes" grouprefs="MH_Z19B_CO2">
-<attribute name="VALUE" x="43.18" y="25.4" size="1.778" layer="96"/>
+<instance part="GND13" gate="1" x="43.18" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
+<attribute name="VALUE" x="40.64" y="27.94" size="1.778" layer="96"/>
 </instance>
 <instance part="J4_AN_LWHW_POWER_2" gate="G$1" x="-309.88" y="149.86" smashed="yes" rot="R270" grouprefs="ANEMOMETER">
 <attribute name="NAME" x="-335.28" y="142.24" size="1.778" layer="95"/>
@@ -1647,6 +1649,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="GND14" gate="1" x="175.26" y="50.8" smashed="yes" grouprefs="TOUCH_SENSOR">
 <attribute name="VALUE" x="172.72" y="48.26" size="1.778" layer="96"/>
 </instance>
+<instance part="R14" gate="G$1" x="-73.66" y="-12.7" smashed="yes" grouprefs="PMS7003">
+<attribute name="NAME" x="-80.01" y="-10.16" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-80.01" y="-16.51" size="1.778" layer="94"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -1670,11 +1676,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="-53.34" y1="15.24" x2="-66.04" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-53.34" y1="17.78" x2="-53.34" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-53.34" y1="22.86" x2="-66.04" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-53.34" y1="25.4" x2="-53.34" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="U$3" gate="G$1" pin="GND"/>
 <pinref part="U$3" gate="G$1" pin="GND_1"/>
-<junction x="-53.34" y="15.24"/>
+<junction x="-53.34" y="22.86" grouprefs="PMS7003"/>
 </segment>
 <segment>
 <wire x1="-55.88" y1="-43.18" x2="-76.2" y2="-43.18" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
@@ -1726,7 +1732,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="GND"/>
-<wire x1="76.2" y1="30.48" x2="45.72" y2="30.48" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="33.02" x2="43.18" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
 <segment>
@@ -1760,9 +1766,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO22"/>
-<wire x1="-20.32" y1="99.06" x2="-10.16" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="-10.16" y1="99.06" x2="-10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-10.16" y1="81.28" x2="10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="99.06" x2="-7.62" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="99.06" x2="-7.62" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-7.62" y1="81.28" x2="10.16" y2="81.28" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="0" y="81.28" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
@@ -1787,9 +1793,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO21"/>
-<wire x1="-20.32" y1="91.44" x2="-12.7" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="-12.7" y1="91.44" x2="-12.7" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-12.7" y1="73.66" x2="10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="91.44" x2="-10.16" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-10.16" y1="91.44" x2="-10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-10.16" y1="73.66" x2="10.16" y2="73.66" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="0" y="73.66" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
@@ -1807,13 +1813,13 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="+5V" class="0">
 <segment>
-<wire x1="-63.5" y1="27.94" x2="-53.34" y2="27.94" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-63.5" y="27.94" size="1.778" layer="95" grouprefs="PMS7003"/>
-<wire x1="-53.34" y1="27.94" x2="-53.34" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-63.5" y1="35.56" x2="-53.34" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-63.5" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
+<wire x1="-53.34" y1="35.56" x2="-53.34" y2="30.48" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="U$3" gate="G$1" pin="VIN"/>
 <pinref part="U$3" gate="G$1" pin="VIN_1"/>
-<wire x1="-53.34" y1="20.32" x2="-53.34" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<junction x="-53.34" y="22.86"/>
+<wire x1="-53.34" y1="27.94" x2="-53.34" y2="30.48" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<junction x="-53.34" y="30.48" grouprefs="PMS7003"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="5V"/>
@@ -1832,8 +1838,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="VCC"/>
-<wire x1="76.2" y1="33.02" x2="55.88" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="33.02" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="35.56" x2="53.34" y2="35.56" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="35.56" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 <segment>
 <pinref part="Q2" gate="G$1" pin="E"/>
@@ -1892,8 +1898,13 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="P$1"/>
-<wire x1="-81.28" y1="-10.16" x2="-86.36" y2="-10.16" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-86.36" y="-12.7" size="1.778" layer="95" grouprefs="PMS7003"/>
+<wire x1="-81.28" y1="-2.54" x2="-86.36" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-96.52" y="-2.54" size="1.778" layer="95" grouprefs="PMS7003"/>
+<pinref part="R14" gate="G$1" pin="P$1"/>
+<wire x1="-81.28" y1="-12.7" x2="-86.36" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-86.36" y1="-12.7" x2="-86.36" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-86.36" y1="-2.54" x2="-96.52" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<junction x="-86.36" y="-2.54" grouprefs="PMS7003"/>
 </segment>
 <segment>
 <wire x1="-55.88" y1="-40.64" x2="-76.2" y2="-40.64" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
@@ -1925,8 +1936,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="RX"/>
-<wire x1="76.2" y1="27.94" x2="55.88" y2="27.94" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="27.94" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="30.48" x2="53.34" y2="30.48" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="30.48" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 </net>
 <net name="UART_0_RXD" class="0">
@@ -1937,8 +1948,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$11" gate="G$1" pin="TX"/>
-<wire x1="76.2" y1="25.4" x2="55.88" y2="25.4" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
-<label x="53.34" y="25.4" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
+<wire x1="73.66" y1="27.94" x2="53.34" y2="27.94" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
+<label x="50.8" y="27.94" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
 </net>
 <net name="UART_1_RXD" class="0">
@@ -1948,8 +1959,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="-78.74" y="66.04" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<wire x1="-53.34" y1="2.54" x2="-86.36" y2="2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-86.36" y="0" size="1.778" layer="95" grouprefs="PMS7003"/>
+<wire x1="-53.34" y1="10.16" x2="-86.36" y2="10.16" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-86.36" y="7.62" size="1.778" layer="95" grouprefs="PMS7003"/>
 <pinref part="U$3" gate="G$1" pin="TXD"/>
 </segment>
 </net>
@@ -1960,8 +1971,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="-78.74" y="60.96" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<wire x1="-53.34" y1="7.62" x2="-86.36" y2="7.62" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-86.36" y="7.62" size="1.778" layer="95" grouprefs="PMS7003"/>
+<wire x1="-53.34" y1="15.24" x2="-86.36" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-86.36" y="15.24" size="1.778" layer="95" grouprefs="PMS7003"/>
 <pinref part="U$3" gate="G$1" pin="RXD"/>
 </segment>
 </net>
@@ -1975,9 +1986,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO18"/>
-<wire x1="-20.32" y1="83.82" x2="-15.24" y2="83.82" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-15.24" y1="83.82" x2="-15.24" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
-<wire x1="-15.24" y1="66.04" x2="10.16" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-20.32" y1="83.82" x2="-12.7" y2="83.82" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-12.7" y1="83.82" x2="-12.7" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
+<wire x1="-12.7" y1="66.04" x2="10.16" y2="66.04" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="-5.08" y="66.04" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 </net>
@@ -2107,16 +2118,11 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="N$8" class="0">
 <segment>
-<wire x1="-63.5" y1="-10.16" x2="-63.5" y2="0" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-63.5" y1="0" x2="-58.42" y2="0" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-58.42" y1="0" x2="-53.34" y2="0" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-53.34" y1="12.7" x2="-58.42" y2="12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-58.42" y1="12.7" x2="-58.42" y2="0" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<junction x="-58.42" y="0"/>
-<pinref part="U$3" gate="G$1" pin="RESET"/>
+<wire x1="-63.5" y1="-2.54" x2="-63.5" y2="7.62" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-63.5" y1="7.62" x2="-53.34" y2="7.62" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="U$3" gate="G$1" pin="SET"/>
 <pinref part="R1" gate="G$1" pin="P$2"/>
-<wire x1="-63.5" y1="-10.16" x2="-64.77" y2="-10.16" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-63.5" y1="-2.54" x2="-64.77" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -2353,6 +2359,22 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="175.26" y1="68.58" x2="157.48" y2="68.58" width="0.1524" layer="91" grouprefs="TOUCH_SENSOR"/>
 <junction x="175.26" y="68.58" grouprefs="TOUCH_SENSOR"/>
 <label x="154.94" y="68.58" size="1.778" layer="95" grouprefs="TOUCH_SENSOR"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO4"/>
+<wire x1="-20.32" y1="73.66" x2="-15.24" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="73.66" x2="-15.24" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="60.96" x2="10.16" y2="60.96" width="0.1524" layer="91"/>
+<label x="-2.54" y="60.96" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$28" class="0">
+<segment>
+<wire x1="-53.34" y1="20.32" x2="-58.42" y2="20.32" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<pinref part="U$3" gate="G$1" pin="RESET"/>
+<wire x1="-58.42" y1="20.32" x2="-58.42" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-58.42" y1="-12.7" x2="-64.77" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<pinref part="R14" gate="G$1" pin="P$2"/>
 </segment>
 </net>
 </nets>

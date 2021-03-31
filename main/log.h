@@ -11,5 +11,6 @@
 #define SNMP_LOG "snmp_log"
 #define PMS7003_LOG "pms7003_log"
 #define TOUCH_LOG "touch_log"
+#define FAN_LOG "fan_log"
 
 #endif /* MAIN_LOG_H_ */

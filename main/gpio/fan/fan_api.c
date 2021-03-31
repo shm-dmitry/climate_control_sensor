@@ -2,6 +2,8 @@
 
 #include "driver/gpio.h"
 
+#include "../../log.h"
+
 #define FAN_NOT_INITIALIZED 0xFFFF
 
 int fan_gpio = FAN_NOT_INITIALIZED;
@@ -17,28 +19,47 @@ esp_err_t fan_init(int gpio) {
 
 	esp_err_t res = gpio_config(&config);
 	if (res) {
+		ESP_LOGI(FAN_LOG, "Cant init GPIO. error %d", res);
 		return res;
 	}
 
+	ESP_LOGE(FAN_LOG, "Driver initialied.");
+
 	fan_gpio = gpio;
 
-	gpio_set_level(fan_gpio, 0);
+	fan_stop();
 
 	return ESP_OK;
 }
 
 esp_err_t fan_start() {
 	if (fan_gpio == FAN_NOT_INITIALIZED) {
+		ESP_LOGE(FAN_LOG, "Driver not initialized.");
 		return ESP_ERR_INVALID_STATE;
 	}
 
-	return gpio_set_level(fan_gpio, 1);
+	esp_err_t res = gpio_set_level(fan_gpio, 1);
+	if (res) {
+		ESP_LOGE(FAN_LOG, "Cant set HIGH level on pin %d: %d", fan_gpio, res);
+	} else {
+		ESP_LOGI(FAN_LOG, "HIGH level on pin %d activated.", fan_gpio);
+	}
+
+	return res;
 }
 
 esp_err_t fan_stop() {
 	if (fan_gpio == FAN_NOT_INITIALIZED) {
+		ESP_LOGE(FAN_LOG, "Driver not initialized.");
 		return ESP_ERR_INVALID_STATE;
 	}
 
-	return gpio_set_level(fan_gpio, 0);
+	esp_err_t res = gpio_set_level(fan_gpio, 0);
+	if (res) {
+		ESP_LOGE(FAN_LOG, "Cant set LOW level on pin %d: %d", fan_gpio, res);
+	} else {
+		ESP_LOGI(FAN_LOG, "LOW level on pin %d activated.", fan_gpio);
+	}
+
+	return res;
 }

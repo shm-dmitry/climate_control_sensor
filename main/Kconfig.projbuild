@@ -193,20 +193,6 @@ menu "Climate Control Configuration"
          default ""
    endmenu
 
-   menu "TTP223 configuration (sensor buffon)"
-      config TTP223_ENABLED
-         bool "Enable TTP223 integration"
-         default false
-
-      config TTP223_GPIO
-         int "GPIO pin"
-         default 0
-
-      config TTP223_MQTT_TOPIC_STATUS
-         string "MQTT topic for TTP223 device status information"
-         default ""
-   endmenu
-
    menu "Internal touch pad configuration (sensor buffon)"
       config TOUCH_ENABLED
          bool "Enable touch pad integration"

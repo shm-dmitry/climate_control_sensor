@@ -13,7 +13,6 @@
 #include "uart/pms7003/pms7003.h"
 #include "gpio/rgbled/rgbled.h"
 #include "gpio/fan/fan.h"
-#include "gpio/ttp223/ttp223.h"
 #include "gpio/anemometer/anemometer.h"
 #include "gpio/touchpad/touchpad.h"
 
@@ -85,10 +84,6 @@ void app_main(void)
 
 #if CONFIG_FAN_ENABLED
 	fan_startup(CONFIG_FAN_GPIO, CONFIG_FAN_MQTT_TOPIC_COMMAND);
-#endif
-
-#if CONFIG_TTP223_ENABLED
-	ttp223_startup(CONFIG_TTP223_GPIO, CONFIG_TTP223_MQTT_TOPIC_STATUS);
 #endif
 
 #if CONFIG_ANEMOMETER_ENABLED
