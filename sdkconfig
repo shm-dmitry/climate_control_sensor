@@ -226,14 +226,6 @@ CONFIG_FAN_MQTT_TOPIC_COMMAND="/fan/0/command"
 # end of FAN configuration (fan: on/off)
 
 #
-# TTP223 configuration (sensor buffon)
-#
-# CONFIG_TTP223_ENABLED is not set
-CONFIG_TTP223_GPIO=30
-CONFIG_TTP223_MQTT_TOPIC_STATUS="/ttp223/0/command"
-# end of TTP223 configuration (sensor buffon)
-
-#
 # Anemometer configuration (air direction, air speed, air consumption)
 #
 # CONFIG_ANEMOMETER_ENABLED is not set
