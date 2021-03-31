@@ -9,7 +9,7 @@
 #define TOUCHPAD_ON_KEY_DOWN_COLOR 0x00FFFFFF
 static char* touchpad_status_topic = NULL;
 
-void touchpad_callback_func(uint8_t state) {
+void touchpad_callback_func(uint8_t state, uint8_t click_index) {
 	if (state == TOUCHPAD_ON_KEY_DOWN) {
 		rgbled_set_override_color(TOUCHPAD_ON_KEY_DOWN_COLOR);
 	} else {
@@ -21,8 +21,10 @@ void touchpad_callback_func(uint8_t state) {
 
 	if (state == TOUCHPAD_ON_KEY_DOWN) {
 		cJSON_AddStringToObject(root, "value", "on_key_down");
+		cJSON_AddNumberToObject(root, "click", click_index);
 	} else if (state == TOUCHPAD_ON_KEY_UP) {
 		cJSON_AddStringToObject(root, "value", "on_key_up");
+		cJSON_AddNumberToObject(root, "click", click_index);
 	} else {
 		cJSON_AddStringToObject(root, "value", "idle");
 	}

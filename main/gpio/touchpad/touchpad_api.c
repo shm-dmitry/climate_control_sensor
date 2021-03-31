@@ -13,41 +13,102 @@
 
 #define TOUCHPAD_THRESH_NO_USE   (0)
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
+#define TOUCHPAD_THRESHOLD_CALC(value) ((value) * 8) / 10
+#define TOUCHPAD_LOG_VALUES false
+
+#define TOUCHPAD_ERROR        0xFF
 
 static touch_pad_t touchpad_index;
 static touchpad_callback_t touchpad_callback = NULL;
-static volatile uint8_t touchpad_pressed = TOUCHPAD_IDLE;
+static volatile uint16_t touchpad_threshold = 0;
+static volatile uint32_t touchpad_calibration_val = 0;
+static volatile uint8_t touchpad_calibration_cnt = 0;
 
-static void touchpad_isr(void *arg) {
-	uint32_t pad_intr = touch_pad_get_status();
-	touch_pad_clear_status();
 
-	if ((pad_intr >> touchpad_index) & 0x01) {
-		touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
+static void touchpad_process_autocalibration(uint16_t value, bool untouched) {
+	if (untouched) {
+		touchpad_calibration_val += value;
+		touchpad_calibration_cnt ++;
+
+		if (touchpad_calibration_cnt >= 100) {
+			touchpad_threshold = TOUCHPAD_THRESHOLD_CALC(touchpad_calibration_val / touchpad_calibration_cnt);
+			touchpad_calibration_val = 0;
+			touchpad_calibration_cnt = 0;
+
+#if TOUCHPAD_LOG_VALUES
+			ESP_LOGI(TOUCH_LOG, "Recalibrated to %d", touchpad_threshold);
+#endif
+		}
+	} else {
+		touchpad_calibration_val = 0;
+		touchpad_calibration_cnt = 0;
+	}
+}
+
+static uint8_t touchpad_read_value() {
+	uint16_t value = 0;
+	esp_err_t res = touch_pad_read_filtered(touchpad_index, &value);
+	if (res) {
+		return TOUCHPAD_ERROR;
+	}
+
+#if TOUCHPAD_LOG_VALUES
+	ESP_LOGI(TOUCH_LOG, "touch_pad_read_filtered == %d", value);
+#endif
+
+	if (value > touchpad_threshold) {
+		touchpad_process_autocalibration(value, true);
+		return TOUCHPAD_ON_KEY_UP;
+	} else {
+		touchpad_process_autocalibration(value, false);
+		return TOUCHPAD_ON_KEY_DOWN;
 	}
 }
 
 static void touchpad_listener(void* arg) {
 	uint8_t last_touchpad_pressed = TOUCHPAD_IDLE;
+	uint8_t click_index = 0;
 	for (;;) {
-		vTaskDelay(100 / portTICK_PERIOD_MS);
-		uint8_t value = touchpad_pressed;
-		if (value != last_touchpad_pressed) {
-			ESP_LOGI(TOUCH_LOG, "OnEvent: %d", value);
-			last_touchpad_pressed = value;
-    		touchpad_callback(value);
+		if (last_touchpad_pressed == TOUCHPAD_IDLE) {
+			vTaskDelay(50 / portTICK_PERIOD_MS);
+		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_DOWN) {
+			vTaskDelay(100 / portTICK_PERIOD_MS);
+		} else {
+			vTaskDelay(200 / portTICK_PERIOD_MS);
 		}
 
-		if (value == TOUCHPAD_ON_KEY_DOWN) {
-			touchpad_pressed = TOUCHPAD_ON_KEY_UP;
-		} else if (value == TOUCHPAD_ON_KEY_UP) {
-			touchpad_pressed = TOUCHPAD_IDLE;
+		uint8_t touchpad_pressed = touchpad_read_value();
+		if (touchpad_pressed == TOUCHPAD_ERROR) {
+			continue;
 		}
-//
-//		uint16_t temp = 0;
-//		if (!touch_pad_read_filtered(touchpad_index, &temp)) {
-//			ESP_LOGI(TOUCH_LOG, "touch_pad_read_filtered == %d", temp);
-//		}
+
+		if (last_touchpad_pressed == TOUCHPAD_IDLE) {
+			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+				// do nothing, idle mode
+			} else {
+				click_index = 1;
+
+				last_touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
+				touchpad_callback(TOUCHPAD_ON_KEY_DOWN, click_index);
+			}
+		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_DOWN) {
+			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+				last_touchpad_pressed = TOUCHPAD_ON_KEY_UP;
+				touchpad_callback(TOUCHPAD_ON_KEY_UP, click_index);
+			} else {
+				// do nothing, key-down mode
+			}
+		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+				last_touchpad_pressed = TOUCHPAD_IDLE;
+				touchpad_callback(TOUCHPAD_IDLE, 0);
+			} else {
+				click_index++;
+
+				last_touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
+				touchpad_callback(TOUCHPAD_ON_KEY_DOWN, click_index);
+			}
+		}
 	}
 }
 
@@ -93,26 +154,9 @@ esp_err_t touchpad_setup(touch_pad_t pad, touchpad_callback_t callback) {
 	}
 
 	ESP_LOGI(TOUCH_LOG, "touch_pad_read_filtered: readed value %d", touch_value);
-
-	res = touch_pad_set_thresh(pad, touch_value * 2 / 3);
-	if (res) {
-		ESP_LOGE(TOUCH_LOG, "touch_pad_set_thresh error %d", res);
-		return res;
-	}
-
-	res = touch_pad_isr_register(touchpad_isr, NULL);
-	if (res) {
-		ESP_LOGE(TOUCH_LOG, "touch_pad_isr_register error %d", res);
-		return res;
-	}
+	touchpad_threshold = TOUCHPAD_THRESHOLD_CALC(touch_value);
 
 	xTaskCreate(touchpad_listener, "on touch pad listener", 2048, NULL, 10, NULL);
-
-	res = touch_pad_intr_enable();
-	if (res) {
-		ESP_LOGE(TOUCH_LOG, "touch_pad_intr_enable error %d", res);
-		return res;
-	}
 
 	return ESP_OK;
 }
