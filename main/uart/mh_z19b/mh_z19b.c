@@ -18,14 +18,14 @@ void mh_z19b_commands(const char * topic, const char * data) {
 	}
 
 	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
-	if (strcmp(type, "autocalibrate")) {
+	if (strcmp(type, "autocalibrate") == 0) {
 		uint8_t value = get_boolean_from_json(cJSON_GetObjectItem(root, "enabled"), 1, 0, 2);
 		if (value == 1 || value == 0) {
 			mh_z19b_autocalibrate(value == 1);
 		}
-	} else if (strcmp(type, "calibrate_zero")) {
+	} else if (strcmp(type, "calibrate_zero") == 0) {
 		mh_z19b_calibrate(0);
-	} else if (strcmp(type, "calibrate_span")) {
+	} else if (strcmp(type, "calibrate_span") == 0) {
 		uint16_t value = get_number16_from_json(cJSON_GetObjectItem(root, "co2"), 0xFFFF);
 		if (value != 0xFFFF) {
 			mh_z19b_calibrate(value);

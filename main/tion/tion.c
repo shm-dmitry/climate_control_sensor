@@ -53,7 +53,7 @@ void tion_commands(const char * topic, const char * data) {
 	}
 
 	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
-	if (strcmp(type, "pair")) {
+	if (strcmp(type, "pair") == 0) {
 		tion_pair();
 	} else {
 		tion_change_status_t status = {
