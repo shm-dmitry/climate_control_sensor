@@ -15,6 +15,9 @@
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
 #define TOUCHPAD_THRESHOLD_CALC(value) ((value) * 8) / 10
 #define TOUCHPAD_LOG_VALUES false
+#define TOUCHPAD_FIRE_EVENT(last_state_variable, click_index_variable, new_state) \
+	last_state_variable = new_state; \
+	touchpad_callback(new_state, click_index_variable);
 
 #define TOUCHPAD_ERROR        0xFF
 
@@ -65,49 +68,77 @@ static uint8_t touchpad_read_value() {
 	}
 }
 
+static void touchpad_sleep(uint8_t state) {
+	switch (state) {
+	case TOUCHPAD_ON_KEY_DOWN:
+	case TOUCHPAD_ON_CLICK:
+		vTaskDelay(100 / portTICK_PERIOD_MS);
+		break;
+	case TOUCHPAD_ON_KEY_UP:
+		vTaskDelay(200 / portTICK_PERIOD_MS);
+		break;
+	case TOUCHPAD_IDLE:
+	default:
+		vTaskDelay(50 / portTICK_PERIOD_MS);
+		break;
+	}
+}
+
 static void touchpad_listener(void* arg) {
 	uint8_t last_touchpad_pressed = TOUCHPAD_IDLE;
 	uint8_t click_index = 0;
 	for (;;) {
-		if (last_touchpad_pressed == TOUCHPAD_IDLE) {
-			vTaskDelay(50 / portTICK_PERIOD_MS);
-		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_DOWN) {
-			vTaskDelay(100 / portTICK_PERIOD_MS);
-		} else {
-			vTaskDelay(200 / portTICK_PERIOD_MS);
-		}
+		touchpad_sleep(last_touchpad_pressed);
 
 		uint8_t touchpad_pressed = touchpad_read_value();
 		if (touchpad_pressed == TOUCHPAD_ERROR) {
 			continue;
 		}
 
-		if (last_touchpad_pressed == TOUCHPAD_IDLE) {
+		switch (last_touchpad_pressed) {
+		case TOUCHPAD_IDLE: {
 			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
 				// do nothing, idle mode
 			} else {
 				click_index = 1;
 
-				last_touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
-				touchpad_callback(TOUCHPAD_ON_KEY_DOWN, click_index);
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
 			}
-		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_DOWN) {
+			break;
+		}
+		case TOUCHPAD_ON_CLICK: {
 			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
-				last_touchpad_pressed = TOUCHPAD_ON_KEY_UP;
-				touchpad_callback(TOUCHPAD_ON_KEY_UP, click_index);
+				click_index = 0;
+
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_IDLE);
+			} else {
+				click_index = 1;
+
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
+			}
+			break;
+		}
+		case TOUCHPAD_ON_KEY_DOWN: {
+			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_UP);
 			} else {
 				// do nothing, key-down mode
 			}
-		} else if (last_touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
+			break;
+		}
+		case TOUCHPAD_ON_KEY_UP: {
 			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
-				last_touchpad_pressed = TOUCHPAD_IDLE;
-				touchpad_callback(TOUCHPAD_IDLE, 0);
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_CLICK);
 			} else {
 				click_index++;
 
-				last_touchpad_pressed = TOUCHPAD_ON_KEY_DOWN;
-				touchpad_callback(TOUCHPAD_ON_KEY_DOWN, click_index);
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
 			}
+			break;
+		}
+		default:
+			// do nothing
+			break;
 		}
 	}
 }

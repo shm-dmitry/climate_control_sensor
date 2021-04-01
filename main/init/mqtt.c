@@ -47,12 +47,22 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
 	mqtt_event_handler_cb(event_data);
 }
 
+void mqtt_publish_sync(const char * topic, const char * message) {
+	if (client) {
+		if (esp_mqtt_client_publish(client, topic, message, 0, 0, 1) >= 0) {
+	    	ESP_LOGI(MQTT_LOG, "MQTT publish OK topic = %s, message = %s", topic, message);
+		} else {
+			mqtt_publish(topic, message);
+		}
+	}
+}
+
 void mqtt_publish(const char * topic, const char * message) {
 	if (client) {
 		if (esp_mqtt_client_enqueue(client, topic, message, 0, 0, 1, 1) >= 0) {
-	    	ESP_LOGI(MQTT_LOG, "MQTT publish OK topic = %s, message = %s", topic, message);
+	    	ESP_LOGI(MQTT_LOG, "MQTT enqueue OK topic = %s, message = %s", topic, message);
 		} else {
-	    	ESP_LOGE(MQTT_LOG, "MQTT publish error: topic = %s, message = %s", topic, message);
+	    	ESP_LOGE(MQTT_LOG, "MQTT enqueue error: topic = %s, message = %s", topic, message);
 		}
 	}
 }

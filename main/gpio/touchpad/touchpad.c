@@ -25,12 +25,15 @@ void touchpad_callback_func(uint8_t state, uint8_t click_index) {
 	} else if (state == TOUCHPAD_ON_KEY_UP) {
 		cJSON_AddStringToObject(root, "value", "on_key_up");
 		cJSON_AddNumberToObject(root, "click", click_index);
+	} else if (state == TOUCHPAD_ON_CLICK) {
+		cJSON_AddStringToObject(root, "value", "on_click");
+		cJSON_AddNumberToObject(root, "click", click_index);
 	} else {
 		cJSON_AddStringToObject(root, "value", "idle");
 	}
 
 	char * json = cJSON_Print(root);
-	mqtt_publish(touchpad_status_topic, json);
+	mqtt_publish_sync(touchpad_status_topic, json);
 	cJSON_free(json);
 
 	cJSON_Delete(root);

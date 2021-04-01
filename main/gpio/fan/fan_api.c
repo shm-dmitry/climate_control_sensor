@@ -12,7 +12,7 @@ esp_err_t fan_init(int gpio) {
 	gpio_config_t config = {
 		.intr_type = GPIO_INTR_DISABLE,
 	    .mode = GPIO_MODE_OUTPUT,
-		.pin_bit_mask = 1 << gpio,
+		.pin_bit_mask = 1ULL << gpio,
 		.pull_down_en = GPIO_PULLDOWN_ENABLE,
 		.pull_up_en = GPIO_PULLUP_DISABLE,
 	};
