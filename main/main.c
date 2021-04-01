@@ -15,6 +15,7 @@
 #include "gpio/fan/fan.h"
 #include "gpio/anemometer/anemometer.h"
 #include "gpio/touchpad/touchpad.h"
+#include "gpio/ir/ir.h"
 
 void app_main(void)
 {
@@ -92,6 +93,10 @@ void app_main(void)
 
 #if CONFIG_TOUCH_ENABLED
 	touchpad_init(CONFIG_TOUCH_PIN, CONFIG_TOUCH_MQTT_TOPIC_STATUS);
+#endif
+
+#if CONFIG_IR_ENABLED
+	ir_startup(CONFIG_IR_GPIO, CONFIG_IR_MQTT_TOPIC_COMMAND);
 #endif
 
 	mqtt_start();

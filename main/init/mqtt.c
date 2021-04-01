@@ -29,12 +29,25 @@ static void mqtt_event_handler_cb(esp_mqtt_event_handle_t event) {
 		}
 		break;
 	case MQTT_EVENT_DATA:
-		if (event->data) {
+		if (event->data && event->topic && event->data_len && event->topic_len && event->data_len < 1024 && event->topic_len < 1024) {
+			char * topic = malloc(event->topic_len + 1);
+			memset(topic, 0, event->topic_len + 1);
+			memcpy(topic, event->topic, event->topic_len);
+
+			char * data = malloc(event->data_len + 1);
+			memset(data, 0, event->data_len + 1);
+			memcpy(data, event->data, event->data_len);
+
+			ESP_LOGI(MQTT_LOG, "Received message in topic %s : %s", topic, data);
+
 			for (int i = 0; i<callbacks_count; i++) {
-				if (strcmp(event->topic, callbacks[i].topic)) {
-					callbacks[i].function(event->topic, event->data);
+				if (strcmp(topic, callbacks[i].topic) == 0) {
+					callbacks[i].function(topic, data);
 				}
 			}
+
+			free(topic);
+			free(data);
 		}
 		break;
 	default:

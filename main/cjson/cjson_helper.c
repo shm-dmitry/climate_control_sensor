@@ -26,6 +26,14 @@ uint16_t get_number16_from_json(cJSON * elem, uint16_t if_not_set) {
 	}
 }
 
+uint32_t get_number32_from_json(cJSON * elem, uint32_t if_not_set) {
+	if (cJSON_IsNumber(elem)) {
+		return cJSON_GetNumberValue(elem);
+	} else {
+		return if_not_set;
+	}
+}
+
 float get_float_from_json(cJSON * elem, float if_not_set) {
 	if (cJSON_IsNumber(elem)) {
 		return cJSON_GetNumberValue(elem);

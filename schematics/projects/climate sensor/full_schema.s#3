@@ -1980,26 +1980,26 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="GPIO_AN_A" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="SVN"/>
-<wire x1="-55.88" y1="96.52" x2="-83.82" y2="96.52" width="0.1524" layer="91" grouprefs="ESP"/>
-<label x="-83.82" y="96.52" size="1.778" layer="95" grouprefs="ESP"/>
-</segment>
-<segment>
 <pinref part="R2" gate="G$1" pin="P$2"/>
 <wire x1="-250.19" y1="76.2" x2="-241.3" y2="76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <label x="-251.46" y="73.66" size="1.778" layer="95" grouprefs="ANEMOMETER"/>
 </segment>
-</net>
-<net name="GPIO_AN_B" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO34"/>
-<wire x1="-55.88" y1="93.98" x2="-83.82" y2="93.98" width="0.1524" layer="91" grouprefs="ESP"/>
-<label x="-83.82" y="93.98" size="1.778" layer="95" grouprefs="ESP"/>
+<wire x1="-55.88" y1="93.98" x2="-81.28" y2="93.98" width="0.1524" layer="91"/>
+<label x="-81.28" y="93.98" size="1.778" layer="95"/>
 </segment>
+</net>
+<net name="GPIO_AN_B" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="P$2"/>
 <wire x1="-199.39" y1="76.2" x2="-180.34" y2="76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <label x="-193.04" y="73.66" size="1.778" layer="95" grouprefs="ANEMOMETER"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO35"/>
+<wire x1="-55.88" y1="91.44" x2="-81.28" y2="91.44" width="0.1524" layer="91"/>
+<label x="-81.28" y="91.44" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$6" class="0">

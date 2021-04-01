@@ -1,0 +1,7 @@
+#ifndef MAIN_GPIO_IR_IR_DEF_H_
+#define MAIN_GPIO_IR_IR_DEF_H_
+
+#define IR_PROTOCOL_NEC 0x01
+#define IR_PROTOCOL_RC5 0x02
+
+#endif /* MAIN_GPIO_IR_IR_DEF_H_ */

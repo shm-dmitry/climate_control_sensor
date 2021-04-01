@@ -1353,7 +1353,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="R11" library="my_devices" deviceset="R" device="" value="30"/>
 <part name="D1" library="my_devices" deviceset="LD" device="" value="IR"/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
+<part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R12" library="my_devices" deviceset="R" device="" value="100"/>
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
@@ -1379,6 +1379,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="170.18" y="58.42" size="1.778" layer="91" grouprefs="TOUCH_SENSOR">CHECKED</text>
 <text x="-243.84" y="-114.3" size="1.778" layer="91" grouprefs="FAN_SWITCH">CHECKED</text>
 <text x="-391.16" y="68.58" size="1.778" layer="91" grouprefs="ANEMOMETER">CHECKED</text>
+<text x="142.24" y="-83.82" size="1.778" layer="91" grouprefs="IR">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">

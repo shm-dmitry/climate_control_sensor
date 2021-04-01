@@ -193,6 +193,20 @@ menu "Climate Control Configuration"
          default ""
    endmenu
 
+   menu "IR configuration (Control other devices via IR)"
+      config IR_ENABLED
+         bool "Enable IR integration"
+         default false
+
+      config IR_GPIO
+         int "GPIO pin"
+         default 0
+
+      config IR_MQTT_TOPIC_COMMAND
+         string "MQTT topic for FAN device awaits commands"
+         default ""
+   endmenu
+
    menu "Internal touch pad configuration (sensor buffon)"
       config TOUCH_ENABLED
          bool "Enable touch pad integration"
