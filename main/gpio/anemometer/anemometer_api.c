@@ -8,9 +8,11 @@
 #include "driver/gpio.h"
 #include "string.h"
 #include <stdlib.h>
+#include "../../log.h"
 
 #define ANEMOMETER_MAX_COUNT_TO_RECALC 100
 #define ANEMOMETER_MAX_TIME_PERIOD_TO_RECALC 10 // seconds
+#define ANEMOMETER_LOG_ROTATES true
 
 typedef struct anemometer_internal_data_t {
 	uint8_t direction;
@@ -53,26 +55,48 @@ static void recalc_direction(uint8_t to) {
 
 			if (obj != NULL) {
 				obj->started = anemometer_data.started - obj->started;
-			    xQueueSendFromISR(anemometer_recalc_data_queue, obj, NULL);
+
+#if ANEMOMETER_LOG_ROTATES
+				ESP_LOGI(ANEMOMETER_LOG, "Fire recalc event. Counter = %d, Time = %ld, Direction = %d", obj->counter, obj->started, obj->direction);
+#endif
+
+				xQueueSendFromISR(anemometer_recalc_data_queue, obj, NULL);
+
+				free(obj);
+				obj = NULL;
 			}
 		}
 	}
 }
 
 static void IRAM_ATTR anemometer_gpio_isr_handler(void* arg) {
-    xQueueSendFromISR(anemometer_gpio_evt_queue, 0x00, NULL);
+	uint32_t value = 0;
+	ESP_LOGI(ANEMOMETER_LOG, "ISR called");
+    xQueueSendFromISR(anemometer_gpio_evt_queue, &value, NULL);
 }
 
 static void anemometer_gpio_onchange_queue_listener(void* arg) {
 	uint32_t temp;
     for(;;) {
-        if(xQueueReceive(anemometer_gpio_evt_queue, &temp, portMAX_DELAY)) {
+        if(xQueueReceive(anemometer_gpio_evt_queue, &temp, portMAX_DELAY) == pdPASS) {
 			uint8_t valueA = gpio_get_level(anemometer_gpio_A);
 			uint8_t valueB = gpio_get_level(anemometer_gpio_B);
 
+#if ANEMOMETER_LOG_ROTATES
+			ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: A = %d, B = %d", valueA, valueB);
+#endif
+
 			if (valueA && !valueB) {
+#if ANEMOMETER_LOG_ROTATES
+				ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: added one step in direction#1");
+#endif
+
 				recalc_direction(ANEMOMETER_DIRECTION_1);
 			} else if (!valueA && valueB) {
+#if ANEMOMETER_LOG_ROTATES
+				ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: added one step in direction#2");
+#endif
+
 				recalc_direction(ANEMOMETER_DIRECTION_2);
 			}
         }
@@ -145,12 +169,21 @@ static float anemometer_calculate_consumption(float speed) {
 }
 
 static void anemometer_recalc_data_listener(void* arg) {
-	anemometer_internal_data_t * temp = NULL;
+	anemometer_internal_data_t * temp = malloc(sizeof(anemometer_internal_data_t));
+	if (temp == NULL) {
+		ESP_LOGE(ANEMOMETER_LOG, "anemometer_recalc_data_listener - cant allocate memory");
+		return;
+	}
+
     for(;;) {
-        if(xQueueReceive(anemometer_recalc_data_queue, temp, portMAX_DELAY)) {
+    	memset(temp, 0, sizeof(anemometer_internal_data_t));
+
+        if(xQueueReceive(anemometer_recalc_data_queue, temp, portMAX_DELAY) == pdPASS) {
         	if (temp == NULL) {
         		continue;
         	}
+
+        	ESP_LOGI(ANEMOMETER_LOG, "Recalc event received. Counter = %d, Time = %ld, Direction = %d", temp->counter, temp->started, temp->direction);
 
         	anemometer_data_t result;
 
@@ -175,7 +208,7 @@ static void anemometer_recalc_data_listener(void* arg) {
         		result.consumption = anemometer_calculate_consumption(result.speed);
         	}
 
-    		free(temp);
+        	ESP_LOGI(ANEMOMETER_LOG, "Anemometer event: direction = %d, updated = %ld, rps = %f, speed = %f, consumption = %f", result.direction, result.updated, result.raw_rps, result.speed, result.consumption);
 
         	anemometer_callback(&result);
         }
@@ -185,24 +218,27 @@ static void anemometer_recalc_data_listener(void* arg) {
 esp_err_t anemometer_init(int gpio_A, int gpio_B, anemometer_callback_t callback) {
 	gpio_config_t config = {
 		.intr_type = GPIO_INTR_POSEDGE,
-		.pin_bit_mask = (1 << gpio_A) + (1 << gpio_B),
+		.pin_bit_mask = (1ULL << gpio_A) | (1ULL << gpio_B),
 		.mode = GPIO_MODE_INPUT,
-		.pull_down_en = GPIO_PULLDOWN_ENABLE,
+		.pull_down_en = GPIO_PULLDOWN_DISABLE,
 		.pull_up_en = GPIO_PULLUP_DISABLE
 	};
 
 	esp_err_t res = gpio_config(&config);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_config error: %d. A = %d, B = %d", res, gpio_A, gpio_B);
 		return res;
 	}
 
 	res = gpio_set_intr_type(gpio_A, GPIO_INTR_POSEDGE);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_set_intr_type A error: %d", res);
 		return res;
 	}
 
 	res = gpio_set_intr_type(gpio_B, GPIO_INTR_POSEDGE);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_set_intr_type B error: %d", res);
 		return res;
 	}
 
@@ -221,18 +257,23 @@ esp_err_t anemometer_init(int gpio_A, int gpio_B, anemometer_callback_t callback
 
 	res = gpio_install_isr_service(0);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_install_isr_service error: %d", res);
 		return res;
 	}
 
-    res = gpio_isr_handler_add(gpio_A, anemometer_gpio_isr_handler, NULL);
+    res = gpio_isr_handler_add(anemometer_gpio_A, anemometer_gpio_isr_handler, &anemometer_gpio_A);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_isr_handler_add A error: %d", res);
 		return res;
 	}
 
-    res = gpio_isr_handler_add(gpio_B, anemometer_gpio_isr_handler, NULL);
+    res = gpio_isr_handler_add(anemometer_gpio_B, anemometer_gpio_isr_handler, &anemometer_gpio_B);
 	if (res) {
+		ESP_LOGE(ANEMOMETER_LOG, "gpio_isr_handler_add B error: %d", res);
 		return res;
 	}
+
+	ESP_LOGI(ANEMOMETER_LOG, "Driver initialied");
 
 	return ESP_OK;
 }

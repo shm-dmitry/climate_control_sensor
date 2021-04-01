@@ -4,7 +4,6 @@
 #include "nvs_rw.h"
 
 #include "../log.h"
-#include "esp_log.h"
 
 #define MAX_MQTT_URI_LEN 100
 #define MAX_MQTT_USER_PASS 20

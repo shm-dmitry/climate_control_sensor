@@ -9,7 +9,6 @@
 #include "../i2c/i2c_impl.h"
 
 #include "../log.h"
-#include "esp_log.h"
 
 void init_flash() {
     esp_err_t ret = nvs_flash_init();

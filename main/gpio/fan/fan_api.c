@@ -23,7 +23,7 @@ esp_err_t fan_init(int gpio) {
 		return res;
 	}
 
-	ESP_LOGE(FAN_LOG, "Driver initialied.");
+	ESP_LOGI(FAN_LOG, "Driver initialied.");
 
 	fan_gpio = gpio;
 

@@ -1,6 +1,7 @@
 #include "rgbled_api.h"
 
 #include "driver/ledc.h"
+#include "../../log.h"
 
 #define RGBLED_RED   LEDC_CHANNEL_0
 #define RGBLED_GREEN LEDC_CHANNEL_1
@@ -25,6 +26,7 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 
     esp_err_t res = ledc_timer_config(&ledc_timer);
     if (res) {
+    	ESP_LOGE(RGBLED_LOG, "ledc_timer_config error %d", res);
     	return res;
     }
 
@@ -39,6 +41,7 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 
     res = ledc_channel_config(&cfg);
     if (res) {
+    	ESP_LOGE(RGBLED_LOG, "ledc_channel_config error %d for RED pin %d", res, config->gpio_red);
     	return res;
     }
 
@@ -47,6 +50,7 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 
 	res = ledc_channel_config(&cfg);
 	if (res) {
+    	ESP_LOGE(RGBLED_LOG, "ledc_channel_config error %d for GREEN pin %d", res, config->gpio_green);
 		return res;
 	}
 
@@ -55,16 +59,20 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 
 	res = ledc_channel_config(&cfg);
 	if (res) {
+    	ESP_LOGE(RGBLED_LOG, "ledc_channel_config error %d for BLUE pin %d", res, config->gpio_blue);
 		return res;
 	}
 
 	res = ledc_fade_func_install(9);
 	if (res) {
+    	ESP_LOGE(RGBLED_LOG, "ledc_fade_func_install error %d", res);
 		return res;
 	}
 
 	rgbled_color = 0x0;
 	rgbled_override_color = RGBLED_NO_OVERRIDE_COLOR;
+
+	ESP_LOGI(RGBLED_LOG, "Driver installed. RED: %d, GREEN: %d, BLUE: %d", config->gpio_red, config->gpio_green, config->gpio_blue);
 
 	return rgbled_change_color();
 }
@@ -78,39 +86,48 @@ esp_err_t rgbled_change_color() {
 
 	esp_err_t res = ledc_set_duty(LEDC_LOW_SPEED_MODE, RGBLED_RED, r);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_set_duty(red) error %d", res);
 		return res;
 	}
 
 	res = ledc_update_duty(LEDC_LOW_SPEED_MODE, RGBLED_RED);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_update_duty(red) error %d", res);
 		return res;
 	}
 
 	res = ledc_set_duty(LEDC_LOW_SPEED_MODE, RGBLED_GREEN, g);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_set_duty(green) error %d", res);
 		return res;
 	}
 
 	res = ledc_update_duty(LEDC_LOW_SPEED_MODE, RGBLED_GREEN);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_update_duty(green) error %d", res);
 		return res;
 	}
 
 	res = ledc_set_duty(LEDC_LOW_SPEED_MODE, RGBLED_BLUE, b);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_set_duty(blue) error %d", res);
 		return res;
 	}
 
 	res = ledc_update_duty(LEDC_LOW_SPEED_MODE, RGBLED_BLUE);
 	if (res) {
+		ESP_LOGE(RGBLED_LOG, "rgbled_change_color :: ledc_update_duty(blue) error %d", res);
 		return res;
 	}
+
+	ESP_LOGI(RGBLED_LOG, "Color changed");
 
 	return ESP_OK;
 }
 
 esp_err_t rgbled_set_color(uint32_t rgb) {
 	if (rgbled_color == RGBLED_NOT_INITIALIZED) {
+		ESP_LOGE(RGBLED_LOG, "Driver not initialized. Cant change color");
 		return ESP_ERR_INVALID_STATE;
 	}
 
@@ -121,6 +138,7 @@ esp_err_t rgbled_set_color(uint32_t rgb) {
 
 esp_err_t rgbled_set_override_color(uint32_t rgb) {
 	if (rgbled_color == RGBLED_NOT_INITIALIZED) {
+		ESP_LOGE(RGBLED_LOG, "Driver not initialized. Cant change color");
 		return ESP_ERR_INVALID_STATE;
 	}
 
@@ -131,6 +149,7 @@ esp_err_t rgbled_set_override_color(uint32_t rgb) {
 
 esp_err_t rgbled_reset_override_color() {
 	if (rgbled_color == RGBLED_NOT_INITIALIZED) {
+		ESP_LOGE(RGBLED_LOG, "Driver not initialized. Cant change color");
 		return ESP_ERR_INVALID_STATE;
 	}
 

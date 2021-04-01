@@ -12,5 +12,8 @@
 #define PMS7003_LOG "pms7003_log"
 #define TOUCH_LOG "touch_log"
 #define FAN_LOG "fan_log"
+#define RGBLED_LOG "fan_log"
+#define ANEMOMETER_LOG "anemometer_log"
+#define VNS_LOG "nvs_log"
 
 #endif /* MAIN_LOG_H_ */
