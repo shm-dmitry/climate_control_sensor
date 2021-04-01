@@ -12,7 +12,9 @@
 
 #define ANEMOMETER_MAX_COUNT_TO_RECALC 100
 #define ANEMOMETER_MAX_TIME_PERIOD_TO_RECALC 10 // seconds
-#define ANEMOMETER_LOG_ROTATES true
+#define ANEMOMETER_LOG_DEBUGEVENTS false
+#define ANEMOMETER_GPIO_LISTENER_STACK_SIZE 4096
+#define ANEMOMETER_RECALC_LISTENER_STACK_SIZE 10240
 
 typedef struct anemometer_internal_data_t {
 	uint8_t direction;
@@ -56,7 +58,7 @@ static void recalc_direction(uint8_t to) {
 			if (obj != NULL) {
 				obj->started = anemometer_data.started - obj->started;
 
-#if ANEMOMETER_LOG_ROTATES
+#if ANEMOMETER_LOG_DEBUGEVENTS
 				ESP_LOGI(ANEMOMETER_LOG, "Fire recalc event. Counter = %d, Time = %ld, Direction = %d", obj->counter, obj->started, obj->direction);
 #endif
 
@@ -71,7 +73,6 @@ static void recalc_direction(uint8_t to) {
 
 static void IRAM_ATTR anemometer_gpio_isr_handler(void* arg) {
 	uint32_t value = 0;
-	ESP_LOGI(ANEMOMETER_LOG, "ISR called");
     xQueueSendFromISR(anemometer_gpio_evt_queue, &value, NULL);
 }
 
@@ -82,18 +83,18 @@ static void anemometer_gpio_onchange_queue_listener(void* arg) {
 			uint8_t valueA = gpio_get_level(anemometer_gpio_A);
 			uint8_t valueB = gpio_get_level(anemometer_gpio_B);
 
-#if ANEMOMETER_LOG_ROTATES
+#if ANEMOMETER_LOG_DEBUGEVENTS
 			ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: A = %d, B = %d", valueA, valueB);
 #endif
 
 			if (valueA && !valueB) {
-#if ANEMOMETER_LOG_ROTATES
+#if ANEMOMETER_LOG_DEBUGEVENTS
 				ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: added one step in direction#1");
 #endif
 
 				recalc_direction(ANEMOMETER_DIRECTION_1);
 			} else if (!valueA && valueB) {
-#if ANEMOMETER_LOG_ROTATES
+#if ANEMOMETER_LOG_DEBUGEVENTS
 				ESP_LOGI(ANEMOMETER_LOG, "onValueChanged: added one step in direction#2");
 #endif
 
@@ -250,10 +251,10 @@ esp_err_t anemometer_init(int gpio_A, int gpio_B, anemometer_callback_t callback
 	anemometer_calibration_data = anemometer_nvs_restore_settings();
 
 	anemometer_gpio_evt_queue = xQueueCreate(30, sizeof(uint32_t));
-	xTaskCreate(anemometer_gpio_onchange_queue_listener, "onchange gpio listener", 2048, NULL, 10, NULL);
+	xTaskCreate(anemometer_gpio_onchange_queue_listener, "onchange gpio listener", ANEMOMETER_GPIO_LISTENER_STACK_SIZE, NULL, 10, NULL);
 
 	anemometer_recalc_data_queue = xQueueCreate(10, sizeof(anemometer_internal_data_t));
-	xTaskCreate(anemometer_recalc_data_listener, "recalc data listener", 2048, NULL, 10, NULL);
+	xTaskCreate(anemometer_recalc_data_listener, "recalc data listener", ANEMOMETER_RECALC_LISTENER_STACK_SIZE, NULL, 10, NULL);
 
 	res = gpio_install_isr_service(0);
 	if (res) {
@@ -300,6 +301,8 @@ void anemometer_calibrate(anemometer_calibration_table_t * table) {
 				temp = NULL;
 			}
 		}
+	} else {
+		ESP_LOGI(ANEMOMETER_LOG, "No data provided for calibration: table == %p, table.rows_count == %d", table, (table == NULL ? 0 : table->rows_count));
 	}
 
 	anemometer_nvs_save_settings(temp);

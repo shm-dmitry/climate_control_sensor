@@ -20,7 +20,7 @@ void anemometer_callback(anemometer_data_t* data) {
 		cJSON_AddNumberToObject(root, "speed", data->speed);
 	}
 	if (data->consumption > 0) {
-		cJSON_AddNumberToObject(root, "speed", data->consumption);
+		cJSON_AddNumberToObject(root, "consumption", data->consumption);
 	}
 
 	char date[25] = { 0 };
@@ -43,7 +43,7 @@ void anemometer_commands(const char * topic, const char * data) {
 	}
 
 	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
-	if (strcmp(type, "calibrate")) {
+	if (strcmp(type, "calibrate") == 0) {
 		cJSON* data = cJSON_GetObjectItem(root, "data");
 		cJSON* rows = cJSON_GetObjectItem(data, "rows");
 
@@ -56,7 +56,7 @@ void anemometer_commands(const char * topic, const char * data) {
 			) {
 			anemometer_calibration_table_t table = {
 				.rows_count = cJSON_GetArraySize(rows),
-				.cross_sectional_area = get_float_from_json(data, ANEMOMETER_UNKNOWN_VALUE),
+				.cross_sectional_area = get_float_from_json(cJSON_GetObjectItem(data, "cross_sectional_area"), ANEMOMETER_UNKNOWN_VALUE),
 				.rows = NULL
 			};
 
@@ -81,7 +81,7 @@ void anemometer_commands(const char * topic, const char * data) {
 				}
 			}
 		}
-	} else if (strcmp(type, "calibrate_reset")) {
+	} else if (strcmp(type, "calibrate_reset") == 0) {
 		anemometer_calibrate(NULL);
 	}
 

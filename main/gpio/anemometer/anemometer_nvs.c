@@ -5,7 +5,7 @@
 
 #include "../../log.h"
 
-#define ANEMOMETER_NVS_SETTINGS_NAME "anemometer_calibration_data"
+#define ANEMOMETER_NVS_SETTINGS_NAME "an_calibrate"
 
 void anemometer_nvs_save_settings(anemometer_calibration_table_t* table) {
 	if (table == NULL || table->rows == NULL || table->rows_count == 0) {
