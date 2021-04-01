@@ -1984,12 +1984,22 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-250.19" y1="76.2" x2="-241.3" y2="76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <label x="-251.46" y="73.66" size="1.778" layer="95" grouprefs="ANEMOMETER"/>
 </segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO34"/>
+<wire x1="-55.88" y1="93.98" x2="-81.28" y2="93.98" width="0.1524" layer="91"/>
+<label x="-81.28" y="93.98" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="GPIO_AN_B" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="P$2"/>
 <wire x1="-199.39" y1="76.2" x2="-180.34" y2="76.2" width="0.1524" layer="91" grouprefs="ANEMOMETER"/>
 <label x="-193.04" y="73.66" size="1.778" layer="95" grouprefs="ANEMOMETER"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="IO35"/>
+<wire x1="-55.88" y1="91.44" x2="-81.28" y2="91.44" width="0.1524" layer="91"/>
+<label x="-81.28" y="91.44" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -2285,18 +2295,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-58.42" y1="20.32" x2="-58.42" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <wire x1="-58.42" y1="-12.7" x2="-64.77" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="R14" gate="G$1" pin="P$2"/>
-</segment>
-</net>
-<net name="N$29" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO34"/>
-<wire x1="-55.88" y1="93.98" x2="-81.28" y2="93.98" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$30" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="IO35"/>
-<wire x1="-55.88" y1="91.44" x2="-81.28" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

@@ -1422,7 +1422,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="93.98" y="71.12" size="1.778" layer="91">CHECKED</text>
 <text x="66.04" y="20.32" size="1.778" layer="91" grouprefs="MH_Z19B_CO2">CHECKED</text>
 <text x="-43.18" y="-7.62" size="1.778" layer="91" grouprefs="PMS7003">CHECKED</text>
-<text x="-81.28" y="121.92" size="1.778" layer="91">https://mikrokontroler.pl/wp-content/uploads/2020/07/esp32-devkit-pinout.png</text>
+<text x="-81.28" y="121.92" size="1.778" layer="91" grouprefs="ESP">https://mikrokontroler.pl/wp-content/uploads/2020/07/esp32-devkit-pinout.png</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">

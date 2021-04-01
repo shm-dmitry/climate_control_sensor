@@ -1378,6 +1378,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <text x="-81.28" y="121.92" size="1.778" layer="91" grouprefs="ESP">https://mikrokontroler.pl/wp-content/uploads/2020/07/esp32-devkit-pinout.png</text>
 <text x="170.18" y="58.42" size="1.778" layer="91" grouprefs="TOUCH_SENSOR">CHECKED</text>
 <text x="-243.84" y="-114.3" size="1.778" layer="91" grouprefs="FAN_SWITCH">CHECKED</text>
+<text x="-391.16" y="68.58" size="1.778" layer="91" grouprefs="ANEMOMETER">CHECKED</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="10.16" y="101.6" smashed="yes" grouprefs="ESP">
