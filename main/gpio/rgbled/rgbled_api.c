@@ -17,8 +17,8 @@ esp_err_t rgbled_change_color();
 
 esp_err_t rgbled_init(const rgbled_config_t * config) {
     ledc_timer_config_t ledc_timer = {
-        .duty_resolution = LEDC_TIMER_16_BIT, // resolution of PWM duty
-        .freq_hz = 5000,                      // frequency of PWM signal
+        .duty_resolution = LEDC_TIMER_8_BIT, // resolution of PWM duty
+        .freq_hz = 10240,                      // frequency of PWM signal
         .speed_mode = LEDC_LOW_SPEED_MODE,    // timer mode
         .timer_num = LEDC_TIMER_1,            // timer index
         .clk_cfg = LEDC_AUTO_CLK,             // Auto select the source clock
@@ -80,9 +80,9 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 esp_err_t rgbled_change_color() {
 	uint32_t rgb = (rgbled_override_color == RGBLED_NO_OVERRIDE_COLOR) ? rgbled_color : rgbled_override_color;
 
-	uint8_t r = (rgb >> 16) & 0xFF;
-	uint8_t g = (rgb >> 8) & 0xFF;
-	uint8_t b = rgb & 0xFF;
+	uint8_t r = ((rgb >> 16) & 0xFF);
+	uint8_t g = ((rgb >> 8) & 0xFF);
+	uint8_t b = (rgb & 0xFF);
 
 	esp_err_t res = ledc_set_duty(LEDC_LOW_SPEED_MODE, RGBLED_RED, r);
 	if (res) {
@@ -120,7 +120,7 @@ esp_err_t rgbled_change_color() {
 		return res;
 	}
 
-	ESP_LOGI(RGBLED_LOG, "Color changed");
+	ESP_LOGI(RGBLED_LOG, "Color changed: %d / %d / %d", r, g, b);
 
 	return ESP_OK;
 }

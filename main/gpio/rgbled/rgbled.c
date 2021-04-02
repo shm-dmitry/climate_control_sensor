@@ -1,8 +1,11 @@
 #include "rgbled.h"
 
+#include "string.h"
+
 #include "rgbled_api.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../log.h"
 
 void rgbled_commands(const char * topic, const char * data) {
 	cJSON *root = cJSON_Parse(data);
@@ -11,10 +14,16 @@ void rgbled_commands(const char * topic, const char * data) {
 	}
 
 	char * rgbs = cJSON_GetStringValue(cJSON_GetObjectItem(root, "rgb"));
+	if (strlen(rgbs) == 0) {
+		return;
+	}
+
 	char* invptr = NULL;
 	uint32_t rgb = strtol(rgbs, &invptr, 16);
-	if (invptr == NULL) {
+	if (invptr == NULL || invptr == rgbs + strlen(rgbs)) {
 		rgbled_set_color(rgb);
+	} else {
+		ESP_LOGE(RGBLED_LOG, "Cant parse RGB color %s. Bad char at position %d", rgbs, (uint32_t)(invptr - rgbs));
 	}
 
 	cJSON_Delete(root);
