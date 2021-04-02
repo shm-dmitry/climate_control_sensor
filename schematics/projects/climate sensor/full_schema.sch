@@ -8,20 +8,20 @@
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
-<layer number="20" name="Dimension" color="15" fill="1" visible="no" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="no"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="no"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="no" active="no"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="no"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="no"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="no"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="no"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="no"/>
+<layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="no"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="no"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="no"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="no"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="no"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="no"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="no"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="no"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="no"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="no"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="no"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="no"/>
@@ -30,8 +30,8 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="no"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="no"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="no"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="no" active="no"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="no" active="no"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="no"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="no"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="no"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="no"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="no"/>
@@ -39,12 +39,12 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="no"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="no"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="no"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="no"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="no" active="no"/>
-<layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="14" fill="1" visible="no" active="no"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="no"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="no"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="no"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="no"/>
+<layer number="51" name="tDocu" color="14" fill="1" visible="yes" active="no"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="no"/>
 <layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
@@ -301,228 +301,6 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="diy-modules">
-<description>&lt;b&gt;DIY Modules for Arduino, Raspberry Pi, CubieBoard etc.&lt;/b&gt;
-&lt;br&gt;&lt;br&gt;
-The library contains a list of symbols and footprints for popular, cheap and easy-to-use electronic modules.&lt;br&gt;
-The modules are intend to work with microprocessor-based platforms such as &lt;a href="http://arduino.cc"&gt;Arduino&lt;/a&gt;, &lt;a href="http://raspberrypi.org/"&gt;Raspberry Pi&lt;/a&gt;, &lt;a href="http://cubieboard.org/"&gt;CubieBoard&lt;/a&gt;, &lt;a href="http://beagleboard.org/"&gt;BeagleBone&lt;/a&gt; and many others. There are many manufacturers of the modules in the world. Almost all of them can be bought on &lt;a href="ebay.com"&gt;ebay.com&lt;/a&gt;.&lt;br&gt;
-&lt;br&gt;
-By using this library, you can design a PCB for devices created with usage of modules. Even if you do not need to create PCB design, you can also use the library to quickly document your work by drawing schematics of devices built by you.&lt;br&gt;
-&lt;br&gt;
-The latest version, examples, photos and much more can be found at: &lt;b&gt;&lt;a href="http://diymodules.org/eagle"&gt;diymodules.org/eagle&lt;/a&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;
-Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailto:eagle@diymodules.org"&gt;eagle@diymodules.org&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
-&lt;i&gt;Version: 1.8.0 (2017-Jul-02)&lt;/i&gt;&lt;br&gt;
-&lt;i&gt;Created by: Miroslaw Brudnowski&lt;/i&gt;&lt;br&gt;&lt;br&gt;
-&lt;i&gt;Released under the Creative Commons Attribution 4.0 International License: &lt;a href="http://creativecommons.org/licenses/by/4.0"&gt;http://creativecommons.org/licenses/by/4.0&lt;/a&gt;&lt;/i&gt;
-&lt;br&gt;&lt;br&gt;
-&lt;center&gt;
-&lt;a href="http://diymodules.org/eagle"&gt;&lt;img src="http://www.diymodules.org/img/diymodules-lbr-image.php?v=1.8.0" alt="DIYmodules.org"&gt;&lt;/a&gt;
-&lt;/center&gt;</description>
-<packages>
-<package name="TEMP-HUM-PRES-BME280">
-<description>&lt;b&gt;Digital Humidity-Temperature-Pressure Sensor&lt;/b&gt; based on &lt;b&gt;BME280&lt;/b&gt; device</description>
-<wire x1="-5.715" y1="5.08" x2="-4.445" y2="5.08" width="0.127" layer="21"/>
-<text x="0" y="6.35" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-6.35" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-<pad name="1" x="-5.08" y="3.81" drill="1" shape="square"/>
-<pad name="2" x="-5.08" y="1.27" drill="1"/>
-<pad name="3" x="-5.08" y="-1.27" drill="1"/>
-<pad name="4" x="-5.08" y="-3.81" drill="1"/>
-<wire x1="-4.445" y1="5.08" x2="-3.81" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="4.445" x2="-3.81" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="3.175" x2="-4.445" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="2.54" x2="-3.81" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="1.905" x2="-3.81" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="0.635" x2="-4.445" y2="0" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="0" x2="-3.81" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="-0.635" x2="-3.81" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="-1.905" x2="-4.445" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="-2.54" x2="-3.81" y2="-3.175" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="-3.175" x2="-3.81" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="-4.445" x2="-4.445" y2="-5.08" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="4.445" x2="-5.715" y2="5.08" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="3.175" x2="-5.715" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="2.54" x2="-6.35" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="0.635" x2="-5.715" y2="0" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="0" x2="-6.35" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-1.905" x2="-5.715" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="-2.54" x2="-6.35" y2="-3.175" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-4.445" x2="-5.715" y2="-5.08" width="0.127" layer="21"/>
-<text x="-3.175" y="-1.27" size="1.27" layer="21" align="center-left">SCL</text>
-<wire x1="-6.604" y1="5.334" x2="6.604" y2="5.334" width="0.127" layer="21"/>
-<wire x1="6.604" y1="5.334" x2="6.604" y2="-5.334" width="0.127" layer="21"/>
-<wire x1="6.604" y1="-5.334" x2="-6.604" y2="-5.334" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="-5.334" x2="-6.604" y2="5.334" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="4.445" x2="-6.35" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="1.905" x2="-6.35" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-0.635" x2="-6.35" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-3.175" x2="-6.35" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="-5.08" x2="-4.445" y2="-5.08" width="0.127" layer="21"/>
-<text x="-3.175" y="1.27" size="1.27" layer="21" align="center-left">GND</text>
-<text x="-3.175" y="3.81" size="1.27" layer="21" align="center-left">VIN</text>
-<text x="-3.175" y="-3.81" size="1.27" layer="21" align="center-left">SDA</text>
-<hole x="3.81" y="2.54" drill="3"/>
-<wire x1="2.54" y1="-1.27" x2="5.08" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-1.27" x2="5.08" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
-<circle x="3.048" y="-2.54" radius="0.254" width="0.127" layer="21"/>
-</package>
-<package name="LIGHT-SENSOR-BH1750">
-<description>&lt;b&gt;Digital Light Sensor&lt;/b&gt; based on &lt;b&gt;BH1750&lt;/b&gt;</description>
-<wire x1="-8.255" y1="6.35" x2="-6.985" y2="6.35" width="0.127" layer="21"/>
-<text x="0" y="8.255" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-8.255" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-<pad name="1" x="-7.62" y="-5.08" drill="1" shape="square"/>
-<pad name="2" x="-7.62" y="-2.54" drill="1"/>
-<pad name="3" x="-7.62" y="0" drill="1"/>
-<pad name="4" x="-7.62" y="2.54" drill="1"/>
-<wire x1="-6.985" y1="6.35" x2="-6.35" y2="5.715" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="5.715" x2="-6.35" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="4.445" x2="-6.985" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="3.81" x2="-6.35" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="3.175" x2="-6.35" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="1.905" x2="-6.985" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="1.27" x2="-6.35" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="0.635" x2="-6.35" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-0.635" x2="-6.985" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="-1.27" x2="-6.35" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-1.905" x2="-6.35" y2="-3.175" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-3.175" x2="-6.985" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="5.715" x2="-8.255" y2="6.35" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="4.445" x2="-8.255" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-8.255" y1="3.81" x2="-8.89" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="1.905" x2="-8.255" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-8.255" y1="1.27" x2="-8.89" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-0.635" x2="-8.255" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-8.255" y1="-1.27" x2="-8.89" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-3.175" x2="-8.255" y2="-3.81" width="0.127" layer="21"/>
-<text x="-5.715" y="0" size="1.27" layer="21" align="center-left">SCL</text>
-<wire x1="-9.652" y1="7.112" x2="9.652" y2="7.112" width="0.127" layer="21"/>
-<wire x1="9.652" y1="7.112" x2="9.652" y2="-7.112" width="0.127" layer="21"/>
-<wire x1="9.652" y1="-7.112" x2="-9.652" y2="-7.112" width="0.127" layer="21"/>
-<wire x1="-9.652" y1="-7.112" x2="-9.652" y2="7.112" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="5.715" x2="-8.89" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="3.175" x2="-8.89" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="0.635" x2="-8.89" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-1.905" x2="-8.89" y2="-3.175" width="0.127" layer="21"/>
-<text x="-5.715" y="2.54" size="1.27" layer="21" align="center-left">SDA</text>
-<text x="-5.715" y="5.08" size="1.27" layer="21" align="center-left">ADDR</text>
-<text x="-5.715" y="-2.54" size="1.27" layer="21" align="center-left">GND</text>
-<hole x="6.35" y="4.445" drill="3"/>
-<wire x1="1.27" y1="1.27" x2="2.794" y2="1.27" width="0.127" layer="21"/>
-<wire x1="2.794" y1="1.27" x2="2.794" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="2.794" y1="-1.27" x2="1.27" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="1.27" y1="-1.27" x2="1.27" y2="1.27" width="0.127" layer="21"/>
-<pad name="5" x="-7.62" y="5.08" drill="1"/>
-<wire x1="-8.255" y1="-3.81" x2="-8.89" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-4.445" x2="-8.89" y2="-5.715" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-5.715" x2="-8.255" y2="-6.35" width="0.127" layer="21"/>
-<wire x1="-8.255" y1="-6.35" x2="-6.985" y2="-6.35" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="-6.35" x2="-6.35" y2="-5.715" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-5.715" x2="-6.35" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="-4.445" x2="-6.985" y2="-3.81" width="0.127" layer="21"/>
-<hole x="6.35" y="-4.445" drill="3"/>
-<text x="-5.715" y="-5.08" size="1.27" layer="21" align="center-left">VCC</text>
-<text x="3.81" y="0" size="1.016" layer="21" align="center-left">BH1750</text>
-</package>
-</packages>
-<symbols>
-<symbol name="TEMP-HUM-PRES-BME280">
-<description>&lt;b&gt;Digital Humidity-Temperature-Pressure Sensor&lt;/b&gt; based on &lt;b&gt;BME280&lt;/b&gt; device</description>
-<pin name="VIN" x="-15.24" y="5.08" length="middle" direction="pwr"/>
-<pin name="GND" x="-15.24" y="2.54" length="middle" direction="pwr"/>
-<pin name="SCL" x="-15.24" y="0" length="middle"/>
-<pin name="SDA" x="-15.24" y="-2.54" length="middle"/>
-<wire x1="-10.16" y1="10.16" x2="7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-7.62" x2="-10.16" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-7.62" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
-<text x="-10.16" y="15.24" size="1.778" layer="95">&gt;NAME</text>
-<text x="-10.16" y="12.7" size="1.778" layer="95">&gt;VALUE</text>
-<wire x1="7.62" y1="10.16" x2="7.62" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-5.08" x2="5.08" y2="0" width="0.254" layer="94"/>
-<wire x1="5.08" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="0" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="0" y1="-5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
-<circle x="0.762" y="-2.54" radius="0.359209375" width="0.254" layer="94"/>
-</symbol>
-<symbol name="LIGHT-SENSOR-BH1750">
-<description>&lt;b&gt;Digital Light Sensor&lt;/b&gt; based on &lt;b&gt;BH1750&lt;/b&gt;</description>
-<pin name="ADDR" x="-17.78" y="5.08" length="middle"/>
-<pin name="GND" x="-17.78" y="-2.54" length="middle" direction="pwr"/>
-<pin name="SCL" x="-17.78" y="0" length="middle"/>
-<pin name="SDA" x="-17.78" y="2.54" length="middle"/>
-<wire x1="-12.7" y1="10.16" x2="12.7" y2="10.16" width="0.254" layer="94"/>
-<wire x1="12.7" y1="-10.16" x2="-12.7" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-12.7" y1="-10.16" x2="-12.7" y2="10.16" width="0.254" layer="94"/>
-<text x="-12.7" y="15.24" size="1.778" layer="95">&gt;NAME</text>
-<text x="-12.7" y="12.7" size="1.778" layer="95">&gt;VALUE</text>
-<wire x1="12.7" y1="10.16" x2="12.7" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="3.302" y1="-2.286" x2="3.302" y2="2.286" width="0.254" layer="94"/>
-<wire x1="3.302" y1="2.286" x2="1.016" y2="2.286" width="0.254" layer="94"/>
-<wire x1="1.016" y1="2.286" x2="1.016" y2="-2.286" width="0.254" layer="94"/>
-<wire x1="1.016" y1="-2.286" x2="3.302" y2="-2.286" width="0.254" layer="94"/>
-<pin name="VCC" x="-17.78" y="-5.08" length="middle" direction="pwr"/>
-<circle x="7.62" y="5.08" radius="2.54" width="0.254" layer="94"/>
-<circle x="7.62" y="-5.08" radius="2.54" width="0.254" layer="94"/>
-<text x="0" y="0" size="2.032" layer="94" rot="R270" align="top-center">BH1750</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="TEMP-HUM-PRES-BME280">
-<description>&lt;b&gt;Digital Humidity-Temperature-Pressure Sensor&lt;/b&gt; based on &lt;b&gt;BME280&lt;/b&gt; device
-&lt;p&gt;More information about &lt;b&gt;BME280&lt;/b&gt; device is available here:&lt;br&gt;
-&lt;a href="https://www.bosch-sensortec.com/bst/products/all_products/bme280"&gt;https://www.bosch-sensortec.com/bst/products/all_products/bme280&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;&lt;a href="http://www.ebay.com/sch/bme280+breakout"&gt;Click here to find device on ebay.com&lt;/a&gt;&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="photo" src="http://www.diymodules.org/img/device-photo.php?name=TEMP-HUM-PRES-BME280"&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="TEMP-HUM-PRES-BME280" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="TEMP-HUM-PRES-BME280">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="SCL" pad="3"/>
-<connect gate="G$1" pin="SDA" pad="4"/>
-<connect gate="G$1" pin="VIN" pad="1"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="LIGHT-SENSOR-BH1750">
-<description>&lt;b&gt;Digital Light Sensor&lt;/b&gt; based on &lt;b&gt;BH1750&lt;/b&gt;
-&lt;p&gt;&lt;b&gt;BH1750&lt;/b&gt; datasheet is available here:&lt;br /&gt;
-&lt;a href="http://www.mouser.com/ds/2/348/bh1750fvi-e-186247.pdf"&gt;http://www.mouser.com/ds/2/348/bh1750fvi-e-186247.pdf&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Arduino Library&lt;/b&gt; for &lt;b&gt;BH1750&lt;/b&gt; is available here:&lt;br /&gt;
-&lt;a href="https://github.com/claws/BH1750"&gt;https://github.com/claws/BH1750&lt;/a&gt;&lt;p/&gt;
-&lt;p&gt;&lt;b&gt;Video Tutorial&lt;/b&gt; is available here:&lt;br /&gt;
-&lt;a href="https://www.youtube.com/watch?v=UsLcHSbxf_8"&gt;https://www.youtube.com/watch?v=UsLcHSbxf_8&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;&lt;a href="http://www.ebay.com/sch/bh1750fvi+module"&gt;Click here to find device on ebay.com&lt;/a&gt;&lt;/b&gt;&lt;br /&gt;
-&lt;b&gt;Note:&lt;/b&gt; There are many variants. Search for the proper version.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="photo" src="http://www.diymodules.org/img/device-photo.php?name=LIGHT-SENSOR-BH1750"&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="LIGHT-SENSOR-BH1750" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="LIGHT-SENSOR-BH1750">
-<connects>
-<connect gate="G$1" pin="ADDR" pad="5"/>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="SCL" pad="3"/>
-<connect gate="G$1" pin="SDA" pad="4"/>
-<connect gate="G$1" pin="VCC" pad="1"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="my_devices">
 <packages>
 <package name="FAN">
@@ -531,22 +309,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <circle x="0" y="0" radius="5.08" width="0.127" layer="21"/>
 <wire x1="-6.35" y1="2.54" x2="-3.81" y2="2.54" width="0.127" layer="21"/>
 <wire x1="-6.35" y1="-2.54" x2="-3.81" y2="-2.54" width="0.127" layer="21"/>
-</package>
-<package name="PMS7003">
-<pad name="GND" x="-1.27" y="0" drill="0.6" shape="square"/>
-<pad name="VIN_1" x="-1.27" y="2.54" drill="0.6" shape="square"/>
-<pad name="VIN" x="-1.27" y="5.08" drill="0.6" shape="square"/>
-<pad name="GND_1" x="-1.27" y="-2.54" drill="0.6" shape="square"/>
-<pad name="RESET" x="-1.27" y="-5.08" drill="0.6" shape="square"/>
-<pad name="SET" x="3.81" y="-5.08" drill="0.6" shape="square"/>
-<pad name="TXD" x="3.81" y="-2.54" drill="0.6" shape="square"/>
-<pad name="NC_1" x="3.81" y="0" drill="0.6" shape="square"/>
-<pad name="RXD" x="3.81" y="2.54" drill="0.6" shape="square"/>
-<pad name="NC" x="3.81" y="5.08" drill="0.6" shape="square"/>
-<wire x1="-3.81" y1="7.62" x2="-3.81" y2="-7.62" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="-7.62" x2="6.35" y2="-7.62" width="0.127" layer="21"/>
-<wire x1="6.35" y1="-7.62" x2="6.35" y2="7.62" width="0.127" layer="21"/>
-<wire x1="6.35" y1="7.62" x2="-3.81" y2="7.62" width="0.127" layer="21"/>
 </package>
 <package name="GY-SGP30">
 <pad name="VIN" x="0" y="3.81" drill="0.6" shape="square"/>
@@ -618,9 +380,12 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="3.81" y1="3.81" x2="3.81" y2="-1.27" width="0.127" layer="21"/>
 </package>
 <package name="C">
-<pad name="P$1" x="-3.81" y="0" drill="0.6" shape="square"/>
-<pad name="P$2" x="3.81" y="0" drill="0.6" shape="square"/>
-<circle x="0" y="0" radius="6.35" width="0.127" layer="21"/>
+<pad name="PIN_PLUS" x="-2.54" y="0" drill="0.6" shape="square"/>
+<pad name="PIN_GND" x="2.54" y="0" drill="0.6" shape="square"/>
+<circle x="0" y="0" radius="5.08" width="0.127" layer="21"/>
+<wire x1="-3.175" y1="-1.905" x2="-1.905" y2="-1.905" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-1.27" x2="-2.54" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="1.905" y1="-1.905" x2="3.175" y2="-1.905" width="0.127" layer="21"/>
 </package>
 <package name="R">
 <pad name="P$1" x="-7.62" y="-3.81" drill="0.6" shape="square"/>
@@ -653,6 +418,55 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pad name="P$1" x="0" y="0" drill="0.6" shape="square"/>
 <circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
 </package>
+<package name="BH1750">
+<pad name="SCL" x="0" y="1.27" drill="0.6" shape="square"/>
+<pad name="GND" x="0" y="-1.27" drill="0.6" shape="square"/>
+<pad name="SDA" x="0" y="3.81" drill="0.6" shape="square"/>
+<pad name="VCC" x="0" y="-3.81" drill="0.6" shape="square"/>
+<wire x1="-1.27" y1="7.62" x2="-1.27" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="7.62" y1="-5.08" x2="-1.27" y2="-5.08" width="0.127" layer="21"/>
+<text x="1.27" y="3.81" size="0.8128" layer="21">SDA</text>
+<text x="1.27" y="1.27" size="0.8128" layer="21">SCL</text>
+<text x="1.27" y="-1.27" size="0.8128" layer="21">GND</text>
+<text x="1.27" y="-3.81" size="0.8128" layer="21">VCC</text>
+<wire x1="7.62" y1="7.62" x2="7.62" y2="-5.08" width="0.127" layer="21"/>
+<text x="6.35" y="-1.27" size="0.8128" layer="21" rot="R90">BH1750</text>
+<wire x1="-1.27" y1="7.62" x2="7.62" y2="7.62" width="0.127" layer="21"/>
+</package>
+<package name="BME280">
+<pad name="GND" x="-5.08" y="1.27" drill="0.6" shape="square"/>
+<pad name="SCL" x="-5.08" y="-1.27" drill="0.6" shape="square"/>
+<pad name="VCC" x="-5.08" y="3.81" drill="0.6" shape="square"/>
+<pad name="SDA" x="-5.08" y="-3.81" drill="0.6" shape="square"/>
+<wire x1="-6.35" y1="5.08" x2="-6.35" y2="-10.16" width="0.127" layer="21"/>
+<text x="-3.81" y="3.81" size="0.8128" layer="21">VCC</text>
+<text x="-3.81" y="1.27" size="0.8128" layer="21">GND</text>
+<text x="-3.81" y="-1.27" size="0.8128" layer="21">SCL</text>
+<text x="-3.81" y="-3.81" size="0.8128" layer="21">SDA</text>
+<wire x1="-6.35" y1="5.08" x2="2.54" y2="5.08" width="0.127" layer="21"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="-10.16" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-10.16" x2="-6.35" y2="-10.16" width="0.127" layer="21"/>
+<text x="-5.08" y="-7.62" size="1.27" layer="21">BME280</text>
+</package>
+<package name="PMS7003_J">
+<pad name="VCC" x="-1.27" y="1.27" drill="0.6" shape="square"/>
+<pad name="GND" x="-1.27" y="-1.27" drill="0.6" shape="square"/>
+<pad name="SET" x="-1.27" y="-3.81" drill="0.6" shape="square"/>
+<pad name="RESET" x="1.27" y="-3.81" drill="0.6" shape="square"/>
+<pad name="RXD" x="1.27" y="-1.27" drill="0.6" shape="square"/>
+<pad name="TXD" x="1.27" y="1.27" drill="0.6" shape="square"/>
+<text x="-0.635" y="0" size="0.3048" layer="21">PMS7003</text>
+<text x="-0.635" y="1.27" size="0.3048" layer="21">VCC</text>
+<text x="-0.635" y="-1.27" size="0.3048" layer="21">GND</text>
+<text x="-0.635" y="-3.81" size="0.3048" layer="21">SET</text>
+<text x="1.905" y="-3.81" size="0.3048" layer="21">RESET</text>
+<text x="1.905" y="1.27" size="0.3048" layer="21">TXD</text>
+<text x="1.905" y="-1.27" size="0.3048" layer="21">RXD</text>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-5.08" x2="3.81" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-5.08" x2="3.81" y2="2.54" width="0.127" layer="21"/>
+<wire x1="3.81" y1="2.54" x2="-2.54" y2="2.54" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="FAN">
@@ -661,23 +475,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <circle x="0" y="0" radius="12.7" width="0.254" layer="94"/>
 <text x="-2.54" y="5.08" size="1.778" layer="94">FAN</text>
 <text x="-5.08" y="-7.62" size="1.778" layer="94">&gt;NAME</text>
-</symbol>
-<symbol name="PMS7003">
-<pin name="VIN" x="-15.24" y="12.7" length="middle" direction="pwr"/>
-<pin name="VIN_1" x="-15.24" y="10.16" length="middle" direction="pwr"/>
-<pin name="GND" x="-15.24" y="7.62" length="middle" direction="pwr"/>
-<pin name="GND_1" x="-15.24" y="5.08" length="middle" direction="pwr"/>
-<pin name="RESET" x="-15.24" y="2.54" length="middle"/>
-<pin name="NC" x="-15.24" y="0" length="middle" direction="nc"/>
-<pin name="RXD" x="-15.24" y="-2.54" length="middle" direction="in"/>
-<pin name="NC_1" x="-15.24" y="-5.08" length="middle" direction="nc"/>
-<pin name="TXD" x="-15.24" y="-7.62" length="middle" direction="out"/>
-<pin name="SET" x="-15.24" y="-10.16" length="middle" direction="in"/>
-<wire x1="-10.16" y1="15.24" x2="-10.16" y2="-12.7" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-12.7" x2="7.62" y2="-12.7" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-12.7" x2="7.62" y2="15.24" width="0.254" layer="94"/>
-<wire x1="7.62" y1="15.24" x2="-10.16" y2="15.24" width="0.254" layer="94"/>
-<text x="-5.08" y="17.78" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
 <symbol name="GY-SGP30">
 <pin name="VIN" x="-7.62" y="2.54" length="middle" direction="pwr"/>
@@ -780,12 +577,15 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <text x="3.81" y="-2.54" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 <symbol name="C">
-<pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
-<pin name="P$2" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
+<pin name="PIN_PLUS" x="-7.62" y="0" visible="off" length="middle"/>
+<pin name="PIN_GND" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
 <wire x1="0" y1="2.54" x2="0" y2="-2.54" width="1.27" layer="94"/>
 <wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="1.27" layer="94"/>
 <text x="-5.08" y="5.08" size="1.778" layer="94">&gt;NAME</text>
 <text x="-5.08" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
+<wire x1="-5.715" y1="1.27" x2="-4.445" y2="1.27" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="1.905" x2="-5.08" y2="0.635" width="0.254" layer="94"/>
+<text x="1.905" y="1.27" size="0.6096" layer="94">GND</text>
 </symbol>
 <symbol name="R">
 <pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
@@ -856,6 +656,44 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="2.54" y1="2.54" x2="-2.54" y2="2.54" width="0.254" layer="94"/>
 <text x="-5.08" y="5.08" size="1.778" layer="94">&gt;NAME</text>
 </symbol>
+<symbol name="BH1750">
+<pin name="I2C_SDA" x="-7.62" y="5.08" length="middle"/>
+<pin name="I2C_SCL" x="-7.62" y="2.54" length="middle"/>
+<pin name="GND" x="-7.62" y="0" length="middle" direction="sup"/>
+<pin name="VCC" x="-7.62" y="-2.54" length="middle" direction="sup"/>
+<wire x1="-2.54" y1="7.62" x2="-2.54" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-5.08" x2="22.86" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-5.08" x2="22.86" y2="7.62" width="0.254" layer="94"/>
+<wire x1="22.86" y1="7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
+<text x="10.16" y="0" size="1.778" layer="94">BH1750</text>
+<text x="10.16" y="5.08" size="1.778" layer="94">&gt;NAME</text>
+</symbol>
+<symbol name="BME280">
+<pin name="GND" x="-10.16" y="2.54" length="middle" direction="sup"/>
+<pin name="SCL" x="-10.16" y="0" length="middle"/>
+<pin name="SDA" x="-10.16" y="-2.54" length="middle"/>
+<pin name="VCC" x="-10.16" y="5.08" length="middle" direction="sup"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-5.08" x2="22.86" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-5.08" x2="22.86" y2="7.62" width="0.254" layer="94"/>
+<wire x1="22.86" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
+<text x="7.62" y="0" size="1.778" layer="94">BME280</text>
+<text x="5.08" y="10.16" size="1.778" layer="94">&gt;NAME</text>
+</symbol>
+<symbol name="PMS7003_J">
+<pin name="TXD" x="-7.62" y="2.54" length="middle"/>
+<pin name="RXD" x="-7.62" y="0" length="middle"/>
+<pin name="RESET" x="-7.62" y="-2.54" length="middle"/>
+<pin name="SET" x="-7.62" y="-5.08" length="middle"/>
+<pin name="GND" x="-7.62" y="5.08" length="middle" direction="sup"/>
+<pin name="VCC" x="-7.62" y="7.62" length="middle" direction="sup"/>
+<wire x1="-2.54" y1="10.16" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-7.62" x2="22.86" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-7.62" x2="22.86" y2="10.16" width="0.254" layer="94"/>
+<wire x1="22.86" y1="10.16" x2="-2.54" y2="10.16" width="0.254" layer="94"/>
+<text x="7.62" y="-2.54" size="1.778" layer="94">PMS7003</text>
+<text x="7.62" y="5.08" size="1.778" layer="94">&gt;NAME</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="FAN">
@@ -867,30 +705,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <connects>
 <connect gate="G$1" pin="220V_L" pad="P$1"/>
 <connect gate="G$1" pin="220V_N" pad="P$2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="PMS7003">
-<gates>
-<gate name="G$1" symbol="PMS7003" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="PMS7003">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="GND_1" pad="GND_1"/>
-<connect gate="G$1" pin="NC" pad="NC"/>
-<connect gate="G$1" pin="NC_1" pad="NC_1"/>
-<connect gate="G$1" pin="RESET" pad="RESET"/>
-<connect gate="G$1" pin="RXD" pad="RXD"/>
-<connect gate="G$1" pin="SET" pad="SET"/>
-<connect gate="G$1" pin="TXD" pad="TXD"/>
-<connect gate="G$1" pin="VIN" pad="VIN"/>
-<connect gate="G$1" pin="VIN_1" pad="VIN_1"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1014,8 +828,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <devices>
 <device name="" package="C">
 <connects>
-<connect gate="G$1" pin="P$1" pad="P$1"/>
-<connect gate="G$1" pin="P$2" pad="P$2"/>
+<connect gate="G$1" pin="PIN_GND" pad="PIN_GND"/>
+<connect gate="G$1" pin="PIN_PLUS" pad="PIN_PLUS"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1100,6 +914,62 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <device name="" package="TOUCH_SENSOR">
 <connects>
 <connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BH1750" prefix="U">
+<gates>
+<gate name="G$1" symbol="BH1750" x="-10.16" y="0"/>
+</gates>
+<devices>
+<device name="" package="BH1750">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="I2C_SCL" pad="SCL"/>
+<connect gate="G$1" pin="I2C_SDA" pad="SDA"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BME280" prefix="U">
+<gates>
+<gate name="G$1" symbol="BME280" x="-10.16" y="0"/>
+</gates>
+<devices>
+<device name="" package="BME280">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="PMS7003" prefix="U">
+<gates>
+<gate name="G$1" symbol="PMS7003_J" x="-10.16" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="PMS7003_J">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="RESET" pad="RESET"/>
+<connect gate="G$1" pin="RXD" pad="RXD"/>
+<connect gate="G$1" pin="SET" pad="SET"/>
+<connect gate="G$1" pin="TXD" pad="TXD"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1299,9 +1169,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="U$1" library="ESP32-DEVKITC" deviceset="ESP32DEVKITC" device=""/>
-<part name="U$2" library="diy-modules" deviceset="TEMP-HUM-PRES-BME280" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U$4" library="diy-modules" deviceset="LIGHT-SENSOR-BH1750" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -1309,7 +1177,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="SUPPLY1" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="VCC" device=""/>
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="VCC" device=""/>
 <part name="U$10" library="my_devices" deviceset="FAN" device=""/>
-<part name="U$3" library="my_devices" deviceset="PMS7003" device=""/>
 <part name="GY_SGP30_1" library="my_devices" deviceset="GY-SGP30" device=""/>
 <part name="U$6" library="my_devices" deviceset="RGBLED" device=""/>
 <part name="U$8" library="my_devices" deviceset="ANEMOMETER" device=""/>
@@ -1358,8 +1225,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="R14" library="my_devices" deviceset="R" device="" value="10K"/>
-<part name="C3" library="my_devices" deviceset="C" device="" value="10mF"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="U$4" library="my_devices" deviceset="BH1750" device=""/>
+<part name="U1" library="my_devices" deviceset="BME280" device=""/>
+<part name="U2" library="my_devices" deviceset="PMS7003" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1388,16 +1257,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <instance part="U$1" gate="G$1" x="-38.1" y="81.28" smashed="yes" rot="R270" grouprefs="ESP">
 <attribute name="NAME" x="-33.02" y="107.95" size="1.27" layer="95"/>
 </instance>
-<instance part="U$2" gate="G$1" x="93.98" y="88.9" smashed="yes" grouprefs="BME_280_TEMP_HUM">
-<attribute name="NAME" x="83.82" y="104.14" size="1.778" layer="95"/>
-<attribute name="VALUE" x="83.82" y="101.6" size="1.778" layer="95"/>
-</instance>
 <instance part="GND2" gate="1" x="40.64" y="88.9" smashed="yes" grouprefs="BME_280_TEMP_HUM">
 <attribute name="VALUE" x="38.1" y="86.36" size="1.778" layer="96"/>
-</instance>
-<instance part="U$4" gate="G$1" x="76.2" y="-40.64" smashed="yes" grouprefs="BH1750">
-<attribute name="NAME" x="63.5" y="-25.4" size="1.778" layer="95"/>
-<attribute name="VALUE" x="63.5" y="-27.94" size="1.778" layer="95"/>
 </instance>
 <instance part="GND5" gate="1" x="48.26" y="-50.8" smashed="yes" grouprefs="BH1750">
 <attribute name="VALUE" x="45.72" y="-53.34" size="1.778" layer="96"/>
@@ -1418,7 +1279,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="VALUE" x="-258.445" y="-6.985" size="1.778" layer="96"/>
 </instance>
 <instance part="U$10" gate="G$1" x="-93.98" y="-106.68" smashed="yes" rot="R90" grouprefs="FAN"/>
-<instance part="U$3" gate="G$1" x="-38.1" y="17.78" smashed="yes" grouprefs="PMS7003"/>
 <instance part="GY_SGP30_1" gate="G$1" x="-48.26" y="-43.18" smashed="yes" grouprefs="GY-SGP30">
 <attribute name="NAME" x="-50.8" y="-33.02" size="1.778" layer="94"/>
 </instance>
@@ -1597,12 +1457,15 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <attribute name="NAME" x="-80.01" y="-10.16" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-80.01" y="-16.51" size="1.778" layer="94"/>
 </instance>
-<instance part="C3" gate="G$1" x="-73.66" y="30.48" smashed="yes" rot="R90" grouprefs="PMS7003">
-<attribute name="NAME" x="-78.74" y="25.4" size="1.778" layer="94" rot="R90"/>
-<attribute name="VALUE" x="-66.04" y="25.4" size="1.778" layer="94" rot="R90"/>
-</instance>
 <instance part="GND4" gate="1" x="-93.98" y="17.78" smashed="yes" grouprefs="PMS7003">
 <attribute name="VALUE" x="-96.52" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="U$4" gate="G$1" x="68.58" y="-43.18" smashed="yes" grouprefs="BH1750"/>
+<instance part="U1" gate="G$1" x="91.44" y="88.9" smashed="yes" grouprefs="BME_280_TEMP_HUM">
+<attribute name="NAME" x="96.52" y="99.06" size="1.778" layer="94"/>
+</instance>
+<instance part="U2" gate="G$1" x="-40.64" y="17.78" smashed="yes" grouprefs="PMS7003">
+<attribute name="NAME" x="-33.02" y="22.86" size="1.778" layer="94"/>
 </instance>
 </instances>
 <busses>
@@ -1611,8 +1474,8 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <net name="GND" class="0">
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
-<pinref part="U$2" gate="G$1" pin="GND"/>
-<wire x1="40.64" y1="91.44" x2="78.74" y2="91.44" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<wire x1="40.64" y1="91.44" x2="81.28" y2="91.44" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND@38"/>
@@ -1620,10 +1483,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-20.32" y1="104.14" x2="10.16" y2="104.14" width="0.1524" layer="91" grouprefs="ESP"/>
 </segment>
 <segment>
-<pinref part="U$4" gate="G$1" pin="GND"/>
-<wire x1="58.42" y1="-43.18" x2="48.26" y2="-43.18" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="60.96" y1="-43.18" x2="48.26" y2="-43.18" width="0.1524" layer="91" grouprefs="BH1750"/>
 <wire x1="48.26" y1="-43.18" x2="48.26" y2="-48.26" width="0.1524" layer="91" grouprefs="BH1750"/>
 <pinref part="GND5" gate="1" pin="GND"/>
+<pinref part="U$4" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <wire x1="-55.88" y1="-43.18" x2="-76.2" y2="-43.18" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
@@ -1663,7 +1526,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-127" y1="-33.02" x2="-127" y2="-27.94" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <wire x1="-127" y1="-27.94" x2="-119.38" y2="-27.94" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <pinref part="GND12" gate="1" pin="GND"/>
-<pinref part="C1" gate="G$1" pin="P$2"/>
+<pinref part="C1" gate="G$1" pin="PIN_GND"/>
 <wire x1="-119.38" y1="-27.94" x2="-106.68" y2="-27.94" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <junction x="-119.38" y="-27.94"/>
 </segment>
@@ -1689,24 +1552,18 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="172.72" y1="-78.74" x2="172.72" y2="-81.28" width="0.1524" layer="91" grouprefs="IR"/>
 </segment>
 <segment>
-<wire x1="-53.34" y1="22.86" x2="-73.66" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-53.34" y1="25.4" x2="-53.34" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="GND"/>
-<pinref part="U$3" gate="G$1" pin="GND_1"/>
-<junction x="-53.34" y="22.86" grouprefs="PMS7003"/>
-<pinref part="C3" gate="G$1" pin="P$1"/>
-<wire x1="-73.66" y1="22.86" x2="-93.98" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<junction x="-73.66" y="22.86" grouprefs="PMS7003"/>
+<wire x1="-48.26" y1="22.86" x2="-93.98" y2="22.86" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="GND4" gate="1" pin="GND"/>
 <wire x1="-93.98" y1="22.86" x2="-93.98" y2="20.32" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<pinref part="U2" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
 <segment>
 <wire x1="55.88" y1="71.12" x2="55.88" y2="88.9" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<pinref part="U$2" gate="G$1" pin="SCL"/>
-<wire x1="55.88" y1="88.9" x2="78.74" y2="88.9" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<wire x1="55.88" y1="88.9" x2="81.28" y2="88.9" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
 <label x="45.72" y="71.12" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
+<pinref part="U1" gate="G$1" pin="SCL"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO22"/>
@@ -1716,9 +1573,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="0" y="81.28" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<pinref part="U$4" gate="G$1" pin="SCL"/>
-<wire x1="58.42" y1="-40.64" x2="38.1" y2="-40.64" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="60.96" y1="-40.64" x2="38.1" y2="-40.64" width="0.1524" layer="91" grouprefs="BH1750"/>
 <label x="38.1" y="-43.18" size="1.778" layer="95" grouprefs="BH1750"/>
+<pinref part="U$4" gate="G$1" pin="I2C_SCL"/>
 </segment>
 <segment>
 <wire x1="-55.88" y1="-45.72" x2="-71.12" y2="-45.72" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
@@ -1731,9 +1588,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <net name="I2C_SDA" class="0">
 <segment>
 <wire x1="68.58" y1="68.58" x2="68.58" y2="86.36" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<pinref part="U$2" gate="G$1" pin="SDA"/>
-<wire x1="68.58" y1="86.36" x2="78.74" y2="86.36" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<wire x1="68.58" y1="86.36" x2="81.28" y2="86.36" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
 <label x="68.58" y="68.58" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
+<pinref part="U1" gate="G$1" pin="SDA"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="IO21"/>
@@ -1743,9 +1600,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="0" y="73.66" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<pinref part="U$4" gate="G$1" pin="SDA"/>
-<wire x1="58.42" y1="-38.1" x2="38.1" y2="-38.1" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="60.96" y1="-38.1" x2="38.1" y2="-38.1" width="0.1524" layer="91" grouprefs="BH1750"/>
 <label x="38.1" y="-38.1" size="1.778" layer="95" grouprefs="BH1750"/>
+<pinref part="U$4" gate="G$1" pin="I2C_SDA"/>
 </segment>
 <segment>
 <wire x1="-55.88" y1="-48.26" x2="-66.04" y2="-48.26" width="0.1524" layer="91" grouprefs="GY-SGP30"/>
@@ -1757,18 +1614,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="+5V" class="0">
 <segment>
-<wire x1="-53.34" y1="35.56" x2="-53.34" y2="30.48" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="VIN"/>
-<pinref part="U$3" gate="G$1" pin="VIN_1"/>
-<wire x1="-53.34" y1="27.94" x2="-53.34" y2="30.48" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<junction x="-53.34" y="30.48" grouprefs="PMS7003"/>
-<pinref part="C3" gate="G$1" pin="P$2"/>
-<wire x1="-53.34" y1="35.56" x2="-73.66" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-73.66" y1="35.56" x2="-93.98" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<junction x="-73.66" y="35.56" grouprefs="PMS7003"/>
-<label x="-93.98" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
-</segment>
-<segment>
 <pinref part="U$1" gate="G$1" pin="5V"/>
 <wire x1="-88.9" y1="58.42" x2="-55.88" y2="58.42" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="-88.9" y="58.42" size="1.778" layer="95" grouprefs="ESP"/>
@@ -1779,7 +1624,7 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <wire x1="-127" y1="-35.56" x2="-127" y2="-40.64" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <wire x1="-127" y1="-40.64" x2="-119.38" y2="-40.64" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <label x="-109.22" y="-43.18" size="1.778" layer="95" grouprefs="5V_SUPPLY_JET"/>
-<pinref part="C1" gate="G$1" pin="P$1"/>
+<pinref part="C1" gate="G$1" pin="PIN_PLUS"/>
 <wire x1="-119.38" y1="-40.64" x2="-106.68" y2="-40.64" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET"/>
 <junction x="-119.38" y="-40.64"/>
 </segment>
@@ -1824,19 +1669,6 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </segment>
 </net>
 <net name="3V3" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="VIN"/>
-<wire x1="78.74" y1="93.98" x2="66.04" y2="93.98" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<wire x1="66.04" y1="93.98" x2="66.04" y2="104.14" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<label x="63.5" y="104.14" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
-</segment>
-<segment>
-<pinref part="U$4" gate="G$1" pin="VCC"/>
-<wire x1="58.42" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91" grouprefs="BH1750"/>
-<wire x1="53.34" y1="-45.72" x2="53.34" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
-<wire x1="53.34" y1="-58.42" x2="35.56" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
-<label x="35.56" y="-58.42" size="1.778" layer="95" grouprefs="BH1750"/>
-</segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="P$1"/>
 <wire x1="-81.28" y1="-2.54" x2="-86.36" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
@@ -1900,9 +1732,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="-78.74" y="66.04" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<wire x1="-53.34" y1="10.16" x2="-86.36" y2="10.16" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-86.36" y="7.62" size="1.778" layer="95" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="TXD"/>
+<wire x1="-48.26" y1="17.78" x2="-86.36" y2="17.78" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-86.36" y="17.78" size="1.778" layer="95" grouprefs="PMS7003"/>
+<pinref part="U2" gate="G$1" pin="RXD"/>
 </segment>
 </net>
 <net name="UART_1_TXD" class="0">
@@ -1912,9 +1744,9 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <label x="-78.74" y="60.96" size="1.778" layer="95" grouprefs="ESP"/>
 </segment>
 <segment>
-<wire x1="-53.34" y1="15.24" x2="-86.36" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-86.36" y="15.24" size="1.778" layer="95" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="RXD"/>
+<wire x1="-48.26" y1="20.32" x2="-86.36" y2="20.32" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-86.36" y="20.32" size="1.778" layer="95" grouprefs="PMS7003"/>
+<pinref part="U2" gate="G$1" pin="TXD"/>
 </segment>
 </net>
 <net name="GPIO_RGB_R" class="0">
@@ -2040,14 +1872,33 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 <pinref part="U$9" gate="G$1" pin="220V_L"/>
 <pinref part="U$7" gate="G$1" pin="220V_IN_L"/>
 </segment>
+<segment>
+<wire x1="60.96" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="53.34" y1="-45.72" x2="53.34" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="53.34" y1="-58.42" x2="35.56" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
+<label x="35.56" y="-58.42" size="1.778" layer="95" grouprefs="BH1750"/>
+<pinref part="U$4" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<wire x1="81.28" y1="93.98" x2="66.04" y2="93.98" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<wire x1="66.04" y1="93.98" x2="66.04" y2="104.14" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<label x="63.5" y="104.14" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
+<pinref part="U1" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="VCC"/>
+<wire x1="-48.26" y1="25.4" x2="-48.26" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-48.26" y1="35.56" x2="-93.98" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-93.98" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
+</segment>
 </net>
 <net name="N$8" class="0">
 <segment>
-<wire x1="-63.5" y1="-2.54" x2="-63.5" y2="7.62" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-63.5" y1="7.62" x2="-53.34" y2="7.62" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="SET"/>
+<wire x1="-63.5" y1="-2.54" x2="-63.5" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="R1" gate="G$1" pin="P$2"/>
 <wire x1="-63.5" y1="-2.54" x2="-64.77" y2="-2.54" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<pinref part="U2" gate="G$1" pin="RESET"/>
+<wire x1="-48.26" y1="15.24" x2="-63.5" y2="15.24" width="0.1524" layer="91" grouprefs="PMS7003"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -2292,11 +2143,10 @@ Source: http://ecommas.tycoelectronics.com .. ENG_CD_640456_W.pdf</description>
 </net>
 <net name="N$28" class="0">
 <segment>
-<wire x1="-53.34" y1="20.32" x2="-58.42" y2="20.32" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<pinref part="U$3" gate="G$1" pin="RESET"/>
-<wire x1="-58.42" y1="20.32" x2="-58.42" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-58.42" y1="-12.7" x2="-64.77" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
 <pinref part="R14" gate="G$1" pin="P$2"/>
+<pinref part="U2" gate="G$1" pin="SET"/>
+<wire x1="-48.26" y1="12.7" x2="-48.26" y2="-12.7" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-48.26" y1="-12.7" x2="-64.77" y2="-12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
