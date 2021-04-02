@@ -287,16 +287,16 @@
 </package>
 <package name="ESP32">
 <pad name="P$1" x="-12.7" y="0" drill="0.6" shape="square"/>
-<pad name="P$2" x="12.7" y="0" drill="0.6" shape="square"/>
+<pad name="IO5" x="12.7" y="0" drill="0.6" shape="square"/>
 <pad name="P$3" x="-12.7" y="2.54" drill="0.6" shape="square"/>
 <pad name="P$4" x="-12.7" y="5.08" drill="0.6" shape="square"/>
 <pad name="P$5" x="-12.7" y="7.62" drill="0.6" shape="square"/>
 <pad name="P$6" x="-12.7" y="10.16" drill="0.6" shape="square"/>
 <pad name="P$7" x="-12.7" y="12.7" drill="0.6" shape="square"/>
-<pad name="P$8" x="-12.7" y="15.24" drill="0.6" shape="square"/>
-<pad name="P$9" x="-12.7" y="17.78" drill="0.6" shape="square"/>
-<pad name="P$10" x="-12.7" y="20.32" drill="0.6" shape="square"/>
-<pad name="P$11" x="-12.7" y="22.86" drill="0.6" shape="square"/>
+<pad name="SVN" x="-12.7" y="15.24" drill="0.6" shape="square"/>
+<pad name="SVP" x="-12.7" y="17.78" drill="0.6" shape="square"/>
+<pad name="EN" x="-12.7" y="20.32" drill="0.6" shape="square"/>
+<pad name="3V3" x="-12.7" y="22.86" drill="0.6" shape="square"/>
 <pad name="P$12" x="-12.7" y="-2.54" drill="0.6" shape="square"/>
 <pad name="P$13" x="-12.7" y="-5.08" drill="0.6" shape="square"/>
 <pad name="P$14" x="-12.7" y="-7.62" drill="0.6" shape="square"/>
@@ -306,24 +306,24 @@
 <pad name="P$18" x="-12.7" y="-17.78" drill="0.6" shape="square"/>
 <pad name="P$19" x="-12.7" y="-20.32" drill="0.6" shape="square"/>
 <pad name="P$20" x="-12.7" y="-22.86" drill="0.6" shape="square"/>
-<pad name="P$21" x="12.7" y="22.86" drill="0.6" shape="square"/>
-<pad name="P$22" x="12.7" y="20.32" drill="0.6" shape="square"/>
-<pad name="P$23" x="12.7" y="17.78" drill="0.6" shape="square"/>
-<pad name="P$24" x="12.7" y="15.24" drill="0.6" shape="square"/>
-<pad name="P$25" x="12.7" y="12.7" drill="0.6" shape="square"/>
-<pad name="P$26" x="12.7" y="7.62" drill="0.6" shape="square"/>
-<pad name="P$27" x="12.7" y="10.16" drill="0.6" shape="square"/>
-<pad name="P$28" x="12.7" y="5.08" drill="0.6" shape="square"/>
-<pad name="P$29" x="12.7" y="2.54" drill="0.6" shape="square"/>
-<pad name="P$30" x="12.7" y="-5.08" drill="0.6" shape="square"/>
-<pad name="P$31" x="12.7" y="-2.54" drill="0.6" shape="square"/>
-<pad name="P$32" x="12.7" y="-7.62" drill="0.6" shape="square"/>
-<pad name="P$33" x="12.7" y="-10.16" drill="0.6" shape="square"/>
-<pad name="P$34" x="12.7" y="-12.7" drill="0.6" shape="square"/>
-<pad name="P$35" x="12.7" y="-17.78" drill="0.6" shape="square"/>
-<pad name="P$36" x="12.7" y="-15.24" drill="0.6" shape="square"/>
-<pad name="P$37" x="12.7" y="-20.32" drill="0.6" shape="square"/>
-<pad name="P$38" x="12.7" y="-22.86" drill="0.6" shape="square"/>
+<pad name="GND" x="12.7" y="22.86" drill="0.6" shape="square"/>
+<pad name="IO23" x="12.7" y="20.32" drill="0.6" shape="square"/>
+<pad name="IO22" x="12.7" y="17.78" drill="0.6" shape="square"/>
+<pad name="TXD0" x="12.7" y="15.24" drill="0.6" shape="square"/>
+<pad name="RXD" x="12.7" y="12.7" drill="0.6" shape="square"/>
+<pad name="GND_1" x="12.7" y="7.62" drill="0.6" shape="square"/>
+<pad name="IO21" x="12.7" y="10.16" drill="0.6" shape="square"/>
+<pad name="IO19" x="12.7" y="5.08" drill="0.6" shape="square"/>
+<pad name="IO18" x="12.7" y="2.54" drill="0.6" shape="square"/>
+<pad name="IO16" x="12.7" y="-5.08" drill="0.6" shape="square"/>
+<pad name="IO17" x="12.7" y="-2.54" drill="0.6" shape="square"/>
+<pad name="IO4" x="12.7" y="-7.62" drill="0.6" shape="square"/>
+<pad name="IO0" x="12.7" y="-10.16" drill="0.6" shape="square"/>
+<pad name="IO2" x="12.7" y="-12.7" drill="0.6" shape="square"/>
+<pad name="SD1" x="12.7" y="-17.78" drill="0.6" shape="square"/>
+<pad name="IO15" x="12.7" y="-15.24" drill="0.6" shape="square"/>
+<pad name="SD0" x="12.7" y="-20.32" drill="0.6" shape="square"/>
+<pad name="CLK" x="12.7" y="-22.86" drill="0.6" shape="square"/>
 <wire x1="-15.24" y1="25.4" x2="-7.62" y2="25.4" width="0.127" layer="21"/>
 <wire x1="-7.62" y1="25.4" x2="7.62" y2="25.4" width="0.127" layer="21"/>
 <wire x1="7.62" y1="25.4" x2="15.24" y2="25.4" width="0.127" layer="21"/>
@@ -339,6 +339,44 @@
 <wire x1="-2.54" y1="-22.86" x2="2.54" y2="-22.86" width="0.127" layer="21"/>
 <wire x1="2.54" y1="-22.86" x2="2.54" y2="-25.4" width="0.127" layer="21"/>
 <text x="-3.81" y="3.81" size="1.9304" layer="21">ESP32</text>
+<text x="-11.43" y="22.86" size="0.8128" layer="21">3V3</text>
+<text x="-11.43" y="20.32" size="0.8128" layer="21">EN</text>
+<text x="-11.43" y="17.78" size="0.8128" layer="21">SVP</text>
+<text x="-11.43" y="15.24" size="0.8128" layer="21">SVN</text>
+<text x="-11.43" y="12.7" size="0.8128" layer="21">IO34</text>
+<text x="-11.43" y="10.16" size="0.8128" layer="21">IO35</text>
+<text x="-11.43" y="7.62" size="0.8128" layer="21">IO32</text>
+<text x="-11.43" y="5.08" size="0.8128" layer="21">IO33</text>
+<text x="-11.43" y="2.54" size="0.8128" layer="21">IO25</text>
+<text x="-11.43" y="0" size="0.8128" layer="21">IO26</text>
+<text x="-11.43" y="-2.54" size="0.8128" layer="21">IO27</text>
+<text x="-11.43" y="-5.08" size="0.8128" layer="21">IO14</text>
+<text x="-11.43" y="-7.62" size="0.8128" layer="21">IO12</text>
+<text x="-11.43" y="-10.16" size="0.8128" layer="21">GND</text>
+<text x="-11.43" y="-12.7" size="0.8128" layer="21">IO13</text>
+<text x="-11.43" y="-15.24" size="0.8128" layer="21">SD2</text>
+<text x="-11.43" y="-17.78" size="0.8128" layer="21">SD3</text>
+<text x="-11.43" y="-20.32" size="0.8128" layer="21">CMD</text>
+<text x="-11.43" y="-22.86" size="0.8128" layer="21">+5V</text>
+<text x="8.89" y="22.86" size="0.8128" layer="21">GND</text>
+<text x="8.89" y="20.32" size="0.8128" layer="21">IO23</text>
+<text x="8.89" y="17.78" size="0.8128" layer="21">IO22</text>
+<text x="8.89" y="15.24" size="0.8128" layer="21">TXD0</text>
+<text x="8.89" y="12.7" size="0.8128" layer="21">RXD0</text>
+<text x="8.89" y="10.16" size="0.8128" layer="21">IO21</text>
+<text x="8.89" y="7.62" size="0.8128" layer="21">GND</text>
+<text x="8.89" y="5.08" size="0.8128" layer="21">IO19</text>
+<text x="8.89" y="2.54" size="0.8128" layer="21">IO18</text>
+<text x="8.89" y="0" size="0.8128" layer="21">IO5</text>
+<text x="8.89" y="-2.54" size="0.8128" layer="21">IO17</text>
+<text x="8.89" y="-5.08" size="0.8128" layer="21">IO16</text>
+<text x="8.89" y="-7.62" size="0.8128" layer="21">IO4</text>
+<text x="8.89" y="-10.16" size="0.8128" layer="21">IO0</text>
+<text x="8.89" y="-12.7" size="0.8128" layer="21">IO2</text>
+<text x="8.89" y="-15.24" size="0.8128" layer="21">IO15</text>
+<text x="8.89" y="-17.78" size="0.8128" layer="21">SD1</text>
+<text x="8.89" y="-20.32" size="0.8128" layer="21">SD0</text>
+<text x="8.89" y="-22.86" size="0.8128" layer="21">CLK</text>
 </package>
 </packages>
 <symbols>
