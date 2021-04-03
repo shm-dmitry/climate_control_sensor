@@ -870,7 +870,7 @@
 <part name="R13" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="D1" library="my_devices" deviceset="LD" device="" value="IR"/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="QQ3" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
+<part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R14" library="my_devices" deviceset="R" device="" value="100"/>
 <part name="R10" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
@@ -886,8 +886,8 @@
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J3" library="my_devices" deviceset="J2" device=""/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="QQ2" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
-<part name="QQ1" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
+<part name="Q2" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
+<part name="Q1" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R6" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -971,7 +971,7 @@
 <instance part="GND10" gate="1" x="284.48" y="-134.62" smashed="yes" grouprefs="IR1">
 <attribute name="VALUE" x="281.94" y="-137.16" size="1.778" layer="96"/>
 </instance>
-<instance part="QQ3" gate="G$1" x="284.48" y="-121.92" smashed="yes" grouprefs="IR1">
+<instance part="Q3" gate="G$1" x="284.48" y="-121.92" smashed="yes" grouprefs="IR1">
 <attribute name="NAME" x="288.29" y="-120.65" size="1.778" layer="94"/>
 <attribute name="VALUE" x="288.29" y="-124.46" size="1.778" layer="94"/>
 </instance>
@@ -1025,11 +1025,11 @@
 <instance part="GND11" gate="1" x="-129.54" y="-33.02" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="VALUE" x="-132.08" y="-35.56" size="1.778" layer="96"/>
 </instance>
-<instance part="QQ2" gate="G$1" x="-104.14" y="-17.78" smashed="yes" grouprefs="ANEMOMETER1">
+<instance part="Q2" gate="G$1" x="-104.14" y="-17.78" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-96.52" y="-15.24" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-96.52" y="-20.32" size="1.778" layer="94"/>
 </instance>
-<instance part="QQ1" gate="G$1" x="-154.94" y="-17.78" smashed="yes" grouprefs="ANEMOMETER1">
+<instance part="Q1" gate="G$1" x="-154.94" y="-17.78" smashed="yes" grouprefs="ANEMOMETER1">
 <attribute name="NAME" x="-147.32" y="-15.24" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-147.32" y="-20.32" size="1.778" layer="94"/>
 </instance>
@@ -1115,7 +1115,7 @@
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="QQ3" gate="G$1" pin="E"/>
+<pinref part="Q3" gate="G$1" pin="E"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 <wire x1="284.48" y1="-129.54" x2="284.48" y2="-132.08" width="0.1524" layer="91" grouprefs="IR1"/>
 </segment>
@@ -1154,11 +1154,11 @@
 </segment>
 <segment>
 <wire x1="-154.94" y1="-30.48" x2="-154.94" y2="-25.4" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ1" gate="G$1" pin="E"/>
+<pinref part="Q1" gate="G$1" pin="E"/>
 <pinref part="GND11" gate="1" pin="GND"/>
 <wire x1="-154.94" y1="-30.48" x2="-129.54" y2="-30.48" width="0.1524" layer="91"/>
 <wire x1="-104.14" y1="-30.48" x2="-104.14" y2="-25.4" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ2" gate="G$1" pin="E"/>
+<pinref part="Q2" gate="G$1" pin="E"/>
 <wire x1="-129.54" y1="-30.48" x2="-104.14" y2="-30.48" width="0.1524" layer="91"/>
 <junction x="-129.54" y="-30.48"/>
 </segment>
@@ -1500,7 +1500,7 @@
 <net name="N$25" class="0">
 <segment>
 <pinref part="D1" gate="G$1" pin="PIN_ANODE"/>
-<pinref part="QQ3" gate="G$1" pin="C"/>
+<pinref part="Q3" gate="G$1" pin="C"/>
 <wire x1="284.48" y1="-111.76" x2="284.48" y2="-114.3" width="0.1524" layer="91" grouprefs="IR1"/>
 </segment>
 </net>
@@ -1514,7 +1514,7 @@
 </net>
 <net name="N$27" class="0">
 <segment>
-<pinref part="QQ3" gate="G$1" pin="B"/>
+<pinref part="Q3" gate="G$1" pin="B"/>
 <pinref part="R10" gate="G$1" pin="P$2"/>
 <wire x1="276.86" y1="-121.92" x2="273.05" y2="-121.92" width="0.1524" layer="91" grouprefs="IR1"/>
 </segment>
@@ -1553,7 +1553,7 @@
 <wire x1="-167.64" y1="50.8" x2="-162.56" y2="50.8" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <junction x="-167.64" y="50.8" grouprefs="ANEMOMETER1"/>
 <wire x1="-185.42" y1="63.5" x2="-167.64" y2="63.5" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ1" gate="G$1" pin="B"/>
+<pinref part="Q1" gate="G$1" pin="B"/>
 <pinref part="R1" gate="G$1" pin="P$1"/>
 <pinref part="J6" gate="G$1" pin="PIN_2"/>
 </segment>
@@ -1566,7 +1566,7 @@
 <wire x1="-124.46" y1="50.8" x2="-119.38" y2="50.8" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <junction x="-124.46" y="50.8" grouprefs="ANEMOMETER1"/>
 <wire x1="-185.42" y1="66.04" x2="-124.46" y2="66.04" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ2" gate="G$1" pin="B"/>
+<pinref part="Q2" gate="G$1" pin="B"/>
 <pinref part="R4" gate="G$1" pin="P$1"/>
 <pinref part="J6" gate="G$1" pin="PIN_1"/>
 </segment>
@@ -1577,7 +1577,7 @@
 <wire x1="-154.94" y1="5.08" x2="-152.4" y2="5.08" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <wire x1="-154.94" y1="5.08" x2="-154.94" y2="12.7" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <junction x="-154.94" y="5.08" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ1" gate="G$1" pin="C"/>
+<pinref part="Q1" gate="G$1" pin="C"/>
 <pinref part="R3" gate="G$1" pin="P$1"/>
 <pinref part="R2" gate="G$1" pin="P$1"/>
 </segment>
@@ -1588,7 +1588,7 @@
 <wire x1="-104.14" y1="5.08" x2="-101.6" y2="5.08" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <wire x1="-104.14" y1="5.08" x2="-104.14" y2="12.7" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>
 <junction x="-104.14" y="5.08" grouprefs="ANEMOMETER1"/>
-<pinref part="QQ2" gate="G$1" pin="C"/>
+<pinref part="Q2" gate="G$1" pin="C"/>
 <pinref part="R6" gate="G$1" pin="P$1"/>
 <pinref part="R5" gate="G$1" pin="P$1"/>
 </segment>

@@ -863,7 +863,7 @@
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="D2" library="my_devices" deviceset="RGBLED" device=""/>
-<part name="U$11" library="my_devices" deviceset="MH_Z19B" device=""/>
+<part name="U1" library="my_devices" deviceset="MH_Z19B" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R11" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R12" library="my_devices" deviceset="R" device="" value="600"/>
@@ -875,7 +875,7 @@
 <part name="R10" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="TS1" library="my_devices" deviceset="TOUCH_SENSOR" device=""/>
 <part name="U4" library="my_devices" deviceset="BH1750" device=""/>
-<part name="U1" library="my_devices" deviceset="BME280" device=""/>
+<part name="U5" library="my_devices" deviceset="BME280" device=""/>
 <part name="Q4" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="Q5" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
@@ -946,7 +946,7 @@
 <instance part="D2" gate="G$1" x="340.36" y="-45.72" smashed="yes" grouprefs="RGBLED1">
 <attribute name="NAME" x="340.36" y="-35.56" size="1.778" layer="94"/>
 </instance>
-<instance part="U$11" gate="G$1" x="190.5" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
+<instance part="U1" gate="G$1" x="190.5" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
 <attribute name="NAME" x="200.66" y="-15.24" size="1.778" layer="94"/>
 </instance>
 <instance part="GND13" gate="1" x="154.94" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
@@ -987,7 +987,7 @@
 <attribute name="NAME" x="297.18" y="22.86" size="1.778" layer="94"/>
 </instance>
 <instance part="U4" gate="G$1" x="180.34" y="-93.98" smashed="yes" grouprefs="BH1"/>
-<instance part="U1" gate="G$1" x="203.2" y="38.1" smashed="yes" grouprefs="BME_280_TEMP_HUM1">
+<instance part="U5" gate="G$1" x="203.2" y="38.1" smashed="yes" grouprefs="BME_280_TEMP_HUM1">
 <attribute name="NAME" x="208.28" y="48.26" size="1.778" layer="94"/>
 </instance>
 <instance part="Q4" gate="G$1" x="294.64" y="-25.4" smashed="yes" grouprefs="RGBLED1">
@@ -1101,7 +1101,7 @@
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
 <wire x1="152.4" y1="40.64" x2="193.04" y2="40.64" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
-<pinref part="U1" gate="G$1" pin="GND"/>
+<pinref part="U5" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <wire x1="172.72" y1="-93.98" x2="160.02" y2="-93.98" width="0.1524" layer="91" grouprefs="BH1"/>
@@ -1110,7 +1110,7 @@
 <pinref part="U4" gate="G$1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="U$11" gate="G$1" pin="GND"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
 <wire x1="185.42" y1="-17.78" x2="154.94" y2="-17.78" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
@@ -1175,7 +1175,7 @@
 <wire x1="167.64" y1="20.32" x2="167.64" y2="38.1" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <wire x1="167.64" y1="38.1" x2="193.04" y2="38.1" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <label x="157.48" y="20.32" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM1"/>
-<pinref part="U1" gate="G$1" pin="SCL"/>
+<pinref part="U5" gate="G$1" pin="SCL"/>
 </segment>
 <segment>
 <wire x1="172.72" y1="-91.44" x2="149.86" y2="-91.44" width="0.1524" layer="91" grouprefs="BH1"/>
@@ -1202,7 +1202,7 @@
 <wire x1="180.34" y1="17.78" x2="180.34" y2="35.56" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <wire x1="180.34" y1="35.56" x2="193.04" y2="35.56" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <label x="180.34" y="17.78" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM1"/>
-<pinref part="U1" gate="G$1" pin="SDA"/>
+<pinref part="U5" gate="G$1" pin="SDA"/>
 </segment>
 <segment>
 <wire x1="172.72" y1="-88.9" x2="149.86" y2="-88.9" width="0.1524" layer="91" grouprefs="BH1"/>
@@ -1260,7 +1260,7 @@
 <wire x1="193.04" y1="43.18" x2="177.8" y2="43.18" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <wire x1="177.8" y1="43.18" x2="177.8" y2="53.34" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM1"/>
 <label x="175.26" y="53.34" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM1"/>
-<pinref part="U1" gate="G$1" pin="VCC"/>
+<pinref part="U5" gate="G$1" pin="VCC"/>
 </segment>
 </net>
 <net name="UART_0_TXD" class="0">
@@ -1270,7 +1270,7 @@
 <pinref part="U3" gate="G$1" pin="TXD0"/>
 </segment>
 <segment>
-<pinref part="U$11" gate="G$1" pin="RX"/>
+<pinref part="U1" gate="G$1" pin="RX"/>
 <wire x1="185.42" y1="-20.32" x2="165.1" y2="-20.32" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-20.32" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>
@@ -1282,7 +1282,7 @@
 <pinref part="U3" gate="G$1" pin="RXD0"/>
 </segment>
 <segment>
-<pinref part="U$11" gate="G$1" pin="TX"/>
+<pinref part="U1" gate="G$1" pin="TX"/>
 <wire x1="185.42" y1="-22.86" x2="165.1" y2="-22.86" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-22.86" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>
@@ -1415,7 +1415,7 @@
 </net>
 <net name="+5V" class="0">
 <segment>
-<pinref part="U$11" gate="G$1" pin="VCC"/>
+<pinref part="U1" gate="G$1" pin="VCC"/>
 <wire x1="185.42" y1="-15.24" x2="165.1" y2="-15.24" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-15.24" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>

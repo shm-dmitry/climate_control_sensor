@@ -881,7 +881,7 @@
 <part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GY_SGP30_1" library="my_devices" deviceset="GY-SGP30" device=""/>
+<part name="U1" library="my_devices" deviceset="GY-SGP30" device=""/>
 <part name="C1" library="my_devices" deviceset="C" device="" value="1000 uF"/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="J3" library="my_devices" deviceset="J2" device=""/>
@@ -1008,7 +1008,7 @@
 <instance part="GND6" gate="1" x="27.94" y="-116.84" smashed="yes" grouprefs="GY-SGP1">
 <attribute name="VALUE" x="25.4" y="-119.38" size="1.778" layer="96"/>
 </instance>
-<instance part="GY_SGP30_1" gate="G$1" x="55.88" y="-111.76" smashed="yes" grouprefs="GY-SGP1">
+<instance part="U1" gate="G$1" x="55.88" y="-111.76" smashed="yes" grouprefs="GY-SGP1">
 <attribute name="NAME" x="53.34" y="-101.6" size="1.778" layer="94"/>
 </instance>
 <instance part="C1" gate="G$1" x="-15.24" y="-101.6" smashed="yes" rot="R90" grouprefs="5V_SUPPLY_JET1">
@@ -1129,7 +1129,7 @@
 <wire x1="48.26" y1="-111.76" x2="27.94" y2="-111.76" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <pinref part="GND6" gate="1" pin="GND"/>
 <wire x1="27.94" y1="-111.76" x2="27.94" y2="-114.3" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP30_1" gate="G$1" pin="GND"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <wire x1="-30.48" y1="-101.6" x2="-22.86" y2="-101.6" width="0.1524" layer="91" grouprefs="5V_SUPPLY_JET1"/>
@@ -1187,7 +1187,7 @@
 <wire x1="33.02" y1="-114.3" x2="33.02" y2="-121.92" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <wire x1="33.02" y1="-121.92" x2="22.86" y2="-121.92" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <label x="22.86" y="-124.46" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP30_1" gate="G$1" pin="SCL"/>
+<pinref part="U1" gate="G$1" pin="SCL"/>
 </segment>
 </net>
 <net name="I2C_SDA" class="0">
@@ -1214,7 +1214,7 @@
 <wire x1="38.1" y1="-116.84" x2="38.1" y2="-129.54" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <wire x1="38.1" y1="-129.54" x2="22.86" y2="-129.54" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <label x="22.86" y="-129.54" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP30_1" gate="G$1" pin="SDA"/>
+<pinref part="U1" gate="G$1" pin="SDA"/>
 </segment>
 </net>
 <net name="3V3" class="0">
@@ -1227,7 +1227,7 @@
 <segment>
 <wire x1="48.26" y1="-109.22" x2="27.94" y2="-109.22" width="0.1524" layer="91" grouprefs="GY-SGP1"/>
 <label x="27.94" y="-109.22" size="1.778" layer="95" grouprefs="GY-SGP1"/>
-<pinref part="GY_SGP30_1" gate="G$1" pin="VIN"/>
+<pinref part="U1" gate="G$1" pin="VIN"/>
 </segment>
 <segment>
 <wire x1="-154.94" y1="29.21" x2="-154.94" y2="33.02" width="0.1524" layer="91" grouprefs="ANEMOMETER1"/>

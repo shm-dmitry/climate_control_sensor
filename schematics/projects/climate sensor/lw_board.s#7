@@ -862,7 +862,7 @@
 <part name="U3" library="my_devices" deviceset="ESP32" device="" value="ESP32 DEVKIT WROOM-32D"/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U$6" library="my_devices" deviceset="RGBLED" device=""/>
+<part name="D2" library="my_devices" deviceset="RGBLED" device=""/>
 <part name="U$11" library="my_devices" deviceset="MH_Z19B" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R11" library="my_devices" deviceset="R" device="" value="600"/>
@@ -943,7 +943,7 @@
 <instance part="GND5" gate="1" x="160.02" y="-101.6" smashed="yes" grouprefs="BH1">
 <attribute name="VALUE" x="157.48" y="-104.14" size="1.778" layer="96"/>
 </instance>
-<instance part="U$6" gate="G$1" x="340.36" y="-45.72" smashed="yes" grouprefs="RGBLED1">
+<instance part="D2" gate="G$1" x="340.36" y="-45.72" smashed="yes" grouprefs="RGBLED1">
 <attribute name="NAME" x="340.36" y="-35.56" size="1.778" layer="94"/>
 </instance>
 <instance part="U$11" gate="G$1" x="190.5" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
@@ -1120,7 +1120,7 @@
 <wire x1="284.48" y1="-129.54" x2="284.48" y2="-132.08" width="0.1524" layer="91" grouprefs="IR1"/>
 </segment>
 <segment>
-<pinref part="U$6" gate="G$1" pin="GND"/>
+<pinref part="D2" gate="G$1" pin="GND"/>
 <wire x1="332.74" y1="-50.8" x2="325.12" y2="-50.8" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 <wire x1="325.12" y1="-50.8" x2="325.12" y2="-55.88" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 <pinref part="GND7" gate="1" pin="GND"/>
@@ -1523,7 +1523,7 @@
 <segment>
 <pinref part="Q4" gate="G$1" pin="E"/>
 <wire x1="294.64" y1="-33.02" x2="332.74" y2="-33.02" width="0.1524" layer="91" grouprefs="RGBLED1"/>
-<pinref part="U$6" gate="G$1" pin="VIN_B"/>
+<pinref part="D2" gate="G$1" pin="VIN_B"/>
 <wire x1="332.74" y1="-33.02" x2="332.74" y2="-43.18" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 </segment>
 </net>
@@ -1532,7 +1532,7 @@
 <pinref part="Q5" gate="G$1" pin="E"/>
 <wire x1="294.64" y1="-50.8" x2="304.8" y2="-50.8" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 <wire x1="304.8" y1="-50.8" x2="304.8" y2="-45.72" width="0.1524" layer="91" grouprefs="RGBLED1"/>
-<pinref part="U$6" gate="G$1" pin="VIN_G"/>
+<pinref part="D2" gate="G$1" pin="VIN_G"/>
 <wire x1="304.8" y1="-45.72" x2="332.74" y2="-45.72" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 </segment>
 </net>
@@ -1541,7 +1541,7 @@
 <pinref part="Q6" gate="G$1" pin="E"/>
 <wire x1="294.64" y1="-68.58" x2="314.96" y2="-68.58" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 <wire x1="314.96" y1="-68.58" x2="314.96" y2="-48.26" width="0.1524" layer="91" grouprefs="RGBLED1"/>
-<pinref part="U$6" gate="G$1" pin="VIN_R"/>
+<pinref part="D2" gate="G$1" pin="VIN_R"/>
 <wire x1="314.96" y1="-48.26" x2="332.74" y2="-48.26" width="0.1524" layer="91" grouprefs="RGBLED1"/>
 </segment>
 </net>

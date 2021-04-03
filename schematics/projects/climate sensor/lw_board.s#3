@@ -863,7 +863,7 @@
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="D2" library="my_devices" deviceset="RGBLED" device=""/>
-<part name="U1" library="my_devices" deviceset="MH_Z19B" device=""/>
+<part name="U6" library="my_devices" deviceset="MH_Z19B" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R11" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R12" library="my_devices" deviceset="R" device="" value="600"/>
@@ -946,7 +946,7 @@
 <instance part="D2" gate="G$1" x="340.36" y="-45.72" smashed="yes" grouprefs="RGBLED1">
 <attribute name="NAME" x="340.36" y="-35.56" size="1.778" layer="94"/>
 </instance>
-<instance part="U1" gate="G$1" x="190.5" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
+<instance part="U6" gate="G$1" x="190.5" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
 <attribute name="NAME" x="200.66" y="-15.24" size="1.778" layer="94"/>
 </instance>
 <instance part="GND13" gate="1" x="154.94" y="-20.32" smashed="yes" grouprefs="MH_Z19B_CO1">
@@ -1110,7 +1110,7 @@
 <pinref part="U4" gate="G$1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="GND"/>
+<pinref part="U6" gate="G$1" pin="GND"/>
 <wire x1="185.42" y1="-17.78" x2="154.94" y2="-17.78" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
@@ -1270,7 +1270,7 @@
 <pinref part="U2" gate="G$1" pin="TXD0"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="RX"/>
+<pinref part="U6" gate="G$1" pin="RX"/>
 <wire x1="185.42" y1="-20.32" x2="165.1" y2="-20.32" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-20.32" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>
@@ -1282,7 +1282,7 @@
 <pinref part="U2" gate="G$1" pin="RXD0"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="TX"/>
+<pinref part="U6" gate="G$1" pin="TX"/>
 <wire x1="185.42" y1="-22.86" x2="165.1" y2="-22.86" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-22.86" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>
@@ -1415,7 +1415,7 @@
 </net>
 <net name="+5V" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="VCC"/>
+<pinref part="U6" gate="G$1" pin="VCC"/>
 <wire x1="185.42" y1="-15.24" x2="165.1" y2="-15.24" width="0.1524" layer="91" grouprefs="MH_Z19B_CO1"/>
 <label x="162.56" y="-15.24" size="1.778" layer="95" grouprefs="MH_Z19B_CO1"/>
 </segment>
