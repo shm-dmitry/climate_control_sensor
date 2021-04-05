@@ -1,8 +1,23 @@
-Warning
+Project status
 =======
-This code not tested yet.
 
-I awaiting for a physical device to debug and test it.
+Schematics is done.
+Board is done.
+
+| Sensor | Software | Hardware |
+| --- | --- | --- |
+| TION 3S | Not tested yet | - |
+| BME280 | Not tested yet | OK |
+| SGP30 | Not tested yet | OK |
+| BH1750 | Not tested yet | OK |
+| MH-Z19B | OK | OK |
+| PMS7003 | OK | OK |
+| Internal ESP32 Touch Pin | OK | OK |
+| RGB Led | OK | OK |
+| FAN Switch control | OK | OK |
+| IR Transmitter | OK | OK |
+
+
 
 ------
 
@@ -83,8 +98,3 @@ Sensors and devices
 >
 > https://github.com/jmstriegel/Plantower_PMS7003
 
-- TTP223
-
-> Thanks to
->
-> https://github.com/espressif/esp-idf/blob/master/examples/peripherals/gpio/generic_gpio/main/gpio_example_main
