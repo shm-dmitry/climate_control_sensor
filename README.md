@@ -45,7 +45,7 @@ Features
 - Published current PM1.0, PM2.5 and PM10.0 to a MQTT topic (uses PMS7003 sensor)
 - Listen for a topic to control RGB Led
 - Listen for a topic to control external fan
-- Works with sensor button (uses TTP223 sensor) and send ON_PRESSED command to topic.
+- Works with sensor button (uses internal ESP32 touch sensor) and send ON_CLICK(clicks count) command to topic. Support double-click, tripple-click, etc.
 - Works with anemometer (published air speed, air consumption and air direction to topic)
 
 -----
