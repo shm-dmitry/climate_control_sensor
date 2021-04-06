@@ -13,17 +13,33 @@ void rgbled_commands(const char * topic, const char * data) {
 		return;
 	}
 
-	char * rgbs = cJSON_GetStringValue(cJSON_GetObjectItem(root, "rgb"));
-	if (strlen(rgbs) == 0) {
-		return;
-	}
+	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
+	if (strcmp(type, "set_color") == 0) {
+		char * rgbs = cJSON_GetStringValue(cJSON_GetObjectItem(root, "rgb"));
+		if (strlen(rgbs) == 0) {
+			return;
+		}
 
-	char* invptr = NULL;
-	uint32_t rgb = strtol(rgbs, &invptr, 16);
-	if (invptr == NULL || invptr == rgbs + strlen(rgbs)) {
-		rgbled_set_color(rgb);
-	} else {
-		ESP_LOGE(RGBLED_LOG, "Cant parse RGB color %s. Bad char at position %d", rgbs, (uint32_t)(invptr - rgbs));
+		char* invptr = NULL;
+		uint32_t rgb = strtol(rgbs, &invptr, 16);
+		if (invptr == NULL || invptr == rgbs + strlen(rgbs)) {
+			rgbled_set_color(rgb);
+		} else {
+			ESP_LOGE(RGBLED_LOG, "Cant parse RGB color %s. Bad char at position %d", rgbs, (uint32_t)(invptr - rgbs));
+		}
+	} else if (strcmp(type, "calibrate") == 0) {
+		char * rgbs = cJSON_GetStringValue(cJSON_GetObjectItem(root, "rgb"));
+		if (strlen(rgbs) == 0) {
+			return;
+		}
+
+		char* invptr = NULL;
+		uint32_t rgb = strtol(rgbs, &invptr, 16);
+		if (invptr == NULL || invptr == rgbs + strlen(rgbs)) {
+			rgbled_calibrate(rgb);
+		} else {
+			ESP_LOGE(RGBLED_LOG, "Cant parse RGB color %s. Bad char at position %d", rgbs, (uint32_t)(invptr - rgbs));
+		}
 	}
 
 	cJSON_Delete(root);

@@ -7,6 +7,7 @@
 
 esp_err_t rgbled_init(const rgbled_config_t * config);
 
+esp_err_t rgbled_calibrate(uint32_t value);
 esp_err_t rgbled_set_color(uint32_t rgb);
 esp_err_t rgbled_set_override_color(uint32_t rgb);
 esp_err_t rgbled_reset_override_color();

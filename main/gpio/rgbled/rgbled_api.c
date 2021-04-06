@@ -1,4 +1,5 @@
 #include "rgbled_api.h"
+#include "rgbled_calibration.h"
 
 #include "driver/ledc.h"
 #include "../../log.h"
@@ -72,17 +73,28 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 	rgbled_color = 0x0;
 	rgbled_override_color = RGBLED_NO_OVERRIDE_COLOR;
 
+	res = rgbled_calibration_init();
+	if (res) {
+		ESP_LOGI(RGBLED_LOG, "Cant init calibration settings: %d", res);
+	}
+
 	ESP_LOGI(RGBLED_LOG, "Driver installed. RED: %d, GREEN: %d, BLUE: %d", config->gpio_red, config->gpio_green, config->gpio_blue);
 
 	return rgbled_change_color();
 }
 
+esp_err_t rgbled_calibrate(uint32_t value) {
+	return rgbled_calibration_calibrate(value);
+}
+
 esp_err_t rgbled_change_color() {
 	uint32_t rgb = (rgbled_override_color == RGBLED_NO_OVERRIDE_COLOR) ? rgbled_color : rgbled_override_color;
 
-	uint8_t r = ((rgb >> 16) & 0xFF);
-	uint8_t g = ((rgb >> 8) & 0xFF);
-	uint8_t b = (rgb & 0xFF);
+	uint8_t r = 0x00;
+	uint8_t g = 0x00;
+	uint8_t b = 0x00;
+
+	rgbled_calibration_parsecolor(rgb, &r, &g, &b);
 
 	esp_err_t res = ledc_set_duty(LEDC_LOW_SPEED_MODE, RGBLED_RED, r);
 	if (res) {
