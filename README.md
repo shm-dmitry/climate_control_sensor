@@ -16,6 +16,7 @@ Board is done.
 | RGB Led | OK | OK |
 | FAN Switch control | OK | OK |
 | IR Transmitter | OK | OK |
+| Anemometer | OK | OK |
 
 
 
