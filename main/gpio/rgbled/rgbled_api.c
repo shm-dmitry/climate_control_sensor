@@ -64,7 +64,7 @@ esp_err_t rgbled_init(const rgbled_config_t * config) {
 		return res;
 	}
 
-	res = ledc_fade_func_install(9);
+	res = ledc_fade_func_install(0);
 	if (res) {
     	ESP_LOGE(RGBLED_LOG, "ledc_fade_func_install error %d", res);
 		return res;
