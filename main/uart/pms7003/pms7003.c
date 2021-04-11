@@ -63,7 +63,7 @@ void pms7003_init(const uart_config_def_t * config, const char * status_topic) {
 	esp_timer_create_args_t periodic_timer_args = {
 			.callback = &pms7003_timer_exec_function,
 			/* name is optional, but may help identify the timer when debugging */
-			.name = "periodic"
+			.name = "PMS7003 publish value"
 	};
 
 	esp_timer_handle_t periodic_timer;

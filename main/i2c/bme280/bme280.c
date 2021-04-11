@@ -60,7 +60,7 @@ void bme280_init(i2c_port_t port, const char* mqtt_topic) {
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &bme280_timer_exec_function,
 				/* name is optional, but may help identify the timer when debugging */
-				.name = "periodic"
+				.name = "bme280 publish value"
 		};
 
 		esp_timer_handle_t periodic_timer;

@@ -67,7 +67,7 @@ void mh_z19b_init(const uart_config_def_t * config, const char * status_topic, c
 	esp_timer_create_args_t periodic_timer_args = {
 			.callback = &mh_z19b_timer_exec_function,
 			/* name is optional, but may help identify the timer when debugging */
-			.name = "periodic"
+			.name = "MH-Z19B publish value"
 	};
 
 	esp_timer_handle_t periodic_timer;

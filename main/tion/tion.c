@@ -92,7 +92,7 @@ void tion_startup(const char * status_topic, const char * command_topic) {
 	esp_timer_create_args_t periodic_timer_args = {
 			.callback = &tion_timer_exec_function,
 			/* name is optional, but may help identify the timer when debugging */
-			.name = "periodic"
+			.name = "TION publish value"
 	};
 
 	esp_timer_handle_t periodic_timer;

@@ -64,7 +64,7 @@ void sgp30_init(i2c_port_t port, const char* mqtt_topic) {
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &sgp30_timer_exec_function,
 				/* name is optional, but may help identify the timer when debugging */
-				.name = "sgp30_read_data"
+				.name = "sgp30 publish value"
 		};
 
 		esp_timer_handle_t periodic_timer;
@@ -78,7 +78,7 @@ void sgp30_init_auto_compensation() {
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &sgp30_timer_apply_correction_function,
 				/* name is optional, but may help identify the timer when debugging */
-				.name = "sgp30_auto_compensation"
+				.name = "bh1750 auto compensation from BME280"
 		};
 
 		esp_timer_handle_t periodic_timer;
