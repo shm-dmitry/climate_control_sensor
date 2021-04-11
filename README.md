@@ -7,9 +7,9 @@ Board is done.
 | Sensor | Software | Hardware |
 | --- | --- | --- |
 | TION 3S | Not tested yet | - |
-| BME280 | Not tested yet | OK |
+| BME280 | OK | OK |
 | SGP30 | Not tested yet | OK |
-| BH1750 | Not tested yet | OK |
+| BH1750 | OK | OK |
 | MH-Z19B | OK | OK |
 | PMS7003 | OK | OK |
 | Internal ESP32 Touch Pin | OK | OK |

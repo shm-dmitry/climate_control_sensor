@@ -1,6 +1,16 @@
 #include "sgp30_api.h"
 
-#define SGP30_ADDRESS 0x58
+#include "../../log.h"
+#include "sgp30_nvs.h"
+
+#define SGP30_CALIBRATION_TASK_STACK_SIZE 4096
+
+#define SGP30_I2C_ADDRESS 0x58
+
+#define SGP30_INIT_STATUS_NOT_INITIALIZED  0x00
+#define SGP30_INIT_STATUS_INITIALIZING     0x01
+#define SGP30_INIT_STATUS_INITIALIZED      0x02
+#define SGP30_INIT_STATUS_ERROR            0x03
 
 const uint8_t SGP30_COMMAND_INIT[] = { 0x20, 0x03 };
 const uint8_t SGP30_COMMAND_READ[] = { 0x20, 0x08 };
@@ -8,6 +18,16 @@ const uint8_t SGP30_COMMAND_READ_RAW[] = { 0x20, 0x50 };
 const uint8_t SGP30_COMMAND_READ_BASELINE[] = { 0x20, 0x15 };
 const uint8_t SGP30_COMMAND_WRITE_BASELINE[] = { 0x20, 0x1E };
 const uint8_t SGP30_COMMAND_SET_HUMIDITY[] = { 0x20, 0x61 };
+const uint8_t SGP30_COMMAND_SOFT_RESET[] = { 0x00, 0x06 };
+const uint8_t SGP30_COMMAND_GET_SERIAL_ID[] = { 0x36, 0x82 };
+const uint8_t SGP30_COMMAND_GET_FEATURE_SET[] = { 0x20, 0x2F };
+
+static uint8_t sgp30_init_status = SGP30_INIT_STATUS_NOT_INITIALIZED;
+
+esp_err_t sgp30_read_internal(i2c_handler_t * i2c, sgp30_data_t * result, bool query_raw_signals);
+esp_err_t sgp30_write_read_word(i2c_handler_t * i2c, const uint8_t * command, uint16_t * buffer, uint8_t buffer_size);
+esp_err_t sgp30_get_feature_set(i2c_handler_t * i2c);
+esp_err_t sgp30_get_serial_id(i2c_handler_t * i2c);
 
 static uint8_t sgp30_crc(uint16_t data) {
 	uint8_t crc = 0xFF;
@@ -32,26 +52,47 @@ static uint8_t sgp30_crc(uint16_t data) {
 	return crc;
 }
 
-esp_err_t sgp30_read_baseline(i2c_handler_t * i2c, sgp30_baseline_t * baseline) {
-	uint8_t buffer[6];
+static void sgp30_calibration_task(void* arg) {
+	i2c_handler_t * i2c = (i2c_handler_t*) arg;
 
-	esp_err_t res = i2c->write_read(SGP30_ADDRESS, SGP30_COMMAND_READ_BASELINE, 2, SGP30_ADDRESS, buffer, 6);
+	esp_err_t res = ESP_OK;
+	sgp30_data_t result = { 0 };
+	for (int i = 0; i<20; i++) {
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+		res = sgp30_read_internal(i2c, &result, false);
+		//if (res) {
+		//	ESP_LOGE(SGP30_LOG, "Calibration failed: %d", res);
+		//	sgp30_init_status = SGP30_INIT_STATUS_ERROR;
+		//	vTaskDelete(NULL);
+		//	return;
+		//}
+	}
+
+	ESP_LOGI(SGP30_LOG, "Calibration done. Driver initialized.");
+	sgp30_init_status = SGP30_INIT_STATUS_INITIALIZED;
+
+	sgp30_baseline_t baseline = { 0 };
+	res = sgp30_read_baseline(i2c, &baseline);
 	if (res) {
+		ESP_LOGE(SGP30_LOG, "Cant read baseline after calibration: %d Information will not be stored in NVS.", res);
+		res = sgp30_nvs_save_baseline(&baseline);
+		ESP_LOGE(SGP30_LOG, "Baseline was not saved in NVS: %d", res);
+	}
+
+	vTaskDelete(NULL);
+}
+
+esp_err_t sgp30_read_baseline(i2c_handler_t * i2c, sgp30_baseline_t * baseline) {
+	uint16_t _baseline[2] = { 0x00 };
+	esp_err_t res = sgp30_write_read_word(i2c, SGP30_COMMAND_READ_BASELINE, _baseline, 2);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Read baseline failed failed: %d", res);
 		return res;
 	}
 
-	uint16_t _baselineCO2 = buffer[0] << 8 | buffer[1];
-	if (sgp30_crc(_baselineCO2) != buffer[2]) {
-		return ESP_ERR_INVALID_CRC;
-	}
-
-	uint16_t _baselineTVOC = buffer[3] << 8 | buffer[4];
-	if (sgp30_crc(_baselineTVOC) != buffer[5]) {
-		return ESP_ERR_INVALID_CRC;
-	}
-
-	baseline->co2 = _baselineCO2;
-	baseline->tvoc = _baselineTVOC;
+	baseline->co2 = _baseline[0];
+	baseline->tvoc = _baseline[1];
 
 	return ESP_OK;
 }
@@ -69,7 +110,12 @@ esp_err_t sgp30_write_baseline(i2c_handler_t * i2c, const sgp30_baseline_t * bas
 		sgp30_crc(baseline->co2)
 	};
 
-	return i2c->write(SGP30_ADDRESS, buffer, 10);
+	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, buffer, 10);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Cant write baseline to sensor. %d", res);
+	}
+
+	return res;
 }
 
 esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, float absolute_humidity) {
@@ -83,49 +129,136 @@ esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, float absolute_humidity) {
 		sgp30_crc(hum)
 	};
 
-	return i2c->write(SGP30_ADDRESS, buffer, 5);
+	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, buffer, 5);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Cant set humidity. res = %d", res);
+	}
+
+	return res;
 }
 
 esp_err_t sgp30_write_init(i2c_handler_t * i2c) {
-	return i2c->write(SGP30_ADDRESS, SGP30_COMMAND_INIT, 2);
+	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, SGP30_COMMAND_SOFT_RESET, 2);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Cant soft-reset sensor: %d", res);
+	}
+
+	sgp30_get_serial_id(i2c);
+	sgp30_get_feature_set(i2c);
+
+	res = i2c->write(SGP30_I2C_ADDRESS, SGP30_COMMAND_INIT, 2);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Cant init sensor: %d", res);
+		return res;
+	}
+
+	sgp30_baseline_t baseline = { 0 };
+	res = sgp30_nvs_read_baseline(&baseline);
+	if (res) {
+		ESP_LOGW(SGP30_LOG, "Cant read baseline from NVS: %d. Start calibration....", res);
+	} else {
+		//res = sgp30_write_baseline(i2c, &baseline);
+		res = ESP_FAIL;
+		if (res == ESP_OK) {
+			sgp30_init_status = SGP30_INIT_STATUS_INITIALIZED;
+			ESP_LOGI(SGP30_LOG, "Driver initialized");
+			return ESP_OK;
+		} else {
+			ESP_LOGW(SGP30_LOG, "Cant write baseline to sensor: %d. Start calibration", res);
+		}
+	}
+
+	sgp30_init_status = SGP30_INIT_STATUS_INITIALIZING;
+
+	xTaskCreate(sgp30_calibration_task, "calibration_task", SGP30_CALIBRATION_TASK_STACK_SIZE, i2c, 10, NULL);
+
+	return ESP_OK;
 }
 
 esp_err_t sgp30_read(i2c_handler_t * i2c, sgp30_data_t * result) {
-	uint8_t tvoc_eco2[6] = { 0 };
-	uint8_t h2_ethanol[6] = { 0 };
+	if (sgp30_init_status != SGP30_INIT_STATUS_INITIALIZED) {
+		ESP_LOGE(SGP30_LOG, "Driver not initialized. Init status == %d", sgp30_init_status);
+		return ESP_FAIL;
+	}
 
-	esp_err_t res = i2c->write_read(SGP30_ADDRESS, SGP30_COMMAND_READ, 2, SGP30_ADDRESS, tvoc_eco2, 6);
+	return sgp30_read_internal(i2c, result, true);
+}
+
+esp_err_t sgp30_read_internal(i2c_handler_t * i2c, sgp30_data_t * result, bool query_raw_signals) {
+	uint16_t buffer[2] = { 0x00 };
+	esp_err_t res = sgp30_write_read_word(i2c, SGP30_COMMAND_READ, buffer, 2);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Read TVOC/eCO2 failed: %d", res);
+		return res;
+	}
+
+	result->tvoc = buffer[1];
+	result->eco2 = buffer[0];
+
+	if (query_raw_signals) {
+		res = sgp30_write_read_word(i2c, SGP30_COMMAND_READ_RAW, buffer, 2);
+		if (res) {
+			ESP_LOGE(SGP30_LOG, "Read h2/ethanol failed: %d", res);
+			return res;
+		}
+
+		result->h2 = buffer[0];
+		result->ethanol = buffer[1];
+	} else {
+		result->h2 = SGP30_VALUE_NODATA;
+		result->ethanol = SGP30_VALUE_NODATA;
+	}
+
+	return ESP_OK;
+}
+
+esp_err_t sgp30_get_serial_id(i2c_handler_t * i2c) {
+	uint16_t buffer[3] = { 0x00 };
+	esp_err_t res = sgp30_write_read_word(i2c, SGP30_COMMAND_GET_SERIAL_ID, buffer, 3);
 	if (res) {
 		return res;
 	}
 
-	uint16_t tvoc = tvoc_eco2[0] << 8 | tvoc_eco2[1];
-	uint16_t eco2 = tvoc_eco2[3] << 8 | tvoc_eco2[4];
-	if (sgp30_crc(tvoc) != tvoc_eco2[2]) {
-		return ESP_ERR_INVALID_CRC;
-	}
-	if (sgp30_crc(eco2) != tvoc_eco2[5]) {
-		return ESP_ERR_INVALID_CRC;
-	}
+    ESP_LOGI(SGP30_LOG, "Serial Number: %02x %02x %02x", buffer[0], buffer[1], buffer[2]);
 
-	i2c->write_read(SGP30_ADDRESS, SGP30_COMMAND_READ_RAW, 2, SGP30_ADDRESS, h2_ethanol, 6);
+    return ESP_OK;
+}
+
+esp_err_t sgp30_get_feature_set(i2c_handler_t * i2c) {
+	uint16_t buffer = 0x00;
+	esp_err_t res = sgp30_write_read_word(i2c, SGP30_COMMAND_GET_FEATURE_SET, &buffer, 1);
 	if (res) {
 		return res;
 	}
 
-	uint16_t h2 = h2_ethanol[0] << 8 | h2_ethanol[1];
-	uint16_t ethanol = h2_ethanol[3] << 8 | h2_ethanol[4];
-	if (sgp30_crc(h2) != h2_ethanol[2]) {
-		return ESP_ERR_INVALID_CRC;
-	}
-	if (sgp30_crc(ethanol) != h2_ethanol[5]) {
-		return ESP_ERR_INVALID_CRC;
+    ESP_LOGI(SGP30_LOG, "Feature set: %02x", buffer);
+
+    return ESP_OK;
+}
+
+esp_err_t sgp30_write_read_word(i2c_handler_t * i2c, const uint8_t * command, uint16_t * buffer, uint8_t buffer_size) {
+	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, command, 2);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Write command %02x%02x failed: %d", command[0], command[1], res);
+		return res;
 	}
 
-	result->tvoc = tvoc;
-	result->eco2 = eco2;
-	result->h2 = h2;
-	result->ethanol = ethanol;
+	vTaskDelay(20 / portTICK_PERIOD_MS);
+
+	uint8_t * data = malloc(buffer_size * 3);
+	res = i2c->read(SGP30_I2C_ADDRESS, data, buffer_size * 3);
+	if (res) {
+		ESP_LOGE(SGP30_LOG, "Read command %02x%02x failed: %d", command[0], command[1], res);
+		return res;
+	}
+
+	for (int i = 0; i<buffer_size; i++) {
+		buffer[i] = data[i * 3] << 8 | data[i * 3 + 1];
+		if (sgp30_crc(buffer[i]) != data[i * 3 + 2] && (buffer[i] != 0xFFFF || data[i * 3 + 2] != 0xFF)) {
+			ESP_LOGE(SGP30_LOG, "Read word#%d failed. Invalid crc. %d != %d", i, sgp30_crc(buffer[i]), data[i * 3 + 2]);
+			return ESP_ERR_INVALID_CRC;
+		}
+	}
 
 	return ESP_OK;
 }

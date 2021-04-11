@@ -7,8 +7,7 @@
 
 typedef esp_err_t (* i2c_read_function)(uint8_t addr_id, uint8_t* buffer, uint8_t buffer_size);
 typedef esp_err_t (* i2c_write_function)(uint8_t addr_id, const uint8_t* buffer, uint8_t buffer_size);
-typedef esp_err_t (* i2c_write_read_function)(uint8_t write_addr_id, const uint8_t* write_buffer, uint8_t write_buffer_size,
-											  uint8_t read_addr_id, uint8_t* read_buffer, uint8_t read_buffer_size);
+typedef esp_err_t (* i2c_write_read_function)(uint8_t addr_id, const uint8_t* write_buffer, uint8_t write_buffer_size, uint8_t* read_buffer, uint8_t read_buffer_size);
 
 typedef struct i2c_handler_t {
 	i2c_read_function read;

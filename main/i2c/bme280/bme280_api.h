@@ -6,11 +6,11 @@
 // based on https://github.com/finitespace/BME280/blob/master/src/BME280.cpp
 
 typedef struct bme280_data_t {
-	float temperature; // in °C
-	float humidity;    // in %
-	float pressure;    // in Pa
-	float heatindex;   // in °C
-	float absolute_humidity; // in grams/m³
+	double temperature; // in °C
+	double humidity;    // in %
+	uint32_t pressure; // in Pa
+	int16_t heatindex;   // in °C
+	double absolute_humidity; // in grams/m³
 } bme280_data_t;
 
 typedef enum bme280_ocr
@@ -60,7 +60,9 @@ typedef struct bme280_settings_t {
 	bme280_filter filter;
 } bme280_settings_t;
 
-esp_err_t bme280_save_settings(i2c_handler_t * i2c, bme280_settings_t settings);
+esp_err_t bme280_save_settings(i2c_handler_t * i2c, bme280_settings_t * settings);
+
+esp_err_t bme280_init_driver(i2c_handler_t * i2c);
 
 esp_err_t bme280_read(i2c_handler_t * i2c, bme280_data_t * to);
 

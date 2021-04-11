@@ -12,7 +12,7 @@ static i2c_handler_t * bh1750_i2c = NULL;
 static char* g_bh1750_status_topic = NULL;
 
 void bh1750_timer_exec_function(void* arg) {
-	float lux = 0;
+	uint16_t lux = 0;
 	if (bh1750_read(bh1750_i2c, &lux)) {
 		return;
 	}

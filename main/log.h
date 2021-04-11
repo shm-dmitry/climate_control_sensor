@@ -16,5 +16,8 @@
 #define ANEMOMETER_LOG "anemometer_log"
 #define VNS_LOG "nvs_log"
 #define IR_LOG "ir_log"
+#define BH1750_LOG "bh1750_log"
+#define SGP30_LOG "sgp30_log"
+#define BME280_LOG "bme280_log"
 
 #endif /* MAIN_LOG_H_ */

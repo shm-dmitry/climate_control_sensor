@@ -50,6 +50,10 @@ esp_err_t bme280_read_absolute_humidity(float * absolute_humidity) {
 void bme280_init(i2c_port_t port, const char* mqtt_topic) {
 	bme280_i2c = i2c_get_handlers(port);
 	if (bme280_i2c != NULL) {
+		if (bme280_init_driver(bme280_i2c)) {
+			return;
+		}
+
 		g_bme280_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_bme280_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);
 

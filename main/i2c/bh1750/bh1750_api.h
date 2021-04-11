@@ -5,6 +5,6 @@
 
 esp_err_t bh1750_configure(i2c_handler_t * i2c);
 
-esp_err_t bh1750_read(i2c_handler_t * i2c, float * result);
+esp_err_t bh1750_read(i2c_handler_t * i2c, uint16_t * result);
 
 #endif /* MAIN_I2C_BH1750_BH1750_API_H_ */

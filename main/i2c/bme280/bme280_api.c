@@ -1,214 +1,159 @@
 #include "bme280_api.h"
 
+#include "bme280_math.h"
+#include "../../log.h"
+
 #include "string.h"
-#include "math.h"
 
-#define CTRL_HUM_ADDR   0xF2
-#define CTRL_MEAS_ADDR  0xF4
-#define CONFIG_ADDR     0xF5
-#define PRESS_ADDR		0xF7
-#define TEMP_DIG_ADDR   0x88
-#define PRESS_DIG_ADDR  0x8E
-#define HUM_DIG_ADDR1   0xA1
-#define HUM_DIG_ADDR2   0xE1
+// Thanks to https://github.com/letscontrolit/ESPEasy/blob/mega/src/src/PluginStructs/P028_data_struct.cpp
+// Thanks to https://github.com/finitespace/BME280/blob/master/src/BME280.cpp
 
-#define TEMP_DIG_LENGTH      6
-#define PRESS_DIG_LENGTH     18
-#define HUM_DIG_ADDR1_LENGTH 1
-#define HUM_DIG_ADDR2_LENGTH 7
+#define BME280_I2C_ADDRESS 0x76
+
+#define REGISTER_CTRL_HUM   0xF2
+#define REGISTER_CTRL_MEAS  0xF4
+#define REGISTER_CONFIG     0xF5
+
+#define REGISTER_PRESS	0xF7
 
 #define SENSOR_DATA_LENGTH 8
 
-#define HI_COEFF1 -42.379
-#define HI_COEFF2   2.04901523
-#define HI_COEFF3  10.14333127
-#define HI_COEFF4  -0.22475541
-#define HI_COEFF5  -0.00683783
-#define HI_COEFF6  -0.05481717
-#define HI_COEFF7   0.00122874
-#define HI_COEFF8   0.00085282
-#define HI_COEFF9  -0.00000199
+static bme280_math_calibration_table_t * calibration_table = NULL;
 
-#define MASS_OF_WATTER 18.01534
-#define UNIV_GAZ_CONSTANT 8.31447215
+esp_err_t bme280_write_register(i2c_handler_t * i2c, uint8_t register_id, uint8_t value);
+esp_err_t bme280_read_registers(i2c_handler_t * i2c, uint8_t from_register_id, uint8_t * buffer, uint8_t buffer_size);
+esp_err_t bme280_update_settings(i2c_handler_t * i2c);
 
-uint8_t* basis = NULL;
-
-esp_err_t init_basis(i2c_handler_t * i2c) {
-	basis = malloc(TEMP_DIG_LENGTH + PRESS_DIG_LENGTH + HUM_DIG_ADDR1_LENGTH + HUM_DIG_ADDR2_LENGTH);
-
-	uint8_t ord = 0;
-
-	esp_err_t err1 = i2c->read(TEMP_DIG_ADDR, &basis[ord], TEMP_DIG_LENGTH);
-	ord += TEMP_DIG_LENGTH;
-
-	esp_err_t err2 = i2c->read(PRESS_DIG_ADDR, &basis[ord], PRESS_DIG_LENGTH);
-	ord += PRESS_DIG_LENGTH;
-
-	esp_err_t err3 = i2c->read(HUM_DIG_ADDR1, &basis[ord], HUM_DIG_ADDR1_LENGTH);
-	ord += HUM_DIG_ADDR1_LENGTH;
-
-	esp_err_t err4 = i2c->read(HUM_DIG_ADDR2, &basis[ord], HUM_DIG_ADDR2_LENGTH);
-
-	if (err1 || err2 || err3 || err4) {
-		free(basis);
-		basis = NULL;
-	}
-
-	if (err1) {
-		return err1;
-	}
-	if (err2) {
-		return err2;
-	}
-	if (err3) {
-		return err3;
-	}
-
-	return err4;
+double bme280_round(double value) {
+	int32_t temp = value * 10;
+	return (double) temp / 10.0;
 }
 
-float calculate_temperature(const uint32_t * buffer, int32_t * t_fine) {
-	uint32_t raw   = (buffer[3] << 12) | (buffer[4] << 4) | (buffer[5] >> 4);
+esp_err_t bme280_read_calibration_table(i2c_handler_t * i2c) {
+	uint8_t buffer_88[26] = { 0 };
+	uint8_t buffer_e1[7] = { 0 };
 
-	uint16_t dig_T1 = (basis[1] << 8) | basis[0];
-	int16_t dig_T2  = (basis[3] << 8) | basis[2];
-	int16_t dig_T3  = (basis[5] << 8) | basis[4];
-	int32_t var1 = ((((raw >> 3) - ((int32_t) dig_T1 << 1))) * ((int32_t) dig_T2)) >> 11;
-	int32_t var2 = (((((raw >> 4) - ((int32_t) dig_T1)) * ((raw >> 4) - ((int32_t) dig_T1))) >> 12) * ((int32_t) dig_T3)) >> 14;
-	*t_fine = var1 + var2;
-	int32_t result = (*t_fine * 5 + 128) >> 8;
-
-	return result / 100.0;
-}
-
-float calculate_pressure(const uint32_t * buffer, const int32_t * t_fine) {
-	uint32_t raw = (buffer[0] << 12) | (buffer[1] << 4) | (buffer[2] >> 4);
-
-	uint16_t dig_P1 = (basis[7] << 8) | basis[6];
-	int16_t dig_P2  = (basis[9] << 8) | basis[8];
-	int16_t dig_P3  = (basis[11] << 8) | basis[10];
-	int16_t dig_P4  = (basis[13] << 8) | basis[12];
-	int16_t dig_P5  = (basis[15] << 8) | basis[14];
-	int16_t dig_P6  = (basis[17] << 8) | basis[16];
-	int16_t dig_P7  = (basis[19] << 8) | basis[18];
-	int16_t dig_P8  = (basis[21] << 8) | basis[20];
-	int16_t dig_P9  = (basis[23] << 8) | basis[22];
-
-
-	int64_t var1 = (int64_t) *t_fine - 128000;
-	int64_t var2 = var1 * var1 * (int64_t) dig_P6;
-	var2 = var2 + ((var1 * (int64_t) dig_P5) << 17);
-	var2 = var2 + (((int64_t) dig_P4) << 35);
-	var1 = ((var1 * var1 * (int64_t) dig_P3) >> 8) + ((var1 * (int64_t) dig_P2) << 12);
-	var1 = (((((int64_t) 1) << 47) + var1)) * ((int64_t) dig_P1) >> 33;
-	if (var1 == 0) {
-		return NAN;
-	}
-	int64_t pressure = 1048576 - raw;
-	pressure = (((pressure << 31) - var2) * 3125) / var1;
-	var1 = (((int64_t) dig_P9) * (pressure >> 13) * (pressure >> 13)) >> 25;
-	var2 = (((int64_t) dig_P8) * pressure) >> 19;
-	pressure = ((pressure + var1 + var2) >> 8) + (((int64_t) dig_P7) << 4);
-
-	return ((uint32_t)pressure)/256.0;
-}
-
-float calculate_humidity(const uint32_t * buffer, const int32_t * t_fine) {
-	uint32_t raw = (buffer[6] << 8) | buffer[7];
-
-	uint8_t dig_H1 = basis[24];
-	int16_t dig_H2 = (basis[26] << 8) | basis[25];
-	uint8_t dig_H3 = basis[27];
-	int16_t dig_H4 = (basis[28] << 4) | (0x0F & basis[29]);
-	int16_t dig_H5 = (basis[30] << 4) | ((basis[29] >> 4) & 0x0F);
-	int8_t dig_H6 = basis[31];
-
-	int32_t var1 = (*t_fine - ((int32_t) 76800));
-	var1 = (((((raw << 14) - (((int32_t)dig_H4) << 20) - (((int32_t)dig_H5) * var1)) +
-	   ((int32_t)16384)) >> 15) * (((((((var1 * ((int32_t)dig_H6)) >> 10) * (((var1 *
-	   ((int32_t)dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + ((int32_t)2097152)) *
-	   ((int32_t)dig_H2) + 8192) >> 14));
-	var1 = (var1 - (((((var1 >> 15) * (var1 >> 15)) >> 7) * ((int32_t) dig_H1)) >> 4));
-	var1 = (var1 < 0 ? 0 : var1);
-	var1 = (var1 > 419430400 ? 419430400 : var1);
-
-	return ((uint32_t)(var1 >> 12))/1024.0;
-}
-
-float calcilate_heatindex(float temperature, float humidity) {
-	float heat_index = 0;
-
-	temperature = (temperature * (9.0 / 5.0) + 32.0);
-
-	if (temperature <= 40) {
-		heat_index = temperature;
-	} else {
-		heat_index = 0.5 * (temperature + 61.0 + ((temperature - 68.0) * 1.2) + (humidity * 0.094));
-		if (heat_index >= 79) {
-			heat_index = HI_COEFF1 + (HI_COEFF2 + HI_COEFF4 * humidity + temperature * (HI_COEFF5 + HI_COEFF7 * humidity)) * temperature
-					+ (HI_COEFF3 + humidity * (HI_COEFF6 + temperature * (HI_COEFF8 + HI_COEFF9 * temperature))) * humidity;
-			if ((humidity < 13) && (temperature >= 80.0) && (temperature <= 112.0)) {
-				heat_index -= ((13.0 - humidity) * 0.25) * sqrt((17.0 - abs(temperature - 95.0)) * 0.05882);
-			} else if ((humidity > 85.0) && (temperature >= 80.0) && (temperature <= 87.0)) {
-				heat_index += (0.02 * (humidity - 85.0) * (87.0 - temperature));
-			}
-		}
+	esp_err_t res = bme280_read_registers(i2c, 0x88, buffer_88, 26);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant read calibration table from address 0x88: %d", res);
+		return res;
 	}
 
-    return (heat_index - 32.0) * (5.0 / 9.0);
+	res = bme280_read_registers(i2c, 0xE1, buffer_e1, 7);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant read calibration table from address 0xE1: %d", res);
+		return res;
+	}
+
+	calibration_table = bme280_math_init_calibration_table(buffer_88, buffer_e1);
+
+/*
+	ESP_LOGI(BME280_LOG, "CT: T1 = %d, T2 = %d, T3 = %d", calibration_table->dig_T1, calibration_table->dig_T2, calibration_table->dig_T3);
+	ESP_LOGI(BME280_LOG, "CT: P1 = %d, P2 = %d, P3 = %d, P4 = %d, P5 = %d, P6 = %d, P7 = %d, P8 = %d, P9 = %d",
+			  calibration_table->dig_P1, calibration_table->dig_P2, calibration_table->dig_P3
+			, calibration_table->dig_P4, calibration_table->dig_P5, calibration_table->dig_P6
+			, calibration_table->dig_P7, calibration_table->dig_P8, calibration_table->dig_P9);
+	ESP_LOGI(BME280_LOG, "CT: H1 = %d, H2 = %d, H3 = %d, H4 = %d, H5 = %d, H6 = %d", calibration_table->dig_H1, calibration_table->dig_H2, calibration_table->dig_H3
+			, calibration_table->dig_H4, calibration_table->dig_H5, calibration_table->dig_H6);
+*/
+
+	return res;
 }
 
-float absolute_humidity(float temperature, float humidity) {
-	float temp = pow(2.718281828, (17.67 * temperature) / (temperature + 243.5));
-	return (6.112 * temp * humidity * MASS_OF_WATTER) / ((273.15 + temperature) * UNIV_GAZ_CONSTANT);
-}
-
-esp_err_t bme280_read(i2c_handler_t * i2c, bme280_data_t * to) {
-	if (basis == NULL) {
-		esp_err_t err = init_basis(i2c);
-		if (err) {
-			return err;
-		}
+esp_err_t bme280_init_driver(i2c_handler_t * i2c) {
+	esp_err_t res = bme280_read_calibration_table(i2c);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant read calibration table: %d", res);
+		return res;
 	}
 
-	uint8_t buffer_8[SENSOR_DATA_LENGTH] = { 0 };
-
-	esp_err_t err = i2c->read(PRESS_ADDR, buffer_8, SENSOR_DATA_LENGTH);
-	if (err) {
-		return err;
+	res = bme280_update_settings(i2c);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant wakeup sensor: %d", res);
+		return res;
 	}
-
-	uint32_t buffer[SENSOR_DATA_LENGTH] = { 0 };
-	for (int i = 0; i<SENSOR_DATA_LENGTH; i++) {
-		buffer[i] = buffer_8[i];
-	}
-
-	int32_t t_fine = 0;
-	to->temperature = calculate_temperature(buffer, &t_fine);
-	to->pressure = calculate_pressure(buffer, &t_fine);
-	to->humidity = calculate_humidity(buffer, &t_fine);
-	to->heatindex = calcilate_heatindex(to->temperature, to->humidity);
-	to->absolute_humidity = absolute_humidity(to->temperature, to->humidity);
 
 	return ESP_OK;
 }
 
-esp_err_t bme280_save_settings(i2c_handler_t * i2c, bme280_settings_t settings) {
+esp_err_t bme280_read(i2c_handler_t * i2c, bme280_data_t * to) {
+	if (calibration_table == NULL) {
+		ESP_LOGE(BME280_LOG, "Driver not initialized.");
+		return ESP_FAIL;
+	}
+
+	uint8_t buffer[SENSOR_DATA_LENGTH] = { 0 };
+
+	esp_err_t err = bme280_read_registers(i2c, REGISTER_PRESS, buffer, SENSOR_DATA_LENGTH);
+	if (err) {
+		ESP_LOGE(BME280_LOG, "Cant read measurement: %d", err);
+		return err;
+	}
+
+	int32_t raw_t = ((uint32_t) buffer[3] << 12) | ((uint32_t) buffer[4] << 4) | ((uint32_t) buffer[5] >> 4);
+	int32_t raw_p = ((uint32_t) buffer[0] << 12) | ((uint32_t) buffer[1] << 4) | ((uint32_t) buffer[2] >> 4);
+	int32_t raw_h = ((uint32_t) buffer[6] << 8)  | ((uint32_t) buffer[7]);
+
+	int32_t t_fine = 0;
+	to->temperature = bme280_round(bme280_math_calculate_temperature(raw_t, calibration_table, &t_fine));
+	to->pressure = bme280_math_calculate_pressure(raw_p, calibration_table, &t_fine);
+	to->humidity = bme280_round(bme280_math_calculate_humidity(raw_h, calibration_table, &t_fine));
+	to->heatindex = bme280_math_calcilate_heatindex(to->temperature, to->humidity);
+	to->absolute_humidity = bme280_round(bme280_math_absolute_humidity(to->temperature, to->humidity));
+
+	return ESP_OK;
+}
+
+esp_err_t bme280_update_settings(i2c_handler_t * i2c) {
+	bme280_settings_t settings = {
+		.tosr = OSR_X1,
+		.hosr = OSR_X1,
+		.posr = OSR_X1,
+		.mode = Mode_Normal,
+		.time = StandbyTime_1000ms,
+		.filter = Filter_Off
+	};
+
 	uint8_t ctrl_hum = settings.hosr;
 	uint8_t ctrl_meas = (settings.tosr << 5) | (settings.posr << 2) | settings.mode;
 	uint8_t config = settings.time << 5 | settings.filter << 2;
 
-	esp_err_t err1 = i2c->write(CTRL_HUM_ADDR, &ctrl_hum, 1);
-	esp_err_t err2 = i2c->write(CTRL_MEAS_ADDR, &ctrl_meas, 1);
-	esp_err_t err3 = i2c->write(CONFIG_ADDR, &config, 1);
-
-	if (err1) {
-		return err1;
-	}
-	if (err2) {
-		return err2;
+	esp_err_t res = bme280_write_register(i2c, REGISTER_CTRL_HUM, ctrl_hum);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant write to control register %02x value %02x", REGISTER_CTRL_HUM, ctrl_hum);
+		return res;
 	}
 
-	return err3;
+	res = bme280_write_register(i2c, REGISTER_CTRL_MEAS, ctrl_meas);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant write to control register %02x value %02x", REGISTER_CTRL_MEAS, ctrl_meas);
+		return res;
+	}
+
+	res = bme280_write_register(i2c, REGISTER_CONFIG, config);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant write to control register %02x value %02x", REGISTER_CONFIG, config);
+		return res;
+	}
+
+	return ESP_OK;
+}
+
+esp_err_t bme280_write_register(i2c_handler_t * i2c, uint8_t register_id, uint8_t value) {
+	uint8_t buffer[2] = { register_id, value };
+	esp_err_t res = i2c->write(BME280_I2C_ADDRESS, buffer, 2);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant write value %20x into register %02x: %d", value, register_id, res);
+	}
+
+	return res;
+}
+
+esp_err_t bme280_read_registers(i2c_handler_t * i2c, uint8_t from_register_id, uint8_t * buffer, uint8_t buffer_size) {
+	esp_err_t res = i2c->write_read(BME280_I2C_ADDRESS, &from_register_id, 1, buffer, buffer_size);
+	if (res) {
+		ESP_LOGE(BME280_LOG, "Cant read register %02x: %d", from_register_id, res);
+	}
+
+	return res;
 }

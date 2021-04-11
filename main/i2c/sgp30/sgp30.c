@@ -20,10 +20,18 @@ void sgp30_timer_exec_function(void* arg) {
 	}
 
 	cJSON *root = cJSON_CreateObject();
-	cJSON_AddNumberToObject(root, "tvoc", data.tvoc);
-	cJSON_AddNumberToObject(root, "eco2", data.eco2);
-	cJSON_AddNumberToObject(root, "h2", data.h2);
-	cJSON_AddNumberToObject(root, "ethanol", data.ethanol);
+	if (data.tvoc != SGP30_VALUE_NODATA) {
+		cJSON_AddNumberToObject(root, "tvoc", data.tvoc);
+	}
+	if (data.eco2 != SGP30_VALUE_NODATA) {
+		cJSON_AddNumberToObject(root, "eco2", data.eco2);
+	}
+	if (data.h2 != SGP30_VALUE_NODATA) {
+		cJSON_AddNumberToObject(root, "h2", data.h2);
+	}
+	if (data.ethanol != SGP30_VALUE_NODATA) {
+		cJSON_AddNumberToObject(root, "ethanol", data.ethanol);
+	}
 
 	char * json = cJSON_Print(root);
 	mqtt_publish(g_sgp30_status_topic, json);
@@ -54,7 +62,7 @@ void sgp30_init(i2c_port_t port, const char* mqtt_topic) {
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &sgp30_timer_exec_function,
 				/* name is optional, but may help identify the timer when debugging */
-				.name = "periodic"
+				.name = "sgp30_read_data"
 		};
 
 		esp_timer_handle_t periodic_timer;
@@ -68,7 +76,7 @@ void sgp30_init_auto_compensation() {
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &sgp30_timer_apply_correction_function,
 				/* name is optional, but may help identify the timer when debugging */
-				.name = "periodic"
+				.name = "sgp30_auto_compensation"
 		};
 
 		esp_timer_handle_t periodic_timer;
