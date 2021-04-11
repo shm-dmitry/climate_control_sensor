@@ -5,6 +5,6 @@
 
 void bme280_init(i2c_port_t port, const char* mqtt_topic);
 
-esp_err_t bme280_read_absolute_humidity(float * absolute_humidity);
+esp_err_t bme280_read_absolute_humidity(double * absolute_humidity);
 
 #endif /* MAIN_I2C_BME280_BME280_H_ */

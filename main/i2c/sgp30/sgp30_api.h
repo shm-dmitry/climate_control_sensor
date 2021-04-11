@@ -12,7 +12,7 @@
 esp_err_t sgp30_read_baseline(i2c_handler_t * i2c, sgp30_baseline_t * baseline);
 esp_err_t sgp30_write_baseline(i2c_handler_t * i2c, const sgp30_baseline_t * baseline);
 
-esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, float absolute_humidity);
+esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, double absolute_humidity);
 
 esp_err_t sgp30_write_init(i2c_handler_t * i2c);
 

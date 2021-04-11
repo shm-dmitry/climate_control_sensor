@@ -76,8 +76,13 @@ static void sgp30_calibration_task(void* arg) {
 	res = sgp30_read_baseline(i2c, &baseline);
 	if (res) {
 		ESP_LOGE(SGP30_LOG, "Cant read baseline after calibration: %d Information will not be stored in NVS.", res);
+	} else {
 		res = sgp30_nvs_save_baseline(&baseline);
-		ESP_LOGE(SGP30_LOG, "Baseline was not saved in NVS: %d", res);
+		if (res) {
+			ESP_LOGE(SGP30_LOG, "Baseline tvoc = %d, co2 = %d was not saved in NVS: result %d", baseline.tvoc, baseline.co2, res);
+		} else {
+			ESP_LOGI(SGP30_LOG, "Baseline tvoc = %d, co2 = %d saved in NVS: result %d", baseline.tvoc, baseline.co2, res);
+		}
 	}
 
 	vTaskDelete(NULL);
@@ -98,19 +103,19 @@ esp_err_t sgp30_read_baseline(i2c_handler_t * i2c, sgp30_baseline_t * baseline) 
 }
 
 esp_err_t sgp30_write_baseline(i2c_handler_t * i2c, const sgp30_baseline_t * baseline) {
-	uint8_t buffer[10] = {
+	uint8_t buffer[8] = {
 		SGP30_COMMAND_WRITE_BASELINE[0], SGP30_COMMAND_WRITE_BASELINE[1],
 
-		(uint8_t) baseline->tvoc >> 8,
-		(uint8_t) baseline->tvoc,
+		(uint8_t) (baseline->tvoc >> 8),
+		(uint8_t) (baseline->tvoc & 0xFF),
 		sgp30_crc(baseline->tvoc),
 
-		(uint8_t) baseline->co2 >> 8,
-		(uint8_t) baseline->co2,
+		(uint8_t) (baseline->co2 >> 8),
+		(uint8_t) (baseline->co2 & 0xFF),
 		sgp30_crc(baseline->co2)
 	};
 
-	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, buffer, 10);
+	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, buffer, 8);
 	if (res) {
 		ESP_LOGE(SGP30_LOG, "Cant write baseline to sensor. %d", res);
 	}
@@ -118,20 +123,22 @@ esp_err_t sgp30_write_baseline(i2c_handler_t * i2c, const sgp30_baseline_t * bas
 	return res;
 }
 
-esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, float absolute_humidity) {
+esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, double absolute_humidity) {
 	uint16_t hum = (uint16_t) (absolute_humidity * 256);
 
 	uint8_t buffer[5] = {
 		SGP30_COMMAND_SET_HUMIDITY[0], SGP30_COMMAND_SET_HUMIDITY[1],
 
-		(uint8_t) hum >> 8,
-		(uint8_t) hum,
+		(uint8_t) (hum >> 8),
+		(uint8_t) (hum & 0xFF),
 		sgp30_crc(hum)
 	};
 
 	esp_err_t res = i2c->write(SGP30_I2C_ADDRESS, buffer, 5);
 	if (res) {
 		ESP_LOGE(SGP30_LOG, "Cant set humidity. res = %d", res);
+	} else {
+		ESP_LOGI(SGP30_LOG, "Applied humidity compensation: %.2f", absolute_humidity);
 	}
 
 	return res;
@@ -157,8 +164,9 @@ esp_err_t sgp30_write_init(i2c_handler_t * i2c) {
 	if (res) {
 		ESP_LOGW(SGP30_LOG, "Cant read baseline from NVS: %d. Start calibration....", res);
 	} else {
-		//res = sgp30_write_baseline(i2c, &baseline);
-		res = ESP_FAIL;
+		ESP_LOGI(SGP30_LOG, "Baseline readed from VNS: tvoc = %d, co2 = %d", baseline.tvoc, baseline.co2);
+
+		res = sgp30_write_baseline(i2c, &baseline);
 		if (res == ESP_OK) {
 			sgp30_init_status = SGP30_INIT_STATUS_INITIALIZED;
 			ESP_LOGI(SGP30_LOG, "Driver initialized");

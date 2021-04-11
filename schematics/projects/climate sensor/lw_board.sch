@@ -858,7 +858,7 @@
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R7" library="my_devices" deviceset="R" device="" value="30"/>
+<part name="R7" library="my_devices" deviceset="R" device="" value="5 om, 2W"/>
 <part name="J12" library="my_devices" deviceset="J2" device="" value="J4_FS_2"/>
 <part name="U2" library="my_devices" deviceset="ESP32" device="" value="ESP32 DEVKIT WROOM-32D"/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>

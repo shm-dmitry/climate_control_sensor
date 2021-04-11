@@ -69,8 +69,8 @@
 <text x="92.71" y="1.27" size="1.016" layer="21">Supply</text>
 <text x="99.06" y="2.54" size="0.6096" layer="21" rot="R90">GND</text>
 <text x="99.06" y="7.62" size="0.6096" layer="21" rot="R90">+5V</text>
-<text x="85.09" y="6.35" size="1.016" layer="21">C1</text>
-<text x="90.17" y="15.24" size="1.016" layer="21">D1
+<text x="87.63" y="1.27" size="1.016" layer="21">C1</text>
+<text x="92.71" y="15.24" size="1.016" layer="21">D1
 IR</text>
 <text x="19.05" y="7.62" size="1.016" layer="21" rot="R90">D2</text>
 <text x="17.78" y="45.72" size="1.016" layer="21" rot="R90">J5</text>
@@ -83,7 +83,7 @@ Out</text>
 <text x="13.97" y="54.61" size="0.6096" layer="21" rot="R270">OUT_A</text>
 <text x="13.97" y="59.69" size="0.6096" layer="21" rot="R270">OUT_B</text>
 <text x="17.78" y="55.88" size="1.016" layer="21" rot="R90">J6</text>
-<text x="95.25" y="5.08" size="1.016" layer="21" rot="R90">J10</text>
+<text x="92.71" y="5.08" size="1.016" layer="21" rot="R90">J10</text>
 <text x="19.05" y="24.13" size="1.016" layer="21" rot="R90">J12</text>
 <text x="15.24" y="30.48" size="1.016" layer="21">FAN SW</text>
 <text x="13.97" y="22.86" size="0.4064" layer="21" rot="R90">GND</text>
@@ -94,6 +94,27 @@ Out</text>
 <text x="34.29" y="15.24" size="1.016" layer="21" rot="R180">Q4</text>
 <text x="26.67" y="33.02" size="1.016" layer="21" rot="R180">Q5</text>
 <text x="36.83" y="35.56" size="1.016" layer="21" rot="R180">Q6</text>
+<text x="30.48" y="36.83" size="1.016" layer="21">R1</text>
+<text x="31.75" y="45.72" size="1.016" layer="21" rot="R90">R2</text>
+<text x="55.88" y="41.91" size="1.016" layer="21" rot="R90">R3</text>
+<text x="40.64" y="44.45" size="1.016" layer="21" rot="R90">R4</text>
+<text x="40.64" y="57.15" size="1.016" layer="21" rot="R90">R5</text>
+<text x="62.23" y="40.64" size="1.016" layer="21" rot="R90">R6</text>
+<text x="64.77" y="50.8" size="1.016" layer="21" rot="R90">R7</text>
+<text x="59.69" y="11.43" size="1.016" layer="21" rot="R90">R8</text>
+<text x="53.34" y="11.43" size="1.016" layer="21" rot="R90">R9</text>
+<text x="66.04" y="10.16" size="1.016" layer="21" rot="R90">R10</text>
+<text x="31.75" y="17.78" size="1.016" layer="21" rot="R180">R11</text>
+<text x="29.21" y="22.86" size="1.016" layer="21" rot="R180">R12</text>
+<text x="29.21" y="26.67" size="1.016" layer="21" rot="R180">R13</text>
+<text x="63.5" y="29.21" size="1.016" layer="21" rot="R270">R14</text>
+<text x="78.74" y="22.86" size="1.016" layer="21">TS1</text>
+<text x="80.01" y="53.34" size="1.016" layer="21">U1</text>
+<text x="58.42" y="57.15" size="1.016" layer="21">U2</text>
+<text x="31.75" y="2.54" size="1.016" layer="21">U3</text>
+<text x="82.55" y="24.13" size="1.016" layer="21">U4</text>
+<text x="95.25" y="50.8" size="1.016" layer="21">U5</text>
+<text x="90.17" y="30.48" size="1.016" layer="21">U6</text>
 </plain>
 <libraries>
 <library name="my_devices">

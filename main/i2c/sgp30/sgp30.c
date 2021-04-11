@@ -41,12 +41,14 @@ void sgp30_timer_exec_function(void* arg) {
 }
 
 void sgp30_timer_apply_correction_function(void* arg) {
-	float value = 0;
+	double value = 0;
 	if (bme280_read_absolute_humidity(&value)) {
 		return;
 	}
 
-	sgp30_set_humidity(sgp30_i2c, value);
+	if (value > 0) {
+		sgp30_set_humidity(sgp30_i2c, value);
+	}
 }
 
 void sgp30_init(i2c_port_t port, const char* mqtt_topic) {

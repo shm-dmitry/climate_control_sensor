@@ -8,7 +8,7 @@ Board is done.
 | --- | --- | --- |
 | TION 3S | Not tested yet | - |
 | BME280 | OK | OK |
-| SGP30 | Not tested yet | OK |
+| SGP30 | OK | OK |
 | BH1750 | OK | OK |
 | MH-Z19B | OK | OK |
 | PMS7003 | OK | OK |

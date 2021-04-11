@@ -83,6 +83,8 @@ Out</text>
 <text x="13.97" y="54.61" size="0.6096" layer="21" rot="R270">OUT_A</text>
 <text x="13.97" y="59.69" size="0.6096" layer="21" rot="R270">OUT_B</text>
 <text x="17.78" y="55.88" size="1.016" layer="21" rot="R90">J6</text>
+<text x="95.25" y="5.08" size="1.016" layer="21" rot="R90">J10</text>
+<text x="19.05" y="24.13" size="1.016" layer="21" rot="R90">J12</text>
 </plain>
 <libraries>
 <library name="my_devices">

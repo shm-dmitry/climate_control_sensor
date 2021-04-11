@@ -31,7 +31,7 @@ void bme280_timer_exec_function(void* arg) {
 	cJSON_Delete(root);
 }
 
-esp_err_t bme280_read_absolute_humidity(float * absolute_humidity) {
+esp_err_t bme280_read_absolute_humidity(double * absolute_humidity) {
 	if (!bme280_i2c) {
 		return ESP_FAIL;
 	}
