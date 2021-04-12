@@ -19,6 +19,22 @@ Board is done.
 | Anemometer | OK | OK |
 
 
+Install guide
+===========
+
+Hardware:
+
+1. Install EAGLE. Freeware version is OK: https://www.autodesk.com/products/eagle/free-download
+2. Open board (lw_board.brd)
+3. Generate CAM data and make order on any factory
+
+
+Software
+1. Install ESP-IDF SDK https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html
+2. Clone and open project. 
+3. Open `sdkconfig` and setup project settings. You can enable or disable unused options in `Climate Control Configuration` menu.
+4. Build and flash ESP32 Devkit
+
 
 ------
 
