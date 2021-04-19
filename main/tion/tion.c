@@ -1,5 +1,6 @@
 #include "tion_bt.h"
 
+#include "../log.h"
 #include "../init/mqtt.h"
 #include "../cjson/cjson_helper.h"
 #include "tion_bt.h"
@@ -80,6 +81,10 @@ void tion_timer_exec_function(void* arg) {
 void tion_startup(const char * status_topic, const char * command_topic) {
 	tion_status_topic = malloc(strlen(status_topic) + 1);
 	if (tion_status_topic == NULL) {
+		return;
+	}
+
+	if (tion_bt_init()) {
 		return;
 	}
 

@@ -24,7 +24,7 @@ esp_err_t ir_transmit(uint8_t protocol, uint32_t address, uint32_t command) {
     rmt_item32_t *items = NULL;
     size_t length = 0;
 
-    ESP_LOGI(IR_LOG, "Send command %d to address %d via protocol %d", command, address, protocol);
+    ESP_LOGI(IR_LOG, "Send command %02x to address %02x via protocol %d", command, address, protocol);
 
 	switch(protocol) {
 	case IR_PROTOCOL_NEC:

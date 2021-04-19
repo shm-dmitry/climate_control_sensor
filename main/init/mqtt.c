@@ -18,7 +18,7 @@ uint8_t callbacks_count = 0;
 esp_mqtt_client_handle_t client;
 
 static void mqtt_event_handler_cb(esp_mqtt_event_handle_t event) {
-	if (callbacks_count == 0) {
+	if (callbacks_count == 0 || event == NULL) {
 		return;
 	}
 
@@ -80,11 +80,16 @@ void mqtt_publish(const char * topic, const char * message) {
 }
 
 void mqtt_subscribe(const char * topic, mqtt_topic_callback_t callback) {
-	mqtt_callback_mapping_t* newtable = (mqtt_callback_mapping_t*) malloc(sizeof(mqtt_topic_callback_t) * (callbacks_count + 1));
-	memset(newtable, 0, sizeof(mqtt_topic_callback_t) * (callbacks_count + 1));
+	if (callback == NULL) {
+		ESP_LOGW(MQTT_LOG, "Cant subscribe for a topic %s. Callback is NULL.", topic);
+		return;
+	}
+
+	mqtt_callback_mapping_t* newtable = (mqtt_callback_mapping_t*) malloc(sizeof(mqtt_callback_mapping_t) * (callbacks_count + 1));
+	memset(newtable, 0, sizeof(mqtt_callback_mapping_t) * (callbacks_count + 1));
 
 	if (callbacks_count > 0) {
-		memcpy(newtable, callbacks, sizeof(mqtt_topic_callback_t) * callbacks_count);
+		memcpy(newtable, callbacks, sizeof(mqtt_callback_mapping_t) * callbacks_count);
 		free(callbacks);
 		callbacks = NULL;
 	}
@@ -110,7 +115,7 @@ void mqtt_start() {
 	};
 
 	client = esp_mqtt_client_init(&mqtt_cfg);
-    esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client);
+    esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
     if (esp_mqtt_client_start(client)) {
     	client = NULL;
     	ESP_LOGE(MQTT_LOG, "Cant start MQTT client!");

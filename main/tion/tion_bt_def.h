@@ -11,7 +11,6 @@
 static const char TION_DEVICE_NAME[] = "Tion Breezer 3S";
 
 struct gattc_profile_inst {
-	esp_gattc_cb_t gattc_cb;
 	uint16_t gattc_if;
 	uint16_t conn_id;
 	uint16_t service_start_handle;
@@ -39,6 +38,8 @@ typedef struct tion_exec_command_t {
 	tion_status_t * current_status;
 
 	uint8_t retry_allowed_count;
+
+	uint8_t command_uuid;
 } tion_exec_command_t;
 
 static esp_ble_scan_params_t ble_scan_params = {

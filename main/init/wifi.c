@@ -29,14 +29,14 @@ static void event_handler(void* arg, esp_event_base_t event_base,
         if (s_retry_num < WIFI_MAXIMUM_RETRY) {
             esp_wifi_connect();
             s_retry_num++;
-            ESP_LOGI(WIFI_LOG_TAG, "retry to connect to the AP");
+            ESP_LOGI(WIFI_LOG, "retry to connect to the AP");
         } else {
             xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
         }
-        ESP_LOGI(WIFI_LOG_TAG,"connect to the AP fail");
+        ESP_LOGI(WIFI_LOG,"connect to the AP fail");
     } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
         ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
-        ESP_LOGI(WIFI_LOG_TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
+        ESP_LOGI(WIFI_LOG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         s_retry_num = 0;
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
     }
@@ -90,11 +90,11 @@ void wifi_init(const char* ssid, const char* password) {
             portMAX_DELAY);
 
     if (bits & WIFI_CONNECTED_BIT) {
-        ESP_LOGI(WIFI_LOG_TAG, "connected to ap SSID:%s", ssid);
+        ESP_LOGI(WIFI_LOG, "connected to ap SSID:%s", ssid);
     } else if (bits & WIFI_FAIL_BIT) {
-        ESP_LOGE(WIFI_LOG_TAG, "Failed to connect to SSID:%s", ssid);
+        ESP_LOGE(WIFI_LOG, "Failed to connect to SSID:%s", ssid);
     } else {
-        ESP_LOGE(WIFI_LOG_TAG, "UNEXPECTED EVENT");
+        ESP_LOGE(WIFI_LOG, "UNEXPECTED EVENT");
     }
 
     esp_event_handler_instance_unregister(IP_EVENT, IP_EVENT_STA_GOT_IP, instance_got_ip);
@@ -102,8 +102,8 @@ void wifi_init(const char* ssid, const char* password) {
     vEventGroupDelete(s_wifi_event_group);
 
     if (bits & WIFI_CONNECTED_BIT) {
-    	ESP_LOGI(WIFI_LOG_TAG, "WIFI configured");
+    	ESP_LOGI(WIFI_LOG, "WIFI configured");
     } else {
-    	ESP_LOGE(WIFI_LOG_TAG, "Failed to configure WIFI");
+    	ESP_LOGE(WIFI_LOG, "Failed to configure WIFI");
     }
 }

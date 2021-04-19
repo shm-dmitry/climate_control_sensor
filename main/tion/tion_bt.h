@@ -2,6 +2,7 @@
 #define MAIN_TION_H_
 
 #include "tion_data.h"
+#include "esp_err.h"
 
 // based on:
 // 1. TION API [unofficial] Python impl https://github.com/TionAPI/tion_python
@@ -17,5 +18,7 @@ void tion_pair();
 void tion_write_new_status(tion_change_status_t status);
 
 void tion_request_status();
+
+esp_err_t tion_bt_init();
 
 #endif /* MAIN_TION_H_ */

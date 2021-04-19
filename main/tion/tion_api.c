@@ -14,7 +14,7 @@ uint8_t decode_tion_mode(uint8_t mode);
 uint8_t* create_buffer(uint8_t command) {
 	uint8_t* buffer = (uint8_t *)malloc(BUFFER_SIZE);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG_TAG, "send_pair_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "send_pair_command malloc error - no memory");
 		return 0;
 	}
 
@@ -33,7 +33,7 @@ uint8_t* create_buffer(uint8_t command) {
 esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_handle) {
 	uint8_t* buffer = create_buffer(COMMAND_PAIR);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG_TAG, "send_pair_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "send_pair_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
@@ -47,6 +47,9 @@ esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_h
 							  buffer,
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
+	if (result) {
+		ESP_LOGE(TION_LOG, "Cant send PAIR command to device: %d", result);
+	}
 
 	free(buffer);
 
@@ -56,7 +59,7 @@ esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_h
 esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle) {
 	uint8_t* buffer = create_buffer(COMMAND_REQUEST_PARAMS);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG_TAG, "send_request_data_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "send_request_data_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
@@ -70,6 +73,9 @@ esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_
 							  buffer,
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
+	if (result) {
+		ESP_LOGE(TION_LOG, "Cant send GET DATA command to device: %d", result);
+	}
 
 	free(buffer);
 
@@ -79,7 +85,7 @@ esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_
 esp_err_t send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle, tion_change_status_t status) {
 	uint8_t* buffer = create_buffer(COMMAND_WRITE_PARAMS);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG_TAG, "send_write_data_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "send_write_data_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
@@ -97,6 +103,9 @@ esp_err_t send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t 
 							  buffer,
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
+	if (result) {
+		ESP_LOGE(TION_LOG, "Cant send CHANGE STATUS command to device: %d", result);
+	}
 
 	free(buffer);
 
