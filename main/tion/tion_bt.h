@@ -11,13 +11,13 @@
 
 typedef void (* tion_status_callback_t)(tion_status_t * current_status);
 
-void tion_register_status_callback(tion_status_callback_t callback);
+void tion_bt_register_status_callback(tion_status_callback_t callback);
 
-void tion_pair();
+void tion_bt_pair();
 
-void tion_write_new_status(tion_change_status_t status);
+void tion_bt_write_new_status(tion_change_status_t status);
 
-void tion_request_status();
+void tion_bt_request_status();
 
 esp_err_t tion_bt_init();
 

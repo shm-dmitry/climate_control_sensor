@@ -1,16 +1,12 @@
-#ifndef MAIN_TION_TION_BT_DEF_H_
-#define MAIN_TION_TION_BT_DEF_H_
+#ifndef MAIN_INIT_TION_BT_DEF_GUID_H_
+#define MAIN_INIT_TION_BT_DEF_GUID_H_
 
-#include "esp_gattc_api.h"
-#include "esp_gap_ble_api.h"
+#define TION_BT_EXEC_TIMEOUT 60 // seconds
+#define TION_BT_PROFILE_APP_ID 0
 
-#define TION_EXEC_TIMEOUT 60 // seconds
+static const char TION_BT_DEVICE_NAME[] = "Tion Breezer 3S";
 
-#define PROFILE_APP_ID 0
-
-static const char TION_DEVICE_NAME[] = "Tion Breezer 3S";
-
-struct gattc_profile_inst {
+struct tion_bt_gattc_profile {
 	uint16_t gattc_if;
 	uint16_t conn_id;
 	uint16_t service_start_handle;
@@ -22,34 +18,14 @@ struct gattc_profile_inst {
 	uint16_t pair_handle;
 };
 
-#define TION_EXEC_COMMAND_PAIR 0
-#define TION_EXEC_COMMAND_REQUEST_DATA 1
-#define TION_EXEC_COMMAND_WAIT_TION_STATUS 2
-#define TION_EXEC_COMMAND_WRITE_DATA 3
-
-typedef struct tion_exec_command_t {
-	uint8_t commands[10];
-	uint8_t commands_size;
-	uint8_t current_command;
-
-	time_t started;
-
-	tion_change_status_t new_status;
-	tion_status_t * current_status;
-
-	uint8_t retry_allowed_count;
-
-	uint8_t command_uuid;
-} tion_exec_command_t;
-
-static esp_ble_scan_params_t ble_scan_params = {
+static esp_ble_scan_params_t tion_bt_ble_scan_params = {
 		.scan_type = BLE_SCAN_TYPE_ACTIVE,
 		.own_addr_type = BLE_ADDR_TYPE_PUBLIC,
 		.scan_filter_policy = BLE_SCAN_FILTER_ALLOW_ALL,
 		.scan_interval = 0x50,
 		.scan_window = 0x30 };
 
-static esp_bt_uuid_t tion_remote_service_uuid = {
+static esp_bt_uuid_t tion_bt_remote_service_uuid = {
 // 6e400001-b5a3-f393-e0a9-e50e24dcca9e
 		.len = ESP_UUID_LEN_128,
 		.uuid = {
@@ -57,7 +33,7 @@ static esp_bt_uuid_t tion_remote_service_uuid = {
 		},
 };
 
- static esp_bt_uuid_t tion_remote_characteristics_write_uuid = {
+ static esp_bt_uuid_t tion_bt_remote_characteristics_write_uuid = {
  // 6e400002-b5a3-f393-e0a9-e50e24dcca9e
 	 .len = ESP_UUID_LEN_128,
 	 .uuid = {
@@ -65,7 +41,7 @@ static esp_bt_uuid_t tion_remote_service_uuid = {
 	 },
  };
 
-static esp_bt_uuid_t tion_remote_characteristics_read_uuid = {
+static esp_bt_uuid_t tion_bt_remote_characteristics_read_uuid = {
 // 6e400003-b5a3-f393-e0a9-e50e24dcca9e
 		.len = ESP_UUID_LEN_128,
 		.uuid = {
@@ -73,5 +49,4 @@ static esp_bt_uuid_t tion_remote_characteristics_read_uuid = {
 		},
 };
 
-
-#endif /* MAIN_TION_TION_BT_DEF_H_ */
+#endif /* MAIN_INIT_TION_BT_DEF_GUID_H_ */

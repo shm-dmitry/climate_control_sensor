@@ -30,10 +30,10 @@ typedef struct tion_status_t {
 	time_t updated;
 } tion_status_t;
 
-#define CHANGE_STATUS_NOT_SET 250
-#define CHANGE_STATUS_TRUE 1
-#define CHANGE_STATUS_FALSE 0
-#define CHANGE_STATUS_INVALID_CHECKSUM 0xFFFFFFFF
+#define TION_CHANGE_STATUS_NOT_SET 250
+#define TION_CHANGE_STATUS_TRUE 1
+#define TION_CHANGE_STATUS_FALSE 0
+#define TION_CHANGE_STATUS_INVALID_CHECKSUM 0xFFFFFFFF
 
 typedef struct tion_change_status_t {
 	uint8_t fan_speed;

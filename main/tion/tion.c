@@ -13,7 +13,7 @@ static char * tion_status_topic = NULL;
 
 #define TION_EXEC_PERIOD 15*60*100000
 
-void status_callback(tion_status_t * status) {
+void tion_status_callback(tion_status_t * status) {
 	cJSON *root = cJSON_CreateObject();
 	cJSON_AddNumberToObject(root, "fan_spped", status->fan_spped);
 	cJSON_AddNumberToObject(root, "mode", status->mode);
@@ -55,27 +55,27 @@ void tion_commands(const char * topic, const char * data) {
 
 	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
 	if (strcmp(type, "pair") == 0) {
-		tion_pair();
+		tion_bt_pair();
 	} else {
 		tion_change_status_t status = {
-			.fan_speed = get_number8_from_json(cJSON_GetObjectItem(root, "fan_speed"), CHANGE_STATUS_NOT_SET),
-			.target_temperature = get_number8_from_json(cJSON_GetObjectItem(root, "target_temperature"), CHANGE_STATUS_NOT_SET),
-			.mode = get_number8_from_json(cJSON_GetObjectItem(root, "mode"), CHANGE_STATUS_NOT_SET),
-			.heater = get_boolean_from_json(cJSON_GetObjectItem(root, "heater"), CHANGE_STATUS_TRUE, CHANGE_STATUS_FALSE, CHANGE_STATUS_NOT_SET),
-			.state = get_boolean_from_json(cJSON_GetObjectItem(root, "state"), CHANGE_STATUS_TRUE, CHANGE_STATUS_FALSE, CHANGE_STATUS_NOT_SET),
-			.sound = get_boolean_from_json(cJSON_GetObjectItem(root, "sound"), CHANGE_STATUS_TRUE, CHANGE_STATUS_FALSE, CHANGE_STATUS_NOT_SET),
+			.fan_speed = get_number8_from_json(cJSON_GetObjectItem(root, "fan_speed"), TION_CHANGE_STATUS_NOT_SET),
+			.target_temperature = get_number8_from_json(cJSON_GetObjectItem(root, "target_temperature"), TION_CHANGE_STATUS_NOT_SET),
+			.mode = get_number8_from_json(cJSON_GetObjectItem(root, "mode"), TION_CHANGE_STATUS_NOT_SET),
+			.heater = get_boolean_from_json(cJSON_GetObjectItem(root, "heater"), TION_CHANGE_STATUS_TRUE, TION_CHANGE_STATUS_FALSE, TION_CHANGE_STATUS_NOT_SET),
+			.state = get_boolean_from_json(cJSON_GetObjectItem(root, "state"), TION_CHANGE_STATUS_TRUE, TION_CHANGE_STATUS_FALSE, TION_CHANGE_STATUS_NOT_SET),
+			.sound = get_boolean_from_json(cJSON_GetObjectItem(root, "sound"), TION_CHANGE_STATUS_TRUE, TION_CHANGE_STATUS_FALSE, TION_CHANGE_STATUS_NOT_SET),
 
-			.check_sum = parse_number32_from_json_string(cJSON_GetObjectItem(root, "check_sum"), CHANGE_STATUS_INVALID_CHECKSUM)
+			.check_sum = parse_number32_from_json_string(cJSON_GetObjectItem(root, "check_sum"), TION_CHANGE_STATUS_INVALID_CHECKSUM)
 		};
 
-		tion_write_new_status(status);
+		tion_bt_write_new_status(status);
 	}
 
 	cJSON_Delete(root);
 }
 
 void tion_timer_exec_function(void* arg) {
-	tion_request_status();
+	tion_bt_request_status();
 }
 
 void tion_startup(const char * status_topic, const char * command_topic) {
@@ -92,7 +92,7 @@ void tion_startup(const char * status_topic, const char * command_topic) {
 	memcpy(tion_status_topic, status_topic, strlen(status_topic) + 1);
 
 	mqtt_subscribe(command_topic, tion_commands);
-	tion_register_status_callback(status_callback);
+	tion_bt_register_status_callback(tion_status_callback);
 
 	esp_timer_create_args_t periodic_timer_args = {
 			.callback = &tion_timer_exec_function,

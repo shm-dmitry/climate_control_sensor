@@ -9,12 +9,12 @@
 #define COMMAND_WRITE_PARAMS 2
 #define BUFFER_SIZE 20
 
-uint8_t decode_tion_mode(uint8_t mode);
+uint8_t tion_api_decode_mode(uint8_t mode);
 
-uint8_t* create_buffer(uint8_t command) {
+uint8_t* tion_api_create_buffer(uint8_t command) {
 	uint8_t* buffer = (uint8_t *)malloc(BUFFER_SIZE);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG, "send_pair_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "tion_api_create_buffer malloc error - no memory");
 		return 0;
 	}
 
@@ -30,10 +30,10 @@ uint8_t* create_buffer(uint8_t command) {
 	return buffer;
 }
 
-esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_handle) {
-	uint8_t* buffer = create_buffer(COMMAND_PAIR);
+esp_err_t tion_api_send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_handle) {
+	uint8_t* buffer = tion_api_create_buffer(COMMAND_PAIR);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG, "send_pair_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "tion_api_send_pair_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
@@ -48,7 +48,7 @@ esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_h
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
 	if (result) {
-		ESP_LOGE(TION_LOG, "Cant send PAIR command to device: %d", result);
+		ESP_LOGE(TION_LOG, "tion_api_send_pair_command error: %d", result);
 	}
 
 	free(buffer);
@@ -56,10 +56,10 @@ esp_err_t send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16_t pair_h
 	return result;
 }
 
-esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle) {
-	uint8_t* buffer = create_buffer(COMMAND_REQUEST_PARAMS);
+esp_err_t tion_api_send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle) {
+	uint8_t* buffer = tion_api_create_buffer(COMMAND_REQUEST_PARAMS);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG, "send_request_data_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "tion_api_send_request_data_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
@@ -74,7 +74,7 @@ esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
 	if (result) {
-		ESP_LOGE(TION_LOG, "Cant send GET DATA command to device: %d", result);
+		ESP_LOGE(TION_LOG, "tion_api_send_request_data_command error: %d", result);
 	}
 
 	free(buffer);
@@ -82,16 +82,16 @@ esp_err_t send_request_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_
 	return result;
 }
 
-esp_err_t send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle, tion_change_status_t status) {
-	uint8_t* buffer = create_buffer(COMMAND_WRITE_PARAMS);
+esp_err_t tion_api_send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t write_handle, tion_change_status_t status) {
+	uint8_t* buffer = tion_api_create_buffer(COMMAND_WRITE_PARAMS);
 	if (!buffer) {
-		ESP_LOGE(TION_LOG, "send_write_data_command malloc error - no memory");
+		ESP_LOGE(TION_LOG, "tion_api_send_write_data_command malloc error - no memory");
 		return ESP_FAIL;
 	}
 
 	buffer[2] = status.fan_speed;
 	buffer[3] = status.target_temperature;
-	buffer[4] = decode_tion_mode(status.mode);
+	buffer[4] = tion_api_decode_mode(status.mode);
 	buffer[5] = status.heater | (status.state << 1) | (status.sound << 3);
 
 	// maybe write desc before??
@@ -104,7 +104,7 @@ esp_err_t send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t 
                               ESP_GATT_WRITE_TYPE_RSP,
                               ESP_GATT_AUTH_REQ_NONE);
 	if (result) {
-		ESP_LOGE(TION_LOG, "Cant send CHANGE STATUS command to device: %d", result);
+		ESP_LOGE(TION_LOG, "tion_api_send_write_data_command error: %d", result);
 	}
 
 	free(buffer);
@@ -112,7 +112,7 @@ esp_err_t send_write_data_command(uint16_t gattc_if, uint16_t conn_id, uint16_t 
 	return result;
 }
 
-uint8_t decode_tion_mode(uint8_t mode) {
+uint8_t tion_api_decode_mode(uint8_t mode) {
 	switch (mode) {
 	case TION_MODE_RECIRCULATION:
 		return TION_MODE_RECIRCULATION;
@@ -125,7 +125,7 @@ uint8_t decode_tion_mode(uint8_t mode) {
 	}
 }
 
-uint32_t calculate_check_sum(uint8_t fan_speed, uint8_t target_temperature, uint8_t mode, bool heater, bool state, bool sound) {
+uint32_t tion_api_calculate_check_sum(uint8_t fan_speed, uint8_t target_temperature, uint8_t mode, bool heater, bool state, bool sound) {
 	return  fan_speed +
 			target_temperature * 256 +
 			mode * 256*256 +
@@ -134,7 +134,7 @@ uint32_t calculate_check_sum(uint8_t fan_speed, uint8_t target_temperature, uint
 			 (sound ? 4 : 0)) * 256*256*256;
 }
 
-int8_t decode_temperature(uint8_t temp) {
+int8_t tion_api_decode_temperature(uint8_t temp) {
 	if (temp < 0b10000000) {
 		return temp;
 	} else {
@@ -142,7 +142,7 @@ int8_t decode_temperature(uint8_t temp) {
 	}
 }
 
-tion_status_t * decode_tion_status(uint8_t* buffer, uint16_t buffer_size) {
+tion_status_t * tion_api_decode_status(uint8_t* buffer, uint16_t buffer_size) {
 	if (buffer_size < BUFFER_SIZE) {
 		return NULL;
 	}
@@ -155,21 +155,21 @@ tion_status_t * decode_tion_status(uint8_t* buffer, uint16_t buffer_size) {
 	memset(value, 0, sizeof(tion_status_t));
 
 	value->fan_spped = buffer[2] % 16;
-	value->mode = decode_tion_mode(buffer[2] / 16);
+	value->mode = tion_api_decode_mode(buffer[2] / 16);
 	value->heater = buffer[4] & 1 ? true : false;
 	value->state = (buffer[4] >> 1) & 1 ? true : false;
 	value->timer = (buffer[4] >> 2) & 1 ? true : false;
 	value->sound = (buffer[4] >> 3) & 1 ? true : false;
 	value->target_temperature = buffer[3];
-	value->outdoor_temperature = decode_temperature(buffer[7]);
-	value->indoor_temperature = decode_temperature(buffer[8]);
+	value->outdoor_temperature = tion_api_decode_temperature(buffer[7]);
+	value->indoor_temperature = tion_api_decode_temperature(buffer[8]);
 	value->filter_remain = buffer[10] * 256 + buffer[9];
 	value->error_code = buffer[13];
 	value->time = buffer[11] * 256 + buffer[12];
 	value->productivity = buffer[14];
 	value->fw_version = buffer[18] * 256 + buffer[17];
 
-	value->check_sum = calculate_check_sum(value->fan_spped, value->target_temperature, value->mode, value->heater, value->state, value->sound);
+	value->check_sum = tion_api_calculate_check_sum(value->fan_spped, value->target_temperature, value->mode, value->heater, value->state, value->sound);
 
 	time(&value->updated);
 
