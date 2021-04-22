@@ -1166,7 +1166,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="R3" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R6" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R8" library="my_devices" deviceset="R" device="" value="10K"/>
-<part name=".U1" library="my_devices" deviceset="MH_Z19B" device=""/>
+<part name="U6" library="my_devices" deviceset="MH_Z19B" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R11" library="my_devices" deviceset="R" device="" value="600"/>
@@ -1293,7 +1293,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <attribute name="NAME" x="-74.93" y="0" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-74.93" y="-6.35" size="1.778" layer="94"/>
 </instance>
-<instance part=".U1" gate="G$1" x="78.74" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
+<instance part="U6" gate="G$1" x="78.74" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
 <attribute name="NAME" x="88.9" y="35.56" size="1.778" layer="94"/>
 </instance>
 <instance part="GND13" gate="1" x="43.18" y="30.48" smashed="yes" grouprefs="MH_Z19B_CO2">
@@ -1496,7 +1496,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <pinref part="J10" gate="G$1" pin="PIN_1"/>
 </segment>
 <segment>
-<pinref part=".U1" gate="G$1" pin="GND"/>
+<pinref part="U6" gate="G$1" pin="GND"/>
 <wire x1="73.66" y1="33.02" x2="43.18" y2="33.02" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
@@ -1595,7 +1595,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <pinref part="J10" gate="G$1" pin="PIN_2"/>
 </segment>
 <segment>
-<pinref part=".U1" gate="G$1" pin="VCC"/>
+<pinref part="U6" gate="G$1" pin="VCC"/>
 <wire x1="73.66" y1="35.56" x2="53.34" y2="35.56" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <label x="50.8" y="35.56" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
@@ -1675,7 +1675,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <pinref part="U2" gate="G$1" pin="TXD0"/>
 </segment>
 <segment>
-<pinref part=".U1" gate="G$1" pin="RX"/>
+<pinref part="U6" gate="G$1" pin="RX"/>
 <wire x1="73.66" y1="30.48" x2="53.34" y2="30.48" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <label x="50.8" y="30.48" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>
@@ -1687,7 +1687,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <pinref part="U2" gate="G$1" pin="RXD0"/>
 </segment>
 <segment>
-<pinref part=".U1" gate="G$1" pin="TX"/>
+<pinref part="U6" gate="G$1" pin="TX"/>
 <wire x1="73.66" y1="27.94" x2="53.34" y2="27.94" width="0.1524" layer="91" grouprefs="MH_Z19B_CO2"/>
 <label x="50.8" y="27.94" size="1.778" layer="95" grouprefs="MH_Z19B_CO2"/>
 </segment>

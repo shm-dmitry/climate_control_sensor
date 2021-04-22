@@ -1176,7 +1176,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="R5" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R1" library="my_devices" deviceset="R" device="" value="600"/>
 <part name="R4" library="my_devices" deviceset="R" device="" value="600"/>
-<part name="R7" library="my_devices" deviceset="R" device="" value="30"/>
+<part name="R7" library="my_devices" deviceset="R" device="" value="5 om, 2W"/>
 <part name="D1" library="my_devices" deviceset="LD" device="" value="IR"/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
