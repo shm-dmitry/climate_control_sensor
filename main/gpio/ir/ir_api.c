@@ -11,11 +11,11 @@ static ir_builder_t * nec_builder;
 static ir_builder_t * rc5_builder;
 
 #define IR_BUILD_BUFFER(builder, address, command, items, items_length) \
-		builder->build_frame(nec_builder, address, command); \
+		builder->build_frame(builder, address, command); \
 		builder->get_result(builder, &items, &items_length);
 
 #define IR_BUILD_BUFFER_REPEAT(builder, items, items_length) \
-		builder->build_repeat_frame(nec_builder); \
+		builder->build_repeat_frame(builder); \
 		builder->get_result(builder, &items, &items_length);
 
 // based on https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_protocols
