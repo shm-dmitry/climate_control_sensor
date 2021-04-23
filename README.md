@@ -6,7 +6,7 @@ Board is done.
 
 | Sensor | Software | Hardware |
 | --- | --- | --- |
-| TION 3S | Not tested yet | - |
+| TION 3S | In progress | - |
 | BME280 | OK | OK |
 | SGP30 | OK | OK |
 | BH1750 | OK | OK |
