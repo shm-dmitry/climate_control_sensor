@@ -19,11 +19,11 @@ void init_flash() {
     ESP_ERROR_CHECK( ret );
 }
 
-void init_wifi(const char* ssid, const char* password) {
+void init_wifi(const char* ssid, const char* password, const char* topic) {
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    wifi_init(ssid, password);
+    wifi_init(ssid, password, topic);
 }
 
 void init_snmp() {

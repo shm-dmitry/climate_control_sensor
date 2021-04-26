@@ -7,6 +7,10 @@ menu "Climate Control Configuration"
    	  config WIFI_PASSWORD
    	  	string "Wifi AP Password"
    	  	default ""
+   	  	
+   	  config WIFI_TOPIC
+   	  	string "WiFi MQTT Topic to listen Change-SSID command"
+   	  	default ""
    endmenu
 
    menu "MQTT Configuration"

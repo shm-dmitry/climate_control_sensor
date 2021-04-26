@@ -20,7 +20,7 @@
 void app_main(void)
 {
 	init_flash();
-	init_wifi(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD);
+	init_wifi(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD, CONFIG_WIFI_TOPIC);
 	init_snmp();
 
 #if CONFIG_I2C_PORT_0_ENABLED

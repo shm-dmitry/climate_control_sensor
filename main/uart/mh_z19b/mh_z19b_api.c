@@ -3,7 +3,6 @@
 #include "stdint.h"
 #include "string.h"
 #include "esp_err.h"
-#include "esp_log.h"
 #include "../../log.h"
 
 // https://github.com/strange-v/MHZ19/
