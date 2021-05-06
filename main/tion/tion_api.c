@@ -39,6 +39,9 @@ esp_err_t tion_api_send_pair_command(uint16_t gattc_if, uint16_t conn_id, uint16
 
 	// maybe write desc before??
 
+	ESP_LOGI(TION_LOG, "Sending PAIR command to %02x", pair_handle);
+	ESP_LOG_BUFFER_HEXDUMP(TION_LOG, buffer, BUFFER_SIZE, ESP_LOG_INFO);
+
 	esp_err_t result = esp_ble_gattc_write_char(
 							  gattc_if,
                               conn_id,

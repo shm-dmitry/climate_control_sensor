@@ -9,6 +9,7 @@
 #include "esp_gatt_defs.h"
 #include "esp_bt_main.h"
 #include "esp_gatt_common_api.h"
+#include "esp_gap_ble_api.h"
 
 #include "freertos/task.h"
 
@@ -185,7 +186,7 @@ void tion_bt_execute_command() {
 	uint8_t command = tion_exec_command->commands[tion_exec_command->current_command];
 	switch (command) {
 	case TION_BT_EXEC_COMMAND_PAIR:
-		result = tion_api_send_pair_command(gl_profile_tab.gattc_if, gl_profile_tab.conn_id, gl_profile_tab.pair_handle);
+		result = tion_api_send_pair_command(gl_profile_tab.gattc_if, gl_profile_tab.conn_id, gl_profile_tab.write_handle);
 		tion_exec_command->current_command++;
 		break;
 	case TION_BT_EXEC_COMMAND_REQUEST_DATA:
@@ -406,6 +407,18 @@ void tion_bt_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
 
 	/* If event is register event, store the gattc_if for each profile */
 	switch (event) {
+	case ESP_GAP_BLE_SET_LOCAL_PRIVACY_COMPLETE_EVT: {
+        if (param->local_privacy_cmpl.status != ESP_BT_STATUS_SUCCESS){
+            ESP_LOGE(TION_LOG, "tion_bt_gap_cb config local privacy failed, error code =%x", param->local_privacy_cmpl.status);
+        } else {
+			if (esp_ble_gap_set_scan_params(&tion_bt_ble_scan_params)) {
+				ESP_LOGE(TION_LOG, "tion_bt_gap_cb: esp_ble_gap_set_scan_params failed");
+				tion_bt_stop(true);
+			}
+        }
+	}
+    break;
+
 	case ESP_GAP_BLE_SCAN_PARAM_SET_COMPLETE_EVT: {
 		esp_ble_gap_start_scanning(TION_PAIR_TIMEOUT);
 		tion_bt_timeout_check_start(TION_PAIR_TIMEOUT + 5);
@@ -428,7 +441,6 @@ void tion_bt_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
 					ESP_LOGI(TION_LOG, "Tion device found! Trying to connect to it.");
 
 					tion_bt_timeout_check_stop();
-
 					esp_ble_gap_stop_scanning();
 					esp_ble_gattc_open(gl_profile_tab.gattc_if, scan_result->scan_rst.bda, scan_result->scan_rst.ble_addr_type, true);
 				}
@@ -450,8 +462,8 @@ void tion_bt_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
 static esp_err_t tion_bt_init_handles(esp_gatt_if_t gattc_if, esp_ble_gattc_cb_param_t *p_data, uint16_t count) {
 	esp_gattc_char_elem_t *char_elem_result = (esp_gattc_char_elem_t*) malloc(sizeof(esp_gattc_char_elem_t) * count);
 	if (!char_elem_result) {
-		tion_bt_stop(true);
 		ESP_LOGE(TION_LOG, "tion_bt_init_handles: No memory for esp_ble_gattc_get_char_by_uuid");
+		tion_bt_stop(true);
 		return ESP_FAIL;
 	} else {
 		if (esp_ble_gattc_get_char_by_uuid(
@@ -462,13 +474,15 @@ static esp_err_t tion_bt_init_handles(esp_gatt_if_t gattc_if, esp_ble_gattc_cb_p
 				tion_bt_remote_characteristics_read_uuid,
 				char_elem_result,
 				&count)) {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_init_handles: READ characteristics not found");
+			tion_bt_stop(true);
 			return ESP_FAIL;
 		} else {
 			if (count > 0 && (char_elem_result[0].properties & ESP_GATT_CHAR_PROP_BIT_NOTIFY)) {
 				gl_profile_tab.read_handle = char_elem_result[0].char_handle;
 				esp_ble_gattc_register_for_notify(gattc_if, gl_profile_tab.remote_bda, char_elem_result[0].char_handle);
+
+				ESP_LOGI(TION_LOG, "tion_bt_init_handles: read_handle == %04x", gl_profile_tab.read_handle);
 			}
 		}
 
@@ -480,32 +494,50 @@ static esp_err_t tion_bt_init_handles(esp_gatt_if_t gattc_if, esp_ble_gattc_cb_p
 				tion_bt_remote_characteristics_write_uuid,
 				char_elem_result,
 				&count)) {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_init_handles: WRITE characteristics not found");
+			tion_bt_stop(true);
 			return ESP_FAIL;
 		} else {
 			if (count > 0 && (char_elem_result[0].properties & ESP_GATT_CHAR_PROP_BIT_WRITE)) {
 				gl_profile_tab.write_handle = char_elem_result[0].char_handle;
+
+				ESP_LOGI(TION_LOG, "tion_bt_init_handles: write_handle == %04x", gl_profile_tab.write_handle);
 			}
 		}
 
-		if (esp_ble_gattc_get_char_by_uuid(
+		esp_gattc_service_elem_t * service = malloc(sizeof(esp_gattc_service_elem_t));
+		uint16_t service_count = 1;
+		if (esp_ble_gattc_get_service(gattc_if,
+				p_data->search_cmpl.conn_id,
+				&tion_bt_remote_service_uuid,
+				service,
+				&service_count,
+				0)) {
+			ESP_LOGE(TION_LOG, "tion_bt_init_handles: SERVICE not found");
+			tion_bt_stop(true);
+			return ESP_FAIL;
+		}
+
+		if (esp_ble_gattc_get_all_char(
 				gattc_if,
 				p_data->search_cmpl.conn_id,
-				gl_profile_tab.service_start_handle,
-				gl_profile_tab.service_end_handle,
-				tion_bt_remote_service_uuid,
+				service->start_handle,
+				service->end_handle,
 				char_elem_result,
-				&count)) {
-			tion_bt_stop(true);
+				&count,
+				0)) {
 			ESP_LOGE(TION_LOG, "tion_bt_init_handles: SERVICE characteristics not found");
+			tion_bt_stop(true);
 			return ESP_FAIL;
 		} else {
 			if (count > 0 && (char_elem_result[0].properties & ESP_GATT_CHAR_PROP_BIT_WRITE)) {
 				gl_profile_tab.pair_handle = char_elem_result[0].char_handle;
+
+				ESP_LOGI(TION_LOG, "tion_bt_init_handles: pair_handle == %04x", gl_profile_tab.pair_handle);
 			}
 		}
 
+		free(service);
 		free(char_elem_result);
 
 		tion_bt_execute_command();
@@ -528,13 +560,10 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 		if (param->reg.status == ESP_GATT_OK) {
 			gl_profile_tab.gattc_if = gattc_if;
 
-			if (esp_ble_gap_set_scan_params(&tion_bt_ble_scan_params)) {
-				tion_bt_stop(true);
-				ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: esp_ble_gap_set_scan_params failed");
-			}
+			esp_ble_gap_config_local_privacy(true);
 		} else {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: reg app failed");
+			tion_bt_stop(true);
 		}
 		break;
 		gl_profile_tab.gattc_if = gattc_if;
@@ -550,8 +579,8 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 
 	case ESP_GATTC_OPEN_EVT: {
 		if (param->open.status != ESP_GATT_OK) {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: open connection failed, status %02x", param->open.status);
+			tion_bt_stop(true);
 		} else {
 			ESP_LOGI(TION_LOG, "tion_bt_gattc_cb: Successfully connected to TION");
 		}
@@ -560,8 +589,8 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 
 	case ESP_GATTC_DIS_SRVC_CMPL_EVT: {
 		if (param->dis_srvc_cmpl.status != ESP_GATT_OK) {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: discover service failed");
+			tion_bt_stop(true);
 		} else {
 			esp_ble_gattc_search_service(gattc_if, param->cfg_mtu.conn_id, &tion_bt_remote_service_uuid);
 		}
@@ -576,8 +605,8 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 
 	case ESP_GATTC_SEARCH_CMPL_EVT: {
 		if (p_data->search_cmpl.status != ESP_GATT_OK) {
-			tion_bt_stop(true);
 			ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: search service failed");
+			tion_bt_stop(true);
 		} else {
 			uint16_t count = 0;
 			if (esp_ble_gattc_get_attr_count(
@@ -588,19 +617,19 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 					gl_profile_tab.service_end_handle,
 					0,
 					&count)) {
-				tion_bt_stop(true);
 				ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: esp_ble_gattc_get_attr_count error");
+				tion_bt_stop(true);
 			} else {
 				if (count > 0) {
 					if (tion_bt_init_handles(gattc_if, p_data, count)) {
-						tion_bt_stop(true);
 						ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: bt_init_handles error");
+						tion_bt_stop(true);
 					} else {
 						tion_bt_execute_command();
 					}
 				} else {
-					tion_bt_stop(true);
 					ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: esp_ble_gattc_get_attr_count :: Attributes count == 0 ???");
+					tion_bt_stop(true);
 				}
 			}
 		}
@@ -609,8 +638,8 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 
 	case ESP_GATTC_WRITE_CHAR_EVT: {
         if (p_data->write.status != ESP_GATT_OK) {
-			tion_bt_stop(true);
             ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: write char failed, error status = %x", p_data->write.status);
+			tion_bt_stop(true);
             break;
         }
 
@@ -622,22 +651,24 @@ static void tion_bt_gattc_cb(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if,
 
 	case ESP_GATTC_REG_FOR_NOTIFY_EVT: {
 		if (p_data->read.status != ESP_GATT_OK) {
-			tion_bt_stop(true);
             ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: read char failed, error status = %x", p_data->write.status);
+			tion_bt_stop(true);
             break;
 		}
 
-		if (tion_exec_command->current_status != NULL) {
-			free(tion_exec_command->current_status);
-			tion_exec_command->current_status = NULL;
-		}
+		if (tion_exec_command ->commands[tion_exec_command->current_command] == TION_BT_EXEC_COMMAND_WAIT_TION_STATUS) {
+			if (tion_exec_command->current_status != NULL) {
+				free(tion_exec_command->current_status);
+				tion_exec_command->current_status = NULL;
+			}
 
-		tion_exec_command->current_status = tion_api_decode_status(p_data->read.value, p_data->read.value_len);
-		if (tion_exec_command->current_status == NULL) {
-			tion_bt_stop(true);
-            ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: Cant decode tion status message. size = %d", p_data->read.value_len);
-		} else {
-			tion_bt_execute_command();
+			tion_exec_command->current_status = tion_api_decode_status(p_data->read.value, p_data->read.value_len);
+			if (tion_exec_command->current_status == NULL) {
+				ESP_LOGE(TION_LOG, "tion_bt_gattc_cb: Cant decode tion status message. size = %d", p_data->read.value_len);
+				//tion_bt_stop(true);
+			} else {
+				tion_bt_execute_command();
+			}
 		}
 	}
 	break;

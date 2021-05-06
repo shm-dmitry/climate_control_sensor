@@ -6,7 +6,7 @@
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
 
-#define BME280_EXEC_PERIOD 5000000
+#define BME280_EXEC_PERIOD 30000000
 
 static i2c_handler_t * bme280_i2c = NULL;
 static char* g_bme280_status_topic = NULL;

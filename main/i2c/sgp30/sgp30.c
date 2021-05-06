@@ -7,7 +7,7 @@
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
 
-#define SGP30_EXEC_PERIOD 5000000
+#define SGP30_EXEC_PERIOD 30000000
 #define SGP30_APPLY_COMPENSATION_PERIOD 60000000
 
 static i2c_handler_t * sgp30_i2c = NULL;

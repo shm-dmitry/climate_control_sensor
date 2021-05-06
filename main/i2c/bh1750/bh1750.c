@@ -6,7 +6,7 @@
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
 
-#define BH1750_EXEC_PERIOD 1000000
+#define BH1750_EXEC_PERIOD 30000000
 
 static i2c_handler_t * bh1750_i2c = NULL;
 static char* g_bh1750_status_topic = NULL;
