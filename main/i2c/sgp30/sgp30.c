@@ -51,7 +51,20 @@ void sgp30_timer_apply_correction_function(void* arg) {
 	}
 }
 
-void sgp30_init(i2c_port_t port, const char* mqtt_topic) {
+void sgp30_commands(const char * topic, const char * data) {
+	cJSON *root = cJSON_Parse(data);
+	if (root == NULL) {
+		return;
+	}
+
+	char * type = cJSON_GetStringValue(cJSON_GetObjectItem(root, "type"));
+	if (strcmp(type, "calibrate") == 0) {
+		sgp30_recalibrate(sgp30_i2c);
+	}
+}
+
+
+void sgp30_init(i2c_port_t port, const char* mqtt_topic, const char * command_topic) {
 	sgp30_i2c = i2c_get_handlers(port);
 	if (sgp30_i2c != NULL) {
 		if (sgp30_write_init(sgp30_i2c)) {
@@ -60,6 +73,8 @@ void sgp30_init(i2c_port_t port, const char* mqtt_topic) {
 
 		g_sgp30_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_sgp30_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);
+
+		mqtt_subscribe(command_topic, sgp30_commands);
 
 		esp_timer_create_args_t periodic_timer_args = {
 				.callback = &sgp30_timer_exec_function,

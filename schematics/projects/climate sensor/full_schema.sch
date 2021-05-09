@@ -1642,6 +1642,12 @@ In this library the device names are the same as the pin names of the symbols, t
 <junction x="198.12" y="27.94" grouprefs="RGBLED"/>
 <label x="213.36" y="27.94" size="1.778" layer="95" grouprefs="RGBLED"/>
 </segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="VCC"/>
+<wire x1="-43.18" y1="25.4" x2="-43.18" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<wire x1="-43.18" y1="35.56" x2="-88.9" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
+<label x="-88.9" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
+</segment>
 </net>
 <net name="3V3" class="0">
 <segment>
@@ -1674,6 +1680,19 @@ In this library the device names are the same as the pin names of the symbols, t
 <wire x1="-78.74" y1="104.14" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="-91.44" y1="104.14" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
 <label x="-91.44" y="104.14" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="81.28" y1="93.98" x2="66.04" y2="93.98" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<wire x1="66.04" y1="93.98" x2="66.04" y2="104.14" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
+<label x="63.5" y="104.14" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
+<pinref part="U5" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<wire x1="60.96" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="53.34" y1="-45.72" x2="53.34" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
+<wire x1="53.34" y1="-58.42" x2="35.56" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
+<label x="35.56" y="-58.42" size="1.778" layer="95" grouprefs="BH1750"/>
+<pinref part="U4" gate="G$1" pin="VCC"/>
 </segment>
 </net>
 <net name="UART_0_TXD" class="0">
@@ -1845,25 +1864,6 @@ In this library the device names are the same as the pin names of the symbols, t
 <wire x1="-182.88" y1="-93.98" x2="-195.58" y2="-93.98" width="0.1524" layer="91" grouprefs="FAN_SWITCH"/>
 <pinref part="ACDC1" gate="G$1" pin="220V_L"/>
 <pinref part="TSW1" gate="G$1" pin="220V_IN_L"/>
-</segment>
-<segment>
-<wire x1="60.96" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91" grouprefs="BH1750"/>
-<wire x1="53.34" y1="-45.72" x2="53.34" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
-<wire x1="53.34" y1="-58.42" x2="35.56" y2="-58.42" width="0.1524" layer="91" grouprefs="BH1750"/>
-<label x="35.56" y="-58.42" size="1.778" layer="95" grouprefs="BH1750"/>
-<pinref part="U4" gate="G$1" pin="VCC"/>
-</segment>
-<segment>
-<wire x1="81.28" y1="93.98" x2="66.04" y2="93.98" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<wire x1="66.04" y1="93.98" x2="66.04" y2="104.14" width="0.1524" layer="91" grouprefs="BME_280_TEMP_HUM"/>
-<label x="63.5" y="104.14" size="1.778" layer="95" grouprefs="BME_280_TEMP_HUM"/>
-<pinref part="U5" gate="G$1" pin="VCC"/>
-</segment>
-<segment>
-<pinref part="U3" gate="G$1" pin="VCC"/>
-<wire x1="-43.18" y1="25.4" x2="-43.18" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<wire x1="-43.18" y1="35.56" x2="-88.9" y2="35.56" width="0.1524" layer="91" grouprefs="PMS7003"/>
-<label x="-88.9" y="35.56" size="1.778" layer="95" grouprefs="PMS7003"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -2137,16 +2137,6 @@ In this library the device names are the same as the pin names of the symbols, t
 <errors>
 <approved hash="102,1,-294.64,-12.7,VCC,N$9,,,,"/>
 <approved hash="201,1,-294.64,-12.7,VCC,N$9\, VCC,,,,"/>
-<approved hash="104,1,-88.9,-124.46,U$10,220V_L,N$16,,,"/>
-<approved hash="104,1,-88.9,-88.9,U$10,220V_N,N$15,,,"/>
-<approved hash="104,1,-55.88,-40.64,GY_SGP30_1,VIN,3V3,,,"/>
-<approved hash="104,1,-403.86,137.16,U$8,VIN,N$12,,,"/>
-<approved hash="104,1,-251.46,-30.48,U$9,220V_L,VCC,,,"/>
-<approved hash="104,1,-251.46,-40.64,U$9,220V_N,N$9,,,"/>
-<approved hash="104,1,-200.66,-40.64,U$9,OUT_5V,ACDC_OUT_5V,,,"/>
-<approved hash="104,1,-195.58,-93.98,U$7,220V_IN_L,VCC,,,"/>
-<approved hash="104,1,-195.58,-96.52,U$7,220V_IN_N,N$9,,,"/>
-<approved hash="104,1,73.66,35.56,U$11,VCC,+5V,,,"/>
 </errors>
 </schematic>
 </drawing>

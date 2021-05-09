@@ -19,4 +19,6 @@ void i2c_register_port(i2c_port_t port, int gpio_sda, int gpio_scl);
 
 i2c_handler_t * i2c_get_handlers(i2c_port_t port);
 
+esp_err_t i2c_general_reset(i2c_handler_t * i2c);
+
 #endif /* MAIN_I2C_I2C_IMPL_H_ */

@@ -4,7 +4,7 @@
 #include "../i2c_impl.h"
 #include "stdbool.h"
 
-void sgp30_init(i2c_port_t port, const char* mqtt_topic);
+void sgp30_init(i2c_port_t port, const char* mqtt_topic, const char * command_topic);
 
 void sgp30_init_auto_compensation();
 

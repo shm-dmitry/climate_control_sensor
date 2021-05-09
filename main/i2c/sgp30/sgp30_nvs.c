@@ -5,6 +5,10 @@
 #define SGP30_NVS_NAME "sgp30_baseline"
 
 esp_err_t sgp30_nvs_save_baseline(const sgp30_baseline_t * baseline) {
+	if (baseline == NULL) {
+		return nvs_write_buffer(SGP30_NVS_NAME, NULL, 0);
+	}
+
 	uint8_t buffer[4] = { baseline->co2 / 256, baseline->co2 % 256, baseline->tvoc / 256, baseline->tvoc % 256 };
 
 	esp_err_t res = nvs_write_buffer(SGP30_NVS_NAME, buffer, 4);

@@ -313,3 +313,13 @@ esp_err_t i2c_write_read(i2c_port_t port, SemaphoreHandle_t mutex, uint8_t addr_
 	return ret;
 }
 
+esp_err_t i2c_general_reset(i2c_handler_t * i2c) {
+	uint8_t buffer = 0x06;
+	esp_err_t res = i2c->write(0x00, &buffer, 1);
+	if (res) {
+		ESP_LOGE(I2C_LOG, "i2c_general_reset error %d", res);
+	} else {
+		ESP_LOGI(I2C_LOG, "i2c_general_reset done.");
+	}
+	return res;
+}

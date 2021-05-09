@@ -90,6 +90,10 @@ menu "Climate Control Configuration"
          string "MQTT topic for SGP30 device status information"
          default ""
 
+	  config SGP30_TOPIC_COMMAND
+         string "MQTT topic for SGP30 device listen commands"
+         default ""
+
       config SGP30_PORT
          int "SGP30 I2C port"
          default 0

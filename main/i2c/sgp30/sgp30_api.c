@@ -183,6 +183,31 @@ esp_err_t sgp30_write_init(i2c_handler_t * i2c) {
 	return ESP_OK;
 }
 
+esp_err_t sgp30_recalibrate(i2c_handler_t * i2c) {
+	if (sgp30_init_status != SGP30_INIT_STATUS_INITIALIZED) {
+		return ESP_ERR_INVALID_STATE;
+	}
+
+	sgp30_init_status = SGP30_INIT_STATUS_NOT_INITIALIZED;
+	esp_err_t res = sgp30_nvs_save_baseline(NULL);
+	if (res) {
+		ESP_LOGW(SGP30_LOG, "Cant reset saved state: %d", res);
+		return res;
+	}
+
+	sgp30_init_status = SGP30_INIT_STATUS_INITIALIZING;
+
+	// send general reset command
+	i2c_general_reset(i2c);
+
+	// after this some sensors must be re-initialized.
+	// so - restart ESP32
+
+	esp_restart();
+
+	return ESP_OK;
+}
+
 esp_err_t sgp30_read(i2c_handler_t * i2c, sgp30_data_t * result) {
 	if (sgp30_init_status != SGP30_INIT_STATUS_INITIALIZED) {
 		ESP_LOGE(SGP30_LOG, "Driver not initialized. Init status == %d", sgp30_init_status);

@@ -9,7 +9,7 @@
 
 static char* mh_z19b_status_topic = NULL;
 
-#define MH_Z19B_EXEC_PERIOD 10000000
+#define MH_Z19B_EXEC_PERIOD 30000000
 
 void mh_z19b_commands(const char * topic, const char * data) {
 	cJSON *root = cJSON_Parse(data);

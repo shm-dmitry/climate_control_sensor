@@ -16,6 +16,8 @@ esp_err_t sgp30_set_humidity(i2c_handler_t * i2c, double absolute_humidity);
 
 esp_err_t sgp30_write_init(i2c_handler_t * i2c);
 
+esp_err_t sgp30_recalibrate(i2c_handler_t * i2c);
+
 esp_err_t sgp30_read(i2c_handler_t * i2c, sgp30_data_t * result);
 
 #endif /* MAIN_I2C_SGP30_SGP30_API_H_ */
