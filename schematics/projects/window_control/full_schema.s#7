@@ -1666,7 +1666,6 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </classes>
 <groups>
 <schematic_group name="220_V_SUPPLY"/>
-<schematic_group name="+5V" grouprefs="HALL_SENSOR SERVO"/>
 <schematic_group name="OPEN-CLOSE"/>
 <schematic_group name="RGBLED"/>
 <schematic_group name="ESP"/>
@@ -1688,7 +1687,7 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <part name="U1" library="my_devices" deviceset="ESP32" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R1" library="my_devices" deviceset="R" device="" value="620"/>
-<part name="R2" library="my_devices" deviceset="R" device="" value="620"/>
+<part name="R2" library="my_devices" deviceset="R" device="" value="400"/>
 <part name="SW1" library="my_devices" deviceset="SWITCH" device=""/>
 <part name="Q2" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="10K"/>
@@ -1750,12 +1749,12 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="B1" library="my_devices" deviceset="HALL_SENSOR" device=""/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
+<part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R17" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R18" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="Q7" library="my_devices" deviceset="TRANSISTOR_PNP" device=""/>
-<part name="R14" library="my_devices" deviceset="R" device=""/>
+<part name="R14" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
@@ -2046,15 +2045,15 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <attribute name="NAME" x="-34.29" y="-21.59" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-34.29" y="-27.94" size="1.778" layer="94"/>
 </instance>
-<instance part="Q7" gate="G$1" x="-34.29" y="138.43" smashed="yes">
+<instance part="Q7" gate="G$1" x="-34.29" y="138.43" smashed="yes" grouprefs="SERVO">
 <attribute name="NAME" x="-30.48" y="139.7" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-30.48" y="135.89" size="1.778" layer="94"/>
 </instance>
-<instance part="R14" gate="G$1" x="-53.34" y="146.05" smashed="yes">
+<instance part="R14" gate="G$1" x="-53.34" y="146.05" smashed="yes" grouprefs="SERVO">
 <attribute name="NAME" x="-59.69" y="148.59" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-59.69" y="142.24" size="1.778" layer="94"/>
 </instance>
-<instance part="GND3" gate="1" x="-64.77" y="142.24" smashed="yes">
+<instance part="GND3" gate="1" x="-64.77" y="142.24" smashed="yes" grouprefs="SERVO">
 <attribute name="VALUE" x="-67.31" y="139.7" size="1.778" layer="96"/>
 </instance>
 </instances>
@@ -2215,8 +2214,8 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <segment>
 <pinref part="GND3" gate="1" pin="GND"/>
 <pinref part="R14" gate="G$1" pin="P$1"/>
-<wire x1="-64.77" y1="144.78" x2="-64.77" y2="146.05" width="0.1524" layer="91"/>
-<wire x1="-64.77" y1="146.05" x2="-60.96" y2="146.05" width="0.1524" layer="91"/>
+<wire x1="-64.77" y1="144.78" x2="-64.77" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-64.77" y1="146.05" x2="-60.96" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -2922,26 +2921,26 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </segment>
 <segment>
 <pinref part="Q7" gate="G$1" pin="B"/>
-<wire x1="-41.91" y1="138.43" x2="-87.63" y2="138.43" width="0.1524" layer="91"/>
-<label x="-86.36" y="139.7" size="1.778" layer="95"/>
+<wire x1="-41.91" y1="138.43" x2="-87.63" y2="138.43" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-86.36" y="139.7" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="P$2"/>
-<wire x1="-41.91" y1="125.73" x2="-34.29" y2="125.73" width="0.1524" layer="91"/>
+<wire x1="-41.91" y1="125.73" x2="-34.29" y2="125.73" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="Q7" gate="G$1" pin="E"/>
-<wire x1="-34.29" y1="125.73" x2="-34.29" y2="130.81" width="0.1524" layer="91"/>
+<wire x1="-34.29" y1="125.73" x2="-34.29" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$38" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
 <pinref part="Q7" gate="G$1" pin="C"/>
-<wire x1="-25.4" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="R14" gate="G$1" pin="P$2"/>
-<wire x1="-44.45" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91"/>
-<junction x="-34.29" y="146.05"/>
+<wire x1="-44.45" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-34.29" y="146.05" grouprefs="SERVO"/>
 </segment>
 </net>
 </nets>

@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1666,7 +1666,6 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </classes>
 <groups>
 <schematic_group name="220_V_SUPPLY"/>
-<schematic_group name="+5V" grouprefs="HALL_SENSOR SERVO"/>
 <schematic_group name="OPEN-CLOSE"/>
 <schematic_group name="RGBLED"/>
 <schematic_group name="ESP"/>
@@ -1688,7 +1687,7 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <part name="U1" library="my_devices" deviceset="ESP32" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R1" library="my_devices" deviceset="R" device="" value="620"/>
-<part name="R2" library="my_devices" deviceset="R" device="" value="620"/>
+<part name="R2" library="my_devices" deviceset="R" device="" value="400"/>
 <part name="SW1" library="my_devices" deviceset="SWITCH" device=""/>
 <part name="Q2" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R3" library="my_devices" deviceset="R" device="" value="10K"/>
@@ -1750,11 +1749,11 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="B1" library="my_devices" deviceset="HALL_SENSOR" device=""/>
 <part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
+<part name="Q3" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="R17" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R18" library="my_devices" deviceset="R" device="" value="10K"/>
-<part name="Q7" library="my_devices" deviceset="TRANSISTOR_PNP" device=""/>
+<part name="Q7" library="my_devices" deviceset="TRANSISTOR_PNP" device="" value="2N3906BU"/>
 <part name="R14" library="my_devices" deviceset="R" device="" value="10K"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
@@ -1799,32 +1798,32 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <instance part="GND2" gate="1" x="-111.76" y="152.4" smashed="yes" grouprefs="ESP">
 <attribute name="VALUE" x="-114.3" y="149.86" size="1.778" layer="96"/>
 </instance>
-<instance part="R1" gate="G$1" x="-34.29" y="194.31" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-40.64" y="196.85" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-40.64" y="190.5" size="1.778" layer="94"/>
+<instance part="R1" gate="G$1" x="-31.75" y="163.83" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-38.1" y="166.37" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-38.1" y="160.02" size="1.778" layer="94"/>
 </instance>
-<instance part="R2" gate="G$1" x="-50.8" y="125.73" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-57.15" y="128.27" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-57.15" y="121.92" size="1.778" layer="94"/>
+<instance part="R2" gate="G$1" x="-48.26" y="95.25" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-54.61" y="97.79" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-54.61" y="91.44" size="1.778" layer="94"/>
 </instance>
-<instance part="SW1" gate="G$1" x="-67.31" y="161.29" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-72.39" y="166.37" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-72.39" y="156.21" size="1.778" layer="94"/>
+<instance part="SW1" gate="G$1" x="-64.77" y="130.81" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-69.85" y="135.89" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-69.85" y="125.73" size="1.778" layer="94"/>
 </instance>
-<instance part="Q2" gate="G$1" x="-49.53" y="171.45" smashed="yes" rot="R90" grouprefs="SERVO">
-<attribute name="NAME" x="-50.8" y="175.26" size="1.778" layer="94" rot="R90"/>
-<attribute name="VALUE" x="-46.99" y="175.26" size="1.778" layer="94" rot="R90"/>
+<instance part="Q2" gate="G$1" x="-46.99" y="140.97" smashed="yes" rot="R90" grouprefs="SERVO">
+<attribute name="NAME" x="-48.26" y="144.78" size="1.778" layer="94" rot="R90"/>
+<attribute name="VALUE" x="-44.45" y="144.78" size="1.778" layer="94" rot="R90"/>
 </instance>
-<instance part="R3" gate="G$1" x="-29.21" y="171.45" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-35.56" y="173.99" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-35.56" y="167.64" size="1.778" layer="94"/>
+<instance part="R3" gate="G$1" x="-26.67" y="140.97" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-33.02" y="143.51" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-33.02" y="137.16" size="1.778" layer="94"/>
 </instance>
-<instance part="GND4" gate="1" x="-11.43" y="173.99" smashed="yes" grouprefs="SERVO">
-<attribute name="VALUE" x="-13.97" y="171.45" size="1.778" layer="96"/>
+<instance part="GND4" gate="1" x="-8.89" y="143.51" smashed="yes" grouprefs="SERVO">
+<attribute name="VALUE" x="-11.43" y="140.97" size="1.778" layer="96"/>
 </instance>
-<instance part="R4" gate="G$1" x="-52.07" y="186.69" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-58.42" y="189.23" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-58.42" y="182.88" size="1.778" layer="94"/>
+<instance part="R4" gate="G$1" x="-49.53" y="156.21" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-55.88" y="158.75" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-55.88" y="152.4" size="1.778" layer="94"/>
 </instance>
 <instance part="TS1" gate="G$1" x="12.7" y="66.04" smashed="yes" grouprefs="OPEN-CLOSE">
 <attribute name="NAME" x="7.62" y="71.12" size="1.778" layer="94"/>
@@ -1956,17 +1955,17 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <attribute name="NAME" x="253.6825" y="122.555" size="1.778" layer="94" rot="R180"/>
 <attribute name="VALUE" x="253.6825" y="127.635" size="1.778" layer="94" rot="R180"/>
 </instance>
-<instance part="R15" gate="G$1" x="-29.21" y="161.29" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-35.56" y="163.83" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-35.56" y="157.48" size="1.778" layer="94"/>
+<instance part="R15" gate="G$1" x="-26.67" y="130.81" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-33.02" y="133.35" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-33.02" y="127" size="1.778" layer="94"/>
 </instance>
-<instance part="Q1" gate="G$1" x="-19.05" y="143.51" smashed="yes" rot="R180" grouprefs="SERVO">
-<attribute name="NAME" x="-2.54" y="140.97" size="1.778" layer="94" rot="R180"/>
-<attribute name="VALUE" x="-2.54" y="148.59" size="1.778" layer="94" rot="R180"/>
+<instance part="Q1" gate="G$1" x="-16.51" y="113.03" smashed="yes" rot="R180" grouprefs="SERVO">
+<attribute name="NAME" x="0" y="110.49" size="1.778" layer="94" rot="R180"/>
+<attribute name="VALUE" x="0" y="118.11" size="1.778" layer="94" rot="R180"/>
 </instance>
-<instance part="J1" gate="G$1" x="19.05" y="153.67" smashed="yes" grouprefs="SERVO">
-<attribute name="VALUE" x="16.51" y="143.51" size="1.778" layer="94"/>
-<attribute name="NAME" x="16.51" y="163.83" size="1.778" layer="94"/>
+<instance part="J1" gate="G$1" x="21.59" y="123.19" smashed="yes" grouprefs="SERVO">
+<attribute name="VALUE" x="19.05" y="113.03" size="1.778" layer="94"/>
+<attribute name="NAME" x="19.05" y="133.35" size="1.778" layer="94"/>
 </instance>
 <instance part="Q8" gate="G$1" x="182.88" y="137.16" smashed="yes" rot="R180" grouprefs="SUPPLY_GENERATOR">
 <attribute name="NAME" x="199.39" y="134.62" size="1.778" layer="94" rot="R180"/>
@@ -2046,16 +2045,16 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <attribute name="NAME" x="-34.29" y="-21.59" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-34.29" y="-27.94" size="1.778" layer="94"/>
 </instance>
-<instance part="Q7" gate="G$1" x="-34.29" y="138.43" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-30.48" y="139.7" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-30.48" y="135.89" size="1.778" layer="94"/>
+<instance part="Q7" gate="G$1" x="-31.75" y="107.95" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-27.94" y="109.22" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-27.94" y="105.41" size="1.778" layer="94"/>
 </instance>
-<instance part="R14" gate="G$1" x="-53.34" y="146.05" smashed="yes" grouprefs="SERVO">
-<attribute name="NAME" x="-59.69" y="148.59" size="1.778" layer="94"/>
-<attribute name="VALUE" x="-59.69" y="142.24" size="1.778" layer="94"/>
+<instance part="R14" gate="G$1" x="-50.8" y="115.57" smashed="yes" grouprefs="SERVO">
+<attribute name="NAME" x="-57.15" y="118.11" size="1.778" layer="94"/>
+<attribute name="VALUE" x="-57.15" y="111.76" size="1.778" layer="94"/>
 </instance>
-<instance part="GND3" gate="1" x="-64.77" y="142.24" smashed="yes" grouprefs="SERVO">
-<attribute name="VALUE" x="-67.31" y="139.7" size="1.778" layer="96"/>
+<instance part="GND3" gate="1" x="-62.23" y="111.76" smashed="yes" grouprefs="SERVO">
+<attribute name="VALUE" x="-64.77" y="109.22" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -2098,8 +2097,8 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </segment>
 <segment>
 <pinref part="SW1" gate="G$1" pin="P$1"/>
-<wire x1="-77.47" y1="161.29" x2="-87.63" y2="161.29" width="0.1524" layer="91" grouprefs="SERVO"/>
-<label x="-87.63" y="161.29" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-74.93" y1="130.81" x2="-85.09" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-85.09" y="130.81" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="Q6" gate="G$1" pin="C"/>
@@ -2152,17 +2151,17 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </segment>
 <segment>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="-16.51" y1="176.53" x2="-11.43" y2="176.53" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-13.97" y1="146.05" x2="-8.89" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="R3" gate="G$1" pin="P$2"/>
-<wire x1="-16.51" y1="161.29" x2="-16.51" y2="171.45" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-16.51" y1="171.45" x2="-16.51" y2="176.53" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-20.32" y1="171.45" x2="-16.51" y2="171.45" width="0.1524" layer="91" grouprefs="SERVO"/>
-<junction x="-16.51" y="171.45" grouprefs="SERVO"/>
+<wire x1="-13.97" y1="130.81" x2="-13.97" y2="140.97" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-13.97" y1="140.97" x2="-13.97" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-17.78" y1="140.97" x2="-13.97" y2="140.97" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-13.97" y="140.97" grouprefs="SERVO"/>
 <pinref part="R15" gate="G$1" pin="P$2"/>
-<wire x1="-20.32" y1="161.29" x2="-16.51" y2="161.29" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-17.78" y1="130.81" x2="-13.97" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="Q1" gate="G$1" pin="S"/>
-<wire x1="-16.51" y1="150.495" x2="-16.51" y2="161.29" width="0.1524" layer="91" grouprefs="SERVO"/>
-<junction x="-16.51" y="161.29" grouprefs="SERVO"/>
+<wire x1="-13.97" y1="120.015" x2="-13.97" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-13.97" y="130.81" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="Q8" gate="G$1" pin="S"/>
@@ -2215,23 +2214,23 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <segment>
 <pinref part="GND3" gate="1" pin="GND"/>
 <pinref part="R14" gate="G$1" pin="P$1"/>
-<wire x1="-64.77" y1="144.78" x2="-64.77" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-64.77" y1="146.05" x2="-60.96" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-62.23" y1="114.3" x2="-62.23" y2="115.57" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-62.23" y1="115.57" x2="-58.42" y2="115.57" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$1" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="P$2"/>
-<wire x1="-25.4" y1="194.31" x2="8.89" y2="194.31" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-22.86" y1="163.83" x2="11.43" y2="163.83" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="J1" gate="G$1" pin="PULSE"/>
-<wire x1="8.89" y1="194.31" x2="8.89" y2="158.75" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="11.43" y1="163.83" x2="11.43" y2="128.27" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="GPIO_SERVO_EN" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="P$1"/>
-<wire x1="-58.42" y1="125.73" x2="-86.36" y2="125.73" width="0.1524" layer="91" grouprefs="SERVO"/>
-<label x="-86.36" y="125.73" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-55.88" y1="95.25" x2="-83.82" y2="95.25" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-83.82" y="95.25" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="IO18"/>
@@ -2242,8 +2241,8 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <net name="GPIO_SERVO_PULSE" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="P$1"/>
-<label x="-87.63" y="194.31" size="1.778" layer="95" grouprefs="SERVO"/>
-<wire x1="-41.91" y1="194.31" x2="-87.63" y2="194.31" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-85.09" y="163.83" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-39.37" y1="163.83" x2="-85.09" y2="163.83" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="IO19"/>
@@ -2254,8 +2253,8 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <net name="3V3" class="0">
 <segment>
 <pinref part="Q2" gate="G$1" pin="C"/>
-<wire x1="-57.15" y1="171.45" x2="-87.63" y2="171.45" width="0.1524" layer="91" grouprefs="SERVO"/>
-<label x="-87.63" y="171.45" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-54.61" y1="140.97" x2="-85.09" y2="140.97" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-85.09" y="140.97" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="3V3"/>
@@ -2272,19 +2271,19 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <segment>
 <pinref part="R3" gate="G$1" pin="P$1"/>
 <pinref part="Q2" gate="G$1" pin="E"/>
-<wire x1="-36.83" y1="171.45" x2="-39.37" y2="171.45" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-39.37" y1="171.45" x2="-41.91" y2="171.45" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-39.37" y1="171.45" x2="-39.37" y2="186.69" width="0.1524" layer="91" grouprefs="SERVO"/>
-<junction x="-39.37" y="171.45" grouprefs="SERVO"/>
-<wire x1="-39.37" y1="186.69" x2="-43.18" y2="186.69" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-34.29" y1="140.97" x2="-36.83" y2="140.97" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-36.83" y1="140.97" x2="-39.37" y2="140.97" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-36.83" y1="140.97" x2="-36.83" y2="156.21" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-36.83" y="140.97" grouprefs="SERVO"/>
+<wire x1="-36.83" y1="156.21" x2="-40.64" y2="156.21" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="R4" gate="G$1" pin="P$2"/>
 </segment>
 </net>
 <net name="GPIO_SERVO_IS_ON" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="P$1"/>
-<wire x1="-59.69" y1="186.69" x2="-87.63" y2="186.69" width="0.1524" layer="91" grouprefs="SERVO"/>
-<label x="-87.63" y="186.69" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-57.15" y1="156.21" x2="-85.09" y2="156.21" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-85.09" y="156.21" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="IO21"/>
@@ -2719,22 +2718,22 @@ Source: www.atmel.com .. doc2503.pdf</description>
 <segment>
 <pinref part="SW1" gate="G$1" pin="P$2"/>
 <pinref part="Q2" gate="G$1" pin="B"/>
-<wire x1="-49.53" y1="161.29" x2="-49.53" y2="163.83" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-49.53" y1="161.29" x2="-57.15" y2="161.29" width="0.1524" layer="91" grouprefs="SERVO"/>
-<junction x="-49.53" y="161.29" grouprefs="SERVO"/>
+<wire x1="-46.99" y1="130.81" x2="-46.99" y2="133.35" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-46.99" y1="130.81" x2="-54.61" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-46.99" y="130.81" grouprefs="SERVO"/>
 <pinref part="R15" gate="G$1" pin="P$1"/>
-<wire x1="-49.53" y1="161.29" x2="-36.83" y2="161.29" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="-49.53" y1="161.29" x2="-49.53" y2="153.67" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-46.99" y1="130.81" x2="-34.29" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-46.99" y1="130.81" x2="-46.99" y2="123.19" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="J1" gate="G$1" pin="VCC"/>
-<wire x1="-49.53" y1="153.67" x2="8.89" y2="153.67" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-46.99" y1="123.19" x2="11.43" y2="123.19" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="D"/>
 <pinref part="J1" gate="G$1" pin="GND"/>
-<wire x1="-16.51" y1="136.525" x2="8.89" y2="136.525" width="0.1524" layer="91" grouprefs="SERVO"/>
-<wire x1="8.89" y1="136.525" x2="8.89" y2="148.59" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-13.97" y1="106.045" x2="11.43" y2="106.045" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="11.43" y1="106.045" x2="11.43" y2="118.11" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$13" class="0">
@@ -2922,26 +2921,26 @@ Source: www.atmel.com .. doc2503.pdf</description>
 </segment>
 <segment>
 <pinref part="Q7" gate="G$1" pin="B"/>
-<wire x1="-41.91" y1="138.43" x2="-87.63" y2="138.43" width="0.1524" layer="91" grouprefs="SERVO"/>
-<label x="-86.36" y="139.7" size="1.778" layer="95" grouprefs="SERVO"/>
+<wire x1="-39.37" y1="107.95" x2="-85.09" y2="107.95" width="0.1524" layer="91" grouprefs="SERVO"/>
+<label x="-83.82" y="109.22" size="1.778" layer="95" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="P$2"/>
-<wire x1="-41.91" y1="125.73" x2="-34.29" y2="125.73" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-39.37" y1="95.25" x2="-31.75" y2="95.25" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="Q7" gate="G$1" pin="E"/>
-<wire x1="-34.29" y1="125.73" x2="-34.29" y2="130.81" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-31.75" y1="95.25" x2="-31.75" y2="100.33" width="0.1524" layer="91" grouprefs="SERVO"/>
 </segment>
 </net>
 <net name="N$38" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
 <pinref part="Q7" gate="G$1" pin="C"/>
-<wire x1="-25.4" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
+<wire x1="-22.86" y1="115.57" x2="-31.75" y2="115.57" width="0.1524" layer="91" grouprefs="SERVO"/>
 <pinref part="R14" gate="G$1" pin="P$2"/>
-<wire x1="-44.45" y1="146.05" x2="-34.29" y2="146.05" width="0.1524" layer="91" grouprefs="SERVO"/>
-<junction x="-34.29" y="146.05" grouprefs="SERVO"/>
+<wire x1="-41.91" y1="115.57" x2="-31.75" y2="115.57" width="0.1524" layer="91" grouprefs="SERVO"/>
+<junction x="-31.75" y="115.57" grouprefs="SERVO"/>
 </segment>
 </net>
 </nets>

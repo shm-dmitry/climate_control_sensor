@@ -176,8 +176,8 @@
 </class>
 </classes>
 <parts>
-<part name="U1" library="my_devices" deviceset="HALL_SENSOR" device=""/>
 <part name="U2" library="my_devices" deviceset="HALL_SENSOR" device=""/>
+<part name="U1" library="my_devices" deviceset="HALL_SENSOR" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 </parts>
@@ -186,11 +186,11 @@
 <plain>
 </plain>
 <instances>
-<instance part="U1" gate="G$1" x="17.78" y="0" smashed="yes">
+<instance part="U2" gate="G$1" x="17.78" y="0" smashed="yes">
 <attribute name="NAME" x="25.4" y="0" size="1.778" layer="94"/>
 <attribute name="VALUE" x="25.4" y="-2.54" size="1.778" layer="94"/>
 </instance>
-<instance part="U2" gate="G$1" x="-22.86" y="0" smashed="yes">
+<instance part="U1" gate="G$1" x="-22.86" y="0" smashed="yes">
 <attribute name="NAME" x="-15.24" y="0" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-15.24" y="-2.54" size="1.778" layer="94"/>
 </instance>
@@ -206,8 +206,8 @@
 <nets>
 <net name="VCC" class="0">
 <segment>
-<pinref part="U2" gate="G$1" pin="VCC"/>
 <pinref part="U1" gate="G$1" pin="VCC"/>
+<pinref part="U2" gate="G$1" pin="VCC"/>
 <wire x1="-22.86" y1="7.62" x2="-5.08" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
 <wire x1="-5.08" y1="7.62" x2="17.78" y2="7.62" width="0.1524" layer="91"/>
@@ -217,8 +217,8 @@
 </net>
 <net name="GND" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="GND"/>
 <pinref part="U2" gate="G$1" pin="GND"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
 <wire x1="17.78" y1="-7.62" x2="-2.54" y2="-7.62" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="-2.54" y1="-7.62" x2="-22.86" y2="-7.62" width="0.1524" layer="91"/>
@@ -226,16 +226,16 @@
 <junction x="-2.54" y="-7.62"/>
 </segment>
 </net>
-<net name="OUT_B" class="0">
+<net name="OUT_A" class="0">
 <segment>
-<pinref part="U2" gate="G$1" pin="OUT"/>
+<pinref part="U1" gate="G$1" pin="OUT"/>
 <wire x1="-30.48" y1="0" x2="-30.48" y2="25.4" width="0.1524" layer="91"/>
 <label x="-30.48" y="22.86" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="OUT_A" class="0">
+<net name="OUT_B" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="OUT"/>
+<pinref part="U2" gate="G$1" pin="OUT"/>
 <wire x1="10.16" y1="0" x2="10.16" y2="25.4" width="0.1524" layer="91"/>
 <label x="10.16" y="22.86" size="1.778" layer="95"/>
 </segment>

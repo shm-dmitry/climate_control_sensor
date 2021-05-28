@@ -208,11 +208,11 @@
 <segment>
 <pinref part="U2" gate="G$1" pin="VCC"/>
 <pinref part="U1" gate="G$1" pin="VCC"/>
-<wire x1="-22.86" y1="7.62" x2="-17.78" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="7.62" x2="17.78" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="7.62" x2="-17.78" y2="7.62" width="0.1524" layer="91"/>
-<wire x1="-17.78" y1="7.62" x2="-17.78" y2="25.4" width="0.1524" layer="91"/>
-<junction x="-17.78" y="7.62"/>
+<wire x1="-22.86" y1="7.62" x2="-5.08" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="P+1" gate="1" pin="+5V"/>
+<wire x1="-5.08" y1="7.62" x2="17.78" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="12.7" width="0.1524" layer="91"/>
+<junction x="-5.08" y="7.62"/>
 </segment>
 </net>
 <net name="GND" class="0">
