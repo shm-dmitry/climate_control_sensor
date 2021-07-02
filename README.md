@@ -14,6 +14,7 @@ It reports:
 
 It controls:
 - Exhaust fan 
+- Cooling fan with speed control (fan_pwm driver) 
 - Control any device (except Air Conditioneers at now) via IR
 - TION Breather (in development at now...) via Bluetooth
 
@@ -41,6 +42,7 @@ Board is done.
 | Internal ESP32 Touch Pin | OK | OK |
 | RGB Led | OK | OK |
 | FAN Switch control | OK | OK |
+| FAN speed control | OK | In progress |
 | IR Transmitter | OK | OK |
 | Anemometer | OK | OK |
 
