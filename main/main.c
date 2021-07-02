@@ -13,6 +13,7 @@
 #include "uart/pms7003/pms7003.h"
 #include "gpio/rgbled/rgbled.h"
 #include "gpio/fan/fan.h"
+#include "gpio/fan_pwm/fan_pwm.h"
 #include "gpio/anemometer/anemometer.h"
 #include "gpio/touchpad/touchpad.h"
 #include "gpio/ir/ir.h"
@@ -85,6 +86,10 @@ void app_main(void)
 
 #if CONFIG_FAN_ENABLED
 	fan_startup(CONFIG_FAN_GPIO, CONFIG_FAN_MQTT_TOPIC_COMMAND);
+#endif
+
+#if CONFIG_FAN_PWM_ENABLED
+	fan_pwm_startup(CONFIG_FAN_PWM_GPIO, CONFIG_FAN_PWM_MQTT_TOPIC_COMMAND);
 #endif
 
 #if CONFIG_ANEMOMETER_ENABLED

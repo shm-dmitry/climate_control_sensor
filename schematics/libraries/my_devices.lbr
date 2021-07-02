@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -599,6 +599,71 @@
 <wire x1="3.81" y1="-1.27" x2="3.81" y2="1.27" width="0.127" layer="21"/>
 <wire x1="3.81" y1="1.27" x2="-3.81" y2="1.27" width="0.127" layer="21"/>
 </package>
+<package name="D_SCHOTTKY">
+<pad name="P$1" x="-1.27" y="0" drill="0.6" shape="square"/>
+<pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
+<wire x1="2.54" y1="1.27" x2="-2.54" y2="1.27" width="0.127" layer="21"/>
+</package>
+<package name="D">
+<pad name="P$1" x="-1.27" y="0" drill="0.6" shape="square"/>
+<pad name="P$2" x="1.27" y="0" drill="0.6" shape="square"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
+<wire x1="2.54" y1="1.27" x2="-2.54" y2="1.27" width="0.127" layer="21"/>
+</package>
+<package name="L-4">
+<pad name="P$1" x="0" y="2.54" drill="0.6" shape="square"/>
+<pad name="P$2" x="0" y="0" drill="0.6" shape="square"/>
+<pad name="P$3" x="0" y="-2.54" drill="0.6" shape="square"/>
+<wire x1="-1.27" y1="3.81" x2="-1.27" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="-3.81" x2="1.27" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-3.81" x2="1.27" y2="3.81" width="0.127" layer="21"/>
+<wire x1="1.27" y1="3.81" x2="-1.27" y2="3.81" width="0.127" layer="21"/>
+</package>
+<package name="DIP14">
+<pad name="PIN_4" x="-2.54" y="0" drill="0.6" shape="square"/>
+<pad name="PIN_3" x="-2.54" y="2.54" drill="0.6" shape="square"/>
+<pad name="PIN_5" x="-2.54" y="-2.54" drill="0.6" shape="square"/>
+<pad name="PIN_2" x="-2.54" y="5.08" drill="0.6" shape="square"/>
+<pad name="PIN_6" x="-2.54" y="-5.08" drill="0.6" shape="square"/>
+<pad name="PIN_1" x="-2.54" y="7.62" drill="0.6" shape="square"/>
+<pad name="PIN_7" x="-2.54" y="-7.62" drill="0.6" shape="square"/>
+<pad name="PIN_8" x="2.54" y="-7.62" drill="0.6" shape="square"/>
+<pad name="PIN_9" x="2.54" y="-5.08" drill="0.6" shape="square"/>
+<pad name="PIN_10" x="2.54" y="-2.54" drill="0.6" shape="square"/>
+<pad name="PIN_11" x="2.54" y="0" drill="0.6" shape="square"/>
+<pad name="PIN_12" x="2.54" y="2.54" drill="0.6" shape="square"/>
+<pad name="PIN_13" x="2.54" y="5.08" drill="0.6" shape="square"/>
+<pad name="PIN_14" x="2.54" y="7.62" drill="0.6" shape="square"/>
+<wire x1="-3.81" y1="8.89" x2="-3.81" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="-8.89" x2="3.81" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-8.89" x2="3.81" y2="8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="8.89" x2="-3.81" y2="8.89" width="0.127" layer="21"/>
+<circle x="-1.2192" y="8.2296" radius="0.43105" width="0.127" layer="21"/>
+</package>
+<package name="DIP8">
+<pad name="PIN_4" x="-2.54" y="-3.81" drill="0.6" shape="square"/>
+<pad name="PIN_3" x="-2.54" y="-1.27" drill="0.6" shape="square"/>
+<pad name="PIN_2" x="-2.54" y="1.27" drill="0.6" shape="square"/>
+<pad name="PIN_1" x="-2.54" y="3.81" drill="0.6" shape="square"/>
+<pad name="PIN_8" x="2.54" y="3.81" drill="0.6" shape="square"/>
+<pad name="PIN_7" x="2.54" y="1.27" drill="0.6" shape="square"/>
+<pad name="PIN_6" x="2.54" y="-1.27" drill="0.6" shape="square"/>
+<pad name="PIN_5" x="2.54" y="-3.81" drill="0.6" shape="square"/>
+<wire x1="-3.81" y1="5.08" x2="-3.81" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="-5.08" x2="3.81" y2="-5.08" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-5.08" x2="3.81" y2="5.08" width="0.127" layer="21"/>
+<wire x1="3.81" y1="5.08" x2="0.635" y2="5.08" width="0.127" layer="21"/>
+<wire x1="0.635" y1="5.08" x2="-0.635" y2="5.08" width="0.127" layer="21"/>
+<wire x1="-0.635" y1="5.08" x2="-3.81" y2="5.08" width="0.127" layer="21"/>
+<wire x1="-0.635" y1="5.08" x2="-0.635" y2="3.81" width="0.127" layer="21"/>
+<wire x1="-0.635" y1="3.81" x2="0.635" y2="3.81" width="0.127" layer="21"/>
+<wire x1="0.635" y1="3.81" x2="0.635" y2="5.08" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="GY-SGP30">
@@ -986,14 +1051,14 @@
 <text x="-16.51" y="-5.08" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 <symbol name="L">
-<wire x1="0" y1="0" x2="0" y2="-5.08" width="0.254" layer="94" curve="-180"/>
-<wire x1="0" y1="5.08" x2="0" y2="0" width="0.254" layer="94" curve="-180"/>
-<wire x1="0" y1="10.16" x2="0" y2="5.08" width="0.254" layer="94" curve="-180"/>
-<wire x1="0" y1="-5.08" x2="0" y2="-10.16" width="0.254" layer="94" curve="-180"/>
-<pin name="P$1" x="-5.08" y="10.16" visible="off" length="middle"/>
-<pin name="P$2" x="-5.08" y="-10.16" visible="off" length="middle"/>
-<text x="-5.08" y="12.7" size="1.778" layer="94">&gt;NAME</text>
-<text x="-5.08" y="-15.24" size="1.778" layer="94">&gt;VALUE</text>
+<pin name="P$1" x="-5.08" y="2.54" visible="off" length="middle"/>
+<pin name="P$2" x="-5.08" y="-2.54" visible="off" length="middle"/>
+<text x="1.905" y="0.635" size="1.778" layer="94">&gt;NAME</text>
+<text x="1.905" y="-2.54" size="1.778" layer="94">&gt;VALUE</text>
+<wire x1="0" y1="0" x2="0" y2="-1.27" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="-1.27" x2="0" y2="-2.54" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="1.27" x2="0" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.27" width="0.254" layer="94" curve="-180"/>
 </symbol>
 <symbol name="DIODE_BRIDGE">
 <pin name="AC1" x="-10.16" y="5.08" visible="off" length="middle" direction="pwr"/>
@@ -1217,6 +1282,139 @@
 </polygon>
 <text x="-4.445" y="-3.81" size="1.778" layer="94">&gt;NAME</text>
 <text x="-5.08" y="-6.35" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="D_SCHOTTKY">
+<pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
+<pin name="P$2" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-1.27" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="1.27" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="1.27" x2="0" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="-1.27" x2="-0.635" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="1.27" x2="0.635" y2="1.27" width="0.254" layer="94"/>
+<wire x1="0.635" y1="1.27" x2="0.635" y2="0.635" width="0.254" layer="94"/>
+<wire x1="-0.635" y1="-0.635" x2="-0.635" y2="-1.27" width="0.254" layer="94"/>
+<text x="-5.715" y="2.54" size="1.778" layer="94">&gt;NAME</text>
+<text x="-5.715" y="-3.81" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="D">
+<pin name="P$1" x="-7.62" y="0" visible="off" length="middle"/>
+<pin name="P$2" x="5.08" y="0" visible="off" length="middle" rot="R180"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-1.27" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-2.54" y2="1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="1.27" x2="0" y2="-1.27" width="0.254" layer="94"/>
+<text x="-5.715" y="1.905" size="1.778" layer="94">&gt;NAME</text>
+<text x="-5.715" y="-3.81" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="L-4">
+<pin name="P$1" x="-5.08" y="5.08" visible="off" length="middle"/>
+<pin name="P$2" x="-5.08" y="0" visible="off" length="middle"/>
+<pin name="P$3" x="-5.08" y="-5.08" visible="off" length="middle"/>
+<wire x1="0" y1="5.08" x2="0" y2="2.54" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="2.54" x2="0" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="0" x2="0" y2="-2.54" width="0.254" layer="94" curve="-180"/>
+<wire x1="0" y1="-2.54" x2="0" y2="-5.08" width="0.254" layer="94" curve="-180"/>
+<circle x="0" y="4.445" radius="0.254" width="0.254" layer="94"/>
+<circle x="0" y="-4.445" radius="0.254" width="0.254" layer="94"/>
+<text x="2.54" y="2.54" size="1.778" layer="94">&gt;NAME</text>
+<text x="2.54" y="-2.54" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="CD4001BE">
+<pin name="CD" x="-10.16" y="0" visible="off" length="middle" direction="out"/>
+<pin name="AB" x="-10.16" y="2.54" visible="off" length="middle" direction="out"/>
+<pin name="C" x="-10.16" y="-2.54" visible="off" length="middle"/>
+<pin name="B" x="-10.16" y="5.08" visible="off" length="middle"/>
+<pin name="D" x="-10.16" y="-5.08" visible="off" length="middle"/>
+<pin name="A" x="-10.16" y="7.62" visible="off" length="middle"/>
+<pin name="GND" x="-10.16" y="-7.62" visible="off" length="middle" direction="pwr"/>
+<pin name="VCC" x="10.16" y="7.62" visible="off" length="middle" direction="pwr" rot="R180"/>
+<pin name="N" x="10.16" y="5.08" visible="off" length="middle" rot="R180"/>
+<pin name="G" x="10.16" y="2.54" visible="off" length="middle" rot="R180"/>
+<pin name="NG" x="10.16" y="0" visible="off" length="middle" direction="out" rot="R180"/>
+<pin name="EF" x="10.16" y="-2.54" visible="off" length="middle" direction="out" rot="R180"/>
+<pin name="E" x="10.16" y="-5.08" visible="off" length="middle" rot="R180"/>
+<pin name="F" x="10.16" y="-7.62" visible="off" length="middle" rot="R180"/>
+<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<text x="-4.445" y="6.985" size="1.016" layer="94">A</text>
+<text x="-4.445" y="5.08" size="1.016" layer="94">B</text>
+<text x="-4.445" y="2.54" size="1.016" layer="94">^(A|B)</text>
+<text x="-4.445" y="0" size="1.016" layer="94">^(C|D)</text>
+<text x="-4.445" y="-2.54" size="1.016" layer="94">C</text>
+<text x="-4.445" y="-5.08" size="1.016" layer="94">D</text>
+<text x="-4.445" y="-7.62" size="1.016" layer="94">GND</text>
+<text x="1.905" y="6.985" size="1.016" layer="94">VCC</text>
+<text x="3.175" y="5.08" size="1.016" layer="94">N</text>
+<text x="3.175" y="2.54" size="1.016" layer="94">G</text>
+<text x="0.635" y="0" size="1.016" layer="94">^(N|G)</text>
+<text x="0.635" y="-2.54" size="1.016" layer="94">^(E|F)</text>
+<text x="3.175" y="-5.08" size="1.016" layer="94">E</text>
+<text x="3.175" y="-7.62" size="1.016" layer="94">F</text>
+<text x="-5.08" y="12.7" size="1.778" layer="94">&gt;NAME</text>
+<text x="-5.08" y="-12.7" size="1.778" layer="94">&gt;VALUE</text>
+</symbol>
+<symbol name="NE555P">
+<pin name="OUT" x="-10.16" y="0" visible="off" length="middle" direction="out"/>
+<pin name="TRIG" x="-10.16" y="2.54" visible="off" length="middle"/>
+<pin name="RESET" x="-10.16" y="-2.54" visible="off" length="middle"/>
+<pin name="GND" x="-10.16" y="5.08" visible="off" length="middle" direction="pwr"/>
+<pin name="VCC" x="10.16" y="5.08" visible="off" length="middle" direction="pwr" rot="R180"/>
+<pin name="DISCH" x="10.16" y="2.54" visible="off" length="middle" rot="R180"/>
+<pin name="THRES" x="10.16" y="0" visible="off" length="middle" rot="R180"/>
+<pin name="CONT" x="10.16" y="-2.54" visible="off" length="middle" rot="R180"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-5.08" x2="5.08" y2="7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="7.62" x2="-5.08" y2="7.62" width="0.254" layer="94"/>
+<text x="-5.08" y="10.16" size="1.778" layer="94">&gt;NAME</text>
+<text x="-5.08" y="-7.62" size="1.778" layer="94">&gt;VALUE</text>
+<text x="-4.445" y="5.08" size="0.8128" layer="94">GND</text>
+<text x="-4.445" y="2.54" size="0.8128" layer="94">TRIG</text>
+<text x="-4.445" y="0" size="0.8128" layer="94">OUT</text>
+<text x="-4.445" y="-2.54" size="0.8128" layer="94">RST</text>
+<text x="1.905" y="5.08" size="0.8128" layer="94">VCC</text>
+<text x="1.27" y="2.54" size="0.8128" layer="94">DISCH</text>
+<text x="0.635" y="0" size="0.8128" layer="94">THRES</text>
+<text x="1.27" y="-2.54" size="0.8128" layer="94">CONT</text>
+</symbol>
+<symbol name="SN74LS32N">
+<pin name="2Y" x="-10.16" y="-5.08" visible="off" length="middle" direction="out"/>
+<pin name="1Y" x="-10.16" y="2.54" visible="off" length="middle" direction="out"/>
+<pin name="2A" x="-10.16" y="0" visible="off" length="middle" direction="in"/>
+<pin name="1B" x="-10.16" y="5.08" visible="off" length="middle" direction="in"/>
+<pin name="2B" x="-10.16" y="-2.54" visible="off" length="middle" direction="in"/>
+<pin name="1A" x="-10.16" y="7.62" visible="off" length="middle" direction="in"/>
+<pin name="GND" x="-10.16" y="-7.62" visible="off" length="middle" direction="pwr"/>
+<pin name="VCC" x="10.16" y="7.62" visible="off" length="middle" direction="pwr" rot="R180"/>
+<pin name="4A" x="10.16" y="5.08" visible="off" length="middle" direction="in" rot="R180"/>
+<pin name="4B" x="10.16" y="2.54" visible="off" length="middle" direction="in" rot="R180"/>
+<pin name="4Y" x="10.16" y="0" visible="off" length="middle" direction="out" rot="R180"/>
+<pin name="3A" x="10.16" y="-2.54" visible="off" length="middle" direction="in" rot="R180"/>
+<pin name="3B" x="10.16" y="-5.08" visible="off" length="middle" direction="in" rot="R180"/>
+<pin name="3Y" x="10.16" y="-7.62" visible="off" length="middle" direction="out" rot="R180"/>
+<wire x1="-5.08" y1="10.16" x2="-5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-10.16" x2="5.08" y2="10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="10.16" x2="-5.08" y2="10.16" width="0.254" layer="94"/>
+<text x="-4.445" y="6.985" size="1.016" layer="94">1A</text>
+<text x="-4.445" y="5.08" size="1.016" layer="94">1B</text>
+<text x="-4.445" y="2.54" size="1.016" layer="94">1Y</text>
+<text x="-4.445" y="-5.08" size="1.016" layer="94">2Y</text>
+<text x="-4.445" y="0" size="1.016" layer="94">2A</text>
+<text x="-4.445" y="-2.54" size="1.016" layer="94">2B</text>
+<text x="-4.445" y="-7.62" size="1.016" layer="94">GND</text>
+<text x="1.905" y="6.985" size="1.016" layer="94">VCC</text>
+<text x="3.175" y="5.08" size="1.016" layer="94">4A</text>
+<text x="3.175" y="2.54" size="1.016" layer="94">4B</text>
+<text x="3.175" y="0" size="1.016" layer="94">4Y</text>
+<text x="3.175" y="-2.54" size="1.016" layer="94">3A</text>
+<text x="3.175" y="-5.08" size="1.016" layer="94">3B</text>
+<text x="3.175" y="-7.62" size="1.016" layer="94">3Y</text>
+<text x="-5.08" y="12.7" size="1.778" layer="94">&gt;NAME</text>
+<text x="-5.08" y="-12.7" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1654,7 +1852,7 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="L">
+<deviceset name="L" prefix="L">
 <gates>
 <gate name="G$1" symbol="L" x="0" y="0"/>
 </gates>
@@ -1902,6 +2100,133 @@
 <connect gate="G$1" pin="P1" pad="P1"/>
 <connect gate="G$1" pin="P2" pad="P2"/>
 <connect gate="G$1" pin="P3" pad="P3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="D_SCHOTTKY" prefix="D">
+<gates>
+<gate name="G$1" symbol="D_SCHOTTKY" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="D_SCHOTTKY">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="D" prefix="D">
+<gates>
+<gate name="G$1" symbol="D" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="D">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="L-4" prefix="L">
+<gates>
+<gate name="G$1" symbol="L-4" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="L-4">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+<connect gate="G$1" pin="P$3" pad="P$3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CD4001BE" prefix="U">
+<gates>
+<gate name="G$1" symbol="CD4001BE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIP14">
+<connects>
+<connect gate="G$1" pin="A" pad="PIN_1"/>
+<connect gate="G$1" pin="AB" pad="PIN_3"/>
+<connect gate="G$1" pin="B" pad="PIN_2"/>
+<connect gate="G$1" pin="C" pad="PIN_5"/>
+<connect gate="G$1" pin="CD" pad="PIN_4"/>
+<connect gate="G$1" pin="D" pad="PIN_6"/>
+<connect gate="G$1" pin="E" pad="PIN_9"/>
+<connect gate="G$1" pin="EF" pad="PIN_10"/>
+<connect gate="G$1" pin="F" pad="PIN_8"/>
+<connect gate="G$1" pin="G" pad="PIN_12"/>
+<connect gate="G$1" pin="GND" pad="PIN_7"/>
+<connect gate="G$1" pin="N" pad="PIN_13"/>
+<connect gate="G$1" pin="NG" pad="PIN_11"/>
+<connect gate="G$1" pin="VCC" pad="PIN_14"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="NE555P" prefix="U">
+<gates>
+<gate name="G$1" symbol="NE555P" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIP8">
+<connects>
+<connect gate="G$1" pin="CONT" pad="PIN_5"/>
+<connect gate="G$1" pin="DISCH" pad="PIN_7"/>
+<connect gate="G$1" pin="GND" pad="PIN_1"/>
+<connect gate="G$1" pin="OUT" pad="PIN_3"/>
+<connect gate="G$1" pin="RESET" pad="PIN_4"/>
+<connect gate="G$1" pin="THRES" pad="PIN_6"/>
+<connect gate="G$1" pin="TRIG" pad="PIN_2"/>
+<connect gate="G$1" pin="VCC" pad="PIN_8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SN74LS32N" prefix="U">
+<gates>
+<gate name="G$1" symbol="SN74LS32N" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIP14">
+<connects>
+<connect gate="G$1" pin="1A" pad="PIN_1"/>
+<connect gate="G$1" pin="1B" pad="PIN_2"/>
+<connect gate="G$1" pin="1Y" pad="PIN_3"/>
+<connect gate="G$1" pin="2A" pad="PIN_4"/>
+<connect gate="G$1" pin="2B" pad="PIN_5"/>
+<connect gate="G$1" pin="2Y" pad="PIN_6"/>
+<connect gate="G$1" pin="3A" pad="PIN_10"/>
+<connect gate="G$1" pin="3B" pad="PIN_9"/>
+<connect gate="G$1" pin="3Y" pad="PIN_8"/>
+<connect gate="G$1" pin="4A" pad="PIN_13"/>
+<connect gate="G$1" pin="4B" pad="PIN_12"/>
+<connect gate="G$1" pin="4Y" pad="PIN_11"/>
+<connect gate="G$1" pin="GND" pad="PIN_7"/>
+<connect gate="G$1" pin="VCC" pad="PIN_14"/>
 </connects>
 <technologies>
 <technology name=""/>

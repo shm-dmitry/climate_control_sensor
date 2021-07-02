@@ -201,6 +201,20 @@ menu "Climate Control Configuration"
          default ""
    endmenu
 
+   menu "FAN PWM configuration (fan: off-on_with_speed)"
+      config FAN_PWM_ENABLED
+         bool "Enable FAN PWM integration"
+         default false
+
+      config FAN_PWM_GPIO
+         int "GPIO pin"
+         default 0
+
+      config FAN_PWM_MQTT_TOPIC_COMMAND
+         string "MQTT topic for FAN PWM device awaits commands"
+         default ""
+   endmenu
+
    menu "IR configuration (Control other devices via IR)"
       config IR_ENABLED
          bool "Enable IR integration"
