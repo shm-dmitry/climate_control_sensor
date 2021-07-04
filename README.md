@@ -42,7 +42,7 @@ Board is done.
 | Internal ESP32 Touch Pin | OK | OK |
 | RGB Led | OK | OK |
 | FAN Switch control | OK | OK |
-| FAN speed control | OK | In progress |
+| FAN speed control | OK | OK |
 | IR Transmitter | OK | OK |
 | Anemometer | OK | OK |
 
