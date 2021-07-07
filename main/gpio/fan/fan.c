@@ -3,6 +3,7 @@
 #include "fan_api.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 #define FAN_CHANGE_STATUS_ENABLED  1
 #define FAN_CHANGE_STATUS_DISABLED 0
@@ -26,9 +27,7 @@ void fan_commands(const char * topic, const char * data) {
 }
 
 void fan_startup(int gpio, const char * command_topic) {
-	if (fan_init(gpio)) {
-		return;
-	}
+	INIT_DRIVER_AND_LOG_OR_RETURN(fan_init(gpio), "FAN driver initialized", "Cant initialize FAN driver: %d");
 
 	mqtt_subscribe(command_topic, fan_commands);
 }

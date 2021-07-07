@@ -25,6 +25,14 @@ menu "Climate Control Configuration"
       config MQTT_BROKER_PASSWORD
 	     string "Broker user password"
 	     default ""
+
+      config MQTT_INIT_LOGGER_ENABLED
+	     boolean "Enable log init messages to MQTT topic"
+	     default false
+
+      config MQTT_INIT_LOGGER_TOPIC
+	     string "MQTT Init logger topic"
+	     default ""
    endmenu
 
    menu "I2C configuration"

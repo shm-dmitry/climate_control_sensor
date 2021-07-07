@@ -4,11 +4,16 @@
 
 #include "string.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 #include "../../cjson/cjson_helper.h"
 
 static char* anemometer_status_topic = NULL;
 
 void anemometer_callback(anemometer_data_t* data) {
+	if (anemometer_status_topic == NULL) {
+		return;
+	}
+
 	cJSON *root = cJSON_CreateObject();
 	cJSON_AddNumberToObject(root, "direction", data->direction);
 
@@ -89,17 +94,14 @@ void anemometer_commands(const char * topic, const char * data) {
 }
 
 void anemometer_startup(int gpio_A, int gpio_B, const char * status_topic, const char * command_topic) {
+	INIT_DRIVER_AND_LOG_OR_RETURN(anemometer_init(gpio_A, gpio_B, anemometer_callback), "Anemometer driver initialized.", "Cant initialize anemometer driver: %d");
+
 	anemometer_status_topic = malloc(strlen(status_topic) + 1);
 	if (anemometer_status_topic == NULL) {
 		return;
 	}
 
 	memcpy(anemometer_status_topic, status_topic, strlen(status_topic) + 1);
-
-	if (anemometer_init(gpio_A, gpio_B, anemometer_callback)) {
-		free(anemometer_status_topic);
-		return;
-	}
 
 	mqtt_subscribe(command_topic, anemometer_commands);
 }

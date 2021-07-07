@@ -6,6 +6,7 @@
 #include "../bme280/bme280.h"
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 #define SGP30_EXEC_PERIOD 30000000
 #define SGP30_APPLY_COMPENSATION_PERIOD 60000000
@@ -67,9 +68,7 @@ void sgp30_commands(const char * topic, const char * data) {
 void sgp30_init(i2c_port_t port, const char* mqtt_topic, const char * command_topic) {
 	sgp30_i2c = i2c_get_handlers(port);
 	if (sgp30_i2c != NULL) {
-		if (sgp30_write_init(sgp30_i2c)) {
-			return;
-		}
+		INIT_DRIVER_AND_LOG_OR_RETURN(sgp30_write_init(sgp30_i2c), "SGP30 Driver initialized.", "Cant initialize SGP30 driver: %d");
 
 		g_sgp30_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_sgp30_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);

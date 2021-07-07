@@ -5,6 +5,7 @@
 #include "tion/tion.h"
 #include "init/init.h"
 #include "init/mqtt.h"
+#include "init/init_logger.h"
 #include "i2c/bme280/bme280.h"
 #include "i2c/sgp30/sgp30.h"
 #include "i2c/bh1750/bh1750.h"
@@ -20,6 +21,10 @@
 
 void app_main(void)
 {
+#if CONFIG_MQTT_INIT_LOGGER_ENABLED
+	init_logger_enable();
+#endif
+
 	init_flash();
 	init_wifi(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD, CONFIG_WIFI_TOPIC);
 	init_snmp();
@@ -105,6 +110,10 @@ void app_main(void)
 #endif
 
 	mqtt_start();
+
+#if CONFIG_MQTT_INIT_LOGGER_ENABLED
+	init_logger_dump_messages(CONFIG_MQTT_INIT_LOGGER_TOPIC);
+#endif
 
 	while(true) {
 		vTaskDelay(100 / portTICK_PERIOD_MS);

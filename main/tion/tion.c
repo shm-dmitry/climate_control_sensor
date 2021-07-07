@@ -2,6 +2,7 @@
 
 #include "../log.h"
 #include "../init/mqtt.h"
+#include "../init/init_logger.h"
 #include "../cjson/cjson_helper.h"
 #include "tion_bt.h"
 
@@ -84,9 +85,7 @@ void tion_startup(const char * status_topic, const char * command_topic) {
 		return;
 	}
 
-	if (tion_bt_init()) {
-		return;
-	}
+	INIT_DRIVER_AND_LOG_OR_RETURN(tion_bt_init(), "TION Driver initialized.", "Cant initialize TION driver: %d");
 
 	memset(tion_status_topic, 0, strlen(status_topic) + 1);
 	memcpy(tion_status_topic, status_topic, strlen(status_topic) + 1);

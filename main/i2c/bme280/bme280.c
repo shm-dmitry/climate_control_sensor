@@ -5,6 +5,7 @@
 #include "bme280_api.h"
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 #define BME280_EXEC_PERIOD 30000000
 
@@ -50,9 +51,7 @@ esp_err_t bme280_read_absolute_humidity(double * absolute_humidity) {
 void bme280_init(i2c_port_t port, const char* mqtt_topic) {
 	bme280_i2c = i2c_get_handlers(port);
 	if (bme280_i2c != NULL) {
-		if (bme280_init_driver(bme280_i2c)) {
-			return;
-		}
+		INIT_DRIVER_AND_LOG_OR_RETURN(bme280_init_driver(bme280_i2c), "BME280 driver initialized", "Cant initialize BME280 : %d");
 
 		g_bme280_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_bme280_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);

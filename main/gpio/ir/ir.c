@@ -4,6 +4,7 @@
 #include "ir_def.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 #include "string.h"
 #include "../../log.h"
 
@@ -30,9 +31,7 @@ void ir_commands(const char * topic, const char * data) {
 }
 
 void ir_startup(int gpio, const char * command_topic) {
-	if (ir_init(gpio)) {
-		return;
-	}
+	INIT_DRIVER_AND_LOG_OR_RETURN(ir_init(gpio), "IR driver initialized.", "Cant initialize IR driver");
 
 	mqtt_subscribe(command_topic, ir_commands);
 }

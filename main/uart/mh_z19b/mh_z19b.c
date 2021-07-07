@@ -6,10 +6,11 @@
 #include "string.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 static char* mh_z19b_status_topic = NULL;
 
-#define MH_Z19B_EXEC_PERIOD 30000000
+#define MH_Z19B_EXEC_PERIOD 3000000
 
 void mh_z19b_commands(const char * topic, const char * data) {
 	cJSON *root = cJSON_Parse(data);
@@ -54,9 +55,7 @@ void mh_z19b_timer_exec_function(void* arg) {
 }
 
 void mh_z19b_init(const uart_config_def_t * config, const char * status_topic, const char * command_topic) {
-	if (mh_z19b_init_driver(config, MHZ19B_RANGE_3000)) {
-		return;
-	}
+	INIT_DRIVER_AND_LOG_OR_RETURN(mh_z19b_init_driver(config, MHZ19B_RANGE_3000), "MH-Z19B driver initialized", "Cant initialize MH-Z19B : %d");
 
 	mh_z19b_status_topic = malloc(strlen(status_topic) + 1);
 	memset(mh_z19b_status_topic, 0, strlen(status_topic) + 1);

@@ -86,8 +86,17 @@ esp_err_t mh_z19b_init_driver(const uart_config_def_t * config, mh_z19b_range ra
 
     if (res) {
     	ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer(range) error: %d", res);
+    	return res;
     } else {
     	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer(range) OK");
+    }
+
+	vTaskDelay(500 / portTICK_PERIOD_MS);
+
+    mh_z19b_data_t data = {0};
+    res = mh_z19b_read(&data);
+    if (res) {
+    	ESP_LOGE(MH_Z19B_LOG, "Cant read data from sensor: %d", res);
     }
 
     return res;

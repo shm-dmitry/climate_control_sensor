@@ -5,6 +5,7 @@
 #include "pms7003_api.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 static char* pms7003_status_topic = NULL;
 
@@ -44,17 +45,7 @@ void pms7003_timer_exec_function(void* arg) {
 }
 
 void pms7003_init(const uart_config_def_t * config, const char * status_topic) {
-	if (pms7003_init_driver(config)) {
-		return;
-	}
-
-	if (pms7003_wakeup()) {
-		return;
-	}
-	if (pms7003_set_active(true)) {
-		return;
-	}
-
+	INIT_DRIVER_AND_LOG_OR_RETURN(pms7003_init_driver(config), "PMS7003 driver initialized", "Cant initialize PMS7003: %d");
 
 	pms7003_status_topic = malloc(strlen(status_topic) + 1);
 	memset(pms7003_status_topic, 0, strlen(status_topic) + 1);

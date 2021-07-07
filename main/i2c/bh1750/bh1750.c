@@ -5,6 +5,7 @@
 #include "bh1750_api.h"
 #include "../../cjson/cJSON.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 
 #define BH1750_EXEC_PERIOD 30000000
 
@@ -30,9 +31,7 @@ void bh1750_timer_exec_function(void* arg) {
 void bh1750_init(i2c_port_t port, const char* mqtt_topic) {
 	bh1750_i2c = i2c_get_handlers(port);
 	if (bh1750_i2c != NULL) {
-		if (bh1750_configure(bh1750_i2c)) {
-			return;
-		}
+		INIT_DRIVER_AND_LOG_OR_RETURN(bh1750_configure(bh1750_i2c), "BH1750 driver initialized", "Cant initialize BH1750: %d");
 
 		g_bh1750_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_bh1750_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);

@@ -5,6 +5,7 @@
 #include "rgbled_api.h"
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 #include "../../log.h"
 
 void rgbled_commands(const char * topic, const char * data) {
@@ -46,9 +47,7 @@ void rgbled_commands(const char * topic, const char * data) {
 }
 
 void rgbled_startup(const rgbled_config_t * config, const char * command_topic) {
-	if (rgbled_init(config)) {
-		return;
-	}
+	INIT_DRIVER_AND_LOG_OR_RETURN(rgbled_init(config), "RGBLED Driver initialized", "Cant initialize RGBLED driver: %d");
 
 	mqtt_subscribe(command_topic, rgbled_commands);
 }

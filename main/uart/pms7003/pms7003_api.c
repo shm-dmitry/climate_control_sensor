@@ -66,7 +66,26 @@ esp_err_t pms7003_init_driver(const uart_config_def_t * config) {
 
 	ESP_LOGI(PMS7003_LOG, "uart_set_pin OK");
 
-    return ESP_OK;
+	res = pms7003_wakeup();
+    if (res) {
+    	ESP_LOGE(PMS7003_LOG, "Cant wakeup sensor: %d", res);
+    	return res;
+    }
+	res = pms7003_set_active(true);
+	if (res) {
+    	ESP_LOGE(PMS7003_LOG, "Cant set sensor state == active: %d", res);
+		return res;
+	}
+
+	vTaskDelay(500 / portTICK_PERIOD_MS);
+
+	pms7003_data_t data = { 0 };
+	res = pms7003_read(&data);
+	if (res) {
+    	ESP_LOGE(PMS7003_LOG, "Cant read data from sensor: %d", res);
+	}
+
+    return res;
 }
 
 esp_err_t pms7003_sleep() {

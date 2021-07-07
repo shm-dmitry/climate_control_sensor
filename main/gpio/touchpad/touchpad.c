@@ -2,6 +2,7 @@
 
 #include "../../cjson/cjson_helper.h"
 #include "../../init/mqtt.h"
+#include "../../init/init_logger.h"
 #include "../rgbled/rgbled_api.h"
 #include "string.h"
 #include "touchpad_api.h"
@@ -39,15 +40,9 @@ void touchpad_callback_func(uint8_t state, uint8_t click_index) {
 	cJSON_Delete(root);
 }
 
-esp_err_t touchpad_init(touch_pad_t pad, const char* status_topic) {
-	esp_err_t res = touchpad_setup(pad, touchpad_callback_func);
-	if (res) {
-		return res;
-	}
-
+void touchpad_init(touch_pad_t pad, const char* status_topic) {
+	INIT_DRIVER_AND_LOG_OR_RETURN(touchpad_setup(pad, touchpad_callback_func), "Touchpad driver initialized", "Cant initialize touchpad driver: %d");
 
 	touchpad_status_topic = malloc(strlen(status_topic) + 1);
 	memcpy(touchpad_status_topic, status_topic, strlen(status_topic) + 1);
-
-	return ESP_OK;
 }
