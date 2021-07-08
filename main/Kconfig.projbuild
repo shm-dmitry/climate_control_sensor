@@ -33,6 +33,14 @@ menu "Climate Control Configuration"
       config MQTT_INIT_LOGGER_TOPIC
 	     string "MQTT Init logger topic"
 	     default ""
+
+      config MQTT_LIVE_LOGGER_ENABLED
+	     boolean "Enable log live messages to MQTT topic"
+	     default false
+
+      config MQTT_LIVE_LOGGER_TOPIC
+	     string "MQTT live logger topic"
+	     default ""
    endmenu
 
    menu "I2C configuration"

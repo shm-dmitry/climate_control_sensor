@@ -3,6 +3,7 @@
 #include "string.h"
 
 #include "../../log.h"
+#include "../../init/mqtt_logger.h"
 
 #define PMS7003_BUF_SIZE 32
 #define PMS7003_DRIVER_BUF_SIZE 1024
@@ -71,18 +72,25 @@ esp_err_t pms7003_init_driver(const uart_config_def_t * config) {
     	ESP_LOGE(PMS7003_LOG, "Cant wakeup sensor: %d", res);
     	return res;
     }
+
+	vTaskDelay(100 / portTICK_PERIOD_MS);
+
 	res = pms7003_set_active(true);
 	if (res) {
     	ESP_LOGE(PMS7003_LOG, "Cant set sensor state == active: %d", res);
 		return res;
 	}
 
-	vTaskDelay(500 / portTICK_PERIOD_MS);
+	for (int i = 0; i<5; i++) {
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-	pms7003_data_t data = { 0 };
-	res = pms7003_read(&data);
-	if (res) {
-    	ESP_LOGE(PMS7003_LOG, "Cant read data from sensor: %d", res);
+		pms7003_data_t data = { 0 };
+		res = pms7003_read(&data);
+		if (res) {
+			ESP_LOGE(PMS7003_LOG, "Cant read data from sensor: %d", res);
+		} else {
+			return ESP_OK;
+		}
 	}
 
     return res;
@@ -149,6 +157,8 @@ uint16_t pms7003_crc(uint8_t * reply) {
 }
 
 esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
+	MQTT_LOG_INIT(PMS7003_LOG);
+
 	while (true) {
 		uint8_t buf;
 
@@ -158,17 +168,18 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 		}
 	}
 
-	ESP_LOGI(PMS7003_LOG, "pms7003_send_buffer  ready-to-send: input queue empty");
-	ESP_LOG_BUFFER_HEXDUMP(PMS7003_LOG, command, PMS7003_COMMAND_SIZE, ESP_LOG_INFO);
+	MQTT_LOGI(PMS7003_LOG, "pms7003_send_buffer  ready-to-send: input queue empty");
+	MQTT_LOG_BUFFER_HEXDUMP(PMS7003_LOG, command, PMS7003_COMMAND_SIZE, ESP_LOG_INFO);
 
 	esp_err_t res = uart_write_bytes(pms7003_uart_port, command, PMS7003_COMMAND_SIZE);
 	if (res <= 0) {
-		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Cant send data to device");
-
+		MQTT_LOGE(PMS7003_LOG, "pms7003_send_buffer  Cant send data to device");
+		MQTT_LOG_DONE;
 		return ESP_FAIL;
 	}
 
 	if (reply == NULL) {
+		MQTT_LOG_DONE;
 		return ESP_OK;
 	}
 
@@ -178,7 +189,8 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 	uint8_t reply_index = 0;
 	for (uint8_t i = 0; i<=await; i++) {
 		if (i == await) {
-			ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Timeout awaiting for a data from device.");
+			MQTT_LOGE(PMS7003_LOG, "pms7003_send_buffer  Timeout awaiting for a data from device.");
+			MQTT_LOG_DONE;
 			return ESP_ERR_TIMEOUT;
 		}
 
@@ -191,23 +203,28 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 		}
 	}
 
-	ESP_LOGI(PMS7003_LOG, "Received reply from device");
-	ESP_LOG_BUFFER_HEXDUMP(PMS7003_LOG, reply, PMS7003_BUF_SIZE, ESP_LOG_INFO);
+	MQTT_LOGI(PMS7003_LOG, "Received reply from device");
+	MQTT_LOG_BUFFER_HEXDUMP(PMS7003_LOG, reply, PMS7003_BUF_SIZE, ESP_LOG_INFO);
 
 	uint16_t crc = pms7003_crc(reply);
 
 	if (reply[0] != 0x42) {
-		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#0");
+		MQTT_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#0");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if (reply[1] != 0x4d) {
-		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#1");
+		MQTT_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad byte#1");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if ((reply[PMS7003_BUF_SIZE - 2] << 8 | reply[PMS7003_BUF_SIZE - 1]) != crc) {
-		ESP_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad CRC");
+		MQTT_LOGE(PMS7003_LOG, "pms7003_send_buffer  Invalid response: bad CRC");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_CRC;
 	}
+
+	MQTT_LOG_DONE;
 
 	return ESP_OK;
 }

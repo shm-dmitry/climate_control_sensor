@@ -4,6 +4,7 @@
 #include "string.h"
 #include "esp_err.h"
 #include "../../log.h"
+#include "../../init/mqtt_logger.h"
 
 // https://github.com/strange-v/MHZ19/
 
@@ -91,13 +92,24 @@ esp_err_t mh_z19b_init_driver(const uart_config_def_t * config, mh_z19b_range ra
     	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer(range) OK");
     }
 
-	vTaskDelay(500 / portTICK_PERIOD_MS);
+	vTaskDelay(100 / portTICK_PERIOD_MS);
 
-    mh_z19b_data_t data = {0};
-    res = mh_z19b_read(&data);
+    res = mh_z19b_autocalibrate(false);
     if (res) {
-    	ESP_LOGE(MH_Z19B_LOG, "Cant read data from sensor: %d", res);
+    	ESP_LOGE(MH_Z19B_LOG, "mh_z19b_autocalibrate(false) error: %d", res);
     }
+
+	for (int i = 0; i<5; i++) {
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+		mh_z19b_data_t data = {0};
+		res = mh_z19b_read(&data);
+		if (res) {
+			ESP_LOGE(MH_Z19B_LOG, "Cant read data from sensor: %d", res);
+		} else {
+			return ESP_OK;
+		}
+	}
 
     return res;
 }
@@ -136,10 +148,12 @@ esp_err_t mh_z19b_read(mh_z19b_data_t * data) {
 }
 
 esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
+	MQTT_LOG_INIT(MH_Z19B_LOG);
+
 	uint8_t command[] = { 0xFF, 0x01, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], 0x00 };
 	command[8] = mh_z19b_crc(command);
 
-	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  send buffer ready");
+	MQTT_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  send buffer ready");
 
 	while (true) {
 		uint8_t buf;
@@ -150,24 +164,28 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 		}
 	}
 
-	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  ready-to-send: input queue empty");
-	ESP_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, command, 9, ESP_LOG_INFO);
+	MQTT_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  ready-to-send: input queue empty");
+	MQTT_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, command, 9, ESP_LOG_INFO);
 
 	int res = uart_write_bytes(mh_z19b_uart_port, command, 9);
 	if (res <= 0) {
-		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Cant send data to device");
-
+		MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Cant send data to device");
+		MQTT_LOG_DONE;
 		return ESP_FAIL;
 	}
 
 	if (reply == NULL) {
+		MQTT_LOG_DONE;
 		return ESP_OK;
 	}
+
+	memset(reply, 0, 9);
 
 	uint8_t await = MH_Z19B_AWAIT_RESPONSE / 20;
 	for (uint8_t i = 0; i<=await; i++) {
 		if (i == await) {
-			ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Timeout awaiting for a data from device.");
+			MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Timeout awaiting for a data from device.");
+			MQTT_LOG_DONE;
 			return ESP_ERR_TIMEOUT;
 		}
 
@@ -176,25 +194,29 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 		}
 	}
 
-	ESP_LOGI(MH_Z19B_LOG, "Received reply from device");
-	ESP_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, reply, 9, ESP_LOG_INFO);
+	MQTT_LOGI(MH_Z19B_LOG, "Received reply from device");
+	MQTT_LOG_BUFFER_HEXDUMP(MH_Z19B_LOG, reply, 9, ESP_LOG_INFO);
 
 	uint8_t crc = mh_z19b_crc(reply);
 
 	if (reply[0] != 0xFF) {
-		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad magic byte)");
+		MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad magic byte)");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if (reply[1] != buffer[0]) {
-		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad command)");
+		MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad command)");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_RESPONSE;
 	}
 	if (reply[8] != crc) {
-		ESP_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad crc)");
+		MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Invalid response from device (bad crc)");
+		MQTT_LOG_DONE;
 		return ESP_ERR_INVALID_CRC;
 	}
 
-	ESP_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  Readed response from device.");
+	MQTT_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  Readed response from device.");
+	MQTT_LOG_DONE;
 
 	return ESP_OK;
 }

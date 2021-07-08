@@ -6,6 +6,7 @@
 #include "init/init.h"
 #include "init/mqtt.h"
 #include "init/init_logger.h"
+#include "init/mqtt_logger.h"
 #include "i2c/bme280/bme280.h"
 #include "i2c/sgp30/sgp30.h"
 #include "i2c/bh1750/bh1750.h"
@@ -21,6 +22,10 @@
 
 void app_main(void)
 {
+#if CONFIG_MQTT_INIT_LOGGER_ENABLED
+	mqtt_logger_start();
+#endif
+
 #if CONFIG_MQTT_INIT_LOGGER_ENABLED
 	init_logger_enable();
 #endif
@@ -57,17 +62,6 @@ void app_main(void)
 	bh1750_init(CONFIG_BH1750_PORT, CONFIG_BH1750_TOPIC_STATUS);
 #endif
 
-#if CONFIG_MH_Z19B_ENABLED
-	uart_config_def_t mh_z19b_config = {
-		.port = CONFIG_MH_Z19B_UART_PORT,
-		.baud_rate = 9600,
-		.pin_rxd = CONFIG_MH_Z19B_UART_PIN_RXD,
-		.pin_txd = CONFIG_MH_Z19B_UART_PIN_TXD
-	};
-
-	mh_z19b_init(&mh_z19b_config, CONFIG_MH_Z19B_MQTT_TOPIC_STATUS, CONFIG_MH_Z19B_MQTT_TOPIC_COMMAND);
-#endif
-
 #if CONFIG_PMS7003_ENABLED
 	uart_config_def_t pms7003_config = {
 		.port = CONFIG_PMS7003_UART_PORT,
@@ -77,6 +71,17 @@ void app_main(void)
 	};
 
 	pms7003_init(&pms7003_config, CONFIG_PMS7003_MQTT_TOPIC_STATUS);
+#endif
+
+#if CONFIG_MH_Z19B_ENABLED
+	uart_config_def_t mh_z19b_config = {
+		.port = CONFIG_MH_Z19B_UART_PORT,
+		.baud_rate = 9600,
+		.pin_rxd = CONFIG_MH_Z19B_UART_PIN_RXD,
+		.pin_txd = CONFIG_MH_Z19B_UART_PIN_TXD
+	};
+
+	mh_z19b_init(&mh_z19b_config, CONFIG_MH_Z19B_MQTT_TOPIC_STATUS, CONFIG_MH_Z19B_MQTT_TOPIC_COMMAND);
 #endif
 
 #if CONFIG_RGBLED_ENABLED
