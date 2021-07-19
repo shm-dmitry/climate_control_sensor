@@ -1418,8 +1418,8 @@
 </symbol>
 <symbol name="FAN_5V">
 <circle x="0" y="0" radius="2.54" width="0.254" layer="94"/>
-<pin name="VCC" x="-7.62" y="0" visible="off" length="middle"/>
-<pin name="GND" x="7.62" y="0" visible="off" length="middle" rot="R180"/>
+<pin name="VCC" x="-7.62" y="0" visible="off" length="middle" direction="pwr"/>
+<pin name="GND" x="7.62" y="0" visible="off" length="middle" direction="pwr" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
