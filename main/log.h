@@ -13,7 +13,7 @@
 #define TOUCH_LOG "touch_log"
 #define FAN_LOG "fan_log"
 #define FAN_PWM_LOG "fan_pwm_log"
-#define RGBLED_LOG "fan_log"
+#define RGBLED_LOG "rgbled_log"
 #define ANEMOMETER_LOG "anemometer_log"
 #define VNS_LOG "nvs_log"
 #define IR_LOG "ir_log"

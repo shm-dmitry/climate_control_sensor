@@ -40,8 +40,8 @@ esp_err_t fan_pwm_init(int gpio) {
 	}
 
 	res = ledc_fade_func_install(0);
-	if (res) {
-    	ESP_LOGE(RGBLED_LOG, "ledc_fade_func_install error %d", res);
+	if (res && res != ESP_ERR_NOT_FOUND) {
+		ESP_LOGE(FAN_PWM_LOG, "ledc_fade_func_install error %d", res);
 		return res;
 	}
 
