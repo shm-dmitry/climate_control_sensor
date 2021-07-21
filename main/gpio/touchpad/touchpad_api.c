@@ -13,7 +13,7 @@
 
 #define TOUCHPAD_THRESH_NO_USE   (0)
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
-#define TOUCHPAD_THRESHOLD_CALC(value) ((value) * 8) / 10
+#define TOUCHPAD_THRESHOLD_CALC(value) (uint16_t) (((value) * 9.5) / 10.0)
 #define TOUCHPAD_LOG_VALUES false
 #define TOUCHPAD_FIRE_EVENT(last_state_variable, click_index_variable, new_state) \
 	last_state_variable = new_state; \
