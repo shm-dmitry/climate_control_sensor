@@ -10,7 +10,7 @@ menu "Climate Control Configuration"
    	  	
    	  config WIFI_TOPIC
    	  	string "WiFi MQTT Topic to listen Change-SSID command"
-   	  	default ""
+   	  	default "/hws/system/0/wifi/command"
    endmenu
 
    menu "MQTT Configuration"
@@ -28,33 +28,33 @@ menu "Climate Control Configuration"
 
       config MQTT_INIT_LOGGER_ENABLED
 	     boolean "Enable log init messages to MQTT topic"
-	     default false
+	     default true
 
       config MQTT_INIT_LOGGER_TOPIC
 	     string "MQTT Init logger topic"
-	     default ""
+	     default "/hws/system/0/logger/init"
 
       config MQTT_LIVE_LOGGER_ENABLED
 	     boolean "Enable log live messages to MQTT topic"
-	     default false
+	     default true
 
       config MQTT_LIVE_LOGGER_TOPIC
 	     string "MQTT live logger topic"
-	     default ""
+	     default "/hws/system/0/logger/live"
    endmenu
 
    menu "I2C configuration"
       config I2C_PORT_0_ENABLED
          boolean "Enable I2C port#0"
-         default false
+         default true
 
       config I2C_PORT_0_GPIO_SDA
          int "GPIO SDA pin for I2C port#0"
-         default 0
+         default 21
 
       config I2C_PORT_0_GPIO_SCL
          int "GPIO SCL pin for I2C port#0"
-         default 0
+         default 23
 
       config I2C_PORT_1_ENABLED
          boolean "Enable I2C port#1"
@@ -76,11 +76,11 @@ menu "Climate Control Configuration"
 
       config TION_MQTT_TOPIC_STATUS
          string "MQTT topic for TION device status information"
-         default ""
+         default "/hws/tion/0/status"
 
       config TION_MQTT_TOPIC_COMMANDS
          string "MQTT topic for TION device awaits commands"
-         default ""
+         default "/hws/tion/0/command"
    endmenu
    
    menu "BME280 configuration (pressure, temperature, humidity)"
@@ -90,7 +90,7 @@ menu "Climate Control Configuration"
 
       config BME280_TOPIC_STATUS
          string "MQTT topic for BME280 device status information"
-         default ""
+         default "/hws/bme280/0/status"
 
       config BME280_PORT
          int "BME280 I2C port"
@@ -104,11 +104,11 @@ menu "Climate Control Configuration"
  
       config SGP30_TOPIC_STATUS
          string "MQTT topic for SGP30 device status information"
-         default ""
+         default "/hws/sgp30/0/status"
 
 	  config SGP30_TOPIC_COMMAND
          string "MQTT topic for SGP30 device listen commands"
-         default ""
+         default "/hws/sgp30/0/command"
 
       config SGP30_PORT
          int "SGP30 I2C port"
@@ -116,7 +116,7 @@ menu "Climate Control Configuration"
 
       config SGP30_APPLI_COMPENSATION
          bool "Automatic apply compensation to SGP30 from BME280 data"
-         default false
+         default true
    endmenu
 
    menu "BH1750 configuration (illumination)"
@@ -126,7 +126,7 @@ menu "Climate Control Configuration"
 
       config BH1750_TOPIC_STATUS
          string "MQTT topic for BH1750 device status information"
-         default ""
+         default "/hws/bh1750/0/status"
 
       config BH1750_PORT
          int "BH1750 I2C port"
@@ -144,19 +144,19 @@ menu "Climate Control Configuration"
 
       config MH_Z19B_UART_PIN_RXD
          int "UART Pin RXD"
-         default 0
+         default 3
 
       config MH_Z19B_UART_PIN_TXD
          int "UART Pin TXD"
-         default 0
+         default 1
 
       config MH_Z19B_MQTT_TOPIC_STATUS
          string "MQTT topic for MH-Z19B device status information"
-         default ""
+         default "/hws/mhz19b/0/status"
 
       config MH_Z19B_MQTT_TOPIC_COMMAND
          string "MQTT topic for MH-Z19B device awaits commands"
-         default ""
+         default "/hws/mhz19b/0/command"
    endmenu
 
    menu "PMS7003 configuration (PM1.0, PM2.5, PM10.0)"
@@ -166,19 +166,19 @@ menu "Climate Control Configuration"
 
       config PMS7003_UART_PORT
          int "UART Port number"
-         default 0
+         default 1
 
       config PMS7003_UART_PIN_RXD
          int "UART Pin RXD"
-         default 0
+         default 9
 
       config PMS7003_UART_PIN_TXD
          int "UART Pin TXD"
-         default 0
+         default 10
 
       config PMS7003_MQTT_TOPIC_STATUS
          string "MQTT topic for PMS7003 device status information"
-         default ""
+         default "/hws/pms7003/0/status"
    endmenu
 
    menu "RGB Led configuration (RGB led)"
@@ -188,19 +188,19 @@ menu "Climate Control Configuration"
 
       config RGBLED_GPIO_RED
          int "GPIO red pin"
-         default 0
+         default 25
 
       config RGBLED_GPIO_GREEN
          int "GPIO green pin"
-         default 0
+         default 26
 
       config RGBLED_GPIO_BLUE
          int "GPIO blue pin"
-         default 0
+         default 27
 
       config RGBLED_MQTT_TOPIC_COMMAND
          string "MQTT topic for RGB Led device awaits commands"
-         default ""
+         default "/hws/rgbled/0/command"
    endmenu
 
    menu "FAN configuration (fan: on/off)"
@@ -210,11 +210,11 @@ menu "Climate Control Configuration"
 
       config FAN_GPIO
          int "GPIO pin"
-         default 0
+         default 32
 
       config FAN_MQTT_TOPIC_COMMAND
          string "MQTT topic for FAN device awaits commands"
-         default ""
+         default "/hws/fan/0/command"
    endmenu
 
    menu "FAN PWM configuration (fan: off-on_with_speed)"
@@ -224,11 +224,11 @@ menu "Climate Control Configuration"
 
       config FAN_PWM_GPIO
          int "GPIO pin"
-         default 0
+         default 25
 
       config FAN_PWM_MQTT_TOPIC_COMMAND
          string "MQTT topic for FAN PWM device awaits commands"
-         default ""
+         default "/hws/fanpwm/0/command"
    endmenu
 
    menu "IR configuration (Control other devices via IR)"
@@ -238,11 +238,11 @@ menu "Climate Control Configuration"
 
       config IR_GPIO
          int "GPIO pin"
-         default 0
+         default 2
 
       config IR_MQTT_TOPIC_COMMAND
          string "MQTT topic for FAN device awaits commands"
-         default ""
+         default "/hws/ir/0/command"
    endmenu
 
    menu "Internal touch pad configuration (sensor buffon)"
@@ -252,11 +252,11 @@ menu "Climate Control Configuration"
 
       config TOUCH_PIN
          int "Touch pin"
-         default 0
+         default 4
 
       config TOUCH_MQTT_TOPIC_STATUS
          string "MQTT topic for touch pad device status information"
-         default ""
+         default "/hws/touchpad/0/status"
    endmenu
 
    menu "Anemometer configuration (air direction, air speed, air consumption)"
@@ -266,18 +266,18 @@ menu "Climate Control Configuration"
 
       config ANEMOMETER_GPIO_A
          int "GPIO pin A"
-         default 0
+         default 39
 
       config ANEMOMETER_GPIO_B
          int "GPIO pin B"
-         default 0
+         default 34
 
       config ANEMOMETER_MQTT_TOPIC_STATUS
          string "MQTT topic for anemometer device status information"
-         default ""
+         default "/hws/anemometer/0/status"
 
       config ANEMOMETER_MQTT_TOPIC_COMMAND
          string "MQTT topic for anemometer device awaits commands"
-         default ""
+         default "/hws/anemometer/0/command"
    endmenu
 endmenu

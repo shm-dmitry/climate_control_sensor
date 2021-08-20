@@ -51,7 +51,7 @@ esp_err_t bme280_read_absolute_humidity(double * absolute_humidity) {
 void bme280_init(i2c_port_t port, const char* mqtt_topic) {
 	bme280_i2c = i2c_get_handlers(port);
 	if (bme280_i2c != NULL) {
-		INIT_DRIVER_AND_LOG_OR_RETURN(bme280_init_driver(bme280_i2c), "BME280 driver initialized", "Cant initialize BME280 : %d");
+		INIT_DRIVER_AND_LOG_OR_RETURN(bme280_init_driver(bme280_i2c), "BME280 driver initialized", "Cant initialize BME280 : 0x%04X");
 
 		g_bme280_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_bme280_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);

@@ -68,7 +68,7 @@ void sgp30_commands(const char * topic, const char * data) {
 void sgp30_init(i2c_port_t port, const char* mqtt_topic, const char * command_topic) {
 	sgp30_i2c = i2c_get_handlers(port);
 	if (sgp30_i2c != NULL) {
-		INIT_DRIVER_AND_LOG_OR_RETURN(sgp30_write_init(sgp30_i2c), "SGP30 Driver initialized.", "Cant initialize SGP30 driver: %d");
+		INIT_DRIVER_AND_LOG_OR_RETURN(sgp30_write_init(sgp30_i2c), "SGP30 Driver initialized.", "Cant initialize SGP30 driver: 0x%04X");
 
 		g_sgp30_status_topic = malloc(strlen(mqtt_topic) + 1);
 		memcpy(g_sgp30_status_topic, mqtt_topic, strlen(mqtt_topic) + 1);

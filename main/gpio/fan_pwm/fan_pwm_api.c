@@ -1,47 +1,56 @@
 #include "fan_pwm_api.h"
 
 #include "fan_pwm_nvs.h"
-#include "driver/ledc.h"
 #include "../../log.h"
 
-#define FAN_PWM_CHANNEL   LEDC_CHANNEL_3
-#define FAN_PWM_TIMER     LEDC_TIMER_2
-#define FAN_PWM_SPEED     LEDC_LOW_SPEED_MODE
-#define FAN_PWM_FREQ      4
+#include "driver/gpio.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+static int fan_pwm_gpio = -1;
+static TaskHandle_t fan_pwm_task_handle = NULL;
+
+#define FAN_PWM_HIGL_LEVEL_TIME 500
+#define FAN_PWM_LOW_LEVEL_CALC(percent) ((uint32_t)((FAN_PWM_HIGL_LEVEL_TIME * ( 100 - percent )) / percent))
+
+static void fan_pwm_task(void* arg) {
+	uint32_t low_time = (uint32_t) arg;
+
+	while (true) {
+		esp_err_t res = gpio_set_level(fan_pwm_gpio, 1);
+		if (res) {
+			ESP_LOGE(FAN_LOG, "Cant set HIGH level on pin %d: %d", fan_pwm_gpio, res);
+			fan_pwm_task_handle = NULL;
+			vTaskDelete(NULL);
+		}
+
+		vTaskDelay(FAN_PWM_HIGL_LEVEL_TIME / portTICK_PERIOD_MS);
+
+		res = gpio_set_level(fan_pwm_gpio, 0);
+		if (res) {
+			ESP_LOGE(FAN_LOG, "Cant set LOW level on pin %d: %d", fan_pwm_gpio, res);
+			fan_pwm_task_handle = NULL;
+			vTaskDelete(NULL);
+		}
+
+		vTaskDelay(low_time / portTICK_PERIOD_MS);
+	}
+}
 
 esp_err_t fan_pwm_init(int gpio) {
-    ledc_timer_config_t ledc_timer = {
-		.duty_resolution = LEDC_TIMER_8_BIT, // resolution of PWM duty
-		.freq_hz = FAN_PWM_FREQ,             // frequency of PWM signal
-		.speed_mode = FAN_PWM_SPEED,         // timer mode
-		.timer_num = FAN_PWM_TIMER,          // timer index
-		.clk_cfg = LEDC_AUTO_CLK,            // Auto select the source clock
-    };
+	fan_pwm_gpio = gpio;
 
-    esp_err_t res = ledc_timer_config(&ledc_timer);
-    if (res) {
-    	ESP_LOGE(FAN_PWM_LOG, "ledc_timer_config error %d", res);
-    	return res;
-    }
+	gpio_config_t config = {
+		.intr_type = GPIO_INTR_DISABLE,
+	    .mode = GPIO_MODE_OUTPUT,
+		.pin_bit_mask = 1ULL << gpio,
+		.pull_down_en = GPIO_PULLDOWN_ENABLE,
+		.pull_up_en = GPIO_PULLUP_DISABLE,
+	};
 
-    ledc_channel_config_t cfg = {
-		.channel    = FAN_PWM_CHANNEL,
-		.duty       = 0,
-		.gpio_num   = gpio,
-		.speed_mode = FAN_PWM_SPEED,
-		.hpoint     = 0,
-		.timer_sel  = FAN_PWM_TIMER
-    };
-
-	res = ledc_channel_config(&cfg);
+	esp_err_t res = gpio_config(&config);
 	if (res) {
-    	ESP_LOGE(FAN_PWM_LOG, "ledc_channel_config error %d for pin %d", res, gpio);
-		return res;
-	}
-
-	res = ledc_fade_func_install(0);
-	if (res && res != ESP_ERR_NOT_FOUND) {
-		ESP_LOGE(FAN_PWM_LOG, "ledc_fade_func_install error %d", res);
+		ESP_LOGI(FAN_PWM_LOG, "Cant init GPIO. error %d", res);
 		return res;
 	}
 
@@ -57,23 +66,35 @@ esp_err_t fan_pwm_set_percent(uint8_t percent) {
 		percent = 100;
 	}
 
-	fan_pwm_nws_write(percent);
-
-	uint8_t value = (percent * 255) / 100;
-	esp_err_t res = ledc_set_duty(FAN_PWM_SPEED, FAN_PWM_CHANNEL, value);
-	if (res) {
-		ESP_LOGE(FAN_PWM_LOG, "set duty :: ledc_set_duty() error %d", res);
-		return res;
+	if (fan_pwm_task_handle) {
+		vTaskDelete(fan_pwm_task_handle);
+		fan_pwm_task_handle = NULL;
 	}
 
+	if (percent == 100) {
+		esp_err_t res = gpio_set_level(fan_pwm_gpio, 1);
+		if (res) {
+			ESP_LOGE(FAN_LOG, "Cant set HIGH level on pin %d: %d", fan_pwm_gpio, res);
+		} else {
+			ESP_LOGI(FAN_LOG, "HIGH level on pin %d activated.", fan_pwm_gpio);
+		}
 
-	res = ledc_update_duty(FAN_PWM_SPEED, FAN_PWM_CHANNEL);
-	if (res) {
-		ESP_LOGE(FAN_PWM_LOG, "change duty :: ledc_update_duty() error %d", res);
 		return res;
+	} else {
+		esp_err_t res = gpio_set_level(fan_pwm_gpio, 0);
+		if (res) {
+			ESP_LOGE(FAN_LOG, "Cant set LOW level on pin %d: %d", fan_pwm_gpio, res);
+		} else {
+			ESP_LOGI(FAN_LOG, "HIGH level on pin %d activated.", fan_pwm_gpio);
+		}
 	}
 
-	ESP_LOGI(FAN_PWM_LOG, "Duty changed to %d", value);
+	if (percent > 0) {
+		uint32_t low_time = FAN_PWM_LOW_LEVEL_CALC(percent);
 
-	return res;
+		fan_pwm_nws_write(percent);
+		xTaskCreate(fan_pwm_task, "fan_pwm running task", 1024, (void *) low_time, 10, &fan_pwm_task_handle);
+	}
+
+	return ESP_OK;
 }
