@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -1474,6 +1474,35 @@
 <text x="-15.24" y="-7.62" size="1.778" layer="94">&gt;NAME</text>
 <text x="-15.24" y="-10.16" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
+<symbol name="LM358">
+<pin name="A_OUT" x="-10.16" y="2.54" visible="off" length="middle" direction="out"/>
+<pin name="A-" x="-10.16" y="0" visible="off" length="middle" direction="in"/>
+<pin name="A+" x="-10.16" y="-2.54" visible="off" length="middle" direction="in"/>
+<pin name="VEE" x="-10.16" y="-5.08" visible="off" length="middle" direction="pwr"/>
+<pin name="VCC" x="10.16" y="2.54" visible="off" length="middle" direction="pwr" rot="R180"/>
+<pin name="B_OUT" x="10.16" y="0" visible="off" length="middle" direction="out" rot="R180"/>
+<pin name="B-" x="10.16" y="-2.54" visible="off" length="middle" direction="in" rot="R180"/>
+<pin name="B+" x="10.16" y="-5.08" visible="off" length="middle" direction="in" rot="R180"/>
+<wire x1="-5.08" y1="5.08" x2="-5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-7.62" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="5.08" x2="0.635" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0.635" y1="5.08" x2="-0.635" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-0.635" y1="5.08" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-0.635" y1="5.08" x2="-0.635" y2="4.445" width="0.254" layer="94"/>
+<wire x1="-0.635" y1="4.445" x2="0.635" y2="4.445" width="0.254" layer="94"/>
+<wire x1="0.635" y1="4.445" x2="0.635" y2="5.08" width="0.254" layer="94"/>
+<text x="-4.445" y="2.54" size="0.6096" layer="94">A_OUT</text>
+<text x="-4.445" y="0" size="0.6096" layer="94">A-</text>
+<text x="-4.445" y="-2.54" size="0.6096" layer="94">A+</text>
+<text x="-4.445" y="-5.08" size="0.6096" layer="94">Vee</text>
+<text x="3.175" y="2.54" size="0.6096" layer="94">Vcc</text>
+<text x="1.905" y="0" size="0.6096" layer="94">B_OUT</text>
+<text x="3.81" y="-2.54" size="0.6096" layer="94">B-</text>
+<text x="3.81" y="-5.08" size="0.6096" layer="94">B+</text>
+<text x="-3.81" y="5.715" size="1.4224" layer="94">&gt;NAME</text>
+<text x="-3.81" y="-9.525" size="1.4224" layer="94">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="PMS7003" prefix="U">
@@ -2323,6 +2352,28 @@
 <connect gate="G$1" pin="IN+" pad="PIN_2"/>
 <connect gate="G$1" pin="IN-" pad="PIN_3"/>
 <connect gate="G$1" pin="VCC" pad="PIN_8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LM358" prefix="U">
+<gates>
+<gate name="G$1" symbol="LM358" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIP8">
+<connects>
+<connect gate="G$1" pin="A+" pad="PIN_3"/>
+<connect gate="G$1" pin="A-" pad="PIN_2"/>
+<connect gate="G$1" pin="A_OUT" pad="PIN_1"/>
+<connect gate="G$1" pin="B+" pad="PIN_5"/>
+<connect gate="G$1" pin="B-" pad="PIN_6"/>
+<connect gate="G$1" pin="B_OUT" pad="PIN_7"/>
+<connect gate="G$1" pin="VCC" pad="PIN_8"/>
+<connect gate="G$1" pin="VEE" pad="PIN_4"/>
 </connects>
 <technologies>
 <technology name=""/>

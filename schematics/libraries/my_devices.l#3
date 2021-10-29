@@ -1466,6 +1466,8 @@
 <text x="2.8575" y="4.1275" size="0.6096" layer="94">COL_OUT</text>
 <text x="1.27" y="-4.7625" size="0.6096" layer="94">BAL/STROBE</text>
 <text x="2.54" y="-7.3025" size="0.6096" layer="94">BALANCE</text>
+<text x="-15.24" y="-7.62" size="1.778" layer="94">&gt;NAME</text>
+<text x="-15.24" y="-10.16" size="1.778" layer="94">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -2301,12 +2303,22 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="LM311P">
+<deviceset name="LM311P" prefix="U">
 <gates>
 <gate name="G$1" symbol="LM311P" x="0" y="0"/>
 </gates>
 <devices>
 <device name="" package="DIP8">
+<connects>
+<connect gate="G$1" pin="BALANCE" pad="PIN_5"/>
+<connect gate="G$1" pin="BAL_STROBE" pad="PIN_6"/>
+<connect gate="G$1" pin="COL_OUT" pad="PIN_7"/>
+<connect gate="G$1" pin="EMI_OUT" pad="PIN_1"/>
+<connect gate="G$1" pin="GND" pad="PIN_4"/>
+<connect gate="G$1" pin="IN+" pad="PIN_2"/>
+<connect gate="G$1" pin="IN-" pad="PIN_3"/>
+<connect gate="G$1" pin="VCC" pad="PIN_8"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>

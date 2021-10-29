@@ -29,6 +29,8 @@ void touchpad_callback_func(uint8_t state, uint8_t click_index) {
 	} else if (state == TOUCHPAD_ON_CLICK) {
 		cJSON_AddStringToObject(root, "value", "on_click");
 		cJSON_AddNumberToObject(root, "click", click_index);
+	} else if (state == TOUCHPAD_ON_ERROR) {
+		cJSON_AddStringToObject(root, "value", "on_error");
 	} else {
 		cJSON_AddStringToObject(root, "value", "idle");
 	}

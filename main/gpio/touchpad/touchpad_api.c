@@ -8,11 +8,14 @@
 #include "soc/sens_periph.h"
 
 #include "../../log.h"
+#include "../../init/mqtt_logger.h"
 
 // based on https://github.com/espressif/esp-idf/blob/master/examples/peripherals/touch_pad_interrupt/main/esp32/tp_interrupt_main.c
 
 #define TOUCHPAD_THRESH_NO_USE   (0)
 #define TOUCHPAD_FILTER_TOUCH_PERIOD (10)
+#define TOUCHPAD_MAX_AWAIT_DOUBLE_CLICK (10)
+#define TOUCHPAD_MAX_ONKEYDOWN_RETRIES (100)
 #define TOUCHPAD_THRESHOLD_CALC(value) (uint16_t) (((value) * 9.5) / 10.0)
 #define TOUCHPAD_LOG_VALUES false
 #define TOUCHPAD_FIRE_EVENT(last_state_variable, click_index_variable, new_state) \
@@ -26,14 +29,14 @@ static touchpad_callback_t touchpad_callback = NULL;
 static volatile uint16_t touchpad_threshold = 0;
 static volatile uint32_t touchpad_calibration_val = 0;
 static volatile uint8_t touchpad_calibration_cnt = 0;
-
+static volatile uint16_t touchpad_onkeydown_retries = 0;
 
 static void touchpad_process_autocalibration(uint16_t value, bool untouched) {
 	if (untouched) {
 		touchpad_calibration_val += value;
 		touchpad_calibration_cnt ++;
 
-		if (touchpad_calibration_cnt >= 100) {
+		if (touchpad_calibration_cnt >= 50) {
 			touchpad_threshold = TOUCHPAD_THRESHOLD_CALC(touchpad_calibration_val / touchpad_calibration_cnt);
 			touchpad_calibration_val = 0;
 			touchpad_calibration_cnt = 0;
@@ -59,10 +62,21 @@ static uint8_t touchpad_read_value() {
 	ESP_LOGI(TOUCH_LOG, "touch_pad_read_filtered == %d", value);
 #endif
 
+	if (touchpad_onkeydown_retries > TOUCHPAD_MAX_ONKEYDOWN_RETRIES) {
+		touchpad_onkeydown_retries = 0;
+		ESP_LOGI(TOUCH_LOG, "Too many retries on on-key-down mode. Reset threshold");
+		touchpad_threshold = TOUCHPAD_THRESHOLD_CALC(value);
+		return TOUCHPAD_ERROR;
+	}
+
 	if (value > touchpad_threshold) {
+		touchpad_onkeydown_retries = 0;
+
 		touchpad_process_autocalibration(value, true);
 		return TOUCHPAD_ON_KEY_UP;
 	} else {
+		touchpad_onkeydown_retries++;
+
 		touchpad_process_autocalibration(value, false);
 		return TOUCHPAD_ON_KEY_DOWN;
 	}
@@ -72,10 +86,10 @@ static void touchpad_sleep(uint8_t state) {
 	switch (state) {
 	case TOUCHPAD_ON_KEY_DOWN:
 	case TOUCHPAD_ON_CLICK:
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 		break;
 	case TOUCHPAD_ON_KEY_UP:
-		vTaskDelay(200 / portTICK_PERIOD_MS);
+		vTaskDelay(20 / portTICK_PERIOD_MS);
 		break;
 	case TOUCHPAD_IDLE:
 	default:
@@ -87,11 +101,19 @@ static void touchpad_sleep(uint8_t state) {
 static void touchpad_listener(void* arg) {
 	uint8_t last_touchpad_pressed = TOUCHPAD_IDLE;
 	uint8_t click_index = 0;
+	uint8_t un_key_up_await_double_click = 0;
 	for (;;) {
 		touchpad_sleep(last_touchpad_pressed);
 
 		uint8_t touchpad_pressed = touchpad_read_value();
 		if (touchpad_pressed == TOUCHPAD_ERROR) {
+			if (last_touchpad_pressed != TOUCHPAD_IDLE) {
+				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_ERROR);
+				click_index = 0;
+				un_key_up_await_double_click = 0;
+				last_touchpad_pressed = TOUCHPAD_IDLE;
+			}
+
 			continue;
 		}
 
@@ -101,6 +123,7 @@ static void touchpad_listener(void* arg) {
 				// do nothing, idle mode
 			} else {
 				click_index = 1;
+				un_key_up_await_double_click = 0;
 
 				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
 			}
@@ -112,9 +135,11 @@ static void touchpad_listener(void* arg) {
 
 				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_IDLE);
 			} else {
-				click_index = 1;
+				if (un_key_up_await_double_click++ > TOUCHPAD_MAX_AWAIT_DOUBLE_CLICK) {
+					click_index = 1;
 
-				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
+					TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_KEY_DOWN);
+				}
 			}
 			break;
 		}
@@ -128,7 +153,9 @@ static void touchpad_listener(void* arg) {
 		}
 		case TOUCHPAD_ON_KEY_UP: {
 			if (touchpad_pressed == TOUCHPAD_ON_KEY_UP) {
-				TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_CLICK);
+				if (un_key_up_await_double_click++ > TOUCHPAD_MAX_AWAIT_DOUBLE_CLICK) {
+					TOUCHPAD_FIRE_EVENT(last_touchpad_pressed, click_index, TOUCHPAD_ON_CLICK);
+				}
 			} else {
 				click_index++;
 

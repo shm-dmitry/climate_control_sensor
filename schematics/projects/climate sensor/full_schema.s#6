@@ -1184,6 +1184,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <schematic_group name="FAN"/>
 <schematic_group name="IR"/>
 <schematic_group name="TOUCH_SENSOR"/>
+<schematic_group name="FAN_PWN"/>
 </groups>
 <parts>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -1482,18 +1483,18 @@ In this library the device names are the same as the pin names of the symbols, t
 <instance part="GND7" gate="1" x="213.36" y="-7.62" smashed="yes" grouprefs="RGBLED">
 <attribute name="VALUE" x="210.82" y="-10.16" size="1.778" layer="96"/>
 </instance>
-<instance part="Q7" gate="G$1" x="15.24" y="-114.3" smashed="yes">
+<instance part="Q7" gate="G$1" x="15.24" y="-114.3" smashed="yes" grouprefs="FAN_PWN">
 <attribute name="NAME" x="19.05" y="-113.03" size="1.778" layer="94"/>
 <attribute name="VALUE" x="19.05" y="-116.84" size="1.778" layer="94"/>
 </instance>
-<instance part="FAN2" gate="G$1" x="5.08" y="-99.06" smashed="yes">
+<instance part="FAN2" gate="G$1" x="5.08" y="-99.06" smashed="yes" grouprefs="FAN_PWN">
 <attribute name="NAME" x="0" y="-93.98" size="1.778" layer="94"/>
 <attribute name="VALUE" x="0" y="-104.14" size="1.778" layer="94"/>
 </instance>
-<instance part="GND8" gate="1" x="15.24" y="-127" smashed="yes">
+<instance part="GND8" gate="1" x="15.24" y="-127" smashed="yes" grouprefs="FAN_PWN">
 <attribute name="VALUE" x="12.7" y="-129.54" size="1.778" layer="96"/>
 </instance>
-<instance part="R15" gate="G$1" x="-2.54" y="-114.3" smashed="yes">
+<instance part="R15" gate="G$1" x="-2.54" y="-114.3" smashed="yes" grouprefs="FAN_PWN">
 <attribute name="NAME" x="-8.89" y="-111.76" size="1.778" layer="94"/>
 <attribute name="VALUE" x="-8.89" y="-118.11" size="1.778" layer="94"/>
 </instance>
@@ -1591,7 +1592,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <segment>
 <pinref part="Q7" gate="G$1" pin="E"/>
 <pinref part="GND8" gate="1" pin="GND"/>
-<wire x1="15.24" y1="-121.92" x2="15.24" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="-121.92" x2="15.24" y2="-124.46" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -1707,8 +1708,8 @@ In this library the device names are the same as the pin names of the symbols, t
 </segment>
 <segment>
 <pinref part="FAN2" gate="G$1" pin="VCC"/>
-<wire x1="-2.54" y1="-99.06" x2="-15.24" y2="-99.06" width="0.1524" layer="91"/>
-<label x="-15.24" y="-99.06" size="1.778" layer="95"/>
+<wire x1="-2.54" y1="-99.06" x2="-15.24" y2="-99.06" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
+<label x="-15.24" y="-99.06" size="1.778" layer="95" grouprefs="FAN_PWN"/>
 </segment>
 </net>
 <net name="3V3" class="0">
@@ -2197,22 +2198,22 @@ In this library the device names are the same as the pin names of the symbols, t
 <segment>
 <pinref part="FAN2" gate="G$1" pin="GND"/>
 <pinref part="Q7" gate="G$1" pin="C"/>
-<wire x1="12.7" y1="-99.06" x2="15.24" y2="-99.06" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="-99.06" x2="15.24" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-99.06" x2="15.24" y2="-99.06" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
+<wire x1="15.24" y1="-99.06" x2="15.24" y2="-106.68" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
 </segment>
 </net>
 <net name="N$30" class="0">
 <segment>
 <pinref part="R15" gate="G$1" pin="P$2"/>
 <pinref part="Q7" gate="G$1" pin="B"/>
-<wire x1="6.35" y1="-114.3" x2="7.62" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="6.35" y1="-114.3" x2="7.62" y2="-114.3" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
 </segment>
 </net>
 <net name="FAN_PWM" class="0">
 <segment>
 <pinref part="R15" gate="G$1" pin="P$1"/>
-<wire x1="-10.16" y1="-114.3" x2="-25.4" y2="-114.3" width="0.1524" layer="91"/>
-<label x="-25.4" y="-114.3" size="1.778" layer="95"/>
+<wire x1="-10.16" y1="-114.3" x2="-25.4" y2="-114.3" width="0.1524" layer="91" grouprefs="FAN_PWN"/>
+<label x="-25.4" y="-114.3" size="1.778" layer="95" grouprefs="FAN_PWN"/>
 </segment>
 </net>
 </nets>

@@ -66,6 +66,8 @@ esp_err_t fan_pwm_set_percent(uint8_t percent) {
 		percent = 100;
 	}
 
+	fan_pwm_nws_write(percent);
+
 	if (fan_pwm_task_handle) {
 		vTaskDelete(fan_pwm_task_handle);
 		fan_pwm_task_handle = NULL;
@@ -92,7 +94,6 @@ esp_err_t fan_pwm_set_percent(uint8_t percent) {
 	if (percent > 0) {
 		uint32_t low_time = FAN_PWM_LOW_LEVEL_CALC(percent);
 
-		fan_pwm_nws_write(percent);
 		xTaskCreate(fan_pwm_task, "fan_pwm running task", 1024, (void *) low_time, 10, &fan_pwm_task_handle);
 	}
 

@@ -2,8 +2,11 @@
 #define MAIN_FAN_FAN_API_H_
 
 #include "esp_err.h"
+#include "stdbool.h"
 
-esp_err_t fan_init(int gpio);
+typedef void (* fan_callback_t)(bool state);
+
+esp_err_t fan_init(int gpio, fan_callback_t callback);
 
 esp_err_t fan_start();
 

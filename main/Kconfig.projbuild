@@ -215,6 +215,10 @@ menu "Climate Control Configuration"
       config FAN_MQTT_TOPIC_COMMAND
          string "MQTT topic for FAN device awaits commands"
          default "/hws/fan/0/command"
+
+      config FAN_MQTT_TOPIC_STATUS
+         string "MQTT topic for FAN device send current status"
+         default "/hws/fan/0/status"
    endmenu
 
    menu "FAN PWM configuration (fan: off-on_with_speed)"

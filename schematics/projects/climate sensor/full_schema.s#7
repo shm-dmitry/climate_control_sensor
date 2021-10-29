@@ -134,10 +134,10 @@
 <text x="5.08" y="-2.54" size="0.8128" layer="21" rot="R90">GY-SGP30</text>
 </package>
 <package name="RGBLED">
-<pad name="VIN_R" x="0" y="0" drill="0.6" shape="square"/>
-<pad name="VIN_G" x="0" y="2.54" drill="0.6" shape="square"/>
-<pad name="GND" x="0" y="-2.54" drill="0.6" shape="square"/>
-<pad name="VIN_B" x="0" y="5.08" drill="0.6" shape="square"/>
+<pad name="VIN_R" x="0" y="0" drill="0.8" shape="square"/>
+<pad name="VIN_G" x="0" y="2.54" drill="0.8" shape="square"/>
+<pad name="GND" x="0" y="-2.54" drill="0.8" shape="square"/>
+<pad name="VIN_B" x="0" y="5.08" drill="0.8" shape="square"/>
 <wire x1="-1.27" y1="7.62" x2="-1.27" y2="-5.08" width="0.127" layer="21"/>
 <text x="1.27" y="-2.54" size="0.4064" layer="21">GND</text>
 <text x="1.27" y="0" size="0.4064" layer="21">VIN_R</text>
@@ -200,8 +200,8 @@
 <text x="-0.635" y="-1.27" size="0.8128" layer="21">E</text>
 </package>
 <package name="C">
-<pad name="PIN_PLUS" x="-2.54" y="0" drill="0.6" shape="square"/>
-<pad name="PIN_GND" x="2.54" y="0" drill="0.6" shape="square"/>
+<pad name="PIN_PLUS" x="-2.54" y="0" drill="0.8" shape="square"/>
+<pad name="PIN_GND" x="2.54" y="0" drill="0.8" shape="square"/>
 <circle x="0" y="0" radius="5.08" width="0.127" layer="21"/>
 <wire x1="-3.175" y1="-1.905" x2="-1.905" y2="-1.905" width="0.127" layer="21"/>
 <wire x1="-2.54" y1="-1.27" x2="-2.54" y2="-2.54" width="0.127" layer="21"/>
@@ -220,10 +220,10 @@
 <wire x1="3.81" y1="0" x2="6.35" y2="0" width="0.127" layer="21"/>
 </package>
 <package name="MH_Z19B">
-<pad name="GND" x="0" y="0" drill="0.6" shape="square"/>
-<pad name="RX" x="0" y="2.54" drill="0.6" shape="square"/>
-<pad name="TX" x="0" y="5.08" drill="0.6" shape="square"/>
-<pad name="VCC" x="0" y="-2.54" drill="0.6" shape="square"/>
+<pad name="GND" x="0" y="0" drill="1" shape="square"/>
+<pad name="RX" x="0" y="2.54" drill="1" shape="square"/>
+<pad name="TX" x="0" y="5.08" drill="1" shape="square"/>
+<pad name="VCC" x="0" y="-2.54" drill="1" shape="square"/>
 <wire x1="-2.54" y1="6.35" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
 <wire x1="-2.54" y1="-3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
 <wire x1="2.54" y1="-3.81" x2="2.54" y2="6.35" width="0.127" layer="21"/>
@@ -235,8 +235,8 @@
 <text x="-1.27" y="0" size="0.3048" layer="21" rot="R90">MH-Z19B</text>
 </package>
 <package name="LD">
-<pad name="PIN_CATHODE" x="-1.27" y="0" drill="0.6" shape="square"/>
-<pad name="PIN_ANODE" x="1.27" y="0" drill="0.6" shape="square"/>
+<pad name="PIN_CATHODE" x="-1.27" y="0" drill="0.8" shape="square"/>
+<pad name="PIN_ANODE" x="1.27" y="0" drill="0.8" shape="square"/>
 <circle x="0" y="0" radius="3.81" width="0.127" layer="21"/>
 <wire x1="-0.635" y1="-1.27" x2="-0.635" y2="-1.905" width="0.127" layer="21"/>
 <wire x1="-0.635" y1="-1.905" x2="-0.635" y2="-2.54" width="0.127" layer="21"/>
@@ -248,7 +248,7 @@
 <wire x1="-1.27" y1="-1.905" x2="-0.635" y2="-1.905" width="0.127" layer="21"/>
 </package>
 <package name="TOUCH_SENSOR">
-<pad name="P$1" x="0" y="0" drill="0.6" shape="square"/>
+<pad name="P$1" x="0" y="0" drill="1" shape="square"/>
 <circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
 </package>
 <package name="BH1750">
@@ -282,42 +282,42 @@
 <text x="-5.08" y="-7.62" size="1.27" layer="21">BME280</text>
 </package>
 <package name="PMS7003_J">
-<pad name="VCC" x="-1.27" y="1.27" drill="0.6" shape="square"/>
-<pad name="GND" x="-1.27" y="-1.27" drill="0.6" shape="square"/>
-<pad name="SET" x="-1.27" y="-3.81" drill="0.6" shape="square"/>
-<pad name="RESET" x="1.27" y="-3.81" drill="0.6" shape="square"/>
-<pad name="RXD" x="1.27" y="-1.27" drill="0.6" shape="square"/>
-<pad name="TXD" x="1.27" y="1.27" drill="0.6" shape="square"/>
+<pad name="VCC" x="-1.27" y="1.27" drill="1" shape="square"/>
+<pad name="GND" x="-1.27" y="-1.27" drill="1" shape="square"/>
+<pad name="SET" x="-1.27" y="-3.81" drill="1" shape="square"/>
+<pad name="RESET" x="1.27" y="-3.81" drill="1" shape="square"/>
+<pad name="RXD" x="1.27" y="-1.27" drill="1" shape="square"/>
+<pad name="TXD" x="1.27" y="1.27" drill="1" shape="square"/>
 <text x="-0.635" y="0" size="0.3048" layer="21">PMS7003</text>
-<text x="-0.635" y="1.27" size="0.3048" layer="21">VCC</text>
-<text x="-0.635" y="-1.27" size="0.3048" layer="21">GND</text>
-<text x="-0.635" y="-3.81" size="0.3048" layer="21">SET</text>
-<text x="1.905" y="-3.81" size="0.3048" layer="21">RESET</text>
-<text x="1.905" y="1.27" size="0.3048" layer="21">TXD</text>
-<text x="1.905" y="-1.27" size="0.3048" layer="21">RXD</text>
+<text x="-1.905" y="0" size="0.3048" layer="21">VCC</text>
+<text x="-1.905" y="-2.54" size="0.3048" layer="21">GND</text>
+<text x="-0.3175" y="-4.7625" size="0.3048" layer="21">SET</text>
+<text x="2.2225" y="-3.81" size="0.3048" layer="21">RESET</text>
+<text x="2.2225" y="1.27" size="0.3048" layer="21">TXD</text>
+<text x="2.2225" y="-1.27" size="0.3048" layer="21">RXD</text>
 <wire x1="-2.54" y1="2.54" x2="-2.54" y2="-5.08" width="0.127" layer="21"/>
 <wire x1="-2.54" y1="-5.08" x2="3.81" y2="-5.08" width="0.127" layer="21"/>
 <wire x1="3.81" y1="-5.08" x2="3.81" y2="2.54" width="0.127" layer="21"/>
 <wire x1="3.81" y1="2.54" x2="-2.54" y2="2.54" width="0.127" layer="21"/>
 </package>
 <package name="J2">
-<pad name="PIN_1" x="0" y="2.54" drill="1.1" shape="square"/>
-<pad name="PIN_2" x="0.04" y="-2.5" drill="1.1" shape="square" rot="R90"/>
-<wire x1="-2.54" y1="3.81" x2="-2.54" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="3.175" x2="-2.54" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="1.905" x2="-2.54" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-1.905" x2="-2.54" y2="-3.175" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.175" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="1.27" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="1.27" y1="-3.81" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="3.81" x2="1.27" y2="3.81" width="0.127" layer="21"/>
-<wire x1="1.27" y1="3.81" x2="-2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="1.27" y1="3.81" x2="1.27" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="3.175" x2="-1.27" y2="3.175" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="1.905" x2="-1.27" y2="1.905" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-1.905" x2="-1.27" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.175" x2="-1.27" y2="-3.175" width="0.127" layer="21"/>
+<pad name="PIN_1" x="0" y="2.54" drill="1.4" shape="square"/>
+<pad name="PIN_2" x="0.04" y="-2.5" drill="1.4" shape="square" rot="R90"/>
+<wire x1="3.5" y1="5" x2="3.5" y2="-5" width="0.127" layer="21"/>
+<wire x1="-4" y1="5" x2="2.5" y2="5" width="0.127" layer="21"/>
+<wire x1="2.5" y1="5" x2="3.5" y2="5" width="0.127" layer="21"/>
+<wire x1="2.5" y1="-5" x2="3.5" y2="-5" width="0.127" layer="21"/>
+<wire x1="2.5" y1="5" x2="2.5" y2="-5" width="0.127" layer="21"/>
+<wire x1="-4" y1="5" x2="-4" y2="4" width="0.127" layer="21"/>
+<wire x1="-4" y1="4" x2="-4" y2="1" width="0.127" layer="21"/>
+<wire x1="-4" y1="1" x2="-4" y2="-1" width="0.127" layer="21"/>
+<wire x1="-4" y1="-1" x2="-4" y2="-4" width="0.127" layer="21"/>
+<wire x1="-4" y1="-4" x2="-4" y2="-5" width="0.127" layer="21"/>
+<wire x1="-4" y1="-5" x2="2.5" y2="-5" width="0.127" layer="21"/>
+<wire x1="-4" y1="4" x2="-1.5" y2="4" width="0.127" layer="21"/>
+<wire x1="-4" y1="1" x2="-1.5" y2="1" width="0.127" layer="21"/>
+<wire x1="-4" y1="-1" x2="-1.5" y2="-1" width="0.127" layer="21"/>
+<wire x1="-4" y1="-4" x2="-1.5" y2="-4" width="0.127" layer="21"/>
 </package>
 <package name="J4">
 <pad name="PIN_3" x="0" y="0" drill="0.6" shape="square"/>
@@ -2199,6 +2199,20 @@ In this library the device names are the same as the pin names of the symbols, t
 <pinref part="Q7" gate="G$1" pin="C"/>
 <wire x1="12.7" y1="-99.06" x2="15.24" y2="-99.06" width="0.1524" layer="91"/>
 <wire x1="15.24" y1="-99.06" x2="15.24" y2="-106.68" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="R15" gate="G$1" pin="P$2"/>
+<pinref part="Q7" gate="G$1" pin="B"/>
+<wire x1="6.35" y1="-114.3" x2="7.62" y2="-114.3" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="FAN_PWM" class="0">
+<segment>
+<pinref part="R15" gate="G$1" pin="P$1"/>
+<wire x1="-10.16" y1="-114.3" x2="-25.4" y2="-114.3" width="0.1524" layer="91"/>
+<label x="-25.4" y="-114.3" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

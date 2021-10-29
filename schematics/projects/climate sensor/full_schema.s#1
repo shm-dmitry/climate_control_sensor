@@ -2217,7 +2217,7 @@ In this library the device names are the same as the pin names of the symbols, t
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="IO14"/>
-<wire x1="-55.88" y1="76.2" x2="-83.82" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="-55.88" y1="76.2" x2="-83.82" y2="76.2" width="0.1524" layer="91" grouprefs="ESP"/>
 <label x="-83.82" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>

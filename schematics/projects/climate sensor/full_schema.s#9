@@ -189,10 +189,10 @@
 <pad name="220V_OUT_N" x="25.4" y="-2.54" drill="0.6" shape="square"/>
 <pad name="220V_OUT_L" x="25.4" y="-5.08" drill="0.6" shape="square"/>
 </package>
-<package name="TRANSISTOR_NPN">
-<pad name="B" x="1.27" y="1.27" drill="0.6" shape="square"/>
-<pad name="E" x="1.27" y="-1.27" drill="0.6" shape="square"/>
-<pad name="C" x="1.27" y="3.81" drill="0.6" shape="square"/>
+<package name="TRANSISTOR">
+<pad name="B" x="1.27" y="1.27" drill="0.8" shape="square"/>
+<pad name="E" x="1.27" y="-1.27" drill="0.8" shape="square"/>
+<pad name="C" x="1.27" y="3.81" drill="0.8" shape="square"/>
 <wire x1="3.81" y1="-1.27" x2="3.81" y2="3.81" width="0.127" layer="21" curve="-270"/>
 <wire x1="3.81" y1="3.81" x2="3.81" y2="-1.27" width="0.127" layer="21"/>
 <text x="-0.635" y="3.175" size="0.8128" layer="21">C</text>
@@ -832,7 +832,7 @@
 <gate name="G$1" symbol="TRANSISTOR_NPN" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="TRANSISTOR_NPN">
+<device name="" package="TRANSISTOR">
 <connects>
 <connect gate="G$1" pin="B" pad="B"/>
 <connect gate="G$1" pin="C" pad="C"/>
@@ -1213,6 +1213,7 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="Q5" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="Q6" library="my_devices" deviceset="TRANSISTOR_NPN" device="" value="2N3904"/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="Q7" library="my_devices" deviceset="TRANSISTOR_NPN" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1444,6 +1445,10 @@ In this library the device names are the same as the pin names of the symbols, t
 </instance>
 <instance part="GND7" gate="1" x="213.36" y="-7.62" smashed="yes" grouprefs="RGBLED">
 <attribute name="VALUE" x="210.82" y="-10.16" size="1.778" layer="96"/>
+</instance>
+<instance part="Q7" gate="G$1" x="15.24" y="-114.3" smashed="yes">
+<attribute name="NAME" x="19.05" y="-113.03" size="1.778" layer="94"/>
+<attribute name="VALUE" x="19.05" y="-116.84" size="1.778" layer="94"/>
 </instance>
 </instances>
 <busses>

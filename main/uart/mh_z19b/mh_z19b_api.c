@@ -8,15 +8,16 @@
 
 // https://github.com/strange-v/MHZ19/
 
-#define MH_Z19B_BUF_SIZE 1024
+#define MH_Z19B_BUF_SIZE 9
+#define MH_Z19B_DRIVER_BUF_SIZE 1024
 #define MH_Z19B_QUEUE_SIZE 10
 #define MH_Z19B_AWAIT_RESPONSE 1000
 
-static uint8_t COMMAND_MHZ19_RANGE_1000[]  = { 0x99, 0x00, 0x00, 0x00, 0x03, 0xE8 };
-static uint8_t COMMAND_MHZ19_RANGE_2000[]  = { 0x99, 0x00, 0x00, 0x00, 0x07, 0xD0 };
-static uint8_t COMMAND_MHZ19_RANGE_3000[]  = { 0x99, 0x00, 0x00, 0x00, 0x0B, 0xB8 };
-static uint8_t COMMAND_MHZ19_RANGE_5000[]  = { 0x99, 0x00, 0x00, 0x00, 0x13, 0x88 };
-static uint8_t COMMAND_MHZ19_RANGE_10000[] = { 0x99, 0x00, 0x00, 0x00, 0x27, 0x10 };
+static uint8_t COMMAND_MHZ19_RANGE_1000[]  = { 0x99, 0x03, 0xE8, 0x00, 0x00, 0x00 };
+static uint8_t COMMAND_MHZ19_RANGE_2000[]  = { 0x99, 0x07, 0xD0, 0x00, 0x00, 0x00 };
+static uint8_t COMMAND_MHZ19_RANGE_3000[]  = { 0x99, 0x0B, 0xB8, 0x00, 0x00, 0x00 };
+static uint8_t COMMAND_MHZ19_RANGE_5000[]  = { 0x99, 0x13, 0x88, 0x00, 0x00, 0x00 };
+static uint8_t COMMAND_MHZ19_RANGE_10000[] = { 0x99, 0x27, 0x10, 0x00, 0x00, 0x00 };
 static uint8_t COMMAND_MHZ19_CALIBRATE_ENABLE[]  = { 0x79, 0xA0, 0x00, 0x00, 0x00, 0x00 };
 static uint8_t COMMAND_MHZ19_CALIBRATE_DISABLE[] = { 0x79, 0x00, 0x00, 0x00, 0x00, 0x00 };
 static uint8_t COMMAND_MHZ19_READ_VALUE[]  = { 0x86, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -46,7 +47,7 @@ esp_err_t mh_z19b_init_driver(const uart_config_def_t * config, mh_z19b_range ra
     intr_alloc_flags = ESP_INTR_FLAG_IRAM;
 #endif
 
-    esp_err_t res = uart_driver_install(mh_z19b_uart_port, MH_Z19B_BUF_SIZE, MH_Z19B_BUF_SIZE, MH_Z19B_QUEUE_SIZE, NULL, intr_alloc_flags);
+    esp_err_t res = uart_driver_install(mh_z19b_uart_port, MH_Z19B_DRIVER_BUF_SIZE, MH_Z19B_DRIVER_BUF_SIZE, MH_Z19B_QUEUE_SIZE, NULL, intr_alloc_flags);
     if (res) {
     	ESP_LOGE(MH_Z19B_LOG, "uart_driver_install error: %d", res);
     	return res;
@@ -162,6 +163,8 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 		if (uart_read_bytes(mh_z19b_uart_port, &buf, 1, 10 / portTICK_RATE_MS) <= 0) {
 			break;
 		}
+
+		MQTT_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  skipped byte before exec command: %02x", buf);
 	}
 
 	MQTT_LOGI(MH_Z19B_LOG, "mh_z19b_send_buffer  ready-to-send: input queue empty");
@@ -182,15 +185,22 @@ esp_err_t mh_z19b_send_buffer(const uint8_t * buffer, uint8_t * reply) {
 	memset(reply, 0, 9);
 
 	uint8_t await = MH_Z19B_AWAIT_RESPONSE / 20;
+	uint8_t reply_index = 0;
 	for (uint8_t i = 0; i<=await; i++) {
 		if (i == await) {
-			MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Timeout awaiting for a data from device.");
+			MQTT_LOGE(MH_Z19B_LOG, "mh_z19b_send_buffer  Timeout awaiting for a data from device. At this moment readed %d bytes", reply_index);
 			MQTT_LOG_DONE;
 			return ESP_ERR_TIMEOUT;
 		}
 
-		if (uart_read_bytes(mh_z19b_uart_port, reply, 9, 20 / portTICK_RATE_MS) > 0) {
-			break;
+		vTaskDelay(20 / portTICK_PERIOD_MS);
+
+		int readed = uart_read_bytes(mh_z19b_uart_port, reply + reply_index, MH_Z19B_BUF_SIZE - reply_index, 1 / portTICK_RATE_MS);
+		if (readed > 0) {
+			reply_index += readed;
+			if (reply_index >= MH_Z19B_BUF_SIZE) {
+				break;
+			}
 		}
 	}
 

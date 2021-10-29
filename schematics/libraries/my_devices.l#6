@@ -1458,6 +1458,14 @@
 <wire x1="-0.3175" y1="-5.08" x2="-0.3175" y2="-1.905" width="0.254" layer="94"/>
 <wire x1="-0.3175" y1="-5.08" x2="-0.3175" y2="-7.62" width="0.254" layer="94"/>
 <wire x1="-0.3175" y1="-7.62" x2="2.54" y2="-7.62" width="0.254" layer="94"/>
+<text x="-4.7625" y="5.715" size="0.6096" layer="94">VCC</text>
+<text x="-4.7625" y="-6.0325" size="0.6096" layer="94">GND</text>
+<text x="-4.445" y="1.905" size="1.27" layer="94">+</text>
+<text x="-4.1275" y="-3.175" size="1.27" layer="94">-</text>
+<text x="2.8575" y="0.3175" size="0.6096" layer="94">EMI_OUT</text>
+<text x="2.8575" y="4.1275" size="0.6096" layer="94">COL_OUT</text>
+<text x="1.27" y="-4.7625" size="0.6096" layer="94">BAL/STROBE</text>
+<text x="2.54" y="-7.3025" size="0.6096" layer="94">BALANCE</text>
 </symbol>
 </symbols>
 <devicesets>

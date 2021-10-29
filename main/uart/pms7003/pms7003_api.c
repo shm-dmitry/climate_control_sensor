@@ -178,6 +178,8 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 		return ESP_FAIL;
 	}
 
+	vTaskDelay(20 / portTICK_PERIOD_MS);
+
 	if (reply == NULL) {
 		MQTT_LOG_DONE;
 		return ESP_OK;
@@ -194,7 +196,9 @@ esp_err_t pms7003_send_buffer(const uint8_t * command, uint8_t * reply) {
 			return ESP_ERR_TIMEOUT;
 		}
 
-		int readed = uart_read_bytes(pms7003_uart_port, reply + reply_index, PMS7003_BUF_SIZE - reply_index, 20 / portTICK_RATE_MS);
+		vTaskDelay(20 / portTICK_PERIOD_MS);
+
+		int readed = uart_read_bytes(pms7003_uart_port, reply + reply_index, PMS7003_BUF_SIZE - reply_index, 1 / portTICK_RATE_MS);
 		if (readed > 0) {
 			reply_index += readed;
 			if (reply_index >= PMS7003_BUF_SIZE) {
