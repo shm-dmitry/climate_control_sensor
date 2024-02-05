@@ -1,6 +1,8 @@
 Project info
 =======
 
+*DEPRECATED. New board/fw project in https://github.com/shm-dmitry/air-detector*
+
 This module allows you to control climate in room.
 
 It reports:
